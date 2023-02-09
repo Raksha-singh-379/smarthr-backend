@@ -1,0 +1,31 @@
+{
+  "smartHrApp": {
+    "reEnumeration": {
+      "home": {
+        "title": "Re Enumerations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Re Enumeration",
+        "createOrEditLabel": "Create or edit a Re Enumeration",
+        "notFound": "No Re Enumerations found"
+      },
+      "created": "A new Re Enumeration is created with identifier {{ param }}",
+      "updated": "A Re Enumeration is updated with identifier {{ param }}",
+      "deleted": "A Re Enumeration is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Re Enumeration {{ id }}?"
+      },
+      "detail": {
+        "title": "Re Enumeration"
+      },
+      "id": "ID",
+      "salaryBasis": "Salary Basis",
+      "amount": "Amount",
+      "paymentType": "Payment Type",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By",
+      "status": "Status",
+      "employeId": "Employe Id",
+      "companyId": "Company Id"
+    }
+  }
+}

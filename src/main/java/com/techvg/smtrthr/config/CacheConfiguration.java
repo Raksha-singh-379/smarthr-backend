@@ -48,6 +48,35 @@ public class CacheConfiguration {
             createCache(cm, com.techvg.smtrthr.domain.User.class.getName());
             createCache(cm, com.techvg.smtrthr.domain.Authority.class.getName());
             createCache(cm, com.techvg.smtrthr.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.techvg.smtrthr.domain.MasterLookup.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.FormValidator.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Employee.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.ReportingStructure.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.PersonalDetails.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Address.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.FamilyInfo.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Contacts.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.BanksDetails.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Education.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.WorkExperience.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.ReEnumeration.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.PfDetails.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.EsiDetails.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Company.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Region.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Branch.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.State.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.SalarySettings.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Tds.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Department.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Designation.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.LeaveType.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.LeavePolicy.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.LeaveApplication.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Holiday.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.WorkinDaysSetting.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.ApprovalSetting.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Approver.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

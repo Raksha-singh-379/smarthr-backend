@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="education">
+      <h2 data-cy="educationDetailsHeading"><span jhiTranslate="smartHrApp.education.detail.title">Education</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ education.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.institution">Institution</span></dt>
+        <dd>
+          <span>{{ education.institution }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.subject">Subject</span></dt>
+        <dd>
+          <span>{{ education.subject }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ education.startDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ education.endDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.educationType">Education Type</span></dt>
+        <dd>
+          <span>{{ education.educationType }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.grade">Grade</span></dt>
+        <dd>
+          <span>{{ education.grade }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.description">Description</span></dt>
+        <dd>
+          <span>{{ education.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ education.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ education.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.status">Status</span></dt>
+        <dd>
+          <span>{{ education.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.employeeId">Employee Id</span></dt>
+        <dd>
+          <span>{{ education.employeeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ education.companyId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/education', education.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reportingStructure">
+      <h2 data-cy="reportingStructureDetailsHeading">
+        <span jhiTranslate="smartHrApp.reportingStructure.detail.title">Reporting Structure</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reportingStructure.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.employeeId">Employee Id</span></dt>
+        <dd>
+          <span>{{ reportingStructure.employeeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.reportingEmpId">Reporting Emp Id</span></dt>
+        <dd>
+          <span>{{ reportingStructure.reportingEmpId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.status">Status</span></dt>
+        <dd>
+          <span>{{ reportingStructure.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.reportingStrId">Reporting Str Id</span></dt>
+        <dd>
+          <span>{{ reportingStructure.reportingStrId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ reportingStructure.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ reportingStructure.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reportingStructure.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ reportingStructure.companyId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reporting-structure', reportingStructure.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

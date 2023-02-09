@@ -1,0 +1,58 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044818",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "branch",
+  "fields": [
+    {
+      "fieldName": "branchName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchcode",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "branchType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "webSite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Branch",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
