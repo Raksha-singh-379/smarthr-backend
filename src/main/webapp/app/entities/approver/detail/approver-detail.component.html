@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="approver">
+      <h2 data-cy="approverDetailsHeading"><span jhiTranslate="smartHrApp.approver.detail.title">Approver</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ approver.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.approverName">Approver Name</span></dt>
+        <dd>
+          <span>{{ approver.approverName }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ approver.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ approver.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.status">Status</span></dt>
+        <dd>
+          <span>{{ approver.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.approvalSettingId">Approval Setting Id</span></dt>
+        <dd>
+          <span>{{ approver.approvalSettingId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.departmentId">Department Id</span></dt>
+        <dd>
+          <span>{{ approver.departmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.approver.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ approver.companyId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/approver', approver.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

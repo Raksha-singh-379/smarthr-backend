@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="familyInfo">
+      <h2 data-cy="familyInfoDetailsHeading"><span jhiTranslate="smartHrApp.familyInfo.detail.title">Family Info</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ familyInfo.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.name">Name</span></dt>
+        <dd>
+          <span>{{ familyInfo.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.dateOfBirth">Date Of Birth</span></dt>
+        <dd>
+          <span>{{ familyInfo.dateOfBirth | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.relation">Relation</span></dt>
+        <dd>
+          <span>{{ familyInfo.relation }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.address">Address</span></dt>
+        <dd>
+          <span>{{ familyInfo.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ familyInfo.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ familyInfo.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.status">Status</span></dt>
+        <dd>
+          <span>{{ familyInfo.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.employeeId">Employee Id</span></dt>
+        <dd>
+          <span>{{ familyInfo.employeeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ familyInfo.companyId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/family-info', familyInfo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
