@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044703",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "esi_details",
+  "fields": [
+    {
+      "fieldName": "isEsiContribution",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "esiNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "esiRate",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "additionalEsiRate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalEsiRate",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "employeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "reEnumerationId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "EsiDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

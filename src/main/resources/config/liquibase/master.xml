@@ -11,6 +11,35 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044650_added_entity_MasterLookup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044651_added_entity_FormValidator.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044652_added_entity_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044653_added_entity_ReportingStructure.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044654_added_entity_PersonalDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044655_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044656_added_entity_FamilyInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044657_added_entity_Contacts.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044658_added_entity_BanksDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044659_added_entity_Education.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044700_added_entity_WorkExperience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044701_added_entity_ReEnumeration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044702_added_entity_PfDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044703_added_entity_EsiDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044704_added_entity_Company.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044705_added_entity_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044706_added_entity_Branch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044707_added_entity_State.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044708_added_entity_SalarySettings.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044709_added_entity_Tds.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044710_added_entity_Department.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044711_added_entity_Designation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044712_added_entity_LeaveType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044713_added_entity_LeavePolicy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044714_added_entity_LeaveApplication.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044715_added_entity_Holiday.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044716_added_entity_WorkinDaysSetting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044717_added_entity_ApprovalSetting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230209044718_added_entity_Approver.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->

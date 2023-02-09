@@ -1,0 +1,27 @@
+{
+  "smartHrApp": {
+    "workinDaysSetting": {
+      "home": {
+        "title": "Workin Days Settings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Workin Days Setting",
+        "createOrEditLabel": "Create or edit a Workin Days Setting",
+        "notFound": "No Workin Days Settings found"
+      },
+      "created": "A new Workin Days Setting is created with identifier {{ param }}",
+      "updated": "A Workin Days Setting is updated with identifier {{ param }}",
+      "deleted": "A Workin Days Setting is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Workin Days Setting {{ id }}?"
+      },
+      "detail": {
+        "title": "Workin Days Setting"
+      },
+      "id": "ID",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By",
+      "status": "Status",
+      "companyId": "Company Id"
+    }
+  }
+}

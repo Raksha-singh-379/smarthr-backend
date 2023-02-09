@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044653",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "reporting_structure",
+  "fields": [
+    {
+      "fieldName": "employeeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "reportingEmpId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reportingStrId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "ReportingStructure",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
