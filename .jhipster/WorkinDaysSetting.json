@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044253",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "workin_days_setting",
+  "fields": [
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "WorkinDaysSetting",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
