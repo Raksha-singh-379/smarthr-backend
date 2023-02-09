@@ -1,0 +1,387 @@
+entity MasterLookup{
+    name String
+    value String
+    description String
+    type String 
+    lastModified Instant 
+    lastModifiedBy String
+    status String
+    companyId Long      
+}
+
+entity FormValidator{
+    type String // required or pattern from lookup table 
+    value String
+    formName String 
+    fieldName String
+    companyId Long
+    createdBy String
+    createdOn Instant
+}
+
+entity Employee {
+    firstName String
+    lastName String
+    username String required unique
+    password String required
+    department String
+    designation String
+    gender String
+    empUniqueId String required   // need to be unique but company wise so we can handle it throght the code
+    joindate Instant
+    lastModified Instant 
+    lastModifiedBy String
+    status String
+    companyId Long   
+    branchId Long
+    regionId Long
+}
+
+entity ReportingStructure{
+    employeeId Long
+    reportingEmpId Long
+    status String
+    reportingStrId Long
+    lastModified Instant 
+    lastModifiedBy String
+    companyId Long
+}
+
+entity PersonalDetails {
+    passportNo String
+    passportExpDate Instant
+    telephoneNo String
+    nationality String
+    maritalStatus String
+    religion String
+    isSpousEmployed Boolean
+    lastModified Instant 
+    lastModifiedBy String
+    status String
+    employeeId Long  
+    companyId Long
+//below feilds are considered as per Lokmanya and common details  
+    personalIdNo String
+    bloodGroup String
+    dateOfBirth LocalDate 
+}
+
+entity Address {
+    type String
+    line1 String
+    line2 String
+    country String 
+    state  String
+    city String
+    pincode String 
+    defaultAdd Boolean
+    landMark String
+    longitude Double
+    latitude Double
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    refTableType String
+    refTableId Long
+    companyId Long 
+}
+
+entity FamilyInfo {
+    name String
+    dateOfBirth LocalDate  
+    relation String
+    address String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    employeeId Long
+    companyId Long
+}
+
+entity Contacts {
+    name String 
+    contactPref String // primary or secondary
+    contactType String // mobile or landline  or email
+    contact String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    refTableType String
+    refTableId Long
+    companyId Long
+}
+
+entity BanksDetails {
+    accountNumber Long
+    bankName String
+    branchTransCode String 
+    taxNumber String
+    branchName String  
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    refTableType String
+    refTableId Long
+    companyId Long
+}
+
+entity Education {
+    institution String
+    subject String
+    startDate Instant
+    endDate Instant
+    educationType String
+    grade String
+    description String   
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    employeeId Long
+    companyId Long
+}
+
+entity WorkExperience {
+    jobTitle String
+    companyName String
+    startDate Instant
+    endDate Instant
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    addressId Long
+    employeeId Long
+    companyId Long
+// below feilds are considered as per Lokmanya and common details 
+    yearOfExp Double
+    jobDesc String
+}
+
+entity ReEnumeration{  
+    salaryBasis String
+    amount Double
+    PaymentType String  //  payment type are fixed bank, cheque and cash
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    employeId Long
+    companyId Long
+
+}
+
+entity PfDetails{  
+    isPfContribution Boolean
+    pfNumber String
+    pfRate Double
+    additionalPfRate String //  values taken from lookup table
+    totalPfRate Double 
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    employeId Long
+    reEnumerationId Long
+
+}
+
+entity EsiDetails{  
+    isEsiContribution Boolean
+    esiNumber String
+    esiRate Double
+    additionalEsiRate String //  values taken from lookup table
+    totalEsiRate Double    
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    employeId Long
+    reEnumerationId Long
+
+}
+
+//-------Tables related to the metadata----
+entity Company{
+    companyName String
+    contactPerson String
+    postalCode String
+    email String
+    phoneNumber String
+    mobileNumber String
+    websiteUrl String
+    fax String 
+    status String
+    lastModified Instant 
+    lastModifiedBy String
+ // below feilds are considered as per Lokmanya and common details 
+    regNumber String  
+    gstin String 
+    pan String 
+    tan String 
+}
+
+entity Region{
+    regionName String required unique
+    description String    
+    status String
+    lastModified Instant 
+    lastModifiedBy String
+    companyId Long 
+}
+
+entity Branch{
+    branchName String required unique
+    description String 
+    branchcode String unique
+    branchType String    // HeadOffice, branch and zonal office
+    webSite String   
+    status String
+    lastModified Instant 
+    lastModifiedBy String
+    regionId Long
+    companyId Long 
+}
+
+entity State {    // need to discuss about state why we are only considering state
+    stateName String required unique
+    lgdCode Long
+    status String
+    lastModified Instant 
+    lastModifiedBy String 
+}
+
+entity SalarySettings{ // needs to discuss
+    da Double
+    hra Double
+    employeeShare Double
+    companyShare Double
+    salaryFrom Instant
+    salaryTo Instant
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 	
+}
+
+entity Tds{
+    salaryFrom Instant
+    salaryTo Instant
+    percentage Double
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    salarySettingId Long
+    companyId Long	
+}
+
+entity Department{
+    name String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 
+}
+
+entity Designation{
+    name String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    departmentId Long
+    companyId Long 
+}
+
+entity LeaveType{
+    leaveType String
+    noOfDays String
+    recordStatus String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 
+}
+
+entity LeavePolicy {
+    leaveType String
+    isCarryForword Boolean
+    employeeType String
+    genderLeave String
+    leaveStatus String
+    totalLeave String
+    maxLeave String
+    hasproRataLeave Boolean
+    description String
+    lastModified Instant 
+   lastModifiedBy String 
+    status String
+companyId Long 
+} // need to ask create custom leave policy table 
+
+entity LeaveApplication {
+    leaveType String
+    balanceLeave Long
+    noOfDays Long
+    reason String
+    year Long
+    formDate Instant
+    toDate Instant
+    leaveStatus Status
+    leaveStatus String
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+   employeId Long
+   companyId Long 
+}
+
+entity Holiday{
+    holidayName String required
+    holidayDate Instant
+    day String 
+    year Instant
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 
+}
+
+entity WorkinDaysSetting{
+    
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 
+}
+
+entity ApprovalSetting{
+    isSequenceApproval Boolean
+    isSimultaneousApproval Boolean
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    companyId Long 
+}
+
+entity Approver{
+    approverName String 
+    lastModified Instant 
+    lastModifiedBy String 
+    status String
+    approvalSettingId Long
+    departmentId Long // need to ask 
+    companyId Long 
+}
+
+//-----------------------------------
+
+
+    
+  // Set pagination options
+paginate * with infinite-scroll
+paginate * with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceClass
+
+filter *
+// Set an angular suffix
+// angularSuffix * with tvg
