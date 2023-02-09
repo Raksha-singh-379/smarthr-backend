@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044254",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "approval_setting",
+  "fields": [
+    {
+      "fieldName": "isSequenceApproval",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isSimultaneousApproval",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "ApprovalSetting",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
