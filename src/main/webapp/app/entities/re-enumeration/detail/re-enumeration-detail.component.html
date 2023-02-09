@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reEnumeration">
+      <h2 data-cy="reEnumerationDetailsHeading"><span jhiTranslate="smartHrApp.reEnumeration.detail.title">Re Enumeration</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reEnumeration.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.salaryBasis">Salary Basis</span></dt>
+        <dd>
+          <span>{{ reEnumeration.salaryBasis }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.amount">Amount</span></dt>
+        <dd>
+          <span>{{ reEnumeration.amount }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.paymentType">Payment Type</span></dt>
+        <dd>
+          <span>{{ reEnumeration.paymentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ reEnumeration.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ reEnumeration.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.status">Status</span></dt>
+        <dd>
+          <span>{{ reEnumeration.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.employeId">Employe Id</span></dt>
+        <dd>
+          <span>{{ reEnumeration.employeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.reEnumeration.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ reEnumeration.companyId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/re-enumeration', reEnumeration.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

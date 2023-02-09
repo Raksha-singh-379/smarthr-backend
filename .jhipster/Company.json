@@ -1,0 +1,76 @@
+{
+  "applications": "*",
+  "changelogDate": "20230209044704",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "company",
+  "fields": [
+    {
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contactPerson",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobileNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "websiteUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gstin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tan",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Company",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
