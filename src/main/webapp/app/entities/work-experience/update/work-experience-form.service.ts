@@ -37,14 +37,13 @@ type WorkExperienceFormGroupContent = {
   companyName: FormControl<WorkExperienceFormRawValue['companyName']>;
   startDate: FormControl<WorkExperienceFormRawValue['startDate']>;
   endDate: FormControl<WorkExperienceFormRawValue['endDate']>;
-  lastModified: FormControl<WorkExperienceFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<WorkExperienceFormRawValue['lastModifiedBy']>;
-  status: FormControl<WorkExperienceFormRawValue['status']>;
   addressId: FormControl<WorkExperienceFormRawValue['addressId']>;
   employeeId: FormControl<WorkExperienceFormRawValue['employeeId']>;
   companyId: FormControl<WorkExperienceFormRawValue['companyId']>;
-  yearOfExp: FormControl<WorkExperienceFormRawValue['yearOfExp']>;
   jobDesc: FormControl<WorkExperienceFormRawValue['jobDesc']>;
+  status: FormControl<WorkExperienceFormRawValue['status']>;
+  lastModified: FormControl<WorkExperienceFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<WorkExperienceFormRawValue['lastModifiedBy']>;
 };
 
 export type WorkExperienceFormGroup = FormGroup<WorkExperienceFormGroupContent>;
@@ -68,14 +67,13 @@ export class WorkExperienceFormService {
       companyName: new FormControl(workExperienceRawValue.companyName),
       startDate: new FormControl(workExperienceRawValue.startDate),
       endDate: new FormControl(workExperienceRawValue.endDate),
-      lastModified: new FormControl(workExperienceRawValue.lastModified),
-      lastModifiedBy: new FormControl(workExperienceRawValue.lastModifiedBy),
-      status: new FormControl(workExperienceRawValue.status),
       addressId: new FormControl(workExperienceRawValue.addressId),
       employeeId: new FormControl(workExperienceRawValue.employeeId),
       companyId: new FormControl(workExperienceRawValue.companyId),
-      yearOfExp: new FormControl(workExperienceRawValue.yearOfExp),
       jobDesc: new FormControl(workExperienceRawValue.jobDesc),
+      status: new FormControl(workExperienceRawValue.status),
+      lastModified: new FormControl(workExperienceRawValue.lastModified),
+      lastModifiedBy: new FormControl(workExperienceRawValue.lastModifiedBy),
     });
   }
 

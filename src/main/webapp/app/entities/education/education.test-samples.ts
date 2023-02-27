@@ -11,23 +11,23 @@ export const sampleWithPartialData: IEducation = {
   institution: 'Security',
   endDate: dayjs('2023-02-08T06:27'),
   description: 'Car Managed',
-  companyId: 21289,
+  lastModifiedBy: 'Fish',
 };
 
 export const sampleWithFullData: IEducation = {
-  id: 17940,
-  institution: 'whiteboard Licensed leverage',
-  subject: 'Profit-focused',
-  startDate: dayjs('2023-02-09T03:15'),
-  endDate: dayjs('2023-02-09T03:19'),
-  educationType: 'Future',
-  grade: 'Assistant Gloves',
-  description: 'Director',
-  lastModified: dayjs('2023-02-09T02:46'),
-  lastModifiedBy: 'Money Steel Producer',
-  status: 'Creative',
-  employeeId: 73880,
-  companyId: 60018,
+  id: 67006,
+  institution: 'Licensed',
+  subject: 'Mississippi',
+  startYear: dayjs('2023-02-08T22:39'),
+  endDate: dayjs('2023-02-08T13:25'),
+  educationType: 'Ergonomic',
+  grade: 'Wyoming panel',
+  description: 'utilisation Computer',
+  employeeId: 62677,
+  companyId: 34741,
+  status: 'Steel',
+  lastModified: dayjs('2023-02-08T05:07'),
+  lastModifiedBy: 'Movies programming Checking',
 };
 
 export const sampleWithNewData: NewEducation = {

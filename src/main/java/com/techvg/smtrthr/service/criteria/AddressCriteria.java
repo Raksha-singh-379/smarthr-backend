@@ -45,17 +45,17 @@ public class AddressCriteria implements Serializable, Criteria {
 
     private DoubleFilter latitude;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private StringFilter refTableType;
+    private StringFilter refTable;
 
     private LongFilter refTableId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -74,12 +74,12 @@ public class AddressCriteria implements Serializable, Criteria {
         this.landMark = other.landMark == null ? null : other.landMark.copy();
         this.longitude = other.longitude == null ? null : other.longitude.copy();
         this.latitude = other.latitude == null ? null : other.latitude.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.refTableType = other.refTableType == null ? null : other.refTableType.copy();
+        this.refTable = other.refTable == null ? null : other.refTable.copy();
         this.refTableId = other.refTableId == null ? null : other.refTableId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -268,64 +268,19 @@ public class AddressCriteria implements Serializable, Criteria {
         this.latitude = latitude;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
+    public StringFilter getRefTable() {
+        return refTable;
     }
 
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
+    public StringFilter refTable() {
+        if (refTable == null) {
+            refTable = new StringFilter();
         }
-        return lastModified;
+        return refTable;
     }
 
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public StringFilter getRefTableType() {
-        return refTableType;
-    }
-
-    public StringFilter refTableType() {
-        if (refTableType == null) {
-            refTableType = new StringFilter();
-        }
-        return refTableType;
-    }
-
-    public void setRefTableType(StringFilter refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(StringFilter refTable) {
+        this.refTable = refTable;
     }
 
     public LongFilter getRefTableId() {
@@ -358,6 +313,51 @@ public class AddressCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -388,12 +388,12 @@ public class AddressCriteria implements Serializable, Criteria {
             Objects.equals(landMark, that.landMark) &&
             Objects.equals(longitude, that.longitude) &&
             Objects.equals(latitude, that.latitude) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(refTableType, that.refTableType) &&
+            Objects.equals(refTable, that.refTable) &&
             Objects.equals(refTableId, that.refTableId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -413,12 +413,12 @@ public class AddressCriteria implements Serializable, Criteria {
             landMark,
             longitude,
             latitude,
-            lastModified,
-            lastModifiedBy,
-            status,
-            refTableType,
+            refTable,
             refTableId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -439,12 +439,12 @@ public class AddressCriteria implements Serializable, Criteria {
             (landMark != null ? "landMark=" + landMark + ", " : "") +
             (longitude != null ? "longitude=" + longitude + ", " : "") +
             (latitude != null ? "latitude=" + latitude + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (refTableType != null ? "refTableType=" + refTableType + ", " : "") +
+            (refTable != null ? "refTable=" + refTable + ", " : "") +
             (refTableId != null ? "refTableId=" + refTableId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

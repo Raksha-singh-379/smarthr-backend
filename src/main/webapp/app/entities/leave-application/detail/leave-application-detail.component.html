@@ -20,10 +20,6 @@
         <dd>
           <span>{{ leaveApplication.leaveType }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.leaveApplication.balanceLeave">Balance Leave</span></dt>
-        <dd>
-          <span>{{ leaveApplication.balanceLeave }}</span>
-        </dd>
         <dt><span jhiTranslate="smartHrApp.leaveApplication.noOfDays">No Of Days</span></dt>
         <dd>
           <span>{{ leaveApplication.noOfDays }}</span>
@@ -48,14 +44,6 @@
         <dd>
           <span>{{ leaveApplication.leaveStatus }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.leaveApplication.lastModified">Last Modified</span></dt>
-        <dd>
-          <span>{{ leaveApplication.lastModified | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.leaveApplication.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-          <span>{{ leaveApplication.lastModifiedBy }}</span>
-        </dd>
         <dt><span jhiTranslate="smartHrApp.leaveApplication.status">Status</span></dt>
         <dd>
           <span>{{ leaveApplication.status }}</span>
@@ -67,6 +55,14 @@
         <dt><span jhiTranslate="smartHrApp.leaveApplication.companyId">Company Id</span></dt>
         <dd>
           <span>{{ leaveApplication.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.leaveApplication.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ leaveApplication.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.leaveApplication.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ leaveApplication.lastModifiedBy }}</span>
         </dd>
       </dl>
 

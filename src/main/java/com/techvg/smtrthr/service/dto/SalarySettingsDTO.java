@@ -20,17 +20,13 @@ public class SalarySettingsDTO implements Serializable {
 
     private Double companyShare;
 
-    private Instant salaryFrom;
+    private Long companyId;
 
-    private Instant salaryTo;
+    private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
-
-    private String status;
-
-    private Long companyId;
 
     public Long getId() {
         return id;
@@ -72,20 +68,20 @@ public class SalarySettingsDTO implements Serializable {
         this.companyShare = companyShare;
     }
 
-    public Instant getSalaryFrom() {
-        return salaryFrom;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setSalaryFrom(Instant salaryFrom) {
-        this.salaryFrom = salaryFrom;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
-    public Instant getSalaryTo() {
-        return salaryTo;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSalaryTo(Instant salaryTo) {
-        this.salaryTo = salaryTo;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -102,22 +98,6 @@ public class SalarySettingsDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -150,12 +130,10 @@ public class SalarySettingsDTO implements Serializable {
             ", hra=" + getHra() +
             ", employeeShare=" + getEmployeeShare() +
             ", companyShare=" + getCompanyShare() +
-            ", salaryFrom='" + getSalaryFrom() + "'" +
-            ", salaryTo='" + getSalaryTo() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

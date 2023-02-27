@@ -15,9 +15,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="region_name" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_region__region_name" />
+                <constraints nullable="false" />
             </column>
             <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="region_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
@@ -27,9 +33,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="last_modified_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -56,10 +59,11 @@
             <column name="id" type="numeric"/>
             <column name="region_name" type="string"/>
             <column name="description" type="string"/>
+            <column name="region_id" type="numeric"/>
+            <column name="company_id" type="numeric"/>
             <column name="status" type="string"/>
             <column name="last_modified" type="date"/>
             <column name="last_modified_by" type="string"/>
-            <column name="company_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

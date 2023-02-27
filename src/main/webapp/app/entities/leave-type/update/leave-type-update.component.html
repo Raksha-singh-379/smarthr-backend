@@ -24,15 +24,13 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leaveType.recordStatus" for="field_recordStatus">Record Status</label>
-          <input
-            type="text"
-            class="form-control"
-            name="recordStatus"
-            id="field_recordStatus"
-            data-cy="recordStatus"
-            formControlName="recordStatus"
-          />
+          <label class="form-label" jhiTranslate="smartHrApp.leaveType.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leaveType.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
         </div>
 
         <div class="row mb-3">
@@ -63,13 +61,36 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leaveType.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+          <label class="form-label" jhiTranslate="smartHrApp.leaveType.hasCarryForward" for="field_hasCarryForward"
+            >Has Carry Forward</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="hasCarryForward"
+            id="field_hasCarryForward"
+            data-cy="hasCarryForward"
+            formControlName="hasCarryForward"
+          />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leaveType.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+          <label class="form-label" jhiTranslate="smartHrApp.leaveType.hasEarned" for="field_hasEarned">Has Earned</label>
+          <input type="checkbox" class="form-check" name="hasEarned" id="field_hasEarned" data-cy="hasEarned" formControlName="hasEarned" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leaveType.hasCustomPolicy" for="field_hasCustomPolicy"
+            >Has Custom Policy</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="hasCustomPolicy"
+            id="field_hasCustomPolicy"
+            data-cy="hasCustomPolicy"
+            formControlName="hasCustomPolicy"
+          />
         </div>
       </div>
 

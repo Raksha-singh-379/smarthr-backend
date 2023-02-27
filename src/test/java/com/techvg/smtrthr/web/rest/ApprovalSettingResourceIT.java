@@ -34,24 +34,25 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ApprovalSettingResourceIT {
 
-    private static final Boolean DEFAULT_IS_SEQUENCE_APPROVAL = false;
-    private static final Boolean UPDATED_IS_SEQUENCE_APPROVAL = true;
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_IS_SIMULTANEOUS_APPROVAL = false;
-    private static final Boolean UPDATED_IS_SIMULTANEOUS_APPROVAL = true;
+    private static final Integer DEFAULT_APPROVAL_CATEGORY = 1;
+    private static final Integer UPDATED_APPROVAL_CATEGORY = 2;
+    private static final Integer SMALLER_APPROVAL_CATEGORY = 1 - 1;
+
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/approval-settings";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -81,12 +82,12 @@ class ApprovalSettingResourceIT {
      */
     public static ApprovalSetting createEntity(EntityManager em) {
         ApprovalSetting approvalSetting = new ApprovalSetting()
-            .isSequenceApproval(DEFAULT_IS_SEQUENCE_APPROVAL)
-            .isSimultaneousApproval(DEFAULT_IS_SIMULTANEOUS_APPROVAL)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .type(DEFAULT_TYPE)
+            .approvalCategory(DEFAULT_APPROVAL_CATEGORY)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return approvalSetting;
     }
 
@@ -98,12 +99,12 @@ class ApprovalSettingResourceIT {
      */
     public static ApprovalSetting createUpdatedEntity(EntityManager em) {
         ApprovalSetting approvalSetting = new ApprovalSetting()
-            .isSequenceApproval(UPDATED_IS_SEQUENCE_APPROVAL)
-            .isSimultaneousApproval(UPDATED_IS_SIMULTANEOUS_APPROVAL)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .type(UPDATED_TYPE)
+            .approvalCategory(UPDATED_APPROVAL_CATEGORY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return approvalSetting;
     }
 
@@ -128,12 +129,12 @@ class ApprovalSettingResourceIT {
         List<ApprovalSetting> approvalSettingList = approvalSettingRepository.findAll();
         assertThat(approvalSettingList).hasSize(databaseSizeBeforeCreate + 1);
         ApprovalSetting testApprovalSetting = approvalSettingList.get(approvalSettingList.size() - 1);
-        assertThat(testApprovalSetting.getIsSequenceApproval()).isEqualTo(DEFAULT_IS_SEQUENCE_APPROVAL);
-        assertThat(testApprovalSetting.getIsSimultaneousApproval()).isEqualTo(DEFAULT_IS_SIMULTANEOUS_APPROVAL);
+        assertThat(testApprovalSetting.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testApprovalSetting.getApprovalCategory()).isEqualTo(DEFAULT_APPROVAL_CATEGORY);
+        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testApprovalSetting.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testApprovalSetting.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testApprovalSetting.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testApprovalSetting.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -169,12 +170,12 @@ class ApprovalSettingResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(approvalSetting.getId().intValue())))
-            .andExpect(jsonPath("$.[*].isSequenceApproval").value(hasItem(DEFAULT_IS_SEQUENCE_APPROVAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].isSimultaneousApproval").value(hasItem(DEFAULT_IS_SIMULTANEOUS_APPROVAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].approvalCategory").value(hasItem(DEFAULT_APPROVAL_CATEGORY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -189,12 +190,12 @@ class ApprovalSettingResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(approvalSetting.getId().intValue()))
-            .andExpect(jsonPath("$.isSequenceApproval").value(DEFAULT_IS_SEQUENCE_APPROVAL.booleanValue()))
-            .andExpect(jsonPath("$.isSimultaneousApproval").value(DEFAULT_IS_SIMULTANEOUS_APPROVAL.booleanValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
+            .andExpect(jsonPath("$.approvalCategory").value(DEFAULT_APPROVAL_CATEGORY))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -217,82 +218,314 @@ class ApprovalSettingResourceIT {
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSequenceApprovalIsEqualToSomething() throws Exception {
+    void getAllApprovalSettingsByTypeIsEqualToSomething() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSequenceApproval equals to DEFAULT_IS_SEQUENCE_APPROVAL
-        defaultApprovalSettingShouldBeFound("isSequenceApproval.equals=" + DEFAULT_IS_SEQUENCE_APPROVAL);
+        // Get all the approvalSettingList where type equals to DEFAULT_TYPE
+        defaultApprovalSettingShouldBeFound("type.equals=" + DEFAULT_TYPE);
 
-        // Get all the approvalSettingList where isSequenceApproval equals to UPDATED_IS_SEQUENCE_APPROVAL
-        defaultApprovalSettingShouldNotBeFound("isSequenceApproval.equals=" + UPDATED_IS_SEQUENCE_APPROVAL);
+        // Get all the approvalSettingList where type equals to UPDATED_TYPE
+        defaultApprovalSettingShouldNotBeFound("type.equals=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSequenceApprovalIsInShouldWork() throws Exception {
+    void getAllApprovalSettingsByTypeIsInShouldWork() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSequenceApproval in DEFAULT_IS_SEQUENCE_APPROVAL or UPDATED_IS_SEQUENCE_APPROVAL
-        defaultApprovalSettingShouldBeFound("isSequenceApproval.in=" + DEFAULT_IS_SEQUENCE_APPROVAL + "," + UPDATED_IS_SEQUENCE_APPROVAL);
+        // Get all the approvalSettingList where type in DEFAULT_TYPE or UPDATED_TYPE
+        defaultApprovalSettingShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
 
-        // Get all the approvalSettingList where isSequenceApproval equals to UPDATED_IS_SEQUENCE_APPROVAL
-        defaultApprovalSettingShouldNotBeFound("isSequenceApproval.in=" + UPDATED_IS_SEQUENCE_APPROVAL);
+        // Get all the approvalSettingList where type equals to UPDATED_TYPE
+        defaultApprovalSettingShouldNotBeFound("type.in=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSequenceApprovalIsNullOrNotNull() throws Exception {
+    void getAllApprovalSettingsByTypeIsNullOrNotNull() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSequenceApproval is not null
-        defaultApprovalSettingShouldBeFound("isSequenceApproval.specified=true");
+        // Get all the approvalSettingList where type is not null
+        defaultApprovalSettingShouldBeFound("type.specified=true");
 
-        // Get all the approvalSettingList where isSequenceApproval is null
-        defaultApprovalSettingShouldNotBeFound("isSequenceApproval.specified=false");
+        // Get all the approvalSettingList where type is null
+        defaultApprovalSettingShouldNotBeFound("type.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSimultaneousApprovalIsEqualToSomething() throws Exception {
+    void getAllApprovalSettingsByTypeContainsSomething() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSimultaneousApproval equals to DEFAULT_IS_SIMULTANEOUS_APPROVAL
-        defaultApprovalSettingShouldBeFound("isSimultaneousApproval.equals=" + DEFAULT_IS_SIMULTANEOUS_APPROVAL);
+        // Get all the approvalSettingList where type contains DEFAULT_TYPE
+        defaultApprovalSettingShouldBeFound("type.contains=" + DEFAULT_TYPE);
 
-        // Get all the approvalSettingList where isSimultaneousApproval equals to UPDATED_IS_SIMULTANEOUS_APPROVAL
-        defaultApprovalSettingShouldNotBeFound("isSimultaneousApproval.equals=" + UPDATED_IS_SIMULTANEOUS_APPROVAL);
+        // Get all the approvalSettingList where type contains UPDATED_TYPE
+        defaultApprovalSettingShouldNotBeFound("type.contains=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSimultaneousApprovalIsInShouldWork() throws Exception {
+    void getAllApprovalSettingsByTypeNotContainsSomething() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSimultaneousApproval in DEFAULT_IS_SIMULTANEOUS_APPROVAL or UPDATED_IS_SIMULTANEOUS_APPROVAL
-        defaultApprovalSettingShouldBeFound(
-            "isSimultaneousApproval.in=" + DEFAULT_IS_SIMULTANEOUS_APPROVAL + "," + UPDATED_IS_SIMULTANEOUS_APPROVAL
-        );
+        // Get all the approvalSettingList where type does not contain DEFAULT_TYPE
+        defaultApprovalSettingShouldNotBeFound("type.doesNotContain=" + DEFAULT_TYPE);
 
-        // Get all the approvalSettingList where isSimultaneousApproval equals to UPDATED_IS_SIMULTANEOUS_APPROVAL
-        defaultApprovalSettingShouldNotBeFound("isSimultaneousApproval.in=" + UPDATED_IS_SIMULTANEOUS_APPROVAL);
+        // Get all the approvalSettingList where type does not contain UPDATED_TYPE
+        defaultApprovalSettingShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
     }
 
     @Test
     @Transactional
-    void getAllApprovalSettingsByIsSimultaneousApprovalIsNullOrNotNull() throws Exception {
+    void getAllApprovalSettingsByApprovalCategoryIsEqualToSomething() throws Exception {
         // Initialize the database
         approvalSettingRepository.saveAndFlush(approvalSetting);
 
-        // Get all the approvalSettingList where isSimultaneousApproval is not null
-        defaultApprovalSettingShouldBeFound("isSimultaneousApproval.specified=true");
+        // Get all the approvalSettingList where approvalCategory equals to DEFAULT_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.equals=" + DEFAULT_APPROVAL_CATEGORY);
 
-        // Get all the approvalSettingList where isSimultaneousApproval is null
-        defaultApprovalSettingShouldNotBeFound("isSimultaneousApproval.specified=false");
+        // Get all the approvalSettingList where approvalCategory equals to UPDATED_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.equals=" + UPDATED_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsInShouldWork() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory in DEFAULT_APPROVAL_CATEGORY or UPDATED_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.in=" + DEFAULT_APPROVAL_CATEGORY + "," + UPDATED_APPROVAL_CATEGORY);
+
+        // Get all the approvalSettingList where approvalCategory equals to UPDATED_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.in=" + UPDATED_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory is not null
+        defaultApprovalSettingShouldBeFound("approvalCategory.specified=true");
+
+        // Get all the approvalSettingList where approvalCategory is null
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory is greater than or equal to DEFAULT_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.greaterThanOrEqual=" + DEFAULT_APPROVAL_CATEGORY);
+
+        // Get all the approvalSettingList where approvalCategory is greater than or equal to UPDATED_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.greaterThanOrEqual=" + UPDATED_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory is less than or equal to DEFAULT_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.lessThanOrEqual=" + DEFAULT_APPROVAL_CATEGORY);
+
+        // Get all the approvalSettingList where approvalCategory is less than or equal to SMALLER_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.lessThanOrEqual=" + SMALLER_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsLessThanSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory is less than DEFAULT_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.lessThan=" + DEFAULT_APPROVAL_CATEGORY);
+
+        // Get all the approvalSettingList where approvalCategory is less than UPDATED_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.lessThan=" + UPDATED_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByApprovalCategoryIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where approvalCategory is greater than DEFAULT_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldNotBeFound("approvalCategory.greaterThan=" + DEFAULT_APPROVAL_CATEGORY);
+
+        // Get all the approvalSettingList where approvalCategory is greater than SMALLER_APPROVAL_CATEGORY
+        defaultApprovalSettingShouldBeFound("approvalCategory.greaterThan=" + SMALLER_APPROVAL_CATEGORY);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId equals to DEFAULT_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId equals to UPDATED_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId equals to UPDATED_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId is not null
+        defaultApprovalSettingShouldBeFound("companyId.specified=true");
+
+        // Get all the approvalSettingList where companyId is null
+        defaultApprovalSettingShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId is less than DEFAULT_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId is less than UPDATED_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultApprovalSettingShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the approvalSettingList where companyId is greater than SMALLER_COMPANY_ID
+        defaultApprovalSettingShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where status equals to DEFAULT_STATUS
+        defaultApprovalSettingShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the approvalSettingList where status equals to UPDATED_STATUS
+        defaultApprovalSettingShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultApprovalSettingShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the approvalSettingList where status equals to UPDATED_STATUS
+        defaultApprovalSettingShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where status is not null
+        defaultApprovalSettingShouldBeFound("status.specified=true");
+
+        // Get all the approvalSettingList where status is null
+        defaultApprovalSettingShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where status contains DEFAULT_STATUS
+        defaultApprovalSettingShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the approvalSettingList where status contains UPDATED_STATUS
+        defaultApprovalSettingShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllApprovalSettingsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        approvalSettingRepository.saveAndFlush(approvalSetting);
+
+        // Get all the approvalSettingList where status does not contain DEFAULT_STATUS
+        defaultApprovalSettingShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the approvalSettingList where status does not contain UPDATED_STATUS
+        defaultApprovalSettingShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -399,162 +632,6 @@ class ApprovalSettingResourceIT {
         defaultApprovalSettingShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where status equals to DEFAULT_STATUS
-        defaultApprovalSettingShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the approvalSettingList where status equals to UPDATED_STATUS
-        defaultApprovalSettingShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultApprovalSettingShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the approvalSettingList where status equals to UPDATED_STATUS
-        defaultApprovalSettingShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where status is not null
-        defaultApprovalSettingShouldBeFound("status.specified=true");
-
-        // Get all the approvalSettingList where status is null
-        defaultApprovalSettingShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where status contains DEFAULT_STATUS
-        defaultApprovalSettingShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the approvalSettingList where status contains UPDATED_STATUS
-        defaultApprovalSettingShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where status does not contain DEFAULT_STATUS
-        defaultApprovalSettingShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the approvalSettingList where status does not contain UPDATED_STATUS
-        defaultApprovalSettingShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId equals to DEFAULT_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId equals to UPDATED_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId equals to UPDATED_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId is not null
-        defaultApprovalSettingShouldBeFound("companyId.specified=true");
-
-        // Get all the approvalSettingList where companyId is null
-        defaultApprovalSettingShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId is less than DEFAULT_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId is less than UPDATED_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllApprovalSettingsByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        approvalSettingRepository.saveAndFlush(approvalSetting);
-
-        // Get all the approvalSettingList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultApprovalSettingShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the approvalSettingList where companyId is greater than SMALLER_COMPANY_ID
-        defaultApprovalSettingShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -564,12 +641,12 @@ class ApprovalSettingResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(approvalSetting.getId().intValue())))
-            .andExpect(jsonPath("$.[*].isSequenceApproval").value(hasItem(DEFAULT_IS_SEQUENCE_APPROVAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].isSimultaneousApproval").value(hasItem(DEFAULT_IS_SIMULTANEOUS_APPROVAL.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].approvalCategory").value(hasItem(DEFAULT_APPROVAL_CATEGORY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restApprovalSettingMockMvc
@@ -618,12 +695,12 @@ class ApprovalSettingResourceIT {
         // Disconnect from session so that the updates on updatedApprovalSetting are not directly saved in db
         em.detach(updatedApprovalSetting);
         updatedApprovalSetting
-            .isSequenceApproval(UPDATED_IS_SEQUENCE_APPROVAL)
-            .isSimultaneousApproval(UPDATED_IS_SIMULTANEOUS_APPROVAL)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .type(UPDATED_TYPE)
+            .approvalCategory(UPDATED_APPROVAL_CATEGORY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         ApprovalSettingDTO approvalSettingDTO = approvalSettingMapper.toDto(updatedApprovalSetting);
 
         restApprovalSettingMockMvc
@@ -638,12 +715,12 @@ class ApprovalSettingResourceIT {
         List<ApprovalSetting> approvalSettingList = approvalSettingRepository.findAll();
         assertThat(approvalSettingList).hasSize(databaseSizeBeforeUpdate);
         ApprovalSetting testApprovalSetting = approvalSettingList.get(approvalSettingList.size() - 1);
-        assertThat(testApprovalSetting.getIsSequenceApproval()).isEqualTo(UPDATED_IS_SEQUENCE_APPROVAL);
-        assertThat(testApprovalSetting.getIsSimultaneousApproval()).isEqualTo(UPDATED_IS_SIMULTANEOUS_APPROVAL);
+        assertThat(testApprovalSetting.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testApprovalSetting.getApprovalCategory()).isEqualTo(UPDATED_APPROVAL_CATEGORY);
+        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testApprovalSetting.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testApprovalSetting.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testApprovalSetting.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testApprovalSetting.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -725,7 +802,7 @@ class ApprovalSettingResourceIT {
         ApprovalSetting partialUpdatedApprovalSetting = new ApprovalSetting();
         partialUpdatedApprovalSetting.setId(approvalSetting.getId());
 
-        partialUpdatedApprovalSetting.lastModified(UPDATED_LAST_MODIFIED).status(UPDATED_STATUS);
+        partialUpdatedApprovalSetting.companyId(UPDATED_COMPANY_ID).lastModified(UPDATED_LAST_MODIFIED);
 
         restApprovalSettingMockMvc
             .perform(
@@ -739,12 +816,12 @@ class ApprovalSettingResourceIT {
         List<ApprovalSetting> approvalSettingList = approvalSettingRepository.findAll();
         assertThat(approvalSettingList).hasSize(databaseSizeBeforeUpdate);
         ApprovalSetting testApprovalSetting = approvalSettingList.get(approvalSettingList.size() - 1);
-        assertThat(testApprovalSetting.getIsSequenceApproval()).isEqualTo(DEFAULT_IS_SEQUENCE_APPROVAL);
-        assertThat(testApprovalSetting.getIsSimultaneousApproval()).isEqualTo(DEFAULT_IS_SIMULTANEOUS_APPROVAL);
+        assertThat(testApprovalSetting.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testApprovalSetting.getApprovalCategory()).isEqualTo(DEFAULT_APPROVAL_CATEGORY);
+        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testApprovalSetting.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testApprovalSetting.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testApprovalSetting.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testApprovalSetting.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -760,12 +837,12 @@ class ApprovalSettingResourceIT {
         partialUpdatedApprovalSetting.setId(approvalSetting.getId());
 
         partialUpdatedApprovalSetting
-            .isSequenceApproval(UPDATED_IS_SEQUENCE_APPROVAL)
-            .isSimultaneousApproval(UPDATED_IS_SIMULTANEOUS_APPROVAL)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .type(UPDATED_TYPE)
+            .approvalCategory(UPDATED_APPROVAL_CATEGORY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restApprovalSettingMockMvc
             .perform(
@@ -779,12 +856,12 @@ class ApprovalSettingResourceIT {
         List<ApprovalSetting> approvalSettingList = approvalSettingRepository.findAll();
         assertThat(approvalSettingList).hasSize(databaseSizeBeforeUpdate);
         ApprovalSetting testApprovalSetting = approvalSettingList.get(approvalSettingList.size() - 1);
-        assertThat(testApprovalSetting.getIsSequenceApproval()).isEqualTo(UPDATED_IS_SEQUENCE_APPROVAL);
-        assertThat(testApprovalSetting.getIsSimultaneousApproval()).isEqualTo(UPDATED_IS_SIMULTANEOUS_APPROVAL);
+        assertThat(testApprovalSetting.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testApprovalSetting.getApprovalCategory()).isEqualTo(UPDATED_APPROVAL_CATEGORY);
+        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testApprovalSetting.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testApprovalSetting.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testApprovalSetting.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testApprovalSetting.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testApprovalSetting.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

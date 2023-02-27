@@ -6,12 +6,10 @@ export interface ISalarySettings {
   hra?: number | null;
   employeeShare?: number | null;
   companyShare?: number | null;
-  salaryFrom?: dayjs.Dayjs | null;
-  salaryTo?: dayjs.Dayjs | null;
+  companyId?: number | null;
+  status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  status?: string | null;
-  companyId?: number | null;
 }
 
 export type NewSalarySettings = Omit<ISalarySettings, 'id'> & { id: null };

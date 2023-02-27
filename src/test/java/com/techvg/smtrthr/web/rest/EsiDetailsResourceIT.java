@@ -51,15 +51,6 @@ class EsiDetailsResourceIT {
     private static final Double UPDATED_TOTAL_ESI_RATE = 2D;
     private static final Double SMALLER_TOTAL_ESI_RATE = 1D - 1D;
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_EMPLOYE_ID = 1L;
     private static final Long UPDATED_EMPLOYE_ID = 2L;
     private static final Long SMALLER_EMPLOYE_ID = 1L - 1L;
@@ -67,6 +58,19 @@ class EsiDetailsResourceIT {
     private static final Long DEFAULT_RE_ENUMERATION_ID = 1L;
     private static final Long UPDATED_RE_ENUMERATION_ID = 2L;
     private static final Long SMALLER_RE_ENUMERATION_ID = 1L - 1L;
+
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/esi-details";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -101,11 +105,12 @@ class EsiDetailsResourceIT {
             .esiRate(DEFAULT_ESI_RATE)
             .additionalEsiRate(DEFAULT_ADDITIONAL_ESI_RATE)
             .totalEsiRate(DEFAULT_TOTAL_ESI_RATE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .employeId(DEFAULT_EMPLOYE_ID)
-            .reEnumerationId(DEFAULT_RE_ENUMERATION_ID);
+            .reEnumerationId(DEFAULT_RE_ENUMERATION_ID)
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return esiDetails;
     }
 
@@ -122,11 +127,12 @@ class EsiDetailsResourceIT {
             .esiRate(UPDATED_ESI_RATE)
             .additionalEsiRate(UPDATED_ADDITIONAL_ESI_RATE)
             .totalEsiRate(UPDATED_TOTAL_ESI_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return esiDetails;
     }
 
@@ -154,11 +160,12 @@ class EsiDetailsResourceIT {
         assertThat(testEsiDetails.getEsiRate()).isEqualTo(DEFAULT_ESI_RATE);
         assertThat(testEsiDetails.getAdditionalEsiRate()).isEqualTo(DEFAULT_ADDITIONAL_ESI_RATE);
         assertThat(testEsiDetails.getTotalEsiRate()).isEqualTo(DEFAULT_TOTAL_ESI_RATE);
-        assertThat(testEsiDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testEsiDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testEsiDetails.getEmployeId()).isEqualTo(DEFAULT_EMPLOYE_ID);
         assertThat(testEsiDetails.getReEnumerationId()).isEqualTo(DEFAULT_RE_ENUMERATION_ID);
+        assertThat(testEsiDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testEsiDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testEsiDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -197,11 +204,12 @@ class EsiDetailsResourceIT {
             .andExpect(jsonPath("$.[*].esiRate").value(hasItem(DEFAULT_ESI_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].additionalEsiRate").value(hasItem(DEFAULT_ADDITIONAL_ESI_RATE)))
             .andExpect(jsonPath("$.[*].totalEsiRate").value(hasItem(DEFAULT_TOTAL_ESI_RATE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())));
+            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -221,11 +229,12 @@ class EsiDetailsResourceIT {
             .andExpect(jsonPath("$.esiRate").value(DEFAULT_ESI_RATE.doubleValue()))
             .andExpect(jsonPath("$.additionalEsiRate").value(DEFAULT_ADDITIONAL_ESI_RATE))
             .andExpect(jsonPath("$.totalEsiRate").value(DEFAULT_TOTAL_ESI_RATE.doubleValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.employeId").value(DEFAULT_EMPLOYE_ID.intValue()))
-            .andExpect(jsonPath("$.reEnumerationId").value(DEFAULT_RE_ENUMERATION_ID.intValue()));
+            .andExpect(jsonPath("$.reEnumerationId").value(DEFAULT_RE_ENUMERATION_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -599,175 +608,6 @@ class EsiDetailsResourceIT {
 
     @Test
     @Transactional
-    void getAllEsiDetailsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultEsiDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the esiDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultEsiDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultEsiDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the esiDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultEsiDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModified is not null
-        defaultEsiDetailsShouldBeFound("lastModified.specified=true");
-
-        // Get all the esiDetailsList where lastModified is null
-        defaultEsiDetailsShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the esiDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the esiDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModifiedBy is not null
-        defaultEsiDetailsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the esiDetailsList where lastModifiedBy is null
-        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the esiDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the esiDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultEsiDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where status equals to DEFAULT_STATUS
-        defaultEsiDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the esiDetailsList where status equals to UPDATED_STATUS
-        defaultEsiDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultEsiDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the esiDetailsList where status equals to UPDATED_STATUS
-        defaultEsiDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where status is not null
-        defaultEsiDetailsShouldBeFound("status.specified=true");
-
-        // Get all the esiDetailsList where status is null
-        defaultEsiDetailsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where status contains DEFAULT_STATUS
-        defaultEsiDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the esiDetailsList where status contains UPDATED_STATUS
-        defaultEsiDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEsiDetailsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        esiDetailsRepository.saveAndFlush(esiDetails);
-
-        // Get all the esiDetailsList where status does not contain DEFAULT_STATUS
-        defaultEsiDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the esiDetailsList where status does not contain UPDATED_STATUS
-        defaultEsiDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
     void getAllEsiDetailsByEmployeIdIsEqualToSomething() throws Exception {
         // Initialize the database
         esiDetailsRepository.saveAndFlush(esiDetails);
@@ -948,6 +788,266 @@ class EsiDetailsResourceIT {
         defaultEsiDetailsShouldBeFound("reEnumerationId.greaterThan=" + SMALLER_RE_ENUMERATION_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId equals to DEFAULT_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId equals to UPDATED_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId equals to UPDATED_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId is not null
+        defaultEsiDetailsShouldBeFound("companyId.specified=true");
+
+        // Get all the esiDetailsList where companyId is null
+        defaultEsiDetailsShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId is less than DEFAULT_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId is less than UPDATED_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultEsiDetailsShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the esiDetailsList where companyId is greater than SMALLER_COMPANY_ID
+        defaultEsiDetailsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where status equals to DEFAULT_STATUS
+        defaultEsiDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the esiDetailsList where status equals to UPDATED_STATUS
+        defaultEsiDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultEsiDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the esiDetailsList where status equals to UPDATED_STATUS
+        defaultEsiDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where status is not null
+        defaultEsiDetailsShouldBeFound("status.specified=true");
+
+        // Get all the esiDetailsList where status is null
+        defaultEsiDetailsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where status contains DEFAULT_STATUS
+        defaultEsiDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the esiDetailsList where status contains UPDATED_STATUS
+        defaultEsiDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where status does not contain DEFAULT_STATUS
+        defaultEsiDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the esiDetailsList where status does not contain UPDATED_STATUS
+        defaultEsiDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultEsiDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the esiDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultEsiDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultEsiDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the esiDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultEsiDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModified is not null
+        defaultEsiDetailsShouldBeFound("lastModified.specified=true");
+
+        // Get all the esiDetailsList where lastModified is null
+        defaultEsiDetailsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the esiDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the esiDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModifiedBy is not null
+        defaultEsiDetailsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the esiDetailsList where lastModifiedBy is null
+        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the esiDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEsiDetailsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        esiDetailsRepository.saveAndFlush(esiDetails);
+
+        // Get all the esiDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the esiDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultEsiDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -962,11 +1062,12 @@ class EsiDetailsResourceIT {
             .andExpect(jsonPath("$.[*].esiRate").value(hasItem(DEFAULT_ESI_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].additionalEsiRate").value(hasItem(DEFAULT_ADDITIONAL_ESI_RATE)))
             .andExpect(jsonPath("$.[*].totalEsiRate").value(hasItem(DEFAULT_TOTAL_ESI_RATE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())));
+            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restEsiDetailsMockMvc
@@ -1020,11 +1121,12 @@ class EsiDetailsResourceIT {
             .esiRate(UPDATED_ESI_RATE)
             .additionalEsiRate(UPDATED_ADDITIONAL_ESI_RATE)
             .totalEsiRate(UPDATED_TOTAL_ESI_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         EsiDetailsDTO esiDetailsDTO = esiDetailsMapper.toDto(updatedEsiDetails);
 
         restEsiDetailsMockMvc
@@ -1044,11 +1146,12 @@ class EsiDetailsResourceIT {
         assertThat(testEsiDetails.getEsiRate()).isEqualTo(UPDATED_ESI_RATE);
         assertThat(testEsiDetails.getAdditionalEsiRate()).isEqualTo(UPDATED_ADDITIONAL_ESI_RATE);
         assertThat(testEsiDetails.getTotalEsiRate()).isEqualTo(UPDATED_TOTAL_ESI_RATE);
-        assertThat(testEsiDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testEsiDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEsiDetails.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testEsiDetails.getReEnumerationId()).isEqualTo(UPDATED_RE_ENUMERATION_ID);
+        assertThat(testEsiDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testEsiDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testEsiDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1128,7 +1231,10 @@ class EsiDetailsResourceIT {
         EsiDetails partialUpdatedEsiDetails = new EsiDetails();
         partialUpdatedEsiDetails.setId(esiDetails.getId());
 
-        partialUpdatedEsiDetails.isEsiContribution(UPDATED_IS_ESI_CONTRIBUTION).additionalEsiRate(UPDATED_ADDITIONAL_ESI_RATE);
+        partialUpdatedEsiDetails
+            .isEsiContribution(UPDATED_IS_ESI_CONTRIBUTION)
+            .additionalEsiRate(UPDATED_ADDITIONAL_ESI_RATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restEsiDetailsMockMvc
             .perform(
@@ -1147,11 +1253,12 @@ class EsiDetailsResourceIT {
         assertThat(testEsiDetails.getEsiRate()).isEqualTo(DEFAULT_ESI_RATE);
         assertThat(testEsiDetails.getAdditionalEsiRate()).isEqualTo(UPDATED_ADDITIONAL_ESI_RATE);
         assertThat(testEsiDetails.getTotalEsiRate()).isEqualTo(DEFAULT_TOTAL_ESI_RATE);
-        assertThat(testEsiDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testEsiDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testEsiDetails.getEmployeId()).isEqualTo(DEFAULT_EMPLOYE_ID);
         assertThat(testEsiDetails.getReEnumerationId()).isEqualTo(DEFAULT_RE_ENUMERATION_ID);
+        assertThat(testEsiDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testEsiDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testEsiDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1172,11 +1279,12 @@ class EsiDetailsResourceIT {
             .esiRate(UPDATED_ESI_RATE)
             .additionalEsiRate(UPDATED_ADDITIONAL_ESI_RATE)
             .totalEsiRate(UPDATED_TOTAL_ESI_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restEsiDetailsMockMvc
             .perform(
@@ -1195,11 +1303,12 @@ class EsiDetailsResourceIT {
         assertThat(testEsiDetails.getEsiRate()).isEqualTo(UPDATED_ESI_RATE);
         assertThat(testEsiDetails.getAdditionalEsiRate()).isEqualTo(UPDATED_ADDITIONAL_ESI_RATE);
         assertThat(testEsiDetails.getTotalEsiRate()).isEqualTo(UPDATED_TOTAL_ESI_RATE);
-        assertThat(testEsiDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testEsiDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEsiDetails.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testEsiDetails.getReEnumerationId()).isEqualTo(UPDATED_RE_ENUMERATION_ID);
+        assertThat(testEsiDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testEsiDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testEsiDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testEsiDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

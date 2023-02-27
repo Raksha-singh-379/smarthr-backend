@@ -90,12 +90,6 @@ public class PersonalDetailsQueryService extends QueryService<PersonalDetails> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), PersonalDetails_.id));
             }
-            if (criteria.getPassportNo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPassportNo(), PersonalDetails_.passportNo));
-            }
-            if (criteria.getPassportExpDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPassportExpDate(), PersonalDetails_.passportExpDate));
-            }
             if (criteria.getTelephoneNo() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTelephoneNo(), PersonalDetails_.telephoneNo));
             }
@@ -108,32 +102,26 @@ public class PersonalDetailsQueryService extends QueryService<PersonalDetails> {
             if (criteria.getReligion() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getReligion(), PersonalDetails_.religion));
             }
-            if (criteria.getIsSpousEmployed() != null) {
-                specification = specification.and(buildSpecification(criteria.getIsSpousEmployed(), PersonalDetails_.isSpousEmployed));
-            }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), PersonalDetails_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), PersonalDetails_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), PersonalDetails_.status));
-            }
             if (criteria.getEmployeeId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEmployeeId(), PersonalDetails_.employeeId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), PersonalDetails_.companyId));
             }
-            if (criteria.getPersonalIdNo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPersonalIdNo(), PersonalDetails_.personalIdNo));
-            }
             if (criteria.getBloodGroup() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getBloodGroup(), PersonalDetails_.bloodGroup));
             }
             if (criteria.getDateOfBirth() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateOfBirth(), PersonalDetails_.dateOfBirth));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), PersonalDetails_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), PersonalDetails_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), PersonalDetails_.lastModifiedBy));
             }
         }
         return specification;

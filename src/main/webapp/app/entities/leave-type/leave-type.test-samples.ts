@@ -7,21 +7,25 @@ export const sampleWithRequiredData: ILeaveType = {
 };
 
 export const sampleWithPartialData: ILeaveType = {
-  id: 75823,
-  noOfDays: 'Automotive bluetooth',
-  lastModified: dayjs('2023-02-08T08:46'),
-  status: 'Borders Industrial Operations',
+  id: 3615,
+  noOfDays: 'Assistant applications Borders',
+  status: 'Administrator',
+  lastModifiedBy: 'Compatible Movies',
+  hasEarned: false,
+  hasCustomPolicy: true,
 };
 
 export const sampleWithFullData: ILeaveType = {
-  id: 9737,
-  leaveType: 'Movies',
-  noOfDays: 'Solutions',
-  recordStatus: 'violet optical compress',
-  lastModified: dayjs('2023-02-08T10:16'),
-  lastModifiedBy: 'Unbranded',
-  status: 'Borders',
-  companyId: 62435,
+  id: 193,
+  leaveType: 'Manager invoice Buckinghamshire',
+  noOfDays: 'copy PNG Movies',
+  companyId: 51415,
+  status: 'Market',
+  lastModified: dayjs('2023-02-08T17:47'),
+  lastModifiedBy: 'deposit',
+  hasCarryForward: true,
+  hasEarned: true,
+  hasCustomPolicy: false,
 };
 
 export const sampleWithNewData: NewLeaveType = {

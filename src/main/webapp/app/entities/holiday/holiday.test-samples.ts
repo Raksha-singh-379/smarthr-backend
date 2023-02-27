@@ -4,33 +4,30 @@ import { IHoliday, NewHoliday } from './holiday.model';
 
 export const sampleWithRequiredData: IHoliday = {
   id: 1031,
-  holidayName: 'Soft Corporate Engineer',
 };
 
 export const sampleWithPartialData: IHoliday = {
-  id: 83516,
-  holidayName: 'Lead radical Cook',
-  day: 'Open-source Plastic',
-  year: dayjs('2023-02-08T05:18'),
-  lastModified: dayjs('2023-02-09T02:50'),
-  lastModifiedBy: 'real-time Turkish multi-byte',
-  status: 'neural primary',
+  id: 27584,
+  holidayName: 'neural-net',
+  day: 'pixel quantifying',
+  companyId: 3953,
+  lastModified: dayjs('2023-02-08T07:27'),
+  lastModifiedBy: 'quantify',
 };
 
 export const sampleWithFullData: IHoliday = {
-  id: 63282,
-  holidayName: 'Exclusive',
-  holidayDate: dayjs('2023-02-08T23:07'),
-  day: 'Tools',
-  year: dayjs('2023-02-09T03:22'),
-  lastModified: dayjs('2023-02-08T05:16'),
-  lastModifiedBy: 'networks',
-  status: 'Arizona',
-  companyId: 78879,
+  id: 20090,
+  holidayName: 'Bedfordshire',
+  holidayDate: dayjs('2023-02-08T10:41'),
+  day: 'web-enabled',
+  year: dayjs('2023-02-09T02:50'),
+  companyId: 93657,
+  status: 'parse',
+  lastModified: dayjs('2023-02-08T09:31'),
+  lastModifiedBy: 'multi-byte',
 };
 
 export const sampleWithNewData: NewHoliday = {
-  holidayName: 'Crest artificial',
   id: null,
 };
 

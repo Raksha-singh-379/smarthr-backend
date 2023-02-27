@@ -25,11 +25,12 @@ describe('EsiDetails Form Service', () => {
             esiRate: expect.any(Object),
             additionalEsiRate: expect.any(Object),
             totalEsiRate: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeId: expect.any(Object),
             reEnumerationId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -45,11 +46,12 @@ describe('EsiDetails Form Service', () => {
             esiRate: expect.any(Object),
             additionalEsiRate: expect.any(Object),
             totalEsiRate: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeId: expect.any(Object),
             reEnumerationId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

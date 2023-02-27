@@ -88,6 +88,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="regNumber">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.company.regNumber">Reg Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="status">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.company.status">Status</span>
@@ -106,27 +112,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="regNumber">
+          <th scope="col" jhiSortBy="leaveSettingLevel">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.company.regNumber">Reg Number</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="gstin">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.company.gstin">Gstin</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="pan">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.company.pan">Pan</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="tan">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.company.tan">Tan</span>
+              <span jhiTranslate="smartHrApp.company.leaveSettingLevel">Leave Setting Level</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -146,13 +134,11 @@
           <td>{{ company.mobileNumber }}</td>
           <td>{{ company.websiteUrl }}</td>
           <td>{{ company.fax }}</td>
+          <td>{{ company.regNumber }}</td>
           <td>{{ company.status }}</td>
           <td>{{ company.lastModified | formatMediumDatetime }}</td>
           <td>{{ company.lastModifiedBy }}</td>
-          <td>{{ company.regNumber }}</td>
-          <td>{{ company.gstin }}</td>
-          <td>{{ company.pan }}</td>
-          <td>{{ company.tan }}</td>
+          <td>{{ company.leaveSettingLevel }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

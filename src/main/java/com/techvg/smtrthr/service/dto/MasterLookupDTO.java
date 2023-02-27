@@ -16,17 +16,19 @@ public class MasterLookupDTO implements Serializable {
 
     private String value;
 
+    private String valueTwo;
+
     private String description;
 
     private String type;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
+    private Long companyId;
 
     private String status;
 
-    private Long companyId;
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -52,6 +54,14 @@ public class MasterLookupDTO implements Serializable {
         this.value = value;
     }
 
+    public String getValueTwo() {
+        return valueTwo;
+    }
+
+    public void setValueTwo(String valueTwo) {
+        this.valueTwo = valueTwo;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -68,6 +78,22 @@ public class MasterLookupDTO implements Serializable {
         this.type = type;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -82,22 +108,6 @@ public class MasterLookupDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -128,12 +138,13 @@ public class MasterLookupDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", value='" + getValue() + "'" +
+            ", valueTwo='" + getValueTwo() + "'" +
             ", description='" + getDescription() + "'" +
             ", type='" + getType() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

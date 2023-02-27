@@ -8,7 +8,7 @@
     {
       "fieldName": "branchName",
       "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
@@ -16,8 +16,7 @@
     },
     {
       "fieldName": "branchcode",
-      "fieldType": "String",
-      "fieldValidateRules": ["unique"]
+      "fieldType": "String"
     },
     {
       "fieldName": "branchType",
@@ -26,6 +25,18 @@
     {
       "fieldName": "webSite",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "branchId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "regionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
       "fieldName": "status",
@@ -38,14 +49,6 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "regionId",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

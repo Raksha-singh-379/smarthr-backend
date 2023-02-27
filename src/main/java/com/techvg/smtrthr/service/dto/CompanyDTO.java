@@ -28,19 +28,15 @@ public class CompanyDTO implements Serializable {
 
     private String fax;
 
+    private String regNumber;
+
     private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
 
-    private String regNumber;
-
-    private String gstin;
-
-    private String pan;
-
-    private String tan;
+    private String leaveSettingLevel;
 
     public Long getId() {
         return id;
@@ -114,6 +110,14 @@ public class CompanyDTO implements Serializable {
         this.fax = fax;
     }
 
+    public String getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -138,36 +142,12 @@ public class CompanyDTO implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getRegNumber() {
-        return regNumber;
+    public String getLeaveSettingLevel() {
+        return leaveSettingLevel;
     }
 
-    public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public String getGstin() {
-        return gstin;
-    }
-
-    public void setGstin(String gstin) {
-        this.gstin = gstin;
-    }
-
-    public String getPan() {
-        return pan;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
-
-    public String getTan() {
-        return tan;
-    }
-
-    public void setTan(String tan) {
-        this.tan = tan;
+    public void setLeaveSettingLevel(String leaveSettingLevel) {
+        this.leaveSettingLevel = leaveSettingLevel;
     }
 
     @Override
@@ -204,13 +184,11 @@ public class CompanyDTO implements Serializable {
             ", mobileNumber='" + getMobileNumber() + "'" +
             ", websiteUrl='" + getWebsiteUrl() + "'" +
             ", fax='" + getFax() + "'" +
+            ", regNumber='" + getRegNumber() + "'" +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", regNumber='" + getRegNumber() + "'" +
-            ", gstin='" + getGstin() + "'" +
-            ", pan='" + getPan() + "'" +
-            ", tan='" + getTan() + "'" +
+            ", leaveSettingLevel='" + getLeaveSettingLevel() + "'" +
             "}";
     }
 }

@@ -105,20 +105,23 @@ public class EsiDetailsQueryService extends QueryService<EsiDetails> {
             if (criteria.getTotalEsiRate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTotalEsiRate(), EsiDetails_.totalEsiRate));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), EsiDetails_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), EsiDetails_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), EsiDetails_.status));
-            }
             if (criteria.getEmployeId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEmployeId(), EsiDetails_.employeId));
             }
             if (criteria.getReEnumerationId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getReEnumerationId(), EsiDetails_.reEnumerationId));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), EsiDetails_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), EsiDetails_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), EsiDetails_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), EsiDetails_.lastModifiedBy));
             }
         }
         return specification;

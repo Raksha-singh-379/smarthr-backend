@@ -36,11 +36,12 @@ type PfDetailsFormGroupContent = {
   pfRate: FormControl<PfDetailsFormRawValue['pfRate']>;
   additionalPfRate: FormControl<PfDetailsFormRawValue['additionalPfRate']>;
   totalPfRate: FormControl<PfDetailsFormRawValue['totalPfRate']>;
-  lastModified: FormControl<PfDetailsFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<PfDetailsFormRawValue['lastModifiedBy']>;
-  status: FormControl<PfDetailsFormRawValue['status']>;
   employeId: FormControl<PfDetailsFormRawValue['employeId']>;
   reEnumerationId: FormControl<PfDetailsFormRawValue['reEnumerationId']>;
+  companyId: FormControl<PfDetailsFormRawValue['companyId']>;
+  status: FormControl<PfDetailsFormRawValue['status']>;
+  lastModified: FormControl<PfDetailsFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<PfDetailsFormRawValue['lastModifiedBy']>;
 };
 
 export type PfDetailsFormGroup = FormGroup<PfDetailsFormGroupContent>;
@@ -65,11 +66,12 @@ export class PfDetailsFormService {
       pfRate: new FormControl(pfDetailsRawValue.pfRate),
       additionalPfRate: new FormControl(pfDetailsRawValue.additionalPfRate),
       totalPfRate: new FormControl(pfDetailsRawValue.totalPfRate),
-      lastModified: new FormControl(pfDetailsRawValue.lastModified),
-      lastModifiedBy: new FormControl(pfDetailsRawValue.lastModifiedBy),
-      status: new FormControl(pfDetailsRawValue.status),
       employeId: new FormControl(pfDetailsRawValue.employeId),
       reEnumerationId: new FormControl(pfDetailsRawValue.reEnumerationId),
+      companyId: new FormControl(pfDetailsRawValue.companyId),
+      status: new FormControl(pfDetailsRawValue.status),
+      lastModified: new FormControl(pfDetailsRawValue.lastModified),
+      lastModifiedBy: new FormControl(pfDetailsRawValue.lastModifiedBy),
     });
   }
 

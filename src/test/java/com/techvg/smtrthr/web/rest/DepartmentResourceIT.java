@@ -37,18 +37,18 @@ class DepartmentResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/departments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -79,10 +79,10 @@ class DepartmentResourceIT {
     public static Department createEntity(EntityManager em) {
         Department department = new Department()
             .name(DEFAULT_NAME)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return department;
     }
 
@@ -95,10 +95,10 @@ class DepartmentResourceIT {
     public static Department createUpdatedEntity(EntityManager em) {
         Department department = new Department()
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return department;
     }
 
@@ -122,10 +122,10 @@ class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeCreate + 1);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testDepartment.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testDepartment.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testDepartment.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testDepartment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testDepartment.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testDepartment.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -160,10 +160,10 @@ class DepartmentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -179,10 +179,10 @@ class DepartmentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(department.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -266,6 +266,162 @@ class DepartmentResourceIT {
 
         // Get all the departmentList where name does not contain UPDATED_NAME
         defaultDepartmentShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId equals to DEFAULT_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the departmentList where companyId equals to UPDATED_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the departmentList where companyId equals to UPDATED_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId is not null
+        defaultDepartmentShouldBeFound("companyId.specified=true");
+
+        // Get all the departmentList where companyId is null
+        defaultDepartmentShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the departmentList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the departmentList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId is less than DEFAULT_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the departmentList where companyId is less than UPDATED_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultDepartmentShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the departmentList where companyId is greater than SMALLER_COMPANY_ID
+        defaultDepartmentShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where status equals to DEFAULT_STATUS
+        defaultDepartmentShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the departmentList where status equals to UPDATED_STATUS
+        defaultDepartmentShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultDepartmentShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the departmentList where status equals to UPDATED_STATUS
+        defaultDepartmentShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where status is not null
+        defaultDepartmentShouldBeFound("status.specified=true");
+
+        // Get all the departmentList where status is null
+        defaultDepartmentShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where status contains DEFAULT_STATUS
+        defaultDepartmentShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the departmentList where status contains UPDATED_STATUS
+        defaultDepartmentShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDepartmentsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        departmentRepository.saveAndFlush(department);
+
+        // Get all the departmentList where status does not contain DEFAULT_STATUS
+        defaultDepartmentShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the departmentList where status does not contain UPDATED_STATUS
+        defaultDepartmentShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -372,162 +528,6 @@ class DepartmentResourceIT {
         defaultDepartmentShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllDepartmentsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where status equals to DEFAULT_STATUS
-        defaultDepartmentShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the departmentList where status equals to UPDATED_STATUS
-        defaultDepartmentShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultDepartmentShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the departmentList where status equals to UPDATED_STATUS
-        defaultDepartmentShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where status is not null
-        defaultDepartmentShouldBeFound("status.specified=true");
-
-        // Get all the departmentList where status is null
-        defaultDepartmentShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where status contains DEFAULT_STATUS
-        defaultDepartmentShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the departmentList where status contains UPDATED_STATUS
-        defaultDepartmentShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where status does not contain DEFAULT_STATUS
-        defaultDepartmentShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the departmentList where status does not contain UPDATED_STATUS
-        defaultDepartmentShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId equals to DEFAULT_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the departmentList where companyId equals to UPDATED_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the departmentList where companyId equals to UPDATED_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId is not null
-        defaultDepartmentShouldBeFound("companyId.specified=true");
-
-        // Get all the departmentList where companyId is null
-        defaultDepartmentShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the departmentList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the departmentList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId is less than DEFAULT_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the departmentList where companyId is less than UPDATED_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllDepartmentsByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        departmentRepository.saveAndFlush(department);
-
-        // Get all the departmentList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultDepartmentShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the departmentList where companyId is greater than SMALLER_COMPANY_ID
-        defaultDepartmentShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -538,10 +538,10 @@ class DepartmentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restDepartmentMockMvc
@@ -591,10 +591,10 @@ class DepartmentResourceIT {
         em.detach(updatedDepartment);
         updatedDepartment
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         DepartmentDTO departmentDTO = departmentMapper.toDto(updatedDepartment);
 
         restDepartmentMockMvc
@@ -610,10 +610,10 @@ class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeUpdate);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testDepartment.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDepartment.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDepartment.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testDepartment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testDepartment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testDepartment.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -693,7 +693,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.lastModified(UPDATED_LAST_MODIFIED).status(UPDATED_STATUS);
+        partialUpdatedDepartment.companyId(UPDATED_COMPANY_ID).lastModified(UPDATED_LAST_MODIFIED);
 
         restDepartmentMockMvc
             .perform(
@@ -708,10 +708,10 @@ class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeUpdate);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testDepartment.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDepartment.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testDepartment.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testDepartment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testDepartment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testDepartment.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -728,10 +728,10 @@ class DepartmentResourceIT {
 
         partialUpdatedDepartment
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restDepartmentMockMvc
             .perform(
@@ -746,10 +746,10 @@ class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeUpdate);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testDepartment.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDepartment.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDepartment.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testDepartment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testDepartment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testDepartment.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

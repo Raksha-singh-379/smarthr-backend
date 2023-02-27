@@ -11,8 +11,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +58,7 @@ public class HolidayResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/holidays")
-    public ResponseEntity<HolidayDTO> createHoliday(@Valid @RequestBody HolidayDTO holidayDTO) throws URISyntaxException {
+    public ResponseEntity<HolidayDTO> createHoliday(@RequestBody HolidayDTO holidayDTO) throws URISyntaxException {
         log.debug("REST request to save Holiday : {}", holidayDTO);
         if (holidayDTO.getId() != null) {
             throw new BadRequestAlertException("A new holiday cannot already have an ID", ENTITY_NAME, "idexists");
@@ -85,7 +83,7 @@ public class HolidayResource {
     @PutMapping("/holidays/{id}")
     public ResponseEntity<HolidayDTO> updateHoliday(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody HolidayDTO holidayDTO
+        @RequestBody HolidayDTO holidayDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Holiday : {}, {}", id, holidayDTO);
         if (holidayDTO.getId() == null) {
@@ -120,7 +118,7 @@ public class HolidayResource {
     @PatchMapping(value = "/holidays/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<HolidayDTO> partialUpdateHoliday(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody HolidayDTO holidayDTO
+        @RequestBody HolidayDTO holidayDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Holiday partially : {}, {}", id, holidayDTO);
         if (holidayDTO.getId() == null) {

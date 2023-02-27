@@ -52,9 +52,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="recordStatus">
+          <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveType.recordStatus">Record Status</span>
+              <span jhiTranslate="smartHrApp.leaveType.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leaveType.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -70,15 +76,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
+          <th scope="col" jhiSortBy="hasCarryForward">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveType.status">Status</span>
+              <span jhiTranslate="smartHrApp.leaveType.hasCarryForward">Has Carry Forward</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="companyId">
+          <th scope="col" jhiSortBy="hasEarned">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveType.companyId">Company Id</span>
+              <span jhiTranslate="smartHrApp.leaveType.hasEarned">Has Earned</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="hasCustomPolicy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leaveType.hasCustomPolicy">Has Custom Policy</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -92,11 +104,13 @@
           </td>
           <td>{{ leaveType.leaveType }}</td>
           <td>{{ leaveType.noOfDays }}</td>
-          <td>{{ leaveType.recordStatus }}</td>
+          <td>{{ leaveType.companyId }}</td>
+          <td>{{ leaveType.status }}</td>
           <td>{{ leaveType.lastModified | formatMediumDatetime }}</td>
           <td>{{ leaveType.lastModifiedBy }}</td>
-          <td>{{ leaveType.status }}</td>
-          <td>{{ leaveType.companyId }}</td>
+          <td>{{ leaveType.hasCarryForward }}</td>
+          <td>{{ leaveType.hasEarned }}</td>
+          <td>{{ leaveType.hasCustomPolicy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

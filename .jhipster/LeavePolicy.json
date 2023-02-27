@@ -22,10 +22,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "leaveStatus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "totalLeave",
       "fieldType": "String"
     },
@@ -42,6 +38,14 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "lastModified",
       "fieldType": "Instant"
     },
@@ -50,11 +54,11 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "status",
+      "fieldName": "refTable",
       "fieldType": "String"
     },
     {
-      "fieldName": "companyId",
+      "fieldName": "refTableId",
       "fieldType": "Long"
     }
   ],

@@ -38,6 +38,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "regNumber",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "status",
       "fieldType": "String"
     },
@@ -50,19 +54,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "regNumber",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "gstin",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "pan",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "tan",
+      "fieldName": "leaveSettingLevel",
       "fieldType": "String"
     }
   ],

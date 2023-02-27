@@ -36,11 +36,11 @@ type TdsFormGroupContent = {
   salaryFrom: FormControl<TdsFormRawValue['salaryFrom']>;
   salaryTo: FormControl<TdsFormRawValue['salaryTo']>;
   percentage: FormControl<TdsFormRawValue['percentage']>;
-  lastModified: FormControl<TdsFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<TdsFormRawValue['lastModifiedBy']>;
-  status: FormControl<TdsFormRawValue['status']>;
   salarySettingId: FormControl<TdsFormRawValue['salarySettingId']>;
   companyId: FormControl<TdsFormRawValue['companyId']>;
+  status: FormControl<TdsFormRawValue['status']>;
+  lastModified: FormControl<TdsFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<TdsFormRawValue['lastModifiedBy']>;
 };
 
 export type TdsFormGroup = FormGroup<TdsFormGroupContent>;
@@ -63,11 +63,11 @@ export class TdsFormService {
       salaryFrom: new FormControl(tdsRawValue.salaryFrom),
       salaryTo: new FormControl(tdsRawValue.salaryTo),
       percentage: new FormControl(tdsRawValue.percentage),
-      lastModified: new FormControl(tdsRawValue.lastModified),
-      lastModifiedBy: new FormControl(tdsRawValue.lastModifiedBy),
-      status: new FormControl(tdsRawValue.status),
       salarySettingId: new FormControl(tdsRawValue.salarySettingId),
       companyId: new FormControl(tdsRawValue.companyId),
+      status: new FormControl(tdsRawValue.status),
+      lastModified: new FormControl(tdsRawValue.lastModified),
+      lastModifiedBy: new FormControl(tdsRawValue.lastModifiedBy),
     });
   }
 

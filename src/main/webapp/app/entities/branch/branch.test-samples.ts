@@ -8,29 +8,31 @@ export const sampleWithRequiredData: IBranch = {
 };
 
 export const sampleWithPartialData: IBranch = {
-  id: 80449,
-  branchName: 'e-services',
-  description: 'Handcrafted International Triple-buffered',
-  lastModified: dayjs('2023-02-08T06:06'),
-  companyId: 98544,
+  id: 11378,
+  branchName: 'superstructure Handcrafted',
+  description: 'Denar Human Architect',
+  regionId: 66061,
+  lastModified: dayjs('2023-02-09T00:53'),
+  lastModifiedBy: 'wireless cultivate',
 };
 
 export const sampleWithFullData: IBranch = {
-  id: 45591,
-  branchName: 'deposit',
-  description: 'matrix Quality Ecuador',
-  branchcode: 'microchip Berkshire',
-  branchType: 'integrated multi-byte',
-  webSite: 'Sum world-class Response',
-  status: 'transparent Plastic action-items',
-  lastModified: dayjs('2023-02-08T05:08'),
-  lastModifiedBy: 'protocol Health Polarised',
-  regionId: 18014,
-  companyId: 22917,
+  id: 2111,
+  branchName: 'Seamless microchip',
+  description: 'Point integrated',
+  branchcode: 'Colorado Sum world-class',
+  branchType: 'demand-driven transparent Plastic',
+  webSite: 'turn-key monitor',
+  branchId: 89228,
+  regionId: 2440,
+  companyId: 47603,
+  status: 'Polarised Bike',
+  lastModified: dayjs('2023-02-08T12:38'),
+  lastModifiedBy: 'Florida Configuration International',
 };
 
 export const sampleWithNewData: NewBranch = {
-  branchName: 'Palladium Car',
+  branchName: 'calculate',
   id: null,
 };
 

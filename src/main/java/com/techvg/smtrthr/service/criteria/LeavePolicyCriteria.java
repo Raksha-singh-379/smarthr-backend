@@ -31,8 +31,6 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
 
     private StringFilter genderLeave;
 
-    private StringFilter leaveStatus;
-
     private StringFilter totalLeave;
 
     private StringFilter maxLeave;
@@ -41,13 +39,17 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
+    private LongFilter companyId;
+
+    private StringFilter status;
+
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
 
-    private StringFilter status;
+    private StringFilter refTable;
 
-    private LongFilter companyId;
+    private LongFilter refTableId;
 
     private Boolean distinct;
 
@@ -59,15 +61,16 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
         this.isCarryForword = other.isCarryForword == null ? null : other.isCarryForword.copy();
         this.employeeType = other.employeeType == null ? null : other.employeeType.copy();
         this.genderLeave = other.genderLeave == null ? null : other.genderLeave.copy();
-        this.leaveStatus = other.leaveStatus == null ? null : other.leaveStatus.copy();
         this.totalLeave = other.totalLeave == null ? null : other.totalLeave.copy();
         this.maxLeave = other.maxLeave == null ? null : other.maxLeave.copy();
         this.hasproRataLeave = other.hasproRataLeave == null ? null : other.hasproRataLeave.copy();
         this.description = other.description == null ? null : other.description.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.refTable = other.refTable == null ? null : other.refTable.copy();
+        this.refTableId = other.refTableId == null ? null : other.refTableId.copy();
         this.distinct = other.distinct;
     }
 
@@ -151,21 +154,6 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
         this.genderLeave = genderLeave;
     }
 
-    public StringFilter getLeaveStatus() {
-        return leaveStatus;
-    }
-
-    public StringFilter leaveStatus() {
-        if (leaveStatus == null) {
-            leaveStatus = new StringFilter();
-        }
-        return leaveStatus;
-    }
-
-    public void setLeaveStatus(StringFilter leaveStatus) {
-        this.leaveStatus = leaveStatus;
-    }
-
     public StringFilter getTotalLeave() {
         return totalLeave;
     }
@@ -226,6 +214,36 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
     public InstantFilter getLastModified() {
         return lastModified;
     }
@@ -256,34 +274,34 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
+    public StringFilter getRefTable() {
+        return refTable;
     }
 
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
+    public StringFilter refTable() {
+        if (refTable == null) {
+            refTable = new StringFilter();
         }
-        return status;
+        return refTable;
     }
 
-    public void setStatus(StringFilter status) {
-        this.status = status;
+    public void setRefTable(StringFilter refTable) {
+        this.refTable = refTable;
     }
 
-    public LongFilter getCompanyId() {
-        return companyId;
+    public LongFilter getRefTableId() {
+        return refTableId;
     }
 
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
+    public LongFilter refTableId() {
+        if (refTableId == null) {
+            refTableId = new LongFilter();
         }
-        return companyId;
+        return refTableId;
     }
 
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
+    public void setRefTableId(LongFilter refTableId) {
+        this.refTableId = refTableId;
     }
 
     public Boolean getDistinct() {
@@ -309,15 +327,16 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
             Objects.equals(isCarryForword, that.isCarryForword) &&
             Objects.equals(employeeType, that.employeeType) &&
             Objects.equals(genderLeave, that.genderLeave) &&
-            Objects.equals(leaveStatus, that.leaveStatus) &&
             Objects.equals(totalLeave, that.totalLeave) &&
             Objects.equals(maxLeave, that.maxLeave) &&
             Objects.equals(hasproRataLeave, that.hasproRataLeave) &&
             Objects.equals(description, that.description) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(refTable, that.refTable) &&
+            Objects.equals(refTableId, that.refTableId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -330,15 +349,16 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
             isCarryForword,
             employeeType,
             genderLeave,
-            leaveStatus,
             totalLeave,
             maxLeave,
             hasproRataLeave,
             description,
+            companyId,
+            status,
             lastModified,
             lastModifiedBy,
-            status,
-            companyId,
+            refTable,
+            refTableId,
             distinct
         );
     }
@@ -352,15 +372,16 @@ public class LeavePolicyCriteria implements Serializable, Criteria {
             (isCarryForword != null ? "isCarryForword=" + isCarryForword + ", " : "") +
             (employeeType != null ? "employeeType=" + employeeType + ", " : "") +
             (genderLeave != null ? "genderLeave=" + genderLeave + ", " : "") +
-            (leaveStatus != null ? "leaveStatus=" + leaveStatus + ", " : "") +
             (totalLeave != null ? "totalLeave=" + totalLeave + ", " : "") +
             (maxLeave != null ? "maxLeave=" + maxLeave + ", " : "") +
             (hasproRataLeave != null ? "hasproRataLeave=" + hasproRataLeave + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (refTable != null ? "refTable=" + refTable + ", " : "") +
+            (refTableId != null ? "refTableId=" + refTableId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

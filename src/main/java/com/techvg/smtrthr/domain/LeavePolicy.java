@@ -34,9 +34,6 @@ public class LeavePolicy implements Serializable {
     @Column(name = "gender_leave")
     private String genderLeave;
 
-    @Column(name = "leave_status")
-    private String leaveStatus;
-
     @Column(name = "total_leave")
     private String totalLeave;
 
@@ -49,17 +46,23 @@ public class LeavePolicy implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "ref_table")
+    private String refTable;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @Column(name = "ref_table_id")
+    private Long refTableId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -128,19 +131,6 @@ public class LeavePolicy implements Serializable {
         this.genderLeave = genderLeave;
     }
 
-    public String getLeaveStatus() {
-        return this.leaveStatus;
-    }
-
-    public LeavePolicy leaveStatus(String leaveStatus) {
-        this.setLeaveStatus(leaveStatus);
-        return this;
-    }
-
-    public void setLeaveStatus(String leaveStatus) {
-        this.leaveStatus = leaveStatus;
-    }
-
     public String getTotalLeave() {
         return this.totalLeave;
     }
@@ -193,6 +183,32 @@ public class LeavePolicy implements Serializable {
         this.description = description;
     }
 
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public LeavePolicy companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public LeavePolicy status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -219,30 +235,30 @@ public class LeavePolicy implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
+    public String getRefTable() {
+        return this.refTable;
     }
 
-    public LeavePolicy status(String status) {
-        this.setStatus(status);
+    public LeavePolicy refTable(String refTable) {
+        this.setRefTable(refTable);
         return this;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
-    public Long getCompanyId() {
-        return this.companyId;
+    public Long getRefTableId() {
+        return this.refTableId;
     }
 
-    public LeavePolicy companyId(Long companyId) {
-        this.setCompanyId(companyId);
+    public LeavePolicy refTableId(Long refTableId) {
+        this.setRefTableId(refTableId);
         return this;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setRefTableId(Long refTableId) {
+        this.refTableId = refTableId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -273,15 +289,16 @@ public class LeavePolicy implements Serializable {
             ", isCarryForword='" + getIsCarryForword() + "'" +
             ", employeeType='" + getEmployeeType() + "'" +
             ", genderLeave='" + getGenderLeave() + "'" +
-            ", leaveStatus='" + getLeaveStatus() + "'" +
             ", totalLeave='" + getTotalLeave() + "'" +
             ", maxLeave='" + getMaxLeave() + "'" +
             ", hasproRataLeave='" + getHasproRataLeave() + "'" +
             ", description='" + getDescription() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
+            ", refTable='" + getRefTable() + "'" +
+            ", refTableId=" + getRefTableId() +
             "}";
     }
 }

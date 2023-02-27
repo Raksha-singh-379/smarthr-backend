@@ -46,33 +46,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="middleName">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.employee.middleName">Middle Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="lastName">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.employee.lastName">Last Name</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="username">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.username">Username</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="password">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.password">Password</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="department">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.department">Department</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="designation">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.designation">Designation</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -94,6 +76,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.employee.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.employee.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="lastModified">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.employee.lastModified">Last Modified</span>
@@ -106,27 +100,33 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
+          <th scope="col" jhiSortBy="employmentTypeId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.status">Status</span>
+              <span jhiTranslate="smartHrApp.employee.employmentTypeId">Employment Type Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="companyId">
+          <th scope="col" jhiSortBy="designation.name">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.companyId">Company Id</span>
+              <span jhiTranslate="smartHrApp.employee.designation">Designation</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="branchId">
+          <th scope="col" jhiSortBy="department.name">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.branchId">Branch Id</span>
+              <span jhiTranslate="smartHrApp.employee.department">Department</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="regionId">
+          <th scope="col" jhiSortBy="branch.branchName">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.employee.regionId">Region Id</span>
+              <span jhiTranslate="smartHrApp.employee.branch">Branch</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="region.regionName">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.employee.region">Region</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -139,20 +139,36 @@
             <a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a>
           </td>
           <td>{{ employee.firstName }}</td>
+          <td>{{ employee.middleName }}</td>
           <td>{{ employee.lastName }}</td>
-          <td>{{ employee.username }}</td>
-          <td>{{ employee.password }}</td>
-          <td>{{ employee.department }}</td>
-          <td>{{ employee.designation }}</td>
           <td>{{ employee.gender }}</td>
           <td>{{ employee.empUniqueId }}</td>
           <td>{{ employee.joindate | formatMediumDatetime }}</td>
+          <td>{{ employee.companyId }}</td>
+          <td>{{ employee.status }}</td>
           <td>{{ employee.lastModified | formatMediumDatetime }}</td>
           <td>{{ employee.lastModifiedBy }}</td>
-          <td>{{ employee.status }}</td>
-          <td>{{ employee.companyId }}</td>
-          <td>{{ employee.branchId }}</td>
-          <td>{{ employee.regionId }}</td>
+          <td>{{ employee.employmentTypeId }}</td>
+          <td>
+            <div *ngIf="employee.designation">
+              <a [routerLink]="['/designation', employee.designation.id, 'view']">{{ employee.designation.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="employee.department">
+              <a [routerLink]="['/department', employee.department.id, 'view']">{{ employee.department.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="employee.branch">
+              <a [routerLink]="['/branch', employee.branch.id, 'view']">{{ employee.branch.branchName }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="employee.region">
+              <a [routerLink]="['/region', employee.region.id, 'view']">{{ employee.region.regionName }}</a>
+            </div>
+          </td>
           <td class="text-end">
             <div class="btn-group">
               <button

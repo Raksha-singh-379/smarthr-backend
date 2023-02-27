@@ -30,10 +30,6 @@
         <dd>
           <span>{{ leavePolicy.genderLeave }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.leavePolicy.leaveStatus">Leave Status</span></dt>
-        <dd>
-          <span>{{ leavePolicy.leaveStatus }}</span>
-        </dd>
         <dt><span jhiTranslate="smartHrApp.leavePolicy.totalLeave">Total Leave</span></dt>
         <dd>
           <span>{{ leavePolicy.totalLeave }}</span>
@@ -50,6 +46,14 @@
         <dd>
           <span>{{ leavePolicy.description }}</span>
         </dd>
+        <dt><span jhiTranslate="smartHrApp.leavePolicy.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ leavePolicy.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.leavePolicy.status">Status</span></dt>
+        <dd>
+          <span>{{ leavePolicy.status }}</span>
+        </dd>
         <dt><span jhiTranslate="smartHrApp.leavePolicy.lastModified">Last Modified</span></dt>
         <dd>
           <span>{{ leavePolicy.lastModified | formatMediumDatetime }}</span>
@@ -58,13 +62,13 @@
         <dd>
           <span>{{ leavePolicy.lastModifiedBy }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.leavePolicy.status">Status</span></dt>
+        <dt><span jhiTranslate="smartHrApp.leavePolicy.refTable">Ref Table</span></dt>
         <dd>
-          <span>{{ leavePolicy.status }}</span>
+          <span>{{ leavePolicy.refTable }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.leavePolicy.companyId">Company Id</span></dt>
+        <dt><span jhiTranslate="smartHrApp.leavePolicy.refTableId">Ref Table Id</span></dt>
         <dd>
-          <span>{{ leavePolicy.companyId }}</span>
+          <span>{{ leavePolicy.refTableId }}</span>
         </dd>
       </dl>
 

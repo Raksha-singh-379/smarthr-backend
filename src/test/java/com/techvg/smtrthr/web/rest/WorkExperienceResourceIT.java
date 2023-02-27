@@ -46,15 +46,6 @@ class WorkExperienceResourceIT {
     private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_ADDRESS_ID = 1L;
     private static final Long UPDATED_ADDRESS_ID = 2L;
     private static final Long SMALLER_ADDRESS_ID = 1L - 1L;
@@ -67,12 +58,17 @@ class WorkExperienceResourceIT {
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
-    private static final Double DEFAULT_YEAR_OF_EXP = 1D;
-    private static final Double UPDATED_YEAR_OF_EXP = 2D;
-    private static final Double SMALLER_YEAR_OF_EXP = 1D - 1D;
-
     private static final String DEFAULT_JOB_DESC = "AAAAAAAAAA";
     private static final String UPDATED_JOB_DESC = "BBBBBBBBBB";
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/work-experiences";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -106,14 +102,13 @@ class WorkExperienceResourceIT {
             .companyName(DEFAULT_COMPANY_NAME)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .addressId(DEFAULT_ADDRESS_ID)
             .employeeId(DEFAULT_EMPLOYEE_ID)
             .companyId(DEFAULT_COMPANY_ID)
-            .yearOfExp(DEFAULT_YEAR_OF_EXP)
-            .jobDesc(DEFAULT_JOB_DESC);
+            .jobDesc(DEFAULT_JOB_DESC)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return workExperience;
     }
 
@@ -129,14 +124,13 @@ class WorkExperienceResourceIT {
             .companyName(UPDATED_COMPANY_NAME)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .addressId(UPDATED_ADDRESS_ID)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .yearOfExp(UPDATED_YEAR_OF_EXP)
-            .jobDesc(UPDATED_JOB_DESC);
+            .jobDesc(UPDATED_JOB_DESC)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return workExperience;
     }
 
@@ -165,14 +159,13 @@ class WorkExperienceResourceIT {
         assertThat(testWorkExperience.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testWorkExperience.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testWorkExperience.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testWorkExperience.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testWorkExperience.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testWorkExperience.getAddressId()).isEqualTo(DEFAULT_ADDRESS_ID);
         assertThat(testWorkExperience.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testWorkExperience.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-        assertThat(testWorkExperience.getYearOfExp()).isEqualTo(DEFAULT_YEAR_OF_EXP);
         assertThat(testWorkExperience.getJobDesc()).isEqualTo(DEFAULT_JOB_DESC);
+        assertThat(testWorkExperience.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testWorkExperience.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -212,14 +205,13 @@ class WorkExperienceResourceIT {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].addressId").value(hasItem(DEFAULT_ADDRESS_ID.intValue())))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].yearOfExp").value(hasItem(DEFAULT_YEAR_OF_EXP.doubleValue())))
-            .andExpect(jsonPath("$.[*].jobDesc").value(hasItem(DEFAULT_JOB_DESC)));
+            .andExpect(jsonPath("$.[*].jobDesc").value(hasItem(DEFAULT_JOB_DESC)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -238,14 +230,13 @@ class WorkExperienceResourceIT {
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.addressId").value(DEFAULT_ADDRESS_ID.intValue()))
             .andExpect(jsonPath("$.employeeId").value(DEFAULT_EMPLOYEE_ID.intValue()))
             .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
-            .andExpect(jsonPath("$.yearOfExp").value(DEFAULT_YEAR_OF_EXP.doubleValue()))
-            .andExpect(jsonPath("$.jobDesc").value(DEFAULT_JOB_DESC));
+            .andExpect(jsonPath("$.jobDesc").value(DEFAULT_JOB_DESC))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -472,175 +463,6 @@ class WorkExperienceResourceIT {
 
         // Get all the workExperienceList where endDate is null
         defaultWorkExperienceShouldNotBeFound("endDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultWorkExperienceShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the workExperienceList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultWorkExperienceShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultWorkExperienceShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the workExperienceList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultWorkExperienceShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModified is not null
-        defaultWorkExperienceShouldBeFound("lastModified.specified=true");
-
-        // Get all the workExperienceList where lastModified is null
-        defaultWorkExperienceShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the workExperienceList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the workExperienceList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModifiedBy is not null
-        defaultWorkExperienceShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the workExperienceList where lastModifiedBy is null
-        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the workExperienceList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the workExperienceList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultWorkExperienceShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where status equals to DEFAULT_STATUS
-        defaultWorkExperienceShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the workExperienceList where status equals to UPDATED_STATUS
-        defaultWorkExperienceShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultWorkExperienceShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the workExperienceList where status equals to UPDATED_STATUS
-        defaultWorkExperienceShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where status is not null
-        defaultWorkExperienceShouldBeFound("status.specified=true");
-
-        // Get all the workExperienceList where status is null
-        defaultWorkExperienceShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where status contains DEFAULT_STATUS
-        defaultWorkExperienceShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the workExperienceList where status contains UPDATED_STATUS
-        defaultWorkExperienceShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where status does not contain DEFAULT_STATUS
-        defaultWorkExperienceShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the workExperienceList where status does not contain UPDATED_STATUS
-        defaultWorkExperienceShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -918,97 +740,6 @@ class WorkExperienceResourceIT {
 
     @Test
     @Transactional
-    void getAllWorkExperiencesByYearOfExpIsEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp equals to DEFAULT_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.equals=" + DEFAULT_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp equals to UPDATED_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.equals=" + UPDATED_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsInShouldWork() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp in DEFAULT_YEAR_OF_EXP or UPDATED_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.in=" + DEFAULT_YEAR_OF_EXP + "," + UPDATED_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp equals to UPDATED_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.in=" + UPDATED_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp is not null
-        defaultWorkExperienceShouldBeFound("yearOfExp.specified=true");
-
-        // Get all the workExperienceList where yearOfExp is null
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp is greater than or equal to DEFAULT_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.greaterThanOrEqual=" + DEFAULT_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp is greater than or equal to UPDATED_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.greaterThanOrEqual=" + UPDATED_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp is less than or equal to DEFAULT_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.lessThanOrEqual=" + DEFAULT_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp is less than or equal to SMALLER_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.lessThanOrEqual=" + SMALLER_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsLessThanSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp is less than DEFAULT_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.lessThan=" + DEFAULT_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp is less than UPDATED_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.lessThan=" + UPDATED_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
-    void getAllWorkExperiencesByYearOfExpIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        workExperienceRepository.saveAndFlush(workExperience);
-
-        // Get all the workExperienceList where yearOfExp is greater than DEFAULT_YEAR_OF_EXP
-        defaultWorkExperienceShouldNotBeFound("yearOfExp.greaterThan=" + DEFAULT_YEAR_OF_EXP);
-
-        // Get all the workExperienceList where yearOfExp is greater than SMALLER_YEAR_OF_EXP
-        defaultWorkExperienceShouldBeFound("yearOfExp.greaterThan=" + SMALLER_YEAR_OF_EXP);
-    }
-
-    @Test
-    @Transactional
     void getAllWorkExperiencesByJobDescIsEqualToSomething() throws Exception {
         // Initialize the database
         workExperienceRepository.saveAndFlush(workExperience);
@@ -1072,6 +803,175 @@ class WorkExperienceResourceIT {
         defaultWorkExperienceShouldBeFound("jobDesc.doesNotContain=" + UPDATED_JOB_DESC);
     }
 
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where status equals to DEFAULT_STATUS
+        defaultWorkExperienceShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the workExperienceList where status equals to UPDATED_STATUS
+        defaultWorkExperienceShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultWorkExperienceShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the workExperienceList where status equals to UPDATED_STATUS
+        defaultWorkExperienceShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where status is not null
+        defaultWorkExperienceShouldBeFound("status.specified=true");
+
+        // Get all the workExperienceList where status is null
+        defaultWorkExperienceShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where status contains DEFAULT_STATUS
+        defaultWorkExperienceShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the workExperienceList where status contains UPDATED_STATUS
+        defaultWorkExperienceShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where status does not contain DEFAULT_STATUS
+        defaultWorkExperienceShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the workExperienceList where status does not contain UPDATED_STATUS
+        defaultWorkExperienceShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultWorkExperienceShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the workExperienceList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultWorkExperienceShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultWorkExperienceShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the workExperienceList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultWorkExperienceShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModified is not null
+        defaultWorkExperienceShouldBeFound("lastModified.specified=true");
+
+        // Get all the workExperienceList where lastModified is null
+        defaultWorkExperienceShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the workExperienceList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the workExperienceList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModifiedBy is not null
+        defaultWorkExperienceShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the workExperienceList where lastModifiedBy is null
+        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the workExperienceList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllWorkExperiencesByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        workExperienceRepository.saveAndFlush(workExperience);
+
+        // Get all the workExperienceList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the workExperienceList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultWorkExperienceShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1085,14 +985,13 @@ class WorkExperienceResourceIT {
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME)))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].addressId").value(hasItem(DEFAULT_ADDRESS_ID.intValue())))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].yearOfExp").value(hasItem(DEFAULT_YEAR_OF_EXP.doubleValue())))
-            .andExpect(jsonPath("$.[*].jobDesc").value(hasItem(DEFAULT_JOB_DESC)));
+            .andExpect(jsonPath("$.[*].jobDesc").value(hasItem(DEFAULT_JOB_DESC)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restWorkExperienceMockMvc
@@ -1145,14 +1044,13 @@ class WorkExperienceResourceIT {
             .companyName(UPDATED_COMPANY_NAME)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .addressId(UPDATED_ADDRESS_ID)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .yearOfExp(UPDATED_YEAR_OF_EXP)
-            .jobDesc(UPDATED_JOB_DESC);
+            .jobDesc(UPDATED_JOB_DESC)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         WorkExperienceDTO workExperienceDTO = workExperienceMapper.toDto(updatedWorkExperience);
 
         restWorkExperienceMockMvc
@@ -1171,14 +1069,13 @@ class WorkExperienceResourceIT {
         assertThat(testWorkExperience.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testWorkExperience.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testWorkExperience.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testWorkExperience.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testWorkExperience.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
         assertThat(testWorkExperience.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testWorkExperience.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testWorkExperience.getYearOfExp()).isEqualTo(UPDATED_YEAR_OF_EXP);
         assertThat(testWorkExperience.getJobDesc()).isEqualTo(UPDATED_JOB_DESC);
+        assertThat(testWorkExperience.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1264,12 +1161,11 @@ class WorkExperienceResourceIT {
             .companyName(UPDATED_COMPANY_NAME)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .addressId(UPDATED_ADDRESS_ID)
+            .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .jobDesc(UPDATED_JOB_DESC);
+            .jobDesc(UPDATED_JOB_DESC)
+            .lastModified(UPDATED_LAST_MODIFIED);
 
         restWorkExperienceMockMvc
             .perform(
@@ -1287,14 +1183,13 @@ class WorkExperienceResourceIT {
         assertThat(testWorkExperience.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testWorkExperience.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testWorkExperience.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testWorkExperience.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testWorkExperience.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
-        assertThat(testWorkExperience.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
+        assertThat(testWorkExperience.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testWorkExperience.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testWorkExperience.getYearOfExp()).isEqualTo(DEFAULT_YEAR_OF_EXP);
         assertThat(testWorkExperience.getJobDesc()).isEqualTo(UPDATED_JOB_DESC);
+        assertThat(testWorkExperience.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1314,14 +1209,13 @@ class WorkExperienceResourceIT {
             .companyName(UPDATED_COMPANY_NAME)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .addressId(UPDATED_ADDRESS_ID)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .yearOfExp(UPDATED_YEAR_OF_EXP)
-            .jobDesc(UPDATED_JOB_DESC);
+            .jobDesc(UPDATED_JOB_DESC)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restWorkExperienceMockMvc
             .perform(
@@ -1339,14 +1233,13 @@ class WorkExperienceResourceIT {
         assertThat(testWorkExperience.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testWorkExperience.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testWorkExperience.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testWorkExperience.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testWorkExperience.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
         assertThat(testWorkExperience.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testWorkExperience.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testWorkExperience.getYearOfExp()).isEqualTo(UPDATED_YEAR_OF_EXP);
         assertThat(testWorkExperience.getJobDesc()).isEqualTo(UPDATED_JOB_DESC);
+        assertThat(testWorkExperience.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testWorkExperience.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testWorkExperience.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

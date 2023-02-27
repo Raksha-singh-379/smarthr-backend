@@ -102,23 +102,26 @@ public class ContactsQueryService extends QueryService<Contacts> {
             if (criteria.getContact() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getContact(), Contacts_.contact));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Contacts_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Contacts_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), Contacts_.status));
-            }
-            if (criteria.getRefTableType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRefTableType(), Contacts_.refTableType));
+            if (criteria.getRefTable() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRefTable(), Contacts_.refTable));
             }
             if (criteria.getRefTableId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRefTableId(), Contacts_.refTableId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Contacts_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), Contacts_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Contacts_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Contacts_.lastModifiedBy));
+            }
+            if (criteria.getContactReference() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getContactReference(), Contacts_.contactReference));
             }
         }
         return specification;

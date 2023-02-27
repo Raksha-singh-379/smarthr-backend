@@ -24,7 +24,7 @@ public class State implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "state_name", nullable = false, unique = true)
+    @Column(name = "state_name", nullable = false)
     private String stateName;
 
     @Column(name = "lgd_code")

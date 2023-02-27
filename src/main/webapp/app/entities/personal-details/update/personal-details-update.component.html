@@ -18,35 +18,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.passportNo" for="field_passportNo">Passport No</label>
-          <input
-            type="text"
-            class="form-control"
-            name="passportNo"
-            id="field_passportNo"
-            data-cy="passportNo"
-            formControlName="passportNo"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.passportExpDate" for="field_passportExpDate"
-            >Passport Exp Date</label
-          >
-          <div class="d-flex">
-            <input
-              id="field_passportExpDate"
-              data-cy="passportExpDate"
-              type="datetime-local"
-              class="form-control"
-              name="passportExpDate"
-              formControlName="passportExpDate"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.personalDetails.telephoneNo" for="field_telephoneNo">Telephone No</label>
           <input
             type="text"
@@ -88,54 +59,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.isSpousEmployed" for="field_isSpousEmployed"
-            >Is Spous Employed</label
-          >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="isSpousEmployed"
-            id="field_isSpousEmployed"
-            data-cy="isSpousEmployed"
-            formControlName="isSpousEmployed"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.lastModified" for="field_lastModified">Last Modified</label>
-          <div class="d-flex">
-            <input
-              id="field_lastModified"
-              data-cy="lastModified"
-              type="datetime-local"
-              class="form-control"
-              name="lastModified"
-              formControlName="lastModified"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.lastModifiedBy" for="field_lastModifiedBy"
-            >Last Modified By</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="lastModifiedBy"
-            id="field_lastModifiedBy"
-            data-cy="lastModifiedBy"
-            formControlName="lastModifiedBy"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.personalDetails.employeeId" for="field_employeeId">Employee Id</label>
           <input
             type="number"
@@ -150,18 +73,6 @@
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.personalDetails.companyId" for="field_companyId">Company Id</label>
           <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.personalIdNo" for="field_personalIdNo">Personal Id No</label>
-          <input
-            type="text"
-            class="form-control"
-            name="personalIdNo"
-            id="field_personalIdNo"
-            data-cy="personalIdNo"
-            formControlName="personalIdNo"
-          />
         </div>
 
         <div class="row mb-3">
@@ -193,6 +104,40 @@
               <fa-icon icon="calendar-alt"></fa-icon>
             </button>
           </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.lastModified" for="field_lastModified">Last Modified</label>
+          <div class="d-flex">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="datetime-local"
+              class="form-control"
+              name="lastModified"
+              formControlName="lastModified"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.personalDetails.lastModifiedBy" for="field_lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
         </div>
       </div>
 

@@ -19,20 +19,20 @@
       },
       "id": "ID",
       "firstName": "First Name",
+      "middleName": "Middle Name",
       "lastName": "Last Name",
-      "username": "Username",
-      "password": "Password",
-      "department": "Department",
-      "designation": "Designation",
       "gender": "Gender",
       "empUniqueId": "Emp Unique Id",
       "joindate": "Joindate",
+      "companyId": "Company Id",
+      "status": "Status",
       "lastModified": "Last Modified",
       "lastModifiedBy": "Last Modified By",
-      "status": "Status",
-      "companyId": "Company Id",
-      "branchId": "Branch Id",
-      "regionId": "Region Id"
+      "employmentTypeId": "Employment Type Id",
+      "designation": "Designation",
+      "department": "Department",
+      "branch": "Branch",
+      "region": "Region"
     }
   }
 }

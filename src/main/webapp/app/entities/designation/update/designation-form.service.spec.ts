@@ -21,11 +21,11 @@ describe('Designation Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             departmentId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -37,11 +37,11 @@ describe('Designation Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             departmentId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

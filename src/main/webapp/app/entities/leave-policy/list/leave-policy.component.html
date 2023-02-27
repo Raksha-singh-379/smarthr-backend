@@ -64,12 +64,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="leaveStatus">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leavePolicy.leaveStatus">Leave Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="totalLeave">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.leavePolicy.totalLeave">Total Leave</span>
@@ -94,6 +88,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leavePolicy.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leavePolicy.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="lastModified">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.leavePolicy.lastModified">Last Modified</span>
@@ -106,15 +112,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
+          <th scope="col" jhiSortBy="refTable">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leavePolicy.status">Status</span>
+              <span jhiTranslate="smartHrApp.leavePolicy.refTable">Ref Table</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="companyId">
+          <th scope="col" jhiSortBy="refTableId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leavePolicy.companyId">Company Id</span>
+              <span jhiTranslate="smartHrApp.leavePolicy.refTableId">Ref Table Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -130,15 +136,16 @@
           <td>{{ leavePolicy.isCarryForword }}</td>
           <td>{{ leavePolicy.employeeType }}</td>
           <td>{{ leavePolicy.genderLeave }}</td>
-          <td>{{ leavePolicy.leaveStatus }}</td>
           <td>{{ leavePolicy.totalLeave }}</td>
           <td>{{ leavePolicy.maxLeave }}</td>
           <td>{{ leavePolicy.hasproRataLeave }}</td>
           <td>{{ leavePolicy.description }}</td>
+          <td>{{ leavePolicy.companyId }}</td>
+          <td>{{ leavePolicy.status }}</td>
           <td>{{ leavePolicy.lastModified | formatMediumDatetime }}</td>
           <td>{{ leavePolicy.lastModifiedBy }}</td>
-          <td>{{ leavePolicy.status }}</td>
-          <td>{{ leavePolicy.companyId }}</td>
+          <td>{{ leavePolicy.refTable }}</td>
+          <td>{{ leavePolicy.refTableId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

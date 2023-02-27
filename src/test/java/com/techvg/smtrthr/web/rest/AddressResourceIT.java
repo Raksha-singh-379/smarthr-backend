@@ -69,17 +69,8 @@ class AddressResourceIT {
     private static final Double UPDATED_LATITUDE = 2D;
     private static final Double SMALLER_LATITUDE = 1D - 1D;
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_REF_TABLE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_REF_TABLE_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_REF_TABLE = "AAAAAAAAAA";
+    private static final String UPDATED_REF_TABLE = "BBBBBBBBBB";
 
     private static final Long DEFAULT_REF_TABLE_ID = 1L;
     private static final Long UPDATED_REF_TABLE_ID = 2L;
@@ -88,6 +79,15 @@ class AddressResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/addresses";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -128,12 +128,12 @@ class AddressResourceIT {
             .landMark(DEFAULT_LAND_MARK)
             .longitude(DEFAULT_LONGITUDE)
             .latitude(DEFAULT_LATITUDE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
-            .refTableType(DEFAULT_REF_TABLE_TYPE)
+            .refTable(DEFAULT_REF_TABLE)
             .refTableId(DEFAULT_REF_TABLE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return address;
     }
 
@@ -156,12 +156,12 @@ class AddressResourceIT {
             .landMark(UPDATED_LAND_MARK)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return address;
     }
 
@@ -195,12 +195,12 @@ class AddressResourceIT {
         assertThat(testAddress.getLandMark()).isEqualTo(DEFAULT_LAND_MARK);
         assertThat(testAddress.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testAddress.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
-        assertThat(testAddress.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testAddress.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testAddress.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testAddress.getRefTableType()).isEqualTo(DEFAULT_REF_TABLE_TYPE);
+        assertThat(testAddress.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
         assertThat(testAddress.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
         assertThat(testAddress.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testAddress.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testAddress.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testAddress.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -245,12 +245,12 @@ class AddressResourceIT {
             .andExpect(jsonPath("$.[*].landMark").value(hasItem(DEFAULT_LAND_MARK)))
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
             .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -276,12 +276,12 @@ class AddressResourceIT {
             .andExpect(jsonPath("$.landMark").value(DEFAULT_LAND_MARK))
             .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.refTableType").value(DEFAULT_REF_TABLE_TYPE))
+            .andExpect(jsonPath("$.refTable").value(DEFAULT_REF_TABLE))
             .andExpect(jsonPath("$.refTableId").value(DEFAULT_REF_TABLE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -1045,236 +1045,67 @@ class AddressResourceIT {
 
     @Test
     @Transactional
-    void getAllAddressesByLastModifiedIsEqualToSomething() throws Exception {
+    void getAllAddressesByRefTableIsEqualToSomething() throws Exception {
         // Initialize the database
         addressRepository.saveAndFlush(address);
 
-        // Get all the addressList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultAddressShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+        // Get all the addressList where refTable equals to DEFAULT_REF_TABLE
+        defaultAddressShouldBeFound("refTable.equals=" + DEFAULT_REF_TABLE);
 
-        // Get all the addressList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultAddressShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+        // Get all the addressList where refTable equals to UPDATED_REF_TABLE
+        defaultAddressShouldNotBeFound("refTable.equals=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllAddressesByLastModifiedIsInShouldWork() throws Exception {
+    void getAllAddressesByRefTableIsInShouldWork() throws Exception {
         // Initialize the database
         addressRepository.saveAndFlush(address);
 
-        // Get all the addressList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultAddressShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+        // Get all the addressList where refTable in DEFAULT_REF_TABLE or UPDATED_REF_TABLE
+        defaultAddressShouldBeFound("refTable.in=" + DEFAULT_REF_TABLE + "," + UPDATED_REF_TABLE);
 
-        // Get all the addressList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultAddressShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+        // Get all the addressList where refTable equals to UPDATED_REF_TABLE
+        defaultAddressShouldNotBeFound("refTable.in=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllAddressesByLastModifiedIsNullOrNotNull() throws Exception {
+    void getAllAddressesByRefTableIsNullOrNotNull() throws Exception {
         // Initialize the database
         addressRepository.saveAndFlush(address);
 
-        // Get all the addressList where lastModified is not null
-        defaultAddressShouldBeFound("lastModified.specified=true");
+        // Get all the addressList where refTable is not null
+        defaultAddressShouldBeFound("refTable.specified=true");
 
-        // Get all the addressList where lastModified is null
-        defaultAddressShouldNotBeFound("lastModified.specified=false");
+        // Get all the addressList where refTable is null
+        defaultAddressShouldNotBeFound("refTable.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllAddressesByLastModifiedByIsEqualToSomething() throws Exception {
+    void getAllAddressesByRefTableContainsSomething() throws Exception {
         // Initialize the database
         addressRepository.saveAndFlush(address);
 
-        // Get all the addressList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultAddressShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the addressList where refTable contains DEFAULT_REF_TABLE
+        defaultAddressShouldBeFound("refTable.contains=" + DEFAULT_REF_TABLE);
 
-        // Get all the addressList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultAddressShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the addressList where refTable contains UPDATED_REF_TABLE
+        defaultAddressShouldNotBeFound("refTable.contains=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllAddressesByLastModifiedByIsInShouldWork() throws Exception {
+    void getAllAddressesByRefTableNotContainsSomething() throws Exception {
         // Initialize the database
         addressRepository.saveAndFlush(address);
 
-        // Get all the addressList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultAddressShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+        // Get all the addressList where refTable does not contain DEFAULT_REF_TABLE
+        defaultAddressShouldNotBeFound("refTable.doesNotContain=" + DEFAULT_REF_TABLE);
 
-        // Get all the addressList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultAddressShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where lastModifiedBy is not null
-        defaultAddressShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the addressList where lastModifiedBy is null
-        defaultAddressShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultAddressShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the addressList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultAddressShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultAddressShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the addressList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultAddressShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where status equals to DEFAULT_STATUS
-        defaultAddressShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the addressList where status equals to UPDATED_STATUS
-        defaultAddressShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultAddressShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the addressList where status equals to UPDATED_STATUS
-        defaultAddressShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where status is not null
-        defaultAddressShouldBeFound("status.specified=true");
-
-        // Get all the addressList where status is null
-        defaultAddressShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where status contains DEFAULT_STATUS
-        defaultAddressShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the addressList where status contains UPDATED_STATUS
-        defaultAddressShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where status does not contain DEFAULT_STATUS
-        defaultAddressShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the addressList where status does not contain UPDATED_STATUS
-        defaultAddressShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByRefTableTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where refTableType equals to DEFAULT_REF_TABLE_TYPE
-        defaultAddressShouldBeFound("refTableType.equals=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the addressList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultAddressShouldNotBeFound("refTableType.equals=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByRefTableTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where refTableType in DEFAULT_REF_TABLE_TYPE or UPDATED_REF_TABLE_TYPE
-        defaultAddressShouldBeFound("refTableType.in=" + DEFAULT_REF_TABLE_TYPE + "," + UPDATED_REF_TABLE_TYPE);
-
-        // Get all the addressList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultAddressShouldNotBeFound("refTableType.in=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByRefTableTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where refTableType is not null
-        defaultAddressShouldBeFound("refTableType.specified=true");
-
-        // Get all the addressList where refTableType is null
-        defaultAddressShouldNotBeFound("refTableType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByRefTableTypeContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where refTableType contains DEFAULT_REF_TABLE_TYPE
-        defaultAddressShouldBeFound("refTableType.contains=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the addressList where refTableType contains UPDATED_REF_TABLE_TYPE
-        defaultAddressShouldNotBeFound("refTableType.contains=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllAddressesByRefTableTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        addressRepository.saveAndFlush(address);
-
-        // Get all the addressList where refTableType does not contain DEFAULT_REF_TABLE_TYPE
-        defaultAddressShouldNotBeFound("refTableType.doesNotContain=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the addressList where refTableType does not contain UPDATED_REF_TABLE_TYPE
-        defaultAddressShouldBeFound("refTableType.doesNotContain=" + UPDATED_REF_TABLE_TYPE);
+        // Get all the addressList where refTable does not contain UPDATED_REF_TABLE
+        defaultAddressShouldBeFound("refTable.doesNotContain=" + UPDATED_REF_TABLE);
     }
 
     @Test
@@ -1459,6 +1290,175 @@ class AddressResourceIT {
         defaultAddressShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllAddressesByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where status equals to DEFAULT_STATUS
+        defaultAddressShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the addressList where status equals to UPDATED_STATUS
+        defaultAddressShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultAddressShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the addressList where status equals to UPDATED_STATUS
+        defaultAddressShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where status is not null
+        defaultAddressShouldBeFound("status.specified=true");
+
+        // Get all the addressList where status is null
+        defaultAddressShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where status contains DEFAULT_STATUS
+        defaultAddressShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the addressList where status contains UPDATED_STATUS
+        defaultAddressShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where status does not contain DEFAULT_STATUS
+        defaultAddressShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the addressList where status does not contain UPDATED_STATUS
+        defaultAddressShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultAddressShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the addressList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultAddressShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultAddressShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the addressList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultAddressShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModified is not null
+        defaultAddressShouldBeFound("lastModified.specified=true");
+
+        // Get all the addressList where lastModified is null
+        defaultAddressShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultAddressShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the addressList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultAddressShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultAddressShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the addressList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultAddressShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModifiedBy is not null
+        defaultAddressShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the addressList where lastModifiedBy is null
+        defaultAddressShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultAddressShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the addressList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultAddressShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllAddressesByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        addressRepository.saveAndFlush(address);
+
+        // Get all the addressList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultAddressShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the addressList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultAddressShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1479,12 +1479,12 @@ class AddressResourceIT {
             .andExpect(jsonPath("$.[*].landMark").value(hasItem(DEFAULT_LAND_MARK)))
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
             .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restAddressMockMvc
@@ -1544,12 +1544,12 @@ class AddressResourceIT {
             .landMark(UPDATED_LAND_MARK)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         AddressDTO addressDTO = addressMapper.toDto(updatedAddress);
 
         restAddressMockMvc
@@ -1575,12 +1575,12 @@ class AddressResourceIT {
         assertThat(testAddress.getLandMark()).isEqualTo(UPDATED_LAND_MARK);
         assertThat(testAddress.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testAddress.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testAddress.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testAddress.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testAddress.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testAddress.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testAddress.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testAddress.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testAddress.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testAddress.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testAddress.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testAddress.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1692,12 +1692,12 @@ class AddressResourceIT {
         assertThat(testAddress.getLandMark()).isEqualTo(DEFAULT_LAND_MARK);
         assertThat(testAddress.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testAddress.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testAddress.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testAddress.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testAddress.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testAddress.getRefTableType()).isEqualTo(DEFAULT_REF_TABLE_TYPE);
+        assertThat(testAddress.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
         assertThat(testAddress.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
         assertThat(testAddress.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testAddress.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testAddress.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testAddress.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1724,12 +1724,12 @@ class AddressResourceIT {
             .landMark(UPDATED_LAND_MARK)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restAddressMockMvc
             .perform(
@@ -1754,12 +1754,12 @@ class AddressResourceIT {
         assertThat(testAddress.getLandMark()).isEqualTo(UPDATED_LAND_MARK);
         assertThat(testAddress.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testAddress.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testAddress.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testAddress.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testAddress.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testAddress.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testAddress.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testAddress.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testAddress.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testAddress.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testAddress.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testAddress.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

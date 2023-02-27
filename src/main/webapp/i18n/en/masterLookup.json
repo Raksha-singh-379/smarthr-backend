@@ -20,12 +20,13 @@
       "id": "ID",
       "name": "Name",
       "value": "Value",
+      "valueTwo": "Value Two",
       "description": "Description",
       "type": "Type",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "companyId": "Company Id",
       "status": "Status",
-      "companyId": "Company Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

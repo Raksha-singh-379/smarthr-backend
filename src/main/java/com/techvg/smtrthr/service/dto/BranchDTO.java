@@ -24,15 +24,17 @@ public class BranchDTO implements Serializable {
 
     private String webSite;
 
+    private Long branchId;
+
+    private Long regionId;
+
+    private Long companyId;
+
     private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
-
-    private Long regionId;
-
-    private Long companyId;
 
     public Long getId() {
         return id;
@@ -82,6 +84,30 @@ public class BranchDTO implements Serializable {
         this.webSite = webSite;
     }
 
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
+    }
+
+    public Long getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(Long regionId) {
+        this.regionId = regionId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -104,22 +130,6 @@ public class BranchDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Long getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -153,11 +163,12 @@ public class BranchDTO implements Serializable {
             ", branchcode='" + getBranchcode() + "'" +
             ", branchType='" + getBranchType() + "'" +
             ", webSite='" + getWebSite() + "'" +
+            ", branchId=" + getBranchId() +
+            ", regionId=" + getRegionId() +
+            ", companyId=" + getCompanyId() +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", regionId=" + getRegionId() +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

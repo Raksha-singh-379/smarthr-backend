@@ -22,18 +22,6 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "addressId",
       "fieldType": "Long"
     },
@@ -46,11 +34,19 @@
       "fieldType": "Long"
     },
     {
-      "fieldName": "yearOfExp",
-      "fieldType": "Double"
+      "fieldName": "jobDesc",
+      "fieldType": "String"
     },
     {
-      "fieldName": "jobDesc",
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
       "fieldType": "String"
     }
   ],

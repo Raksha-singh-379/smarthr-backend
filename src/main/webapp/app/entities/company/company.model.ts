@@ -10,13 +10,11 @@ export interface ICompany {
   mobileNumber?: string | null;
   websiteUrl?: string | null;
   fax?: string | null;
+  regNumber?: string | null;
   status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  regNumber?: string | null;
-  gstin?: string | null;
-  pan?: string | null;
-  tan?: string | null;
+  leaveSettingLevel?: string | null;
 }
 
 export type NewCompany = Omit<ICompany, 'id'> & { id: null };

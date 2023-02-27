@@ -27,17 +27,19 @@ type LeaveTypeFormRawValue = FormValueOf<ILeaveType>;
 
 type NewLeaveTypeFormRawValue = FormValueOf<NewLeaveType>;
 
-type LeaveTypeFormDefaults = Pick<NewLeaveType, 'id' | 'lastModified'>;
+type LeaveTypeFormDefaults = Pick<NewLeaveType, 'id' | 'lastModified' | 'hasCarryForward' | 'hasEarned' | 'hasCustomPolicy'>;
 
 type LeaveTypeFormGroupContent = {
   id: FormControl<LeaveTypeFormRawValue['id'] | NewLeaveType['id']>;
   leaveType: FormControl<LeaveTypeFormRawValue['leaveType']>;
   noOfDays: FormControl<LeaveTypeFormRawValue['noOfDays']>;
-  recordStatus: FormControl<LeaveTypeFormRawValue['recordStatus']>;
+  companyId: FormControl<LeaveTypeFormRawValue['companyId']>;
+  status: FormControl<LeaveTypeFormRawValue['status']>;
   lastModified: FormControl<LeaveTypeFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<LeaveTypeFormRawValue['lastModifiedBy']>;
-  status: FormControl<LeaveTypeFormRawValue['status']>;
-  companyId: FormControl<LeaveTypeFormRawValue['companyId']>;
+  hasCarryForward: FormControl<LeaveTypeFormRawValue['hasCarryForward']>;
+  hasEarned: FormControl<LeaveTypeFormRawValue['hasEarned']>;
+  hasCustomPolicy: FormControl<LeaveTypeFormRawValue['hasCustomPolicy']>;
 };
 
 export type LeaveTypeFormGroup = FormGroup<LeaveTypeFormGroupContent>;
@@ -59,11 +61,13 @@ export class LeaveTypeFormService {
       ),
       leaveType: new FormControl(leaveTypeRawValue.leaveType),
       noOfDays: new FormControl(leaveTypeRawValue.noOfDays),
-      recordStatus: new FormControl(leaveTypeRawValue.recordStatus),
+      companyId: new FormControl(leaveTypeRawValue.companyId),
+      status: new FormControl(leaveTypeRawValue.status),
       lastModified: new FormControl(leaveTypeRawValue.lastModified),
       lastModifiedBy: new FormControl(leaveTypeRawValue.lastModifiedBy),
-      status: new FormControl(leaveTypeRawValue.status),
-      companyId: new FormControl(leaveTypeRawValue.companyId),
+      hasCarryForward: new FormControl(leaveTypeRawValue.hasCarryForward),
+      hasEarned: new FormControl(leaveTypeRawValue.hasEarned),
+      hasCustomPolicy: new FormControl(leaveTypeRawValue.hasCustomPolicy),
     });
   }
 
@@ -87,6 +91,9 @@ export class LeaveTypeFormService {
     return {
       id: null,
       lastModified: currentTime,
+      hasCarryForward: false,
+      hasEarned: false,
+      hasCustomPolicy: false,
     };
   }
 

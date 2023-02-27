@@ -7,21 +7,23 @@ export const sampleWithRequiredData: IFormValidator = {
 };
 
 export const sampleWithPartialData: IFormValidator = {
-  id: 80757,
-  formName: 'Security Money withdrawal',
-  fieldName: 'Intelligent',
-  createdOn: dayjs('2023-02-08T05:44'),
+  id: 95162,
+  formName: 'Incredible 24/7 Buckinghamshire',
+  fieldName: 'teal',
+  lastModified: dayjs('2023-02-09T03:53'),
+  lastModifiedBy: 'blue Cheese empower',
 };
 
 export const sampleWithFullData: IFormValidator = {
-  id: 20342,
-  type: 'Drive',
-  value: 'empower quantify parallelism',
-  formName: 'pink plum',
-  fieldName: 'ivory',
-  companyId: 7548,
-  createdBy: 'drive',
-  createdOn: dayjs('2023-02-08T19:58'),
+  id: 76177,
+  type: 'Paradigm haptic',
+  value: 'Fields',
+  formName: 'Electronics bypassing drive',
+  fieldName: 'e-enable quantifying',
+  companyId: 7829,
+  status: 'reboot Handcrafted Practical',
+  lastModified: dayjs('2023-02-08T07:43'),
+  lastModifiedBy: 'Architect',
 };
 
 export const sampleWithNewData: NewFormValidator = {

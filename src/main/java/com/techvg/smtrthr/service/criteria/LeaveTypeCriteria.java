@@ -27,15 +27,19 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
 
     private StringFilter noOfDays;
 
-    private StringFilter recordStatus;
+    private LongFilter companyId;
+
+    private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
 
-    private StringFilter status;
+    private BooleanFilter hasCarryForward;
 
-    private LongFilter companyId;
+    private BooleanFilter hasEarned;
+
+    private BooleanFilter hasCustomPolicy;
 
     private Boolean distinct;
 
@@ -45,11 +49,13 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.leaveType = other.leaveType == null ? null : other.leaveType.copy();
         this.noOfDays = other.noOfDays == null ? null : other.noOfDays.copy();
-        this.recordStatus = other.recordStatus == null ? null : other.recordStatus.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.hasCarryForward = other.hasCarryForward == null ? null : other.hasCarryForward.copy();
+        this.hasEarned = other.hasEarned == null ? null : other.hasEarned.copy();
+        this.hasCustomPolicy = other.hasCustomPolicy == null ? null : other.hasCustomPolicy.copy();
         this.distinct = other.distinct;
     }
 
@@ -103,19 +109,34 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.noOfDays = noOfDays;
     }
 
-    public StringFilter getRecordStatus() {
-        return recordStatus;
+    public LongFilter getCompanyId() {
+        return companyId;
     }
 
-    public StringFilter recordStatus() {
-        if (recordStatus == null) {
-            recordStatus = new StringFilter();
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
         }
-        return recordStatus;
+        return companyId;
     }
 
-    public void setRecordStatus(StringFilter recordStatus) {
-        this.recordStatus = recordStatus;
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
     public InstantFilter getLastModified() {
@@ -148,34 +169,49 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
+    public BooleanFilter getHasCarryForward() {
+        return hasCarryForward;
     }
 
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
+    public BooleanFilter hasCarryForward() {
+        if (hasCarryForward == null) {
+            hasCarryForward = new BooleanFilter();
         }
-        return status;
+        return hasCarryForward;
     }
 
-    public void setStatus(StringFilter status) {
-        this.status = status;
+    public void setHasCarryForward(BooleanFilter hasCarryForward) {
+        this.hasCarryForward = hasCarryForward;
     }
 
-    public LongFilter getCompanyId() {
-        return companyId;
+    public BooleanFilter getHasEarned() {
+        return hasEarned;
     }
 
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
+    public BooleanFilter hasEarned() {
+        if (hasEarned == null) {
+            hasEarned = new BooleanFilter();
         }
-        return companyId;
+        return hasEarned;
     }
 
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
+    public void setHasEarned(BooleanFilter hasEarned) {
+        this.hasEarned = hasEarned;
+    }
+
+    public BooleanFilter getHasCustomPolicy() {
+        return hasCustomPolicy;
+    }
+
+    public BooleanFilter hasCustomPolicy() {
+        if (hasCustomPolicy == null) {
+            hasCustomPolicy = new BooleanFilter();
+        }
+        return hasCustomPolicy;
+    }
+
+    public void setHasCustomPolicy(BooleanFilter hasCustomPolicy) {
+        this.hasCustomPolicy = hasCustomPolicy;
     }
 
     public Boolean getDistinct() {
@@ -199,18 +235,32 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(leaveType, that.leaveType) &&
             Objects.equals(noOfDays, that.noOfDays) &&
-            Objects.equals(recordStatus, that.recordStatus) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(hasCarryForward, that.hasCarryForward) &&
+            Objects.equals(hasEarned, that.hasEarned) &&
+            Objects.equals(hasCustomPolicy, that.hasCustomPolicy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, leaveType, noOfDays, recordStatus, lastModified, lastModifiedBy, status, companyId, distinct);
+        return Objects.hash(
+            id,
+            leaveType,
+            noOfDays,
+            companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
+            hasCarryForward,
+            hasEarned,
+            hasCustomPolicy,
+            distinct
+        );
     }
 
     // prettier-ignore
@@ -220,11 +270,13 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (leaveType != null ? "leaveType=" + leaveType + ", " : "") +
             (noOfDays != null ? "noOfDays=" + noOfDays + ", " : "") +
-            (recordStatus != null ? "recordStatus=" + recordStatus + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (hasCarryForward != null ? "hasCarryForward=" + hasCarryForward + ", " : "") +
+            (hasEarned != null ? "hasEarned=" + hasEarned + ", " : "") +
+            (hasCustomPolicy != null ? "hasCustomPolicy=" + hasCustomPolicy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

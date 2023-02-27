@@ -27,19 +27,21 @@ type FamilyInfoFormRawValue = FormValueOf<IFamilyInfo>;
 
 type NewFamilyInfoFormRawValue = FormValueOf<NewFamilyInfo>;
 
-type FamilyInfoFormDefaults = Pick<NewFamilyInfo, 'id' | 'lastModified'>;
+type FamilyInfoFormDefaults = Pick<NewFamilyInfo, 'id' | 'isEmployed' | 'lastModified'>;
 
 type FamilyInfoFormGroupContent = {
   id: FormControl<FamilyInfoFormRawValue['id'] | NewFamilyInfo['id']>;
   name: FormControl<FamilyInfoFormRawValue['name']>;
   dateOfBirth: FormControl<FamilyInfoFormRawValue['dateOfBirth']>;
   relation: FormControl<FamilyInfoFormRawValue['relation']>;
-  address: FormControl<FamilyInfoFormRawValue['address']>;
-  lastModified: FormControl<FamilyInfoFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<FamilyInfoFormRawValue['lastModifiedBy']>;
-  status: FormControl<FamilyInfoFormRawValue['status']>;
+  addressId: FormControl<FamilyInfoFormRawValue['addressId']>;
+  isEmployed: FormControl<FamilyInfoFormRawValue['isEmployed']>;
+  employedAt: FormControl<FamilyInfoFormRawValue['employedAt']>;
   employeeId: FormControl<FamilyInfoFormRawValue['employeeId']>;
   companyId: FormControl<FamilyInfoFormRawValue['companyId']>;
+  status: FormControl<FamilyInfoFormRawValue['status']>;
+  lastModified: FormControl<FamilyInfoFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<FamilyInfoFormRawValue['lastModifiedBy']>;
 };
 
 export type FamilyInfoFormGroup = FormGroup<FamilyInfoFormGroupContent>;
@@ -62,12 +64,14 @@ export class FamilyInfoFormService {
       name: new FormControl(familyInfoRawValue.name),
       dateOfBirth: new FormControl(familyInfoRawValue.dateOfBirth),
       relation: new FormControl(familyInfoRawValue.relation),
-      address: new FormControl(familyInfoRawValue.address),
-      lastModified: new FormControl(familyInfoRawValue.lastModified),
-      lastModifiedBy: new FormControl(familyInfoRawValue.lastModifiedBy),
-      status: new FormControl(familyInfoRawValue.status),
+      addressId: new FormControl(familyInfoRawValue.addressId),
+      isEmployed: new FormControl(familyInfoRawValue.isEmployed),
+      employedAt: new FormControl(familyInfoRawValue.employedAt),
       employeeId: new FormControl(familyInfoRawValue.employeeId),
       companyId: new FormControl(familyInfoRawValue.companyId),
+      status: new FormControl(familyInfoRawValue.status),
+      lastModified: new FormControl(familyInfoRawValue.lastModified),
+      lastModifiedBy: new FormControl(familyInfoRawValue.lastModifiedBy),
     });
   }
 
@@ -90,6 +94,7 @@ export class FamilyInfoFormService {
 
     return {
       id: null,
+      isEmployed: false,
       lastModified: currentTime,
     };
   }

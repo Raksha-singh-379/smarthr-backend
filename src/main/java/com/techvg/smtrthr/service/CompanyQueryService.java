@@ -114,6 +114,9 @@ public class CompanyQueryService extends QueryService<Company> {
             if (criteria.getFax() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFax(), Company_.fax));
             }
+            if (criteria.getRegNumber() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRegNumber(), Company_.regNumber));
+            }
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatus(), Company_.status));
             }
@@ -123,17 +126,8 @@ public class CompanyQueryService extends QueryService<Company> {
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Company_.lastModifiedBy));
             }
-            if (criteria.getRegNumber() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRegNumber(), Company_.regNumber));
-            }
-            if (criteria.getGstin() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getGstin(), Company_.gstin));
-            }
-            if (criteria.getPan() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPan(), Company_.pan));
-            }
-            if (criteria.getTan() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getTan(), Company_.tan));
+            if (criteria.getLeaveSettingLevel() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLeaveSettingLevel(), Company_.leaveSettingLevel));
             }
         }
         return specification;

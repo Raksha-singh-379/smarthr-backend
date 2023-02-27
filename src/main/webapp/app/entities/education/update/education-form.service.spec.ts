@@ -22,16 +22,16 @@ describe('Education Form Service', () => {
             id: expect.any(Object),
             institution: expect.any(Object),
             subject: expect.any(Object),
-            startDate: expect.any(Object),
+            startYear: expect.any(Object),
             endDate: expect.any(Object),
             educationType: expect.any(Object),
             grade: expect.any(Object),
             description: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -44,16 +44,16 @@ describe('Education Form Service', () => {
             id: expect.any(Object),
             institution: expect.any(Object),
             subject: expect.any(Object),
-            startDate: expect.any(Object),
+            startYear: expect.any(Object),
             endDate: expect.any(Object),
             educationType: expect.any(Object),
             grade: expect.any(Object),
             description: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

@@ -24,10 +24,10 @@ describe('Holiday Form Service', () => {
             holidayDate: expect.any(Object),
             day: expect.any(Object),
             year: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -42,10 +42,10 @@ describe('Holiday Form Service', () => {
             holidayDate: expect.any(Object),
             day: expect.any(Object),
             year: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

@@ -18,19 +18,15 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "address",
-      "fieldType": "String"
+      "fieldName": "addressId",
+      "fieldType": "Long"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
+      "fieldName": "isEmployed",
+      "fieldType": "Boolean"
     },
     {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
+      "fieldName": "employedAt",
       "fieldType": "String"
     },
     {
@@ -40,6 +36,18 @@
     {
       "fieldName": "companyId",
       "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

@@ -24,12 +24,13 @@ describe('Contacts Form Service', () => {
             contactPref: expect.any(Object),
             contactType: expect.any(Object),
             contact: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            refTableType: expect.any(Object),
+            refTable: expect.any(Object),
             refTableId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            contactReference: expect.any(Object),
           })
         );
       });
@@ -44,12 +45,13 @@ describe('Contacts Form Service', () => {
             contactPref: expect.any(Object),
             contactType: expect.any(Object),
             contact: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            refTableType: expect.any(Object),
+            refTable: expect.any(Object),
             refTableId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            contactReference: expect.any(Object),
           })
         );
       });

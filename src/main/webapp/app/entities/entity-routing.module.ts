@@ -149,6 +149,56 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'smartHrApp.approver.home.title' },
         loadChildren: () => import('./approver/approver.module').then(m => m.ApproverModule),
       },
+      {
+        path: 'reporting',
+        data: { pageTitle: 'smartHrApp.reporting.home.title' },
+        loadChildren: () => import('./reporting/reporting.module').then(m => m.ReportingModule),
+      },
+      {
+        path: 'personal-id',
+        data: { pageTitle: 'smartHrApp.personalId.home.title' },
+        loadChildren: () => import('./personal-id/personal-id.module').then(m => m.PersonalIdModule),
+      },
+      {
+        path: 'remuneration',
+        data: { pageTitle: 'smartHrApp.remuneration.home.title' },
+        loadChildren: () => import('./remuneration/remuneration.module').then(m => m.RemunerationModule),
+      },
+      {
+        path: 'custom-leave-policy',
+        data: { pageTitle: 'smartHrApp.customLeavePolicy.home.title' },
+        loadChildren: () => import('./custom-leave-policy/custom-leave-policy.module').then(m => m.CustomLeavePolicyModule),
+      },
+      {
+        path: 'work-days-setting',
+        data: { pageTitle: 'smartHrApp.workDaysSetting.home.title' },
+        loadChildren: () => import('./work-days-setting/work-days-setting.module').then(m => m.WorkDaysSettingModule),
+      },
+      {
+        path: 'approval-level',
+        data: { pageTitle: 'smartHrApp.approvalLevel.home.title' },
+        loadChildren: () => import('./approval-level/approval-level.module').then(m => m.ApprovalLevelModule),
+      },
+      {
+        path: 'custom-approvar',
+        data: { pageTitle: 'smartHrApp.customApprovar.home.title' },
+        loadChildren: () => import('./custom-approvar/custom-approvar.module').then(m => m.CustomApprovarModule),
+      },
+      {
+        path: 'employment-type',
+        data: { pageTitle: 'smartHrApp.employmentType.home.title' },
+        loadChildren: () => import('./employment-type/employment-type.module').then(m => m.EmploymentTypeModule),
+      },
+      {
+        path: 'working-hours',
+        data: { pageTitle: 'smartHrApp.workingHours.home.title' },
+        loadChildren: () => import('./working-hours/working-hours.module').then(m => m.WorkingHoursModule),
+      },
+      {
+        path: 'employee-leave-account',
+        data: { pageTitle: 'smartHrApp.employeeLeaveAccount.home.title' },
+        loadChildren: () => import('./employee-leave-account/employee-leave-account.module').then(m => m.EmployeeLeaveAccountModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

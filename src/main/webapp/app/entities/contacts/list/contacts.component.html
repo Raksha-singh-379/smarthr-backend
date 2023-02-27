@@ -64,27 +64,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
+          <th scope="col" jhiSortBy="refTable">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.contacts.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.contacts.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.contacts.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="refTableType">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.contacts.refTableType">Ref Table Type</span>
+              <span jhiTranslate="smartHrApp.contacts.refTable">Ref Table</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -100,6 +82,30 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.contacts.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.contacts.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.contacts.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contactReference">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.contacts.contactReference">Contact Reference</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -112,12 +118,13 @@
           <td>{{ contacts.contactPref }}</td>
           <td>{{ contacts.contactType }}</td>
           <td>{{ contacts.contact }}</td>
-          <td>{{ contacts.lastModified | formatMediumDatetime }}</td>
-          <td>{{ contacts.lastModifiedBy }}</td>
-          <td>{{ contacts.status }}</td>
-          <td>{{ contacts.refTableType }}</td>
+          <td>{{ contacts.refTable }}</td>
           <td>{{ contacts.refTableId }}</td>
           <td>{{ contacts.companyId }}</td>
+          <td>{{ contacts.status }}</td>
+          <td>{{ contacts.lastModified | formatMediumDatetime }}</td>
+          <td>{{ contacts.lastModifiedBy }}</td>
+          <td>{{ contacts.contactReference }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

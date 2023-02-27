@@ -8,7 +8,7 @@ import { EducationService, RestEducation } from './education.service';
 
 const requireRestSample: RestEducation = {
   ...sampleWithRequiredData,
-  startDate: sampleWithRequiredData.startDate?.toJSON(),
+  startYear: sampleWithRequiredData.startYear?.toJSON(),
   endDate: sampleWithRequiredData.endDate?.toJSON(),
   lastModified: sampleWithRequiredData.lastModified?.toJSON(),
 };

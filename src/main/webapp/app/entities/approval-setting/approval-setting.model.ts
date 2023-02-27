@@ -2,12 +2,12 @@ import dayjs from 'dayjs/esm';
 
 export interface IApprovalSetting {
   id: number;
-  isSequenceApproval?: boolean | null;
-  isSimultaneousApproval?: boolean | null;
+  type?: string | null;
+  approvalCategory?: number | null;
+  companyId?: number | null;
+  status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  status?: string | null;
-  companyId?: number | null;
 }
 
 export type NewApprovalSetting = Omit<IApprovalSetting, 'id'> & { id: null };

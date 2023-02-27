@@ -20,21 +20,17 @@ describe('PersonalDetails Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            passportNo: expect.any(Object),
-            passportExpDate: expect.any(Object),
             telephoneNo: expect.any(Object),
             nationality: expect.any(Object),
             maritalStatus: expect.any(Object),
             religion: expect.any(Object),
-            isSpousEmployed: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
-            personalIdNo: expect.any(Object),
             bloodGroup: expect.any(Object),
             dateOfBirth: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -45,21 +41,17 @@ describe('PersonalDetails Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            passportNo: expect.any(Object),
-            passportExpDate: expect.any(Object),
             telephoneNo: expect.any(Object),
             nationality: expect.any(Object),
             maritalStatus: expect.any(Object),
             religion: expect.any(Object),
-            isSpousEmployed: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
-            personalIdNo: expect.any(Object),
             bloodGroup: expect.any(Object),
             dateOfBirth: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

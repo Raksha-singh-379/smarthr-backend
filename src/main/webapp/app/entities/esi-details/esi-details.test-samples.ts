@@ -7,27 +7,29 @@ export const sampleWithRequiredData: IEsiDetails = {
 };
 
 export const sampleWithPartialData: IEsiDetails = {
-  id: 58776,
-  isEsiContribution: false,
-  additionalEsiRate: 'Minnesota Buckinghamshire Small',
-  totalEsiRate: 18913,
+  id: 32940,
+  isEsiContribution: true,
+  additionalEsiRate: 'Glens haptic',
+  totalEsiRate: 4701,
+  employeId: 68028,
+  companyId: 18913,
   lastModified: dayjs('2023-02-08T16:47'),
-  status: 'Granite San',
-  reEnumerationId: 35505,
+  lastModifiedBy: 'Granite San',
 };
 
 export const sampleWithFullData: IEsiDetails = {
-  id: 80590,
-  isEsiContribution: false,
-  esiNumber: 'calculating state sexy',
-  esiRate: 91753,
-  additionalEsiRate: 'Mobility Shilling COM',
-  totalEsiRate: 50245,
-  lastModified: dayjs('2023-02-08T10:48'),
-  lastModifiedBy: 'silver standardization copy',
-  status: 'Creative',
-  employeId: 7848,
-  reEnumerationId: 34717,
+  id: 35505,
+  isEsiContribution: true,
+  esiNumber: 'Facilitator',
+  esiRate: 13655,
+  additionalEsiRate: 'Factors Avon parse',
+  totalEsiRate: 77537,
+  employeId: 68568,
+  reEnumerationId: 74027,
+  companyId: 59409,
+  status: 'Georgia reboot Technician',
+  lastModified: dayjs('2023-02-08T08:05'),
+  lastModifiedBy: 'copy azure',
 };
 
 export const sampleWithNewData: NewEsiDetails = {

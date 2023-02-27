@@ -105,20 +105,23 @@ public class PfDetailsQueryService extends QueryService<PfDetails> {
             if (criteria.getTotalPfRate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTotalPfRate(), PfDetails_.totalPfRate));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), PfDetails_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), PfDetails_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), PfDetails_.status));
-            }
             if (criteria.getEmployeId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEmployeId(), PfDetails_.employeId));
             }
             if (criteria.getReEnumerationId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getReEnumerationId(), PfDetails_.reEnumerationId));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), PfDetails_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), PfDetails_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), PfDetails_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), PfDetails_.lastModifiedBy));
             }
         }
         return specification;

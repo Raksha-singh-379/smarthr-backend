@@ -10,21 +10,21 @@ export const sampleWithPartialData: ITds = {
   id: 88582,
   salaryFrom: dayjs('2023-02-09T04:31'),
   percentage: 80386,
-  lastModifiedBy: 'COM Concrete Mews',
-  status: 'synthesize',
-  salarySettingId: 45065,
+  companyId: 75319,
+  status: 'Maryland teal Cambridgeshire',
+  lastModified: dayjs('2023-02-08T10:22'),
 };
 
 export const sampleWithFullData: ITds = {
-  id: 4811,
-  salaryFrom: dayjs('2023-02-08T14:33'),
-  salaryTo: dayjs('2023-02-09T04:36'),
-  percentage: 5483,
-  lastModified: dayjs('2023-02-08T18:10'),
-  lastModifiedBy: 'implement',
-  status: 'transmit Keyboard',
-  salarySettingId: 73903,
-  companyId: 77221,
+  id: 69884,
+  salaryFrom: dayjs('2023-02-08T17:57'),
+  salaryTo: dayjs('2023-02-08T17:59'),
+  percentage: 4811,
+  salarySettingId: 59364,
+  companyId: 848,
+  status: 'communities',
+  lastModified: dayjs('2023-02-09T04:28'),
+  lastModifiedBy: 'Account',
 };
 
 export const sampleWithNewData: NewTds = {

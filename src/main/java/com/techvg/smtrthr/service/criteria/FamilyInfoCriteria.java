@@ -29,17 +29,21 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
 
     private StringFilter relation;
 
-    private StringFilter address;
+    private LongFilter addressId;
 
-    private InstantFilter lastModified;
+    private BooleanFilter isEmployed;
 
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
+    private StringFilter employedAt;
 
     private LongFilter employeeId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -50,12 +54,14 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
         this.name = other.name == null ? null : other.name.copy();
         this.dateOfBirth = other.dateOfBirth == null ? null : other.dateOfBirth.copy();
         this.relation = other.relation == null ? null : other.relation.copy();
-        this.address = other.address == null ? null : other.address.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
+        this.addressId = other.addressId == null ? null : other.addressId.copy();
+        this.isEmployed = other.isEmployed == null ? null : other.isEmployed.copy();
+        this.employedAt = other.employedAt == null ? null : other.employedAt.copy();
         this.employeeId = other.employeeId == null ? null : other.employeeId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -124,64 +130,49 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
         this.relation = relation;
     }
 
-    public StringFilter getAddress() {
-        return address;
+    public LongFilter getAddressId() {
+        return addressId;
     }
 
-    public StringFilter address() {
-        if (address == null) {
-            address = new StringFilter();
+    public LongFilter addressId() {
+        if (addressId == null) {
+            addressId = new LongFilter();
         }
-        return address;
+        return addressId;
     }
 
-    public void setAddress(StringFilter address) {
-        this.address = address;
+    public void setAddressId(LongFilter addressId) {
+        this.addressId = addressId;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
+    public BooleanFilter getIsEmployed() {
+        return isEmployed;
     }
 
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
+    public BooleanFilter isEmployed() {
+        if (isEmployed == null) {
+            isEmployed = new BooleanFilter();
         }
-        return lastModified;
+        return isEmployed;
     }
 
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
+    public void setIsEmployed(BooleanFilter isEmployed) {
+        this.isEmployed = isEmployed;
     }
 
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
+    public StringFilter getEmployedAt() {
+        return employedAt;
     }
 
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
+    public StringFilter employedAt() {
+        if (employedAt == null) {
+            employedAt = new StringFilter();
         }
-        return lastModifiedBy;
+        return employedAt;
     }
 
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
+    public void setEmployedAt(StringFilter employedAt) {
+        this.employedAt = employedAt;
     }
 
     public LongFilter getEmployeeId() {
@@ -214,6 +205,51 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -236,12 +272,14 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
             Objects.equals(name, that.name) &&
             Objects.equals(dateOfBirth, that.dateOfBirth) &&
             Objects.equals(relation, that.relation) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
+            Objects.equals(addressId, that.addressId) &&
+            Objects.equals(isEmployed, that.isEmployed) &&
+            Objects.equals(employedAt, that.employedAt) &&
             Objects.equals(employeeId, that.employeeId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -253,12 +291,14 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
             name,
             dateOfBirth,
             relation,
-            address,
-            lastModified,
-            lastModifiedBy,
-            status,
+            addressId,
+            isEmployed,
+            employedAt,
             employeeId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -271,12 +311,14 @@ public class FamilyInfoCriteria implements Serializable, Criteria {
             (name != null ? "name=" + name + ", " : "") +
             (dateOfBirth != null ? "dateOfBirth=" + dateOfBirth + ", " : "") +
             (relation != null ? "relation=" + relation + ", " : "") +
-            (address != null ? "address=" + address + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
+            (addressId != null ? "addressId=" + addressId + ", " : "") +
+            (isEmployed != null ? "isEmployed=" + isEmployed + ", " : "") +
+            (employedAt != null ? "employedAt=" + employedAt + ", " : "") +
             (employeeId != null ? "employeeId=" + employeeId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

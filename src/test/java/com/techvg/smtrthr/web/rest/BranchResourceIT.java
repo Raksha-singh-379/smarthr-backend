@@ -49,14 +49,9 @@ class BranchResourceIT {
     private static final String DEFAULT_WEB_SITE = "AAAAAAAAAA";
     private static final String UPDATED_WEB_SITE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+    private static final Long DEFAULT_BRANCH_ID = 1L;
+    private static final Long UPDATED_BRANCH_ID = 2L;
+    private static final Long SMALLER_BRANCH_ID = 1L - 1L;
 
     private static final Long DEFAULT_REGION_ID = 1L;
     private static final Long UPDATED_REGION_ID = 2L;
@@ -65,6 +60,15 @@ class BranchResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/branches";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -99,11 +103,12 @@ class BranchResourceIT {
             .branchcode(DEFAULT_BRANCHCODE)
             .branchType(DEFAULT_BRANCH_TYPE)
             .webSite(DEFAULT_WEB_SITE)
+            .branchId(DEFAULT_BRANCH_ID)
+            .regionId(DEFAULT_REGION_ID)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
             .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .regionId(DEFAULT_REGION_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return branch;
     }
 
@@ -120,11 +125,12 @@ class BranchResourceIT {
             .branchcode(UPDATED_BRANCHCODE)
             .branchType(UPDATED_BRANCH_TYPE)
             .webSite(UPDATED_WEB_SITE)
+            .branchId(UPDATED_BRANCH_ID)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regionId(UPDATED_REGION_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return branch;
     }
 
@@ -152,11 +158,12 @@ class BranchResourceIT {
         assertThat(testBranch.getBranchcode()).isEqualTo(DEFAULT_BRANCHCODE);
         assertThat(testBranch.getBranchType()).isEqualTo(DEFAULT_BRANCH_TYPE);
         assertThat(testBranch.getWebSite()).isEqualTo(DEFAULT_WEB_SITE);
+        assertThat(testBranch.getBranchId()).isEqualTo(DEFAULT_BRANCH_ID);
+        assertThat(testBranch.getRegionId()).isEqualTo(DEFAULT_REGION_ID);
+        assertThat(testBranch.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
         assertThat(testBranch.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testBranch.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testBranch.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testBranch.getRegionId()).isEqualTo(DEFAULT_REGION_ID);
-        assertThat(testBranch.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -213,11 +220,12 @@ class BranchResourceIT {
             .andExpect(jsonPath("$.[*].branchcode").value(hasItem(DEFAULT_BRANCHCODE)))
             .andExpect(jsonPath("$.[*].branchType").value(hasItem(DEFAULT_BRANCH_TYPE)))
             .andExpect(jsonPath("$.[*].webSite").value(hasItem(DEFAULT_WEB_SITE)))
+            .andExpect(jsonPath("$.[*].branchId").value(hasItem(DEFAULT_BRANCH_ID.intValue())))
+            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -237,11 +245,12 @@ class BranchResourceIT {
             .andExpect(jsonPath("$.branchcode").value(DEFAULT_BRANCHCODE))
             .andExpect(jsonPath("$.branchType").value(DEFAULT_BRANCH_TYPE))
             .andExpect(jsonPath("$.webSite").value(DEFAULT_WEB_SITE))
+            .andExpect(jsonPath("$.branchId").value(DEFAULT_BRANCH_ID.intValue()))
+            .andExpect(jsonPath("$.regionId").value(DEFAULT_REGION_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.regionId").value(DEFAULT_REGION_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -589,171 +598,93 @@ class BranchResourceIT {
 
     @Test
     @Transactional
-    void getAllBranchesByStatusIsEqualToSomething() throws Exception {
+    void getAllBranchesByBranchIdIsEqualToSomething() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where status equals to DEFAULT_STATUS
-        defaultBranchShouldBeFound("status.equals=" + DEFAULT_STATUS);
+        // Get all the branchList where branchId equals to DEFAULT_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.equals=" + DEFAULT_BRANCH_ID);
 
-        // Get all the branchList where status equals to UPDATED_STATUS
-        defaultBranchShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+        // Get all the branchList where branchId equals to UPDATED_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.equals=" + UPDATED_BRANCH_ID);
     }
 
     @Test
     @Transactional
-    void getAllBranchesByStatusIsInShouldWork() throws Exception {
+    void getAllBranchesByBranchIdIsInShouldWork() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultBranchShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+        // Get all the branchList where branchId in DEFAULT_BRANCH_ID or UPDATED_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.in=" + DEFAULT_BRANCH_ID + "," + UPDATED_BRANCH_ID);
 
-        // Get all the branchList where status equals to UPDATED_STATUS
-        defaultBranchShouldNotBeFound("status.in=" + UPDATED_STATUS);
+        // Get all the branchList where branchId equals to UPDATED_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.in=" + UPDATED_BRANCH_ID);
     }
 
     @Test
     @Transactional
-    void getAllBranchesByStatusIsNullOrNotNull() throws Exception {
+    void getAllBranchesByBranchIdIsNullOrNotNull() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where status is not null
-        defaultBranchShouldBeFound("status.specified=true");
+        // Get all the branchList where branchId is not null
+        defaultBranchShouldBeFound("branchId.specified=true");
 
-        // Get all the branchList where status is null
-        defaultBranchShouldNotBeFound("status.specified=false");
+        // Get all the branchList where branchId is null
+        defaultBranchShouldNotBeFound("branchId.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllBranchesByStatusContainsSomething() throws Exception {
+    void getAllBranchesByBranchIdIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where status contains DEFAULT_STATUS
-        defaultBranchShouldBeFound("status.contains=" + DEFAULT_STATUS);
+        // Get all the branchList where branchId is greater than or equal to DEFAULT_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.greaterThanOrEqual=" + DEFAULT_BRANCH_ID);
 
-        // Get all the branchList where status contains UPDATED_STATUS
-        defaultBranchShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+        // Get all the branchList where branchId is greater than or equal to UPDATED_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.greaterThanOrEqual=" + UPDATED_BRANCH_ID);
     }
 
     @Test
     @Transactional
-    void getAllBranchesByStatusNotContainsSomething() throws Exception {
+    void getAllBranchesByBranchIdIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where status does not contain DEFAULT_STATUS
-        defaultBranchShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+        // Get all the branchList where branchId is less than or equal to DEFAULT_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.lessThanOrEqual=" + DEFAULT_BRANCH_ID);
 
-        // Get all the branchList where status does not contain UPDATED_STATUS
-        defaultBranchShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+        // Get all the branchList where branchId is less than or equal to SMALLER_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.lessThanOrEqual=" + SMALLER_BRANCH_ID);
     }
 
     @Test
     @Transactional
-    void getAllBranchesByLastModifiedIsEqualToSomething() throws Exception {
+    void getAllBranchesByBranchIdIsLessThanSomething() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultBranchShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+        // Get all the branchList where branchId is less than DEFAULT_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.lessThan=" + DEFAULT_BRANCH_ID);
 
-        // Get all the branchList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultBranchShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+        // Get all the branchList where branchId is less than UPDATED_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.lessThan=" + UPDATED_BRANCH_ID);
     }
 
     @Test
     @Transactional
-    void getAllBranchesByLastModifiedIsInShouldWork() throws Exception {
+    void getAllBranchesByBranchIdIsGreaterThanSomething() throws Exception {
         // Initialize the database
         branchRepository.saveAndFlush(branch);
 
-        // Get all the branchList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultBranchShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+        // Get all the branchList where branchId is greater than DEFAULT_BRANCH_ID
+        defaultBranchShouldNotBeFound("branchId.greaterThan=" + DEFAULT_BRANCH_ID);
 
-        // Get all the branchList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultBranchShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModified is not null
-        defaultBranchShouldBeFound("lastModified.specified=true");
-
-        // Get all the branchList where lastModified is null
-        defaultBranchShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultBranchShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the branchList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultBranchShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultBranchShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the branchList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultBranchShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModifiedBy is not null
-        defaultBranchShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the branchList where lastModifiedBy is null
-        defaultBranchShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultBranchShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the branchList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultBranchShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBranchesByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        branchRepository.saveAndFlush(branch);
-
-        // Get all the branchList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultBranchShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the branchList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultBranchShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the branchList where branchId is greater than SMALLER_BRANCH_ID
+        defaultBranchShouldBeFound("branchId.greaterThan=" + SMALLER_BRANCH_ID);
     }
 
     @Test
@@ -938,6 +869,175 @@ class BranchResourceIT {
         defaultBranchShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllBranchesByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where status equals to DEFAULT_STATUS
+        defaultBranchShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the branchList where status equals to UPDATED_STATUS
+        defaultBranchShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultBranchShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the branchList where status equals to UPDATED_STATUS
+        defaultBranchShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where status is not null
+        defaultBranchShouldBeFound("status.specified=true");
+
+        // Get all the branchList where status is null
+        defaultBranchShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where status contains DEFAULT_STATUS
+        defaultBranchShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the branchList where status contains UPDATED_STATUS
+        defaultBranchShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where status does not contain DEFAULT_STATUS
+        defaultBranchShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the branchList where status does not contain UPDATED_STATUS
+        defaultBranchShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultBranchShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the branchList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultBranchShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultBranchShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the branchList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultBranchShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModified is not null
+        defaultBranchShouldBeFound("lastModified.specified=true");
+
+        // Get all the branchList where lastModified is null
+        defaultBranchShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultBranchShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the branchList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBranchShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultBranchShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the branchList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBranchShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModifiedBy is not null
+        defaultBranchShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the branchList where lastModifiedBy is null
+        defaultBranchShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultBranchShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the branchList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultBranchShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBranchesByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        branchRepository.saveAndFlush(branch);
+
+        // Get all the branchList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultBranchShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the branchList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultBranchShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -952,11 +1052,12 @@ class BranchResourceIT {
             .andExpect(jsonPath("$.[*].branchcode").value(hasItem(DEFAULT_BRANCHCODE)))
             .andExpect(jsonPath("$.[*].branchType").value(hasItem(DEFAULT_BRANCH_TYPE)))
             .andExpect(jsonPath("$.[*].webSite").value(hasItem(DEFAULT_WEB_SITE)))
+            .andExpect(jsonPath("$.[*].branchId").value(hasItem(DEFAULT_BRANCH_ID.intValue())))
+            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restBranchMockMvc
@@ -1010,11 +1111,12 @@ class BranchResourceIT {
             .branchcode(UPDATED_BRANCHCODE)
             .branchType(UPDATED_BRANCH_TYPE)
             .webSite(UPDATED_WEB_SITE)
+            .branchId(UPDATED_BRANCH_ID)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regionId(UPDATED_REGION_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         BranchDTO branchDTO = branchMapper.toDto(updatedBranch);
 
         restBranchMockMvc
@@ -1034,11 +1136,12 @@ class BranchResourceIT {
         assertThat(testBranch.getBranchcode()).isEqualTo(UPDATED_BRANCHCODE);
         assertThat(testBranch.getBranchType()).isEqualTo(UPDATED_BRANCH_TYPE);
         assertThat(testBranch.getWebSite()).isEqualTo(UPDATED_WEB_SITE);
+        assertThat(testBranch.getBranchId()).isEqualTo(UPDATED_BRANCH_ID);
+        assertThat(testBranch.getRegionId()).isEqualTo(UPDATED_REGION_ID);
+        assertThat(testBranch.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
         assertThat(testBranch.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testBranch.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testBranch.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testBranch.getRegionId()).isEqualTo(UPDATED_REGION_ID);
-        assertThat(testBranch.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -1122,8 +1225,9 @@ class BranchResourceIT {
             .description(UPDATED_DESCRIPTION)
             .branchcode(UPDATED_BRANCHCODE)
             .webSite(UPDATED_WEB_SITE)
-            .status(UPDATED_STATUS)
-            .lastModified(UPDATED_LAST_MODIFIED);
+            .branchId(UPDATED_BRANCH_ID)
+            .regionId(UPDATED_REGION_ID)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restBranchMockMvc
             .perform(
@@ -1142,11 +1246,12 @@ class BranchResourceIT {
         assertThat(testBranch.getBranchcode()).isEqualTo(UPDATED_BRANCHCODE);
         assertThat(testBranch.getBranchType()).isEqualTo(DEFAULT_BRANCH_TYPE);
         assertThat(testBranch.getWebSite()).isEqualTo(UPDATED_WEB_SITE);
-        assertThat(testBranch.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testBranch.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testBranch.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testBranch.getRegionId()).isEqualTo(DEFAULT_REGION_ID);
+        assertThat(testBranch.getBranchId()).isEqualTo(UPDATED_BRANCH_ID);
+        assertThat(testBranch.getRegionId()).isEqualTo(UPDATED_REGION_ID);
         assertThat(testBranch.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testBranch.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testBranch.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testBranch.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1167,11 +1272,12 @@ class BranchResourceIT {
             .branchcode(UPDATED_BRANCHCODE)
             .branchType(UPDATED_BRANCH_TYPE)
             .webSite(UPDATED_WEB_SITE)
+            .branchId(UPDATED_BRANCH_ID)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regionId(UPDATED_REGION_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restBranchMockMvc
             .perform(
@@ -1190,11 +1296,12 @@ class BranchResourceIT {
         assertThat(testBranch.getBranchcode()).isEqualTo(UPDATED_BRANCHCODE);
         assertThat(testBranch.getBranchType()).isEqualTo(UPDATED_BRANCH_TYPE);
         assertThat(testBranch.getWebSite()).isEqualTo(UPDATED_WEB_SITE);
+        assertThat(testBranch.getBranchId()).isEqualTo(UPDATED_BRANCH_ID);
+        assertThat(testBranch.getRegionId()).isEqualTo(UPDATED_REGION_ID);
+        assertThat(testBranch.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
         assertThat(testBranch.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testBranch.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testBranch.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testBranch.getRegionId()).isEqualTo(UPDATED_REGION_ID);
-        assertThat(testBranch.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

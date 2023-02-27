@@ -9,18 +9,18 @@ export const sampleWithRequiredData: IDesignation = {
 export const sampleWithPartialData: IDesignation = {
   id: 20362,
   name: 'contingency Officer',
-  lastModifiedBy: 'content-based Infrastructure',
-  departmentId: 18407,
+  companyId: 43628,
+  lastModified: dayjs('2023-02-08T22:22'),
 };
 
 export const sampleWithFullData: IDesignation = {
-  id: 28375,
-  name: 'architect THX',
+  id: 24468,
+  name: 'Infrastructure Ball',
+  departmentId: 39910,
+  companyId: 22646,
+  status: 'THX',
   lastModified: dayjs('2023-02-08T16:36'),
   lastModifiedBy: 'generate connect',
-  status: 'invoice',
-  departmentId: 97137,
-  companyId: 63759,
 };
 
 export const sampleWithNewData: NewDesignation = {

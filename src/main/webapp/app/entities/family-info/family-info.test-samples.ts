@@ -7,23 +7,26 @@ export const sampleWithRequiredData: IFamilyInfo = {
 };
 
 export const sampleWithPartialData: IFamilyInfo = {
-  id: 35314,
-  status: 'Pre-emptive array',
-  employeeId: 5228,
-  companyId: 87433,
+  id: 22997,
+  employeeId: 62934,
+  companyId: 32196,
+  status: '24/365 AGP bypass',
+  lastModifiedBy: 'uniform monetize mesh',
 };
 
 export const sampleWithFullData: IFamilyInfo = {
-  id: 26694,
-  name: 'bypass compressing copying',
+  id: 52580,
+  name: 'IB',
   dateOfBirth: dayjs('2023-02-08'),
-  relation: 'Maine Synergized',
-  address: 'e-services Bacon Toys',
-  lastModified: dayjs('2023-02-09T01:15'),
-  lastModifiedBy: 'De-engineered Account circuit',
-  status: 'transmit Intranet',
-  employeeId: 22196,
-  companyId: 82933,
+  relation: 'Bahrain',
+  addressId: 77628,
+  isEmployed: true,
+  employedAt: 'Toys Metal Gloves',
+  employeeId: 12802,
+  companyId: 69719,
+  status: 'SDD transmit Intranet',
+  lastModified: dayjs('2023-02-08T23:28'),
+  lastModifiedBy: 'Mali PNG virtual',
 };
 
 export const sampleWithNewData: NewFamilyInfo = {

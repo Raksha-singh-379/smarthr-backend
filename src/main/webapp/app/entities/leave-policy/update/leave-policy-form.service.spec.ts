@@ -24,15 +24,16 @@ describe('LeavePolicy Form Service', () => {
             isCarryForword: expect.any(Object),
             employeeType: expect.any(Object),
             genderLeave: expect.any(Object),
-            leaveStatus: expect.any(Object),
             totalLeave: expect.any(Object),
             maxLeave: expect.any(Object),
             hasproRataLeave: expect.any(Object),
             description: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            refTable: expect.any(Object),
+            refTableId: expect.any(Object),
           })
         );
       });
@@ -47,15 +48,16 @@ describe('LeavePolicy Form Service', () => {
             isCarryForword: expect.any(Object),
             employeeType: expect.any(Object),
             genderLeave: expect.any(Object),
-            leaveStatus: expect.any(Object),
             totalLeave: expect.any(Object),
             maxLeave: expect.any(Object),
             hasproRataLeave: expect.any(Object),
             description: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            refTable: expect.any(Object),
+            refTableId: expect.any(Object),
           })
         );
       });

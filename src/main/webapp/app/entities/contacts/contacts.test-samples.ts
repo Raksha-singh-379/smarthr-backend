@@ -7,26 +7,27 @@ export const sampleWithRequiredData: IContacts = {
 };
 
 export const sampleWithPartialData: IContacts = {
-  id: 9986,
-  contactPref: 'National Salad',
-  contactType: 'Saudi Communications',
-  lastModifiedBy: 'Balboa Buckinghamshire',
-  status: 'visionary',
-  refTableId: 61074,
+  id: 55483,
+  contactPref: 'virtual Dynamic Saudi',
+  contactType: 'Account Balboa Buckinghamshire',
+  refTableId: 21187,
+  companyId: 36371,
+  lastModified: dayjs('2023-02-08T07:34'),
 };
 
 export const sampleWithFullData: IContacts = {
-  id: 90126,
-  name: 'Leu',
-  contactPref: 'copying',
-  contactType: 'Strategist Neck Polarised',
-  contact: 'hacking',
-  lastModified: dayjs('2023-02-08T17:18'),
-  lastModifiedBy: 'Intelligent',
-  status: 'Ergonomic syndicate Cheese',
-  refTableType: 'Steel Outdoors',
-  refTableId: 77280,
-  companyId: 25290,
+  id: 35170,
+  name: 'Direct invoice',
+  contactPref: 'matrices Strategist Neck',
+  contactType: 'Personal',
+  contact: 'Computer Ergonomic Dynamic',
+  refTable: 'Cotton',
+  refTableId: 32161,
+  companyId: 15641,
+  status: 'multi-byte Program Account',
+  lastModified: dayjs('2023-02-08T08:35'),
+  lastModifiedBy: 'Balanced AGP Bike',
+  contactReference: 'Pizza Health',
 };
 
 export const sampleWithNewData: NewContacts = {

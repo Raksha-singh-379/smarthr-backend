@@ -26,21 +26,17 @@
         <dd>
           <span>{{ familyInfo.relation }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.familyInfo.address">Address</span></dt>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.addressId">Address Id</span></dt>
         <dd>
-          <span>{{ familyInfo.address }}</span>
+          <span>{{ familyInfo.addressId }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModified">Last Modified</span></dt>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.isEmployed">Is Employed</span></dt>
         <dd>
-          <span>{{ familyInfo.lastModified | formatMediumDatetime }}</span>
+          <span>{{ familyInfo.isEmployed }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModifiedBy">Last Modified By</span></dt>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.employedAt">Employed At</span></dt>
         <dd>
-          <span>{{ familyInfo.lastModifiedBy }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.familyInfo.status">Status</span></dt>
-        <dd>
-          <span>{{ familyInfo.status }}</span>
+          <span>{{ familyInfo.employedAt }}</span>
         </dd>
         <dt><span jhiTranslate="smartHrApp.familyInfo.employeeId">Employee Id</span></dt>
         <dd>
@@ -49,6 +45,18 @@
         <dt><span jhiTranslate="smartHrApp.familyInfo.companyId">Company Id</span></dt>
         <dd>
           <span>{{ familyInfo.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.status">Status</span></dt>
+        <dd>
+          <span>{{ familyInfo.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ familyInfo.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.familyInfo.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ familyInfo.lastModifiedBy }}</span>
         </dd>
       </dl>
 

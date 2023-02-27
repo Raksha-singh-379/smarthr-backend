@@ -7,27 +7,29 @@ export const sampleWithRequiredData: IPfDetails = {
 };
 
 export const sampleWithPartialData: IPfDetails = {
-  id: 78480,
-  pfNumber: 'District Bike',
-  totalPfRate: 13788,
-  lastModifiedBy: 'mobile Programmable Books',
-  status: 'deposit',
-  employeId: 79900,
-  reEnumerationId: 30816,
+  id: 47207,
+  pfNumber: 'schemas fuchsia transmitter',
+  totalPfRate: 53351,
+  reEnumerationId: 24780,
+  companyId: 66525,
+  status: 'Books moratorium indigo',
+  lastModified: dayjs('2023-02-08T18:48'),
+  lastModifiedBy: 'Plastic generate',
 };
 
 export const sampleWithFullData: IPfDetails = {
-  id: 41679,
-  isPfContribution: false,
-  pfNumber: 'Iowa',
-  pfRate: 45228,
-  additionalPfRate: 'Avon Jersey Computers',
-  totalPfRate: 48735,
-  lastModified: dayjs('2023-02-08T13:02'),
-  lastModifiedBy: 'Metrics',
-  status: 'deposit e-services',
-  employeId: 11023,
-  reEnumerationId: 95537,
+  id: 92088,
+  isPfContribution: true,
+  pfNumber: 'Supervisor XML',
+  pfRate: 25994,
+  additionalPfRate: 'Strategist deposit e-services',
+  totalPfRate: 11023,
+  employeId: 95537,
+  reEnumerationId: 96024,
+  companyId: 40787,
+  status: 'interactive bluetooth Enhanced',
+  lastModified: dayjs('2023-02-08T12:51'),
+  lastModifiedBy: 'transmit Krone',
 };
 
 export const sampleWithNewData: NewPfDetails = {

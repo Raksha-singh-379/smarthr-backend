@@ -27,16 +27,16 @@ type ApprovalSettingFormRawValue = FormValueOf<IApprovalSetting>;
 
 type NewApprovalSettingFormRawValue = FormValueOf<NewApprovalSetting>;
 
-type ApprovalSettingFormDefaults = Pick<NewApprovalSetting, 'id' | 'isSequenceApproval' | 'isSimultaneousApproval' | 'lastModified'>;
+type ApprovalSettingFormDefaults = Pick<NewApprovalSetting, 'id' | 'lastModified'>;
 
 type ApprovalSettingFormGroupContent = {
   id: FormControl<ApprovalSettingFormRawValue['id'] | NewApprovalSetting['id']>;
-  isSequenceApproval: FormControl<ApprovalSettingFormRawValue['isSequenceApproval']>;
-  isSimultaneousApproval: FormControl<ApprovalSettingFormRawValue['isSimultaneousApproval']>;
+  type: FormControl<ApprovalSettingFormRawValue['type']>;
+  approvalCategory: FormControl<ApprovalSettingFormRawValue['approvalCategory']>;
+  companyId: FormControl<ApprovalSettingFormRawValue['companyId']>;
+  status: FormControl<ApprovalSettingFormRawValue['status']>;
   lastModified: FormControl<ApprovalSettingFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<ApprovalSettingFormRawValue['lastModifiedBy']>;
-  status: FormControl<ApprovalSettingFormRawValue['status']>;
-  companyId: FormControl<ApprovalSettingFormRawValue['companyId']>;
 };
 
 export type ApprovalSettingFormGroup = FormGroup<ApprovalSettingFormGroupContent>;
@@ -56,12 +56,12 @@ export class ApprovalSettingFormService {
           validators: [Validators.required],
         }
       ),
-      isSequenceApproval: new FormControl(approvalSettingRawValue.isSequenceApproval),
-      isSimultaneousApproval: new FormControl(approvalSettingRawValue.isSimultaneousApproval),
+      type: new FormControl(approvalSettingRawValue.type),
+      approvalCategory: new FormControl(approvalSettingRawValue.approvalCategory),
+      companyId: new FormControl(approvalSettingRawValue.companyId),
+      status: new FormControl(approvalSettingRawValue.status),
       lastModified: new FormControl(approvalSettingRawValue.lastModified),
       lastModifiedBy: new FormControl(approvalSettingRawValue.lastModifiedBy),
-      status: new FormControl(approvalSettingRawValue.status),
-      companyId: new FormControl(approvalSettingRawValue.companyId),
     });
   }
 
@@ -86,8 +86,6 @@ export class ApprovalSettingFormService {
 
     return {
       id: null,
-      isSequenceApproval: false,
-      isSimultaneousApproval: false,
       lastModified: currentTime,
     };
   }

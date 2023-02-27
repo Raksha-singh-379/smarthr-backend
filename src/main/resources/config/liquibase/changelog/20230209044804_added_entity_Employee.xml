@@ -17,19 +17,10 @@
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="middle_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="last_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="username" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_employee__username" />
-            </column>
-            <column name="password" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="department" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="designation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="gender" type="varchar(255)">
@@ -41,16 +32,25 @@
             <column name="joindate" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="last_modified" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="status" type="varchar(255)">
+            <column name="employment_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="company_id" type="bigint">
+            <column name="designation_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="department_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="branch_id" type="bigint">
@@ -83,20 +83,16 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="first_name" type="string"/>
+            <column name="middle_name" type="string"/>
             <column name="last_name" type="string"/>
-            <column name="username" type="string"/>
-            <column name="password" type="string"/>
-            <column name="department" type="string"/>
-            <column name="designation" type="string"/>
             <column name="gender" type="string"/>
             <column name="emp_unique_id" type="string"/>
             <column name="joindate" type="date"/>
+            <column name="company_id" type="numeric"/>
+            <column name="status" type="string"/>
             <column name="last_modified" type="date"/>
             <column name="last_modified_by" type="string"/>
-            <column name="status" type="string"/>
-            <column name="company_id" type="numeric"/>
-            <column name="branch_id" type="numeric"/>
-            <column name="region_id" type="numeric"/>
+            <column name="employment_type_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

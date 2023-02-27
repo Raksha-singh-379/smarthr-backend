@@ -31,17 +31,13 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
 
     private DoubleFilter companyShare;
 
-    private InstantFilter salaryFrom;
+    private LongFilter companyId;
 
-    private InstantFilter salaryTo;
+    private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private LongFilter companyId;
 
     private Boolean distinct;
 
@@ -53,12 +49,10 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
         this.hra = other.hra == null ? null : other.hra.copy();
         this.employeeShare = other.employeeShare == null ? null : other.employeeShare.copy();
         this.companyShare = other.companyShare == null ? null : other.companyShare.copy();
-        this.salaryFrom = other.salaryFrom == null ? null : other.salaryFrom.copy();
-        this.salaryTo = other.salaryTo == null ? null : other.salaryTo.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.distinct = other.distinct;
     }
 
@@ -142,34 +136,34 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
         this.companyShare = companyShare;
     }
 
-    public InstantFilter getSalaryFrom() {
-        return salaryFrom;
+    public LongFilter getCompanyId() {
+        return companyId;
     }
 
-    public InstantFilter salaryFrom() {
-        if (salaryFrom == null) {
-            salaryFrom = new InstantFilter();
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
         }
-        return salaryFrom;
+        return companyId;
     }
 
-    public void setSalaryFrom(InstantFilter salaryFrom) {
-        this.salaryFrom = salaryFrom;
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
     }
 
-    public InstantFilter getSalaryTo() {
-        return salaryTo;
+    public StringFilter getStatus() {
+        return status;
     }
 
-    public InstantFilter salaryTo() {
-        if (salaryTo == null) {
-            salaryTo = new InstantFilter();
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
         }
-        return salaryTo;
+        return status;
     }
 
-    public void setSalaryTo(InstantFilter salaryTo) {
-        this.salaryTo = salaryTo;
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
     public InstantFilter getLastModified() {
@@ -202,36 +196,6 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public LongFilter getCompanyId() {
-        return companyId;
-    }
-
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
-        }
-        return companyId;
-    }
-
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -255,32 +219,17 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
             Objects.equals(hra, that.hra) &&
             Objects.equals(employeeShare, that.employeeShare) &&
             Objects.equals(companyShare, that.companyShare) &&
-            Objects.equals(salaryFrom, that.salaryFrom) &&
-            Objects.equals(salaryTo, that.salaryTo) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            da,
-            hra,
-            employeeShare,
-            companyShare,
-            salaryFrom,
-            salaryTo,
-            lastModified,
-            lastModifiedBy,
-            status,
-            companyId,
-            distinct
-        );
+        return Objects.hash(id, da, hra, employeeShare, companyShare, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -292,12 +241,10 @@ public class SalarySettingsCriteria implements Serializable, Criteria {
             (hra != null ? "hra=" + hra + ", " : "") +
             (employeeShare != null ? "employeeShare=" + employeeShare + ", " : "") +
             (companyShare != null ? "companyShare=" + companyShare + ", " : "") +
-            (salaryFrom != null ? "salaryFrom=" + salaryFrom + ", " : "") +
-            (salaryTo != null ? "salaryTo=" + salaryTo + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

@@ -123,23 +123,23 @@ public class AddressQueryService extends QueryService<Address> {
             if (criteria.getLatitude() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLatitude(), Address_.latitude));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Address_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Address_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), Address_.status));
-            }
-            if (criteria.getRefTableType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRefTableType(), Address_.refTableType));
+            if (criteria.getRefTable() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRefTable(), Address_.refTable));
             }
             if (criteria.getRefTableId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRefTableId(), Address_.refTableId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Address_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), Address_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Address_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Address_.lastModifiedBy));
             }
         }
         return specification;

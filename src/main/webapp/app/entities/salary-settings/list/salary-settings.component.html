@@ -64,15 +64,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="salaryFrom">
+          <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.salarySettings.salaryFrom">Salary From</span>
+              <span jhiTranslate="smartHrApp.salarySettings.companyId">Company Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="salaryTo">
+          <th scope="col" jhiSortBy="status">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.salarySettings.salaryTo">Salary To</span>
+              <span jhiTranslate="smartHrApp.salarySettings.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -88,18 +88,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.salarySettings.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="companyId">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.salarySettings.companyId">Company Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -112,12 +100,10 @@
           <td>{{ salarySettings.hra }}</td>
           <td>{{ salarySettings.employeeShare }}</td>
           <td>{{ salarySettings.companyShare }}</td>
-          <td>{{ salarySettings.salaryFrom | formatMediumDatetime }}</td>
-          <td>{{ salarySettings.salaryTo | formatMediumDatetime }}</td>
+          <td>{{ salarySettings.companyId }}</td>
+          <td>{{ salarySettings.status }}</td>
           <td>{{ salarySettings.lastModified | formatMediumDatetime }}</td>
           <td>{{ salarySettings.lastModifiedBy }}</td>
-          <td>{{ salarySettings.status }}</td>
-          <td>{{ salarySettings.companyId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

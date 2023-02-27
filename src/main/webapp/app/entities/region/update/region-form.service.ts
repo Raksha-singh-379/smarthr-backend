@@ -33,10 +33,11 @@ type RegionFormGroupContent = {
   id: FormControl<RegionFormRawValue['id'] | NewRegion['id']>;
   regionName: FormControl<RegionFormRawValue['regionName']>;
   description: FormControl<RegionFormRawValue['description']>;
+  regionId: FormControl<RegionFormRawValue['regionId']>;
+  companyId: FormControl<RegionFormRawValue['companyId']>;
   status: FormControl<RegionFormRawValue['status']>;
   lastModified: FormControl<RegionFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<RegionFormRawValue['lastModifiedBy']>;
-  companyId: FormControl<RegionFormRawValue['companyId']>;
 };
 
 export type RegionFormGroup = FormGroup<RegionFormGroupContent>;
@@ -60,10 +61,11 @@ export class RegionFormService {
         validators: [Validators.required],
       }),
       description: new FormControl(regionRawValue.description),
+      regionId: new FormControl(regionRawValue.regionId),
+      companyId: new FormControl(regionRawValue.companyId),
       status: new FormControl(regionRawValue.status),
       lastModified: new FormControl(regionRawValue.lastModified),
       lastModifiedBy: new FormControl(regionRawValue.lastModifiedBy),
-      companyId: new FormControl(regionRawValue.companyId),
     });
   }
 

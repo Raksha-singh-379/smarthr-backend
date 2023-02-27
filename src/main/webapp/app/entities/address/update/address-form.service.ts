@@ -42,12 +42,12 @@ type AddressFormGroupContent = {
   landMark: FormControl<AddressFormRawValue['landMark']>;
   longitude: FormControl<AddressFormRawValue['longitude']>;
   latitude: FormControl<AddressFormRawValue['latitude']>;
-  lastModified: FormControl<AddressFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<AddressFormRawValue['lastModifiedBy']>;
-  status: FormControl<AddressFormRawValue['status']>;
-  refTableType: FormControl<AddressFormRawValue['refTableType']>;
+  refTable: FormControl<AddressFormRawValue['refTable']>;
   refTableId: FormControl<AddressFormRawValue['refTableId']>;
   companyId: FormControl<AddressFormRawValue['companyId']>;
+  status: FormControl<AddressFormRawValue['status']>;
+  lastModified: FormControl<AddressFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<AddressFormRawValue['lastModifiedBy']>;
 };
 
 export type AddressFormGroup = FormGroup<AddressFormGroupContent>;
@@ -78,12 +78,12 @@ export class AddressFormService {
       landMark: new FormControl(addressRawValue.landMark),
       longitude: new FormControl(addressRawValue.longitude),
       latitude: new FormControl(addressRawValue.latitude),
-      lastModified: new FormControl(addressRawValue.lastModified),
-      lastModifiedBy: new FormControl(addressRawValue.lastModifiedBy),
-      status: new FormControl(addressRawValue.status),
-      refTableType: new FormControl(addressRawValue.refTableType),
+      refTable: new FormControl(addressRawValue.refTable),
       refTableId: new FormControl(addressRawValue.refTableId),
       companyId: new FormControl(addressRawValue.companyId),
+      status: new FormControl(addressRawValue.status),
+      lastModified: new FormControl(addressRawValue.lastModified),
+      lastModifiedBy: new FormControl(addressRawValue.lastModifiedBy),
     });
   }
 

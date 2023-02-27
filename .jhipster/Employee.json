@@ -10,25 +10,11 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "middleName",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "lastName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "username",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
-    },
-    {
-      "fieldName": "password",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "department",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "designation",
       "fieldType": "String"
     },
     {
@@ -45,6 +31,14 @@
       "fieldType": "Instant"
     },
     {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "lastModified",
       "fieldType": "Instant"
     },
@@ -53,19 +47,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "branchId",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "regionId",
+      "fieldName": "employmentTypeId",
       "fieldType": "Long"
     }
   ],
@@ -74,6 +56,31 @@
   "name": "Employee",
   "pagination": "pagination",
   "readOnly": false,
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "designation",
+      "relationshipName": "designation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "branchName",
+      "otherEntityName": "branch",
+      "relationshipName": "branch",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "regionName",
+      "otherEntityName": "region",
+      "relationshipName": "region",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "service": "serviceClass"
 }

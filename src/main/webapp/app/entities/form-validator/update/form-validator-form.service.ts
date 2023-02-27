@@ -19,15 +19,15 @@ type FormValidatorFormGroupInput = IFormValidator | PartialWithRequiredKeyOf<New
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IFormValidator | NewFormValidator> = Omit<T, 'createdOn'> & {
-  createdOn?: string | null;
+type FormValueOf<T extends IFormValidator | NewFormValidator> = Omit<T, 'lastModified'> & {
+  lastModified?: string | null;
 };
 
 type FormValidatorFormRawValue = FormValueOf<IFormValidator>;
 
 type NewFormValidatorFormRawValue = FormValueOf<NewFormValidator>;
 
-type FormValidatorFormDefaults = Pick<NewFormValidator, 'id' | 'createdOn'>;
+type FormValidatorFormDefaults = Pick<NewFormValidator, 'id' | 'lastModified'>;
 
 type FormValidatorFormGroupContent = {
   id: FormControl<FormValidatorFormRawValue['id'] | NewFormValidator['id']>;
@@ -36,8 +36,9 @@ type FormValidatorFormGroupContent = {
   formName: FormControl<FormValidatorFormRawValue['formName']>;
   fieldName: FormControl<FormValidatorFormRawValue['fieldName']>;
   companyId: FormControl<FormValidatorFormRawValue['companyId']>;
-  createdBy: FormControl<FormValidatorFormRawValue['createdBy']>;
-  createdOn: FormControl<FormValidatorFormRawValue['createdOn']>;
+  status: FormControl<FormValidatorFormRawValue['status']>;
+  lastModified: FormControl<FormValidatorFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<FormValidatorFormRawValue['lastModifiedBy']>;
 };
 
 export type FormValidatorFormGroup = FormGroup<FormValidatorFormGroupContent>;
@@ -62,8 +63,9 @@ export class FormValidatorFormService {
       formName: new FormControl(formValidatorRawValue.formName),
       fieldName: new FormControl(formValidatorRawValue.fieldName),
       companyId: new FormControl(formValidatorRawValue.companyId),
-      createdBy: new FormControl(formValidatorRawValue.createdBy),
-      createdOn: new FormControl(formValidatorRawValue.createdOn),
+      status: new FormControl(formValidatorRawValue.status),
+      lastModified: new FormControl(formValidatorRawValue.lastModified),
+      lastModifiedBy: new FormControl(formValidatorRawValue.lastModifiedBy),
     });
   }
 
@@ -86,7 +88,7 @@ export class FormValidatorFormService {
 
     return {
       id: null,
-      createdOn: currentTime,
+      lastModified: currentTime,
     };
   }
 
@@ -95,7 +97,7 @@ export class FormValidatorFormService {
   ): IFormValidator | NewFormValidator {
     return {
       ...rawFormValidator,
-      createdOn: dayjs(rawFormValidator.createdOn, DATE_TIME_FORMAT),
+      lastModified: dayjs(rawFormValidator.lastModified, DATE_TIME_FORMAT),
     };
   }
 
@@ -104,7 +106,7 @@ export class FormValidatorFormService {
   ): FormValidatorFormRawValue | PartialWithRequiredKeyOf<NewFormValidatorFormRawValue> {
     return {
       ...formValidator,
-      createdOn: formValidator.createdOn ? formValidator.createdOn.format(DATE_TIME_FORMAT) : undefined,
+      lastModified: formValidator.lastModified ? formValidator.lastModified.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

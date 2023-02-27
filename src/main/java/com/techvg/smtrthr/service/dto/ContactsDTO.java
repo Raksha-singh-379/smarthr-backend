@@ -20,17 +20,19 @@ public class ContactsDTO implements Serializable {
 
     private String contact;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
-    private String refTableType;
+    private String refTable;
 
     private Long refTableId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
+
+    private String contactReference;
 
     public Long getId() {
         return id;
@@ -72,36 +74,12 @@ public class ContactsDTO implements Serializable {
         this.contact = contact;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
+    public String getRefTable() {
+        return refTable;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRefTableType() {
-        return refTableType;
-    }
-
-    public void setRefTableType(String refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
     public Long getRefTableId() {
@@ -118,6 +96,38 @@ public class ContactsDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public String getContactReference() {
+        return contactReference;
+    }
+
+    public void setContactReference(String contactReference) {
+        this.contactReference = contactReference;
     }
 
     @Override
@@ -150,12 +160,13 @@ public class ContactsDTO implements Serializable {
             ", contactPref='" + getContactPref() + "'" +
             ", contactType='" + getContactType() + "'" +
             ", contact='" + getContact() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", refTableType='" + getRefTableType() + "'" +
+            ", refTable='" + getRefTable() + "'" +
             ", refTableId=" + getRefTableId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", contactReference='" + getContactReference() + "'" +
             "}";
     }
 }

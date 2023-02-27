@@ -27,7 +27,7 @@ public class EducationCriteria implements Serializable, Criteria {
 
     private StringFilter subject;
 
-    private InstantFilter startDate;
+    private InstantFilter startYear;
 
     private InstantFilter endDate;
 
@@ -37,15 +37,15 @@ public class EducationCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
     private LongFilter employeeId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -55,16 +55,16 @@ public class EducationCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.institution = other.institution == null ? null : other.institution.copy();
         this.subject = other.subject == null ? null : other.subject.copy();
-        this.startDate = other.startDate == null ? null : other.startDate.copy();
+        this.startYear = other.startYear == null ? null : other.startYear.copy();
         this.endDate = other.endDate == null ? null : other.endDate.copy();
         this.educationType = other.educationType == null ? null : other.educationType.copy();
         this.grade = other.grade == null ? null : other.grade.copy();
         this.description = other.description == null ? null : other.description.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
         this.employeeId = other.employeeId == null ? null : other.employeeId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -118,19 +118,19 @@ public class EducationCriteria implements Serializable, Criteria {
         this.subject = subject;
     }
 
-    public InstantFilter getStartDate() {
-        return startDate;
+    public InstantFilter getStartYear() {
+        return startYear;
     }
 
-    public InstantFilter startDate() {
-        if (startDate == null) {
-            startDate = new InstantFilter();
+    public InstantFilter startYear() {
+        if (startYear == null) {
+            startYear = new InstantFilter();
         }
-        return startDate;
+        return startYear;
     }
 
-    public void setStartDate(InstantFilter startDate) {
-        this.startDate = startDate;
+    public void setStartYear(InstantFilter startYear) {
+        this.startYear = startYear;
     }
 
     public InstantFilter getEndDate() {
@@ -193,51 +193,6 @@ public class EducationCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
     public LongFilter getEmployeeId() {
         return employeeId;
     }
@@ -268,6 +223,51 @@ public class EducationCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -289,16 +289,16 @@ public class EducationCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(institution, that.institution) &&
             Objects.equals(subject, that.subject) &&
-            Objects.equals(startDate, that.startDate) &&
+            Objects.equals(startYear, that.startYear) &&
             Objects.equals(endDate, that.endDate) &&
             Objects.equals(educationType, that.educationType) &&
             Objects.equals(grade, that.grade) &&
             Objects.equals(description, that.description) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(employeeId, that.employeeId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -309,16 +309,16 @@ public class EducationCriteria implements Serializable, Criteria {
             id,
             institution,
             subject,
-            startDate,
+            startYear,
             endDate,
             educationType,
             grade,
             description,
-            lastModified,
-            lastModifiedBy,
-            status,
             employeeId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -330,16 +330,16 @@ public class EducationCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (institution != null ? "institution=" + institution + ", " : "") +
             (subject != null ? "subject=" + subject + ", " : "") +
-            (startDate != null ? "startDate=" + startDate + ", " : "") +
+            (startYear != null ? "startYear=" + startYear + ", " : "") +
             (endDate != null ? "endDate=" + endDate + ", " : "") +
             (educationType != null ? "educationType=" + educationType + ", " : "") +
             (grade != null ? "grade=" + grade + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
             (employeeId != null ? "employeeId=" + employeeId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

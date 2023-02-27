@@ -96,6 +96,12 @@ public class RegionQueryService extends QueryService<Region> {
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Region_.description));
             }
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRegionId(), Region_.regionId));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Region_.companyId));
+            }
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatus(), Region_.status));
             }
@@ -104,9 +110,6 @@ public class RegionQueryService extends QueryService<Region> {
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Region_.lastModifiedBy));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Region_.companyId));
             }
         }
         return specification;

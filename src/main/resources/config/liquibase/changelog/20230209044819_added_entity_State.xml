@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="state_name" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_state__state_name" />
+                <constraints nullable="false" />
             </column>
             <column name="lgd_code" type="bigint">
                 <constraints nullable="true" />

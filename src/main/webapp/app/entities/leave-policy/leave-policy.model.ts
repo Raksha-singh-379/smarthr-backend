@@ -6,15 +6,16 @@ export interface ILeavePolicy {
   isCarryForword?: boolean | null;
   employeeType?: string | null;
   genderLeave?: string | null;
-  leaveStatus?: string | null;
   totalLeave?: string | null;
   maxLeave?: string | null;
   hasproRataLeave?: boolean | null;
   description?: string | null;
+  companyId?: number | null;
+  status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  status?: string | null;
-  companyId?: number | null;
+  refTable?: string | null;
+  refTableId?: number | null;
 }
 
 export type NewLeavePolicy = Omit<ILeavePolicy, 'id'> & { id: null };

@@ -43,8 +43,54 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.address" for="field_address">Address</label>
-          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.addressId" for="field_addressId">Address Id</label>
+          <input type="number" class="form-control" name="addressId" id="field_addressId" data-cy="addressId" formControlName="addressId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.isEmployed" for="field_isEmployed">Is Employed</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isEmployed"
+            id="field_isEmployed"
+            data-cy="isEmployed"
+            formControlName="isEmployed"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.employedAt" for="field_employedAt">Employed At</label>
+          <input
+            type="text"
+            class="form-control"
+            name="employedAt"
+            id="field_employedAt"
+            data-cy="employedAt"
+            formControlName="employedAt"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.employeeId" for="field_employeeId">Employee Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="employeeId"
+            id="field_employeeId"
+            data-cy="employeeId"
+            formControlName="employeeId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
         </div>
 
         <div class="row mb-3">
@@ -72,28 +118,6 @@
             data-cy="lastModifiedBy"
             formControlName="lastModifiedBy"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.employeeId" for="field_employeeId">Employee Id</label>
-          <input
-            type="number"
-            class="form-control"
-            name="employeeId"
-            id="field_employeeId"
-            data-cy="employeeId"
-            formControlName="employeeId"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.familyInfo.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
         </div>
       </div>
 
