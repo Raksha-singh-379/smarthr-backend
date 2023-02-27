@@ -52,6 +52,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="valueTwo">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.masterLookup.valueTwo">Value Two</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="description">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.masterLookup.description">Description</span>
@@ -61,6 +67,18 @@
           <th scope="col" jhiSortBy="type">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.masterLookup.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.masterLookup.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.masterLookup.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -76,18 +94,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.masterLookup.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="companyId">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.masterLookup.companyId">Company Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -98,12 +104,13 @@
           </td>
           <td>{{ masterLookup.name }}</td>
           <td>{{ masterLookup.value }}</td>
+          <td>{{ masterLookup.valueTwo }}</td>
           <td>{{ masterLookup.description }}</td>
           <td>{{ masterLookup.type }}</td>
+          <td>{{ masterLookup.companyId }}</td>
+          <td>{{ masterLookup.status }}</td>
           <td>{{ masterLookup.lastModified | formatMediumDatetime }}</td>
           <td>{{ masterLookup.lastModifiedBy }}</td>
-          <td>{{ masterLookup.status }}</td>
-          <td>{{ masterLookup.companyId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

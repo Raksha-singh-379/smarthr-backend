@@ -18,13 +18,15 @@ public class RegionDTO implements Serializable {
 
     private String description;
 
+    private Long regionId;
+
+    private Long companyId;
+
     private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
-
-    private Long companyId;
 
     public Long getId() {
         return id;
@@ -50,6 +52,22 @@ public class RegionDTO implements Serializable {
         this.description = description;
     }
 
+    public Long getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(Long regionId) {
+        this.regionId = regionId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -72,14 +90,6 @@ public class RegionDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -110,10 +120,11 @@ public class RegionDTO implements Serializable {
             "id=" + getId() +
             ", regionName='" + getRegionName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", regionId=" + getRegionId() +
+            ", companyId=" + getCompanyId() +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

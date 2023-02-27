@@ -20,8 +20,6 @@ public class LeavePolicyDTO implements Serializable {
 
     private String genderLeave;
 
-    private String leaveStatus;
-
     private String totalLeave;
 
     private String maxLeave;
@@ -30,13 +28,17 @@ public class LeavePolicyDTO implements Serializable {
 
     private String description;
 
+    private Long companyId;
+
+    private String status;
+
     private Instant lastModified;
 
     private String lastModifiedBy;
 
-    private String status;
+    private String refTable;
 
-    private Long companyId;
+    private Long refTableId;
 
     public Long getId() {
         return id;
@@ -78,14 +80,6 @@ public class LeavePolicyDTO implements Serializable {
         this.genderLeave = genderLeave;
     }
 
-    public String getLeaveStatus() {
-        return leaveStatus;
-    }
-
-    public void setLeaveStatus(String leaveStatus) {
-        this.leaveStatus = leaveStatus;
-    }
-
     public String getTotalLeave() {
         return totalLeave;
     }
@@ -118,6 +112,22 @@ public class LeavePolicyDTO implements Serializable {
         this.description = description;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -134,20 +144,20 @@ public class LeavePolicyDTO implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return status;
+    public String getRefTable() {
+        return refTable;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public Long getRefTableId() {
+        return refTableId;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setRefTableId(Long refTableId) {
+        this.refTableId = refTableId;
     }
 
     @Override
@@ -180,15 +190,16 @@ public class LeavePolicyDTO implements Serializable {
             ", isCarryForword='" + getIsCarryForword() + "'" +
             ", employeeType='" + getEmployeeType() + "'" +
             ", genderLeave='" + getGenderLeave() + "'" +
-            ", leaveStatus='" + getLeaveStatus() + "'" +
             ", totalLeave='" + getTotalLeave() + "'" +
             ", maxLeave='" + getMaxLeave() + "'" +
             ", hasproRataLeave='" + getHasproRataLeave() + "'" +
             ", description='" + getDescription() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
+            ", refTable='" + getRefTable() + "'" +
+            ", refTableId=" + getRefTableId() +
             "}";
     }
 }

@@ -58,27 +58,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="address">
+          <th scope="col" jhiSortBy="addressId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.familyInfo.address">Address</span>
+              <span jhiTranslate="smartHrApp.familyInfo.addressId">Address Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
+          <th scope="col" jhiSortBy="isEmployed">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.familyInfo.lastModified">Last Modified</span>
+              <span jhiTranslate="smartHrApp.familyInfo.isEmployed">Is Employed</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
+          <th scope="col" jhiSortBy="employedAt">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.familyInfo.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.familyInfo.status">Status</span>
+              <span jhiTranslate="smartHrApp.familyInfo.employedAt">Employed At</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -94,6 +88,24 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.familyInfo.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.familyInfo.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.familyInfo.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -105,12 +117,14 @@
           <td>{{ familyInfo.name }}</td>
           <td>{{ familyInfo.dateOfBirth | formatMediumDate }}</td>
           <td>{{ familyInfo.relation }}</td>
-          <td>{{ familyInfo.address }}</td>
-          <td>{{ familyInfo.lastModified | formatMediumDatetime }}</td>
-          <td>{{ familyInfo.lastModifiedBy }}</td>
-          <td>{{ familyInfo.status }}</td>
+          <td>{{ familyInfo.addressId }}</td>
+          <td>{{ familyInfo.isEmployed }}</td>
+          <td>{{ familyInfo.employedAt }}</td>
           <td>{{ familyInfo.employeeId }}</td>
           <td>{{ familyInfo.companyId }}</td>
+          <td>{{ familyInfo.status }}</td>
+          <td>{{ familyInfo.lastModified | formatMediumDatetime }}</td>
+          <td>{{ familyInfo.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

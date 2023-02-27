@@ -51,15 +51,6 @@ class PfDetailsResourceIT {
     private static final Double UPDATED_TOTAL_PF_RATE = 2D;
     private static final Double SMALLER_TOTAL_PF_RATE = 1D - 1D;
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_EMPLOYE_ID = 1L;
     private static final Long UPDATED_EMPLOYE_ID = 2L;
     private static final Long SMALLER_EMPLOYE_ID = 1L - 1L;
@@ -67,6 +58,19 @@ class PfDetailsResourceIT {
     private static final Long DEFAULT_RE_ENUMERATION_ID = 1L;
     private static final Long UPDATED_RE_ENUMERATION_ID = 2L;
     private static final Long SMALLER_RE_ENUMERATION_ID = 1L - 1L;
+
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/pf-details";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -101,11 +105,12 @@ class PfDetailsResourceIT {
             .pfRate(DEFAULT_PF_RATE)
             .additionalPfRate(DEFAULT_ADDITIONAL_PF_RATE)
             .totalPfRate(DEFAULT_TOTAL_PF_RATE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .employeId(DEFAULT_EMPLOYE_ID)
-            .reEnumerationId(DEFAULT_RE_ENUMERATION_ID);
+            .reEnumerationId(DEFAULT_RE_ENUMERATION_ID)
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return pfDetails;
     }
 
@@ -122,11 +127,12 @@ class PfDetailsResourceIT {
             .pfRate(UPDATED_PF_RATE)
             .additionalPfRate(UPDATED_ADDITIONAL_PF_RATE)
             .totalPfRate(UPDATED_TOTAL_PF_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return pfDetails;
     }
 
@@ -154,11 +160,12 @@ class PfDetailsResourceIT {
         assertThat(testPfDetails.getPfRate()).isEqualTo(DEFAULT_PF_RATE);
         assertThat(testPfDetails.getAdditionalPfRate()).isEqualTo(DEFAULT_ADDITIONAL_PF_RATE);
         assertThat(testPfDetails.getTotalPfRate()).isEqualTo(DEFAULT_TOTAL_PF_RATE);
-        assertThat(testPfDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testPfDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testPfDetails.getEmployeId()).isEqualTo(DEFAULT_EMPLOYE_ID);
         assertThat(testPfDetails.getReEnumerationId()).isEqualTo(DEFAULT_RE_ENUMERATION_ID);
+        assertThat(testPfDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testPfDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testPfDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -197,11 +204,12 @@ class PfDetailsResourceIT {
             .andExpect(jsonPath("$.[*].pfRate").value(hasItem(DEFAULT_PF_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].additionalPfRate").value(hasItem(DEFAULT_ADDITIONAL_PF_RATE)))
             .andExpect(jsonPath("$.[*].totalPfRate").value(hasItem(DEFAULT_TOTAL_PF_RATE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())));
+            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -221,11 +229,12 @@ class PfDetailsResourceIT {
             .andExpect(jsonPath("$.pfRate").value(DEFAULT_PF_RATE.doubleValue()))
             .andExpect(jsonPath("$.additionalPfRate").value(DEFAULT_ADDITIONAL_PF_RATE))
             .andExpect(jsonPath("$.totalPfRate").value(DEFAULT_TOTAL_PF_RATE.doubleValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.employeId").value(DEFAULT_EMPLOYE_ID.intValue()))
-            .andExpect(jsonPath("$.reEnumerationId").value(DEFAULT_RE_ENUMERATION_ID.intValue()));
+            .andExpect(jsonPath("$.reEnumerationId").value(DEFAULT_RE_ENUMERATION_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -599,175 +608,6 @@ class PfDetailsResourceIT {
 
     @Test
     @Transactional
-    void getAllPfDetailsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultPfDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the pfDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultPfDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultPfDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the pfDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultPfDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModified is not null
-        defaultPfDetailsShouldBeFound("lastModified.specified=true");
-
-        // Get all the pfDetailsList where lastModified is null
-        defaultPfDetailsShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultPfDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the pfDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultPfDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultPfDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the pfDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultPfDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModifiedBy is not null
-        defaultPfDetailsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the pfDetailsList where lastModifiedBy is null
-        defaultPfDetailsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultPfDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the pfDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultPfDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultPfDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the pfDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultPfDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where status equals to DEFAULT_STATUS
-        defaultPfDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the pfDetailsList where status equals to UPDATED_STATUS
-        defaultPfDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultPfDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the pfDetailsList where status equals to UPDATED_STATUS
-        defaultPfDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where status is not null
-        defaultPfDetailsShouldBeFound("status.specified=true");
-
-        // Get all the pfDetailsList where status is null
-        defaultPfDetailsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where status contains DEFAULT_STATUS
-        defaultPfDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the pfDetailsList where status contains UPDATED_STATUS
-        defaultPfDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPfDetailsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        pfDetailsRepository.saveAndFlush(pfDetails);
-
-        // Get all the pfDetailsList where status does not contain DEFAULT_STATUS
-        defaultPfDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the pfDetailsList where status does not contain UPDATED_STATUS
-        defaultPfDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
     void getAllPfDetailsByEmployeIdIsEqualToSomething() throws Exception {
         // Initialize the database
         pfDetailsRepository.saveAndFlush(pfDetails);
@@ -948,6 +788,266 @@ class PfDetailsResourceIT {
         defaultPfDetailsShouldBeFound("reEnumerationId.greaterThan=" + SMALLER_RE_ENUMERATION_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId equals to DEFAULT_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId equals to UPDATED_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId equals to UPDATED_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId is not null
+        defaultPfDetailsShouldBeFound("companyId.specified=true");
+
+        // Get all the pfDetailsList where companyId is null
+        defaultPfDetailsShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId is less than DEFAULT_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId is less than UPDATED_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultPfDetailsShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the pfDetailsList where companyId is greater than SMALLER_COMPANY_ID
+        defaultPfDetailsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where status equals to DEFAULT_STATUS
+        defaultPfDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the pfDetailsList where status equals to UPDATED_STATUS
+        defaultPfDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultPfDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the pfDetailsList where status equals to UPDATED_STATUS
+        defaultPfDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where status is not null
+        defaultPfDetailsShouldBeFound("status.specified=true");
+
+        // Get all the pfDetailsList where status is null
+        defaultPfDetailsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where status contains DEFAULT_STATUS
+        defaultPfDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the pfDetailsList where status contains UPDATED_STATUS
+        defaultPfDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where status does not contain DEFAULT_STATUS
+        defaultPfDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the pfDetailsList where status does not contain UPDATED_STATUS
+        defaultPfDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultPfDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the pfDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultPfDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultPfDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the pfDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultPfDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModified is not null
+        defaultPfDetailsShouldBeFound("lastModified.specified=true");
+
+        // Get all the pfDetailsList where lastModified is null
+        defaultPfDetailsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultPfDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the pfDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultPfDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultPfDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the pfDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultPfDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModifiedBy is not null
+        defaultPfDetailsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the pfDetailsList where lastModifiedBy is null
+        defaultPfDetailsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultPfDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the pfDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultPfDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPfDetailsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        pfDetailsRepository.saveAndFlush(pfDetails);
+
+        // Get all the pfDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultPfDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the pfDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultPfDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -962,11 +1062,12 @@ class PfDetailsResourceIT {
             .andExpect(jsonPath("$.[*].pfRate").value(hasItem(DEFAULT_PF_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].additionalPfRate").value(hasItem(DEFAULT_ADDITIONAL_PF_RATE)))
             .andExpect(jsonPath("$.[*].totalPfRate").value(hasItem(DEFAULT_TOTAL_PF_RATE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())));
+            .andExpect(jsonPath("$.[*].reEnumerationId").value(hasItem(DEFAULT_RE_ENUMERATION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restPfDetailsMockMvc
@@ -1020,11 +1121,12 @@ class PfDetailsResourceIT {
             .pfRate(UPDATED_PF_RATE)
             .additionalPfRate(UPDATED_ADDITIONAL_PF_RATE)
             .totalPfRate(UPDATED_TOTAL_PF_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         PfDetailsDTO pfDetailsDTO = pfDetailsMapper.toDto(updatedPfDetails);
 
         restPfDetailsMockMvc
@@ -1044,11 +1146,12 @@ class PfDetailsResourceIT {
         assertThat(testPfDetails.getPfRate()).isEqualTo(UPDATED_PF_RATE);
         assertThat(testPfDetails.getAdditionalPfRate()).isEqualTo(UPDATED_ADDITIONAL_PF_RATE);
         assertThat(testPfDetails.getTotalPfRate()).isEqualTo(UPDATED_TOTAL_PF_RATE);
-        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPfDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPfDetails.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testPfDetails.getReEnumerationId()).isEqualTo(UPDATED_RE_ENUMERATION_ID);
+        assertThat(testPfDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testPfDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1131,10 +1234,10 @@ class PfDetailsResourceIT {
         partialUpdatedPfDetails
             .isPfContribution(UPDATED_IS_PF_CONTRIBUTION)
             .pfRate(UPDATED_PF_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .employeId(UPDATED_EMPLOYE_ID)
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .lastModified(UPDATED_LAST_MODIFIED);
 
         restPfDetailsMockMvc
             .perform(
@@ -1153,11 +1256,12 @@ class PfDetailsResourceIT {
         assertThat(testPfDetails.getPfRate()).isEqualTo(UPDATED_PF_RATE);
         assertThat(testPfDetails.getAdditionalPfRate()).isEqualTo(DEFAULT_ADDITIONAL_PF_RATE);
         assertThat(testPfDetails.getTotalPfRate()).isEqualTo(DEFAULT_TOTAL_PF_RATE);
-        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPfDetails.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testPfDetails.getEmployeId()).isEqualTo(DEFAULT_EMPLOYE_ID);
+        assertThat(testPfDetails.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testPfDetails.getReEnumerationId()).isEqualTo(UPDATED_RE_ENUMERATION_ID);
+        assertThat(testPfDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testPfDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1178,11 +1282,12 @@ class PfDetailsResourceIT {
             .pfRate(UPDATED_PF_RATE)
             .additionalPfRate(UPDATED_ADDITIONAL_PF_RATE)
             .totalPfRate(UPDATED_TOTAL_PF_RATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .reEnumerationId(UPDATED_RE_ENUMERATION_ID);
+            .reEnumerationId(UPDATED_RE_ENUMERATION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restPfDetailsMockMvc
             .perform(
@@ -1201,11 +1306,12 @@ class PfDetailsResourceIT {
         assertThat(testPfDetails.getPfRate()).isEqualTo(UPDATED_PF_RATE);
         assertThat(testPfDetails.getAdditionalPfRate()).isEqualTo(UPDATED_ADDITIONAL_PF_RATE);
         assertThat(testPfDetails.getTotalPfRate()).isEqualTo(UPDATED_TOTAL_PF_RATE);
-        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPfDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPfDetails.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testPfDetails.getReEnumerationId()).isEqualTo(UPDATED_RE_ENUMERATION_ID);
+        assertThat(testPfDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testPfDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPfDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testPfDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

@@ -7,19 +7,18 @@ export const sampleWithRequiredData: ICompany = {
 };
 
 export const sampleWithPartialData: ICompany = {
-  id: 1226,
-  contactPerson: 'Granite',
-  email: 'Mason.Klocko@yahoo.com',
-  phoneNumber: 'Estate',
-  mobileNumber: 'Devolved',
-  fax: 'Australia',
-  lastModified: dayjs('2023-02-08T23:24'),
-  pan: 'Cayman Nebraska Station',
+  id: 72260,
+  contactPerson: 'Movies Borders',
+  email: 'Jaclyn21@hotmail.com',
+  phoneNumber: 'Hat Devolved',
+  mobileNumber: 'Australia',
+  fax: 'Technician',
+  status: 'Nebraska',
 };
 
 export const sampleWithFullData: ICompany = {
-  id: 15421,
-  companyName: 'RAM withdrawal',
+  id: 47834,
+  companyName: 'panel RAM withdrawal',
   contactPerson: 'JSON payment syndicate',
   postalCode: 'e-business',
   email: 'Ward57@gmail.com',
@@ -27,13 +26,11 @@ export const sampleWithFullData: ICompany = {
   mobileNumber: 'innovative',
   websiteUrl: 'Response multi-byte',
   fax: 'parse',
-  status: '24/7 protocol',
-  lastModified: dayjs('2023-02-08T08:55'),
-  lastModifiedBy: 'homogeneous Interactions',
-  regNumber: 'Tobago Avon',
-  gstin: 'Home Bolivia',
-  pan: 'red',
-  tan: 'Granite',
+  regNumber: '24/7 protocol',
+  status: 'Market Tasty virtual',
+  lastModified: dayjs('2023-02-08T09:21'),
+  lastModifiedBy: 'Avon Pine interface',
+  leaveSettingLevel: 'Mouse client-driven',
 };
 
 export const sampleWithNewData: NewCompany = {

@@ -7,8 +7,7 @@
   "fields": [
     {
       "fieldName": "holidayName",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "holidayDate",
@@ -23,20 +22,20 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
       "fieldName": "status",
       "fieldType": "String"
     },
     {
-      "fieldName": "companyId",
-      "fieldType": "Long"
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

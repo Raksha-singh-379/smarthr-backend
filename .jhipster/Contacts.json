@@ -22,19 +22,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "refTableType",
+      "fieldName": "refTable",
       "fieldType": "String"
     },
     {
@@ -44,6 +32,22 @@
     {
       "fieldName": "companyId",
       "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contactReference",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

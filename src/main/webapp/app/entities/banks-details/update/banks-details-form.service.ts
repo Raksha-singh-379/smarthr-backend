@@ -35,13 +35,15 @@ type BanksDetailsFormGroupContent = {
   bankName: FormControl<BanksDetailsFormRawValue['bankName']>;
   branchTransCode: FormControl<BanksDetailsFormRawValue['branchTransCode']>;
   taxNumber: FormControl<BanksDetailsFormRawValue['taxNumber']>;
+  gstin: FormControl<BanksDetailsFormRawValue['gstin']>;
+  tan: FormControl<BanksDetailsFormRawValue['tan']>;
   branchName: FormControl<BanksDetailsFormRawValue['branchName']>;
-  lastModified: FormControl<BanksDetailsFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<BanksDetailsFormRawValue['lastModifiedBy']>;
-  status: FormControl<BanksDetailsFormRawValue['status']>;
-  refTableType: FormControl<BanksDetailsFormRawValue['refTableType']>;
+  refTable: FormControl<BanksDetailsFormRawValue['refTable']>;
   refTableId: FormControl<BanksDetailsFormRawValue['refTableId']>;
   companyId: FormControl<BanksDetailsFormRawValue['companyId']>;
+  status: FormControl<BanksDetailsFormRawValue['status']>;
+  lastModified: FormControl<BanksDetailsFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<BanksDetailsFormRawValue['lastModifiedBy']>;
 };
 
 export type BanksDetailsFormGroup = FormGroup<BanksDetailsFormGroupContent>;
@@ -65,13 +67,15 @@ export class BanksDetailsFormService {
       bankName: new FormControl(banksDetailsRawValue.bankName),
       branchTransCode: new FormControl(banksDetailsRawValue.branchTransCode),
       taxNumber: new FormControl(banksDetailsRawValue.taxNumber),
+      gstin: new FormControl(banksDetailsRawValue.gstin),
+      tan: new FormControl(banksDetailsRawValue.tan),
       branchName: new FormControl(banksDetailsRawValue.branchName),
-      lastModified: new FormControl(banksDetailsRawValue.lastModified),
-      lastModifiedBy: new FormControl(banksDetailsRawValue.lastModifiedBy),
-      status: new FormControl(banksDetailsRawValue.status),
-      refTableType: new FormControl(banksDetailsRawValue.refTableType),
+      refTable: new FormControl(banksDetailsRawValue.refTable),
       refTableId: new FormControl(banksDetailsRawValue.refTableId),
       companyId: new FormControl(banksDetailsRawValue.companyId),
+      status: new FormControl(banksDetailsRawValue.status),
+      lastModified: new FormControl(banksDetailsRawValue.lastModified),
+      lastModifiedBy: new FormControl(banksDetailsRawValue.lastModifiedBy),
     });
   }
 

@@ -37,15 +37,6 @@ class DesignationResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_DEPARTMENT_ID = 1L;
     private static final Long UPDATED_DEPARTMENT_ID = 2L;
     private static final Long SMALLER_DEPARTMENT_ID = 1L - 1L;
@@ -53,6 +44,15 @@ class DesignationResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/designations";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -83,11 +83,11 @@ class DesignationResourceIT {
     public static Designation createEntity(EntityManager em) {
         Designation designation = new Designation()
             .name(DEFAULT_NAME)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .departmentId(DEFAULT_DEPARTMENT_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return designation;
     }
 
@@ -100,11 +100,11 @@ class DesignationResourceIT {
     public static Designation createUpdatedEntity(EntityManager em) {
         Designation designation = new Designation()
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .departmentId(UPDATED_DEPARTMENT_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return designation;
     }
 
@@ -130,11 +130,11 @@ class DesignationResourceIT {
         assertThat(designationList).hasSize(databaseSizeBeforeCreate + 1);
         Designation testDesignation = designationList.get(designationList.size() - 1);
         assertThat(testDesignation.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testDesignation.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testDesignation.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testDesignation.getDepartmentId()).isEqualTo(DEFAULT_DEPARTMENT_ID);
         assertThat(testDesignation.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testDesignation.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testDesignation.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -171,11 +171,11 @@ class DesignationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(designation.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].departmentId").value(hasItem(DEFAULT_DEPARTMENT_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -191,11 +191,11 @@ class DesignationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(designation.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.departmentId").value(DEFAULT_DEPARTMENT_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -279,175 +279,6 @@ class DesignationResourceIT {
 
         // Get all the designationList where name does not contain UPDATED_NAME
         defaultDesignationShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultDesignationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the designationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultDesignationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultDesignationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the designationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultDesignationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModified is not null
-        defaultDesignationShouldBeFound("lastModified.specified=true");
-
-        // Get all the designationList where lastModified is null
-        defaultDesignationShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultDesignationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the designationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultDesignationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultDesignationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the designationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultDesignationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModifiedBy is not null
-        defaultDesignationShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the designationList where lastModifiedBy is null
-        defaultDesignationShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultDesignationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the designationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultDesignationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultDesignationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the designationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultDesignationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where status equals to DEFAULT_STATUS
-        defaultDesignationShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the designationList where status equals to UPDATED_STATUS
-        defaultDesignationShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultDesignationShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the designationList where status equals to UPDATED_STATUS
-        defaultDesignationShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where status is not null
-        defaultDesignationShouldBeFound("status.specified=true");
-
-        // Get all the designationList where status is null
-        defaultDesignationShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where status contains DEFAULT_STATUS
-        defaultDesignationShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the designationList where status contains UPDATED_STATUS
-        defaultDesignationShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDesignationsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        designationRepository.saveAndFlush(designation);
-
-        // Get all the designationList where status does not contain DEFAULT_STATUS
-        defaultDesignationShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the designationList where status does not contain UPDATED_STATUS
-        defaultDesignationShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -632,6 +463,175 @@ class DesignationResourceIT {
         defaultDesignationShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllDesignationsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where status equals to DEFAULT_STATUS
+        defaultDesignationShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the designationList where status equals to UPDATED_STATUS
+        defaultDesignationShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultDesignationShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the designationList where status equals to UPDATED_STATUS
+        defaultDesignationShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where status is not null
+        defaultDesignationShouldBeFound("status.specified=true");
+
+        // Get all the designationList where status is null
+        defaultDesignationShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where status contains DEFAULT_STATUS
+        defaultDesignationShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the designationList where status contains UPDATED_STATUS
+        defaultDesignationShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where status does not contain DEFAULT_STATUS
+        defaultDesignationShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the designationList where status does not contain UPDATED_STATUS
+        defaultDesignationShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultDesignationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the designationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultDesignationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultDesignationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the designationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultDesignationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModified is not null
+        defaultDesignationShouldBeFound("lastModified.specified=true");
+
+        // Get all the designationList where lastModified is null
+        defaultDesignationShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultDesignationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the designationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultDesignationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultDesignationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the designationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultDesignationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModifiedBy is not null
+        defaultDesignationShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the designationList where lastModifiedBy is null
+        defaultDesignationShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultDesignationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the designationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultDesignationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllDesignationsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        designationRepository.saveAndFlush(designation);
+
+        // Get all the designationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultDesignationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the designationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultDesignationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -642,11 +642,11 @@ class DesignationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(designation.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].departmentId").value(hasItem(DEFAULT_DEPARTMENT_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restDesignationMockMvc
@@ -696,11 +696,11 @@ class DesignationResourceIT {
         em.detach(updatedDesignation);
         updatedDesignation
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .departmentId(UPDATED_DEPARTMENT_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         DesignationDTO designationDTO = designationMapper.toDto(updatedDesignation);
 
         restDesignationMockMvc
@@ -716,11 +716,11 @@ class DesignationResourceIT {
         assertThat(designationList).hasSize(databaseSizeBeforeUpdate);
         Designation testDesignation = designationList.get(designationList.size() - 1);
         assertThat(testDesignation.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDesignation.getDepartmentId()).isEqualTo(UPDATED_DEPARTMENT_ID);
         assertThat(testDesignation.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -802,10 +802,10 @@ class DesignationResourceIT {
 
         partialUpdatedDesignation
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .departmentId(UPDATED_DEPARTMENT_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .departmentId(UPDATED_DEPARTMENT_ID);
+            .lastModified(UPDATED_LAST_MODIFIED);
 
         restDesignationMockMvc
             .perform(
@@ -820,11 +820,11 @@ class DesignationResourceIT {
         assertThat(designationList).hasSize(databaseSizeBeforeUpdate);
         Designation testDesignation = designationList.get(designationList.size() - 1);
         assertThat(testDesignation.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDesignation.getDepartmentId()).isEqualTo(UPDATED_DEPARTMENT_ID);
-        assertThat(testDesignation.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testDesignation.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -841,11 +841,11 @@ class DesignationResourceIT {
 
         partialUpdatedDesignation
             .name(UPDATED_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .departmentId(UPDATED_DEPARTMENT_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restDesignationMockMvc
             .perform(
@@ -860,11 +860,11 @@ class DesignationResourceIT {
         assertThat(designationList).hasSize(databaseSizeBeforeUpdate);
         Designation testDesignation = designationList.get(designationList.size() - 1);
         assertThat(testDesignation.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testDesignation.getDepartmentId()).isEqualTo(UPDATED_DEPARTMENT_ID);
         assertThat(testDesignation.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testDesignation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testDesignation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testDesignation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

@@ -11,8 +11,8 @@ import { IEducation, NewEducation } from '../education.model';
 
 export type PartialUpdateEducation = Partial<IEducation> & Pick<IEducation, 'id'>;
 
-type RestOf<T extends IEducation | NewEducation> = Omit<T, 'startDate' | 'endDate' | 'lastModified'> & {
-  startDate?: string | null;
+type RestOf<T extends IEducation | NewEducation> = Omit<T, 'startYear' | 'endDate' | 'lastModified'> & {
+  startYear?: string | null;
   endDate?: string | null;
   lastModified?: string | null;
 };
@@ -101,7 +101,7 @@ export class EducationService {
   protected convertDateFromClient<T extends IEducation | NewEducation | PartialUpdateEducation>(education: T): RestOf<T> {
     return {
       ...education,
-      startDate: education.startDate?.toJSON() ?? null,
+      startYear: education.startYear?.toJSON() ?? null,
       endDate: education.endDate?.toJSON() ?? null,
       lastModified: education.lastModified?.toJSON() ?? null,
     };
@@ -110,7 +110,7 @@ export class EducationService {
   protected convertDateFromServer(restEducation: RestEducation): IEducation {
     return {
       ...restEducation,
-      startDate: restEducation.startDate ? dayjs(restEducation.startDate) : undefined,
+      startYear: restEducation.startYear ? dayjs(restEducation.startYear) : undefined,
       endDate: restEducation.endDate ? dayjs(restEducation.endDate) : undefined,
       lastModified: restEducation.lastModified ? dayjs(restEducation.lastModified) : undefined,
     };

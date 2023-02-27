@@ -37,10 +37,10 @@ type HolidayFormGroupContent = {
   holidayDate: FormControl<HolidayFormRawValue['holidayDate']>;
   day: FormControl<HolidayFormRawValue['day']>;
   year: FormControl<HolidayFormRawValue['year']>;
+  companyId: FormControl<HolidayFormRawValue['companyId']>;
+  status: FormControl<HolidayFormRawValue['status']>;
   lastModified: FormControl<HolidayFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<HolidayFormRawValue['lastModifiedBy']>;
-  status: FormControl<HolidayFormRawValue['status']>;
-  companyId: FormControl<HolidayFormRawValue['companyId']>;
 };
 
 export type HolidayFormGroup = FormGroup<HolidayFormGroupContent>;
@@ -60,16 +60,14 @@ export class HolidayFormService {
           validators: [Validators.required],
         }
       ),
-      holidayName: new FormControl(holidayRawValue.holidayName, {
-        validators: [Validators.required],
-      }),
+      holidayName: new FormControl(holidayRawValue.holidayName),
       holidayDate: new FormControl(holidayRawValue.holidayDate),
       day: new FormControl(holidayRawValue.day),
       year: new FormControl(holidayRawValue.year),
+      companyId: new FormControl(holidayRawValue.companyId),
+      status: new FormControl(holidayRawValue.status),
       lastModified: new FormControl(holidayRawValue.lastModified),
       lastModifiedBy: new FormControl(holidayRawValue.lastModifiedBy),
-      status: new FormControl(holidayRawValue.status),
-      companyId: new FormControl(holidayRawValue.companyId),
     });
   }
 

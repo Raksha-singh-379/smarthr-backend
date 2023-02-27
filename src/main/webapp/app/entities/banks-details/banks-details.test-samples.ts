@@ -7,28 +7,32 @@ export const sampleWithRequiredData: IBanksDetails = {
 };
 
 export const sampleWithPartialData: IBanksDetails = {
-  id: 68068,
-  bankName: 'Extended parallelism',
-  branchTransCode: 'PNG',
-  taxNumber: 'Computer',
-  branchName: 'Vatu',
-  lastModified: dayjs('2023-02-08T09:17'),
-  refTableType: 'Minnesota microchip Group',
+  id: 23757,
+  bankName: 'Bedfordshire',
+  branchTransCode: 'strategy',
+  taxNumber: 'purple',
+  gstin: 'magenta wireless Minnesota',
+  tan: 'lavender bandwidth Tuna',
+  refTableId: 6242,
+  lastModified: dayjs('2023-02-08T06:32'),
+  lastModifiedBy: 'lime Account Mountains',
 };
 
 export const sampleWithFullData: IBanksDetails = {
-  id: 21816,
-  accountNumber: 16209,
-  bankName: 'Brand Dynamic',
-  branchTransCode: 'Account Mountains',
-  taxNumber: 'SMTP',
-  branchName: 'Verde Soap',
-  lastModified: dayjs('2023-02-08T11:08'),
-  lastModifiedBy: 'synergies indexing',
-  status: 'USB channels',
-  refTableType: 'Brand Carolina',
-  refTableId: 58076,
-  companyId: 47060,
+  id: 18113,
+  accountNumber: 88198,
+  bankName: 'orchid Towels Account',
+  branchTransCode: 'synergies indexing',
+  taxNumber: 'USB channels',
+  gstin: 'Brand Carolina',
+  tan: 'Parkway index',
+  branchName: 'Optimization',
+  refTable: 'Borders panel',
+  refTableId: 73424,
+  companyId: 18480,
+  status: 'bus',
+  lastModified: dayjs('2023-02-08T11:15'),
+  lastModifiedBy: 'Concrete web-enabled Shirt',
 };
 
 export const sampleWithNewData: NewBanksDetails = {

@@ -102,9 +102,6 @@ public class LeavePolicyQueryService extends QueryService<LeavePolicy> {
             if (criteria.getGenderLeave() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getGenderLeave(), LeavePolicy_.genderLeave));
             }
-            if (criteria.getLeaveStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLeaveStatus(), LeavePolicy_.leaveStatus));
-            }
             if (criteria.getTotalLeave() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTotalLeave(), LeavePolicy_.totalLeave));
             }
@@ -117,17 +114,23 @@ public class LeavePolicyQueryService extends QueryService<LeavePolicy> {
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), LeavePolicy_.description));
             }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), LeavePolicy_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), LeavePolicy_.status));
+            }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), LeavePolicy_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), LeavePolicy_.lastModifiedBy));
             }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), LeavePolicy_.status));
+            if (criteria.getRefTable() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRefTable(), LeavePolicy_.refTable));
             }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), LeavePolicy_.companyId));
+            if (criteria.getRefTableId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRefTableId(), LeavePolicy_.refTableId));
             }
         }
         return specification;

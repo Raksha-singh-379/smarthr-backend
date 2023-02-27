@@ -7,23 +7,25 @@ export const sampleWithRequiredData: IMasterLookup = {
 };
 
 export const sampleWithPartialData: IMasterLookup = {
-  id: 70596,
-  value: 'Personal',
-  description: 'niches Product',
-  type: 'edge',
-  status: 'content-based communities Intelligent',
+  id: 30535,
+  value: 'Lead niches',
+  valueTwo: 'collaboration edge port',
+  description: 'communities Intelligent homogeneous',
+  status: 'Research',
+  lastModifiedBy: 'purple',
 };
 
 export const sampleWithFullData: IMasterLookup = {
-  id: 29171,
-  name: 'white Wooden',
-  value: 'Rubber',
-  description: 'transmitting',
-  type: 'index index',
-  lastModified: dayjs('2023-02-08T19:16'),
-  lastModifiedBy: 'Concrete',
-  status: 'Practical Money Creative',
-  companyId: 38441,
+  id: 65505,
+  name: 'transmitting',
+  value: 'index index',
+  valueTwo: 'bifurcated Facilitator',
+  description: 'Orchestrator Automotive',
+  type: 'revolutionize',
+  companyId: 91062,
+  status: 'Borders Future-proofed Savings',
+  lastModified: dayjs('2023-02-08T06:16'),
+  lastModifiedBy: 'Manager',
 };
 
 export const sampleWithNewData: NewMasterLookup = {

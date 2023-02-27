@@ -34,13 +34,17 @@
         <dd>
           <span>{{ formValidator.companyId }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.formValidator.createdBy">Created By</span></dt>
+        <dt><span jhiTranslate="smartHrApp.formValidator.status">Status</span></dt>
         <dd>
-          <span>{{ formValidator.createdBy }}</span>
+          <span>{{ formValidator.status }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.formValidator.createdOn">Created On</span></dt>
+        <dt><span jhiTranslate="smartHrApp.formValidator.lastModified">Last Modified</span></dt>
         <dd>
-          <span>{{ formValidator.createdOn | formatMediumDatetime }}</span>
+          <span>{{ formValidator.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.formValidator.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ formValidator.lastModifiedBy }}</span>
         </dd>
       </dl>
 

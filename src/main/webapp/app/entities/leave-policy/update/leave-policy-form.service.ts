@@ -35,15 +35,16 @@ type LeavePolicyFormGroupContent = {
   isCarryForword: FormControl<LeavePolicyFormRawValue['isCarryForword']>;
   employeeType: FormControl<LeavePolicyFormRawValue['employeeType']>;
   genderLeave: FormControl<LeavePolicyFormRawValue['genderLeave']>;
-  leaveStatus: FormControl<LeavePolicyFormRawValue['leaveStatus']>;
   totalLeave: FormControl<LeavePolicyFormRawValue['totalLeave']>;
   maxLeave: FormControl<LeavePolicyFormRawValue['maxLeave']>;
   hasproRataLeave: FormControl<LeavePolicyFormRawValue['hasproRataLeave']>;
   description: FormControl<LeavePolicyFormRawValue['description']>;
+  companyId: FormControl<LeavePolicyFormRawValue['companyId']>;
+  status: FormControl<LeavePolicyFormRawValue['status']>;
   lastModified: FormControl<LeavePolicyFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<LeavePolicyFormRawValue['lastModifiedBy']>;
-  status: FormControl<LeavePolicyFormRawValue['status']>;
-  companyId: FormControl<LeavePolicyFormRawValue['companyId']>;
+  refTable: FormControl<LeavePolicyFormRawValue['refTable']>;
+  refTableId: FormControl<LeavePolicyFormRawValue['refTableId']>;
 };
 
 export type LeavePolicyFormGroup = FormGroup<LeavePolicyFormGroupContent>;
@@ -67,15 +68,16 @@ export class LeavePolicyFormService {
       isCarryForword: new FormControl(leavePolicyRawValue.isCarryForword),
       employeeType: new FormControl(leavePolicyRawValue.employeeType),
       genderLeave: new FormControl(leavePolicyRawValue.genderLeave),
-      leaveStatus: new FormControl(leavePolicyRawValue.leaveStatus),
       totalLeave: new FormControl(leavePolicyRawValue.totalLeave),
       maxLeave: new FormControl(leavePolicyRawValue.maxLeave),
       hasproRataLeave: new FormControl(leavePolicyRawValue.hasproRataLeave),
       description: new FormControl(leavePolicyRawValue.description),
+      companyId: new FormControl(leavePolicyRawValue.companyId),
+      status: new FormControl(leavePolicyRawValue.status),
       lastModified: new FormControl(leavePolicyRawValue.lastModified),
       lastModifiedBy: new FormControl(leavePolicyRawValue.lastModifiedBy),
-      status: new FormControl(leavePolicyRawValue.status),
-      companyId: new FormControl(leavePolicyRawValue.companyId),
+      refTable: new FormControl(leavePolicyRawValue.refTable),
+      refTableId: new FormControl(leavePolicyRawValue.refTableId),
     });
   }
 

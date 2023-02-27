@@ -18,12 +18,12 @@
         "title": "Approval Setting"
       },
       "id": "ID",
-      "isSequenceApproval": "Is Sequence Approval",
-      "isSimultaneousApproval": "Is Simultaneous Approval",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "type": "Type",
+      "approvalCategory": "Approval Category",
+      "companyId": "Company Id",
       "status": "Status",
-      "companyId": "Company Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

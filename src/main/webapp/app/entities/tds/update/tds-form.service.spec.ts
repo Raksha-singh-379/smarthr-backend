@@ -23,11 +23,11 @@ describe('Tds Form Service', () => {
             salaryFrom: expect.any(Object),
             salaryTo: expect.any(Object),
             percentage: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             salarySettingId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -41,11 +41,11 @@ describe('Tds Form Service', () => {
             salaryFrom: expect.any(Object),
             salaryTo: expect.any(Object),
             percentage: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             salarySettingId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

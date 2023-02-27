@@ -29,15 +29,15 @@ public class TdsCriteria implements Serializable, Criteria {
 
     private DoubleFilter percentage;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
     private LongFilter salarySettingId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -48,11 +48,11 @@ public class TdsCriteria implements Serializable, Criteria {
         this.salaryFrom = other.salaryFrom == null ? null : other.salaryFrom.copy();
         this.salaryTo = other.salaryTo == null ? null : other.salaryTo.copy();
         this.percentage = other.percentage == null ? null : other.percentage.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
         this.salarySettingId = other.salarySettingId == null ? null : other.salarySettingId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -121,51 +121,6 @@ public class TdsCriteria implements Serializable, Criteria {
         this.percentage = percentage;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
     public LongFilter getSalarySettingId() {
         return salarySettingId;
     }
@@ -196,6 +151,51 @@ public class TdsCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -218,11 +218,11 @@ public class TdsCriteria implements Serializable, Criteria {
             Objects.equals(salaryFrom, that.salaryFrom) &&
             Objects.equals(salaryTo, that.salaryTo) &&
             Objects.equals(percentage, that.percentage) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(salarySettingId, that.salarySettingId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -234,11 +234,11 @@ public class TdsCriteria implements Serializable, Criteria {
             salaryFrom,
             salaryTo,
             percentage,
-            lastModified,
-            lastModifiedBy,
-            status,
             salarySettingId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -251,11 +251,11 @@ public class TdsCriteria implements Serializable, Criteria {
             (salaryFrom != null ? "salaryFrom=" + salaryFrom + ", " : "") +
             (salaryTo != null ? "salaryTo=" + salaryTo + ", " : "") +
             (percentage != null ? "percentage=" + percentage + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
             (salarySettingId != null ? "salarySettingId=" + salarySettingId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

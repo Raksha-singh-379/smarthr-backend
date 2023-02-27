@@ -22,14 +22,13 @@
       "companyName": "Company Name",
       "startDate": "Start Date",
       "endDate": "End Date",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "addressId": "Address Id",
       "employeeId": "Employee Id",
       "companyId": "Company Id",
-      "yearOfExp": "Year Of Exp",
-      "jobDesc": "Job Desc"
+      "jobDesc": "Job Desc",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

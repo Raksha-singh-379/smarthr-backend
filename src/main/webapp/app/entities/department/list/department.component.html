@@ -46,6 +46,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.department.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.department.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="lastModified">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.department.lastModified">Last Modified</span>
@@ -58,18 +70,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.department.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="companyId">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.department.companyId">Company Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -79,10 +79,10 @@
             <a [routerLink]="['/department', department.id, 'view']">{{ department.id }}</a>
           </td>
           <td>{{ department.name }}</td>
+          <td>{{ department.companyId }}</td>
+          <td>{{ department.status }}</td>
           <td>{{ department.lastModified | formatMediumDatetime }}</td>
           <td>{{ department.lastModifiedBy }}</td>
-          <td>{{ department.status }}</td>
-          <td>{{ department.companyId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

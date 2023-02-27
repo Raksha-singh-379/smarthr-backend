@@ -23,11 +23,12 @@
       "pfRate": "Pf Rate",
       "additionalPfRate": "Additional Pf Rate",
       "totalPfRate": "Total Pf Rate",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "employeId": "Employe Id",
-      "reEnumerationId": "Re Enumeration Id"
+      "reEnumerationId": "Re Enumeration Id",
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

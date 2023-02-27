@@ -6,14 +6,13 @@ export interface IWorkExperience {
   companyName?: string | null;
   startDate?: dayjs.Dayjs | null;
   endDate?: dayjs.Dayjs | null;
-  lastModified?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  status?: string | null;
   addressId?: number | null;
   employeeId?: number | null;
   companyId?: number | null;
-  yearOfExp?: number | null;
   jobDesc?: string | null;
+  status?: string | null;
+  lastModified?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
 }
 
 export type NewWorkExperience = Omit<IWorkExperience, 'id'> & { id: null };

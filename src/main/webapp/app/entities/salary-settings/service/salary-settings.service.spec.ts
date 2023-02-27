@@ -8,8 +8,6 @@ import { SalarySettingsService, RestSalarySettings } from './salary-settings.ser
 
 const requireRestSample: RestSalarySettings = {
   ...sampleWithRequiredData,
-  salaryFrom: sampleWithRequiredData.salaryFrom?.toJSON(),
-  salaryTo: sampleWithRequiredData.salaryTo?.toJSON(),
   lastModified: sampleWithRequiredData.lastModified?.toJSON(),
 };
 

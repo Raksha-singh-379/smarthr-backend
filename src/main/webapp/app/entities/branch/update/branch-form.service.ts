@@ -36,11 +36,12 @@ type BranchFormGroupContent = {
   branchcode: FormControl<BranchFormRawValue['branchcode']>;
   branchType: FormControl<BranchFormRawValue['branchType']>;
   webSite: FormControl<BranchFormRawValue['webSite']>;
+  branchId: FormControl<BranchFormRawValue['branchId']>;
+  regionId: FormControl<BranchFormRawValue['regionId']>;
+  companyId: FormControl<BranchFormRawValue['companyId']>;
   status: FormControl<BranchFormRawValue['status']>;
   lastModified: FormControl<BranchFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<BranchFormRawValue['lastModifiedBy']>;
-  regionId: FormControl<BranchFormRawValue['regionId']>;
-  companyId: FormControl<BranchFormRawValue['companyId']>;
 };
 
 export type BranchFormGroup = FormGroup<BranchFormGroupContent>;
@@ -67,11 +68,12 @@ export class BranchFormService {
       branchcode: new FormControl(branchRawValue.branchcode),
       branchType: new FormControl(branchRawValue.branchType),
       webSite: new FormControl(branchRawValue.webSite),
+      branchId: new FormControl(branchRawValue.branchId),
+      regionId: new FormControl(branchRawValue.regionId),
+      companyId: new FormControl(branchRawValue.companyId),
       status: new FormControl(branchRawValue.status),
       lastModified: new FormControl(branchRawValue.lastModified),
       lastModifiedBy: new FormControl(branchRawValue.lastModifiedBy),
-      regionId: new FormControl(branchRawValue.regionId),
-      companyId: new FormControl(branchRawValue.companyId),
     });
   }
 

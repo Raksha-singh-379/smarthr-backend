@@ -50,11 +50,14 @@ class FormValidatorResourceIT {
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
-    private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/form-validators";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -89,8 +92,9 @@ class FormValidatorResourceIT {
             .formName(DEFAULT_FORM_NAME)
             .fieldName(DEFAULT_FIELD_NAME)
             .companyId(DEFAULT_COMPANY_ID)
-            .createdBy(DEFAULT_CREATED_BY)
-            .createdOn(DEFAULT_CREATED_ON);
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return formValidator;
     }
 
@@ -107,8 +111,9 @@ class FormValidatorResourceIT {
             .formName(UPDATED_FORM_NAME)
             .fieldName(UPDATED_FIELD_NAME)
             .companyId(UPDATED_COMPANY_ID)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdOn(UPDATED_CREATED_ON);
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return formValidator;
     }
 
@@ -138,8 +143,9 @@ class FormValidatorResourceIT {
         assertThat(testFormValidator.getFormName()).isEqualTo(DEFAULT_FORM_NAME);
         assertThat(testFormValidator.getFieldName()).isEqualTo(DEFAULT_FIELD_NAME);
         assertThat(testFormValidator.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-        assertThat(testFormValidator.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testFormValidator.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testFormValidator.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testFormValidator.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testFormValidator.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -180,8 +186,9 @@ class FormValidatorResourceIT {
             .andExpect(jsonPath("$.[*].formName").value(hasItem(DEFAULT_FORM_NAME)))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME)))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -201,8 +208,9 @@ class FormValidatorResourceIT {
             .andExpect(jsonPath("$.formName").value(DEFAULT_FORM_NAME))
             .andExpect(jsonPath("$.fieldName").value(DEFAULT_FIELD_NAME))
             .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
-            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -576,106 +584,171 @@ class FormValidatorResourceIT {
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedByIsEqualToSomething() throws Exception {
+    void getAllFormValidatorsByStatusIsEqualToSomething() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdBy equals to DEFAULT_CREATED_BY
-        defaultFormValidatorShouldBeFound("createdBy.equals=" + DEFAULT_CREATED_BY);
+        // Get all the formValidatorList where status equals to DEFAULT_STATUS
+        defaultFormValidatorShouldBeFound("status.equals=" + DEFAULT_STATUS);
 
-        // Get all the formValidatorList where createdBy equals to UPDATED_CREATED_BY
-        defaultFormValidatorShouldNotBeFound("createdBy.equals=" + UPDATED_CREATED_BY);
+        // Get all the formValidatorList where status equals to UPDATED_STATUS
+        defaultFormValidatorShouldNotBeFound("status.equals=" + UPDATED_STATUS);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedByIsInShouldWork() throws Exception {
+    void getAllFormValidatorsByStatusIsInShouldWork() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdBy in DEFAULT_CREATED_BY or UPDATED_CREATED_BY
-        defaultFormValidatorShouldBeFound("createdBy.in=" + DEFAULT_CREATED_BY + "," + UPDATED_CREATED_BY);
+        // Get all the formValidatorList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultFormValidatorShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
 
-        // Get all the formValidatorList where createdBy equals to UPDATED_CREATED_BY
-        defaultFormValidatorShouldNotBeFound("createdBy.in=" + UPDATED_CREATED_BY);
+        // Get all the formValidatorList where status equals to UPDATED_STATUS
+        defaultFormValidatorShouldNotBeFound("status.in=" + UPDATED_STATUS);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedByIsNullOrNotNull() throws Exception {
+    void getAllFormValidatorsByStatusIsNullOrNotNull() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdBy is not null
-        defaultFormValidatorShouldBeFound("createdBy.specified=true");
+        // Get all the formValidatorList where status is not null
+        defaultFormValidatorShouldBeFound("status.specified=true");
 
-        // Get all the formValidatorList where createdBy is null
-        defaultFormValidatorShouldNotBeFound("createdBy.specified=false");
+        // Get all the formValidatorList where status is null
+        defaultFormValidatorShouldNotBeFound("status.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedByContainsSomething() throws Exception {
+    void getAllFormValidatorsByStatusContainsSomething() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdBy contains DEFAULT_CREATED_BY
-        defaultFormValidatorShouldBeFound("createdBy.contains=" + DEFAULT_CREATED_BY);
+        // Get all the formValidatorList where status contains DEFAULT_STATUS
+        defaultFormValidatorShouldBeFound("status.contains=" + DEFAULT_STATUS);
 
-        // Get all the formValidatorList where createdBy contains UPDATED_CREATED_BY
-        defaultFormValidatorShouldNotBeFound("createdBy.contains=" + UPDATED_CREATED_BY);
+        // Get all the formValidatorList where status contains UPDATED_STATUS
+        defaultFormValidatorShouldNotBeFound("status.contains=" + UPDATED_STATUS);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedByNotContainsSomething() throws Exception {
+    void getAllFormValidatorsByStatusNotContainsSomething() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdBy does not contain DEFAULT_CREATED_BY
-        defaultFormValidatorShouldNotBeFound("createdBy.doesNotContain=" + DEFAULT_CREATED_BY);
+        // Get all the formValidatorList where status does not contain DEFAULT_STATUS
+        defaultFormValidatorShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
 
-        // Get all the formValidatorList where createdBy does not contain UPDATED_CREATED_BY
-        defaultFormValidatorShouldBeFound("createdBy.doesNotContain=" + UPDATED_CREATED_BY);
+        // Get all the formValidatorList where status does not contain UPDATED_STATUS
+        defaultFormValidatorShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedOnIsEqualToSomething() throws Exception {
+    void getAllFormValidatorsByLastModifiedIsEqualToSomething() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdOn equals to DEFAULT_CREATED_ON
-        defaultFormValidatorShouldBeFound("createdOn.equals=" + DEFAULT_CREATED_ON);
+        // Get all the formValidatorList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultFormValidatorShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
 
-        // Get all the formValidatorList where createdOn equals to UPDATED_CREATED_ON
-        defaultFormValidatorShouldNotBeFound("createdOn.equals=" + UPDATED_CREATED_ON);
+        // Get all the formValidatorList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultFormValidatorShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedOnIsInShouldWork() throws Exception {
+    void getAllFormValidatorsByLastModifiedIsInShouldWork() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdOn in DEFAULT_CREATED_ON or UPDATED_CREATED_ON
-        defaultFormValidatorShouldBeFound("createdOn.in=" + DEFAULT_CREATED_ON + "," + UPDATED_CREATED_ON);
+        // Get all the formValidatorList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultFormValidatorShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
 
-        // Get all the formValidatorList where createdOn equals to UPDATED_CREATED_ON
-        defaultFormValidatorShouldNotBeFound("createdOn.in=" + UPDATED_CREATED_ON);
+        // Get all the formValidatorList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultFormValidatorShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
     }
 
     @Test
     @Transactional
-    void getAllFormValidatorsByCreatedOnIsNullOrNotNull() throws Exception {
+    void getAllFormValidatorsByLastModifiedIsNullOrNotNull() throws Exception {
         // Initialize the database
         formValidatorRepository.saveAndFlush(formValidator);
 
-        // Get all the formValidatorList where createdOn is not null
-        defaultFormValidatorShouldBeFound("createdOn.specified=true");
+        // Get all the formValidatorList where lastModified is not null
+        defaultFormValidatorShouldBeFound("lastModified.specified=true");
 
-        // Get all the formValidatorList where createdOn is null
-        defaultFormValidatorShouldNotBeFound("createdOn.specified=false");
+        // Get all the formValidatorList where lastModified is null
+        defaultFormValidatorShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFormValidatorsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        formValidatorRepository.saveAndFlush(formValidator);
+
+        // Get all the formValidatorList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultFormValidatorShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the formValidatorList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultFormValidatorShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFormValidatorsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        formValidatorRepository.saveAndFlush(formValidator);
+
+        // Get all the formValidatorList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultFormValidatorShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the formValidatorList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultFormValidatorShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFormValidatorsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        formValidatorRepository.saveAndFlush(formValidator);
+
+        // Get all the formValidatorList where lastModifiedBy is not null
+        defaultFormValidatorShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the formValidatorList where lastModifiedBy is null
+        defaultFormValidatorShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFormValidatorsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        formValidatorRepository.saveAndFlush(formValidator);
+
+        // Get all the formValidatorList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultFormValidatorShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the formValidatorList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultFormValidatorShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFormValidatorsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        formValidatorRepository.saveAndFlush(formValidator);
+
+        // Get all the formValidatorList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultFormValidatorShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the formValidatorList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultFormValidatorShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
     /**
@@ -692,8 +765,9 @@ class FormValidatorResourceIT {
             .andExpect(jsonPath("$.[*].formName").value(hasItem(DEFAULT_FORM_NAME)))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME)))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restFormValidatorMockMvc
@@ -747,8 +821,9 @@ class FormValidatorResourceIT {
             .formName(UPDATED_FORM_NAME)
             .fieldName(UPDATED_FIELD_NAME)
             .companyId(UPDATED_COMPANY_ID)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdOn(UPDATED_CREATED_ON);
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         FormValidatorDTO formValidatorDTO = formValidatorMapper.toDto(updatedFormValidator);
 
         restFormValidatorMockMvc
@@ -768,8 +843,9 @@ class FormValidatorResourceIT {
         assertThat(testFormValidator.getFormName()).isEqualTo(UPDATED_FORM_NAME);
         assertThat(testFormValidator.getFieldName()).isEqualTo(UPDATED_FIELD_NAME);
         assertThat(testFormValidator.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testFormValidator.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testFormValidator.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testFormValidator.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFormValidator.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testFormValidator.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -851,7 +927,7 @@ class FormValidatorResourceIT {
         FormValidator partialUpdatedFormValidator = new FormValidator();
         partialUpdatedFormValidator.setId(formValidator.getId());
 
-        partialUpdatedFormValidator.value(UPDATED_VALUE).createdOn(UPDATED_CREATED_ON);
+        partialUpdatedFormValidator.value(UPDATED_VALUE).lastModified(UPDATED_LAST_MODIFIED).lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restFormValidatorMockMvc
             .perform(
@@ -870,8 +946,9 @@ class FormValidatorResourceIT {
         assertThat(testFormValidator.getFormName()).isEqualTo(DEFAULT_FORM_NAME);
         assertThat(testFormValidator.getFieldName()).isEqualTo(DEFAULT_FIELD_NAME);
         assertThat(testFormValidator.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-        assertThat(testFormValidator.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testFormValidator.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testFormValidator.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testFormValidator.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testFormValidator.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -892,8 +969,9 @@ class FormValidatorResourceIT {
             .formName(UPDATED_FORM_NAME)
             .fieldName(UPDATED_FIELD_NAME)
             .companyId(UPDATED_COMPANY_ID)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdOn(UPDATED_CREATED_ON);
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restFormValidatorMockMvc
             .perform(
@@ -912,8 +990,9 @@ class FormValidatorResourceIT {
         assertThat(testFormValidator.getFormName()).isEqualTo(UPDATED_FORM_NAME);
         assertThat(testFormValidator.getFieldName()).isEqualTo(UPDATED_FIELD_NAME);
         assertThat(testFormValidator.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testFormValidator.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testFormValidator.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testFormValidator.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFormValidator.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testFormValidator.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

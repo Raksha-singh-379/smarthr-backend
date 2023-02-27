@@ -11,9 +11,7 @@ import { ISalarySettings, NewSalarySettings } from '../salary-settings.model';
 
 export type PartialUpdateSalarySettings = Partial<ISalarySettings> & Pick<ISalarySettings, 'id'>;
 
-type RestOf<T extends ISalarySettings | NewSalarySettings> = Omit<T, 'salaryFrom' | 'salaryTo' | 'lastModified'> & {
-  salaryFrom?: string | null;
-  salaryTo?: string | null;
+type RestOf<T extends ISalarySettings | NewSalarySettings> = Omit<T, 'lastModified'> & {
   lastModified?: string | null;
 };
 
@@ -105,8 +103,6 @@ export class SalarySettingsService {
   ): RestOf<T> {
     return {
       ...salarySettings,
-      salaryFrom: salarySettings.salaryFrom?.toJSON() ?? null,
-      salaryTo: salarySettings.salaryTo?.toJSON() ?? null,
       lastModified: salarySettings.lastModified?.toJSON() ?? null,
     };
   }
@@ -114,8 +110,6 @@ export class SalarySettingsService {
   protected convertDateFromServer(restSalarySettings: RestSalarySettings): ISalarySettings {
     return {
       ...restSalarySettings,
-      salaryFrom: restSalarySettings.salaryFrom ? dayjs(restSalarySettings.salaryFrom) : undefined,
-      salaryTo: restSalarySettings.salaryTo ? dayjs(restSalarySettings.salaryTo) : undefined,
       lastModified: restSalarySettings.lastModified ? dayjs(restSalarySettings.lastModified) : undefined,
     };
   }

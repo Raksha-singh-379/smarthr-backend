@@ -28,8 +28,11 @@ public class LeaveType implements Serializable {
     @Column(name = "no_of_days")
     private String noOfDays;
 
-    @Column(name = "record_status")
-    private String recordStatus;
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "last_modified")
     private Instant lastModified;
@@ -37,11 +40,14 @@ public class LeaveType implements Serializable {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "has_carry_forward")
+    private Boolean hasCarryForward;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @Column(name = "has_earned")
+    private Boolean hasEarned;
+
+    @Column(name = "has_custom_policy")
+    private Boolean hasCustomPolicy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -84,17 +90,30 @@ public class LeaveType implements Serializable {
         this.noOfDays = noOfDays;
     }
 
-    public String getRecordStatus() {
-        return this.recordStatus;
+    public Long getCompanyId() {
+        return this.companyId;
     }
 
-    public LeaveType recordStatus(String recordStatus) {
-        this.setRecordStatus(recordStatus);
+    public LeaveType companyId(Long companyId) {
+        this.setCompanyId(companyId);
         return this;
     }
 
-    public void setRecordStatus(String recordStatus) {
-        this.recordStatus = recordStatus;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public LeaveType status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -123,30 +142,43 @@ public class LeaveType implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
+    public Boolean getHasCarryForward() {
+        return this.hasCarryForward;
     }
 
-    public LeaveType status(String status) {
-        this.setStatus(status);
+    public LeaveType hasCarryForward(Boolean hasCarryForward) {
+        this.setHasCarryForward(hasCarryForward);
         return this;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setHasCarryForward(Boolean hasCarryForward) {
+        this.hasCarryForward = hasCarryForward;
     }
 
-    public Long getCompanyId() {
-        return this.companyId;
+    public Boolean getHasEarned() {
+        return this.hasEarned;
     }
 
-    public LeaveType companyId(Long companyId) {
-        this.setCompanyId(companyId);
+    public LeaveType hasEarned(Boolean hasEarned) {
+        this.setHasEarned(hasEarned);
         return this;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setHasEarned(Boolean hasEarned) {
+        this.hasEarned = hasEarned;
+    }
+
+    public Boolean getHasCustomPolicy() {
+        return this.hasCustomPolicy;
+    }
+
+    public LeaveType hasCustomPolicy(Boolean hasCustomPolicy) {
+        this.setHasCustomPolicy(hasCustomPolicy);
+        return this;
+    }
+
+    public void setHasCustomPolicy(Boolean hasCustomPolicy) {
+        this.hasCustomPolicy = hasCustomPolicy;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -175,11 +207,13 @@ public class LeaveType implements Serializable {
             "id=" + getId() +
             ", leaveType='" + getLeaveType() + "'" +
             ", noOfDays='" + getNoOfDays() + "'" +
-            ", recordStatus='" + getRecordStatus() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
+            ", hasCarryForward='" + getHasCarryForward() + "'" +
+            ", hasEarned='" + getHasEarned() + "'" +
+            ", hasCustomPolicy='" + getHasCustomPolicy() + "'" +
             "}";
     }
 }

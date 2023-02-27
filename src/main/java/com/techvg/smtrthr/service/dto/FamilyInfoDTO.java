@@ -19,17 +19,21 @@ public class FamilyInfoDTO implements Serializable {
 
     private String relation;
 
-    private String address;
+    private Long addressId;
 
-    private Instant lastModified;
+    private Boolean isEmployed;
 
-    private String lastModifiedBy;
-
-    private String status;
+    private String employedAt;
 
     private Long employeeId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -63,36 +67,28 @@ public class FamilyInfoDTO implements Serializable {
         this.relation = relation;
     }
 
-    public String getAddress() {
-        return address;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
+    public Boolean getIsEmployed() {
+        return isEmployed;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
+    public void setIsEmployed(Boolean isEmployed) {
+        this.isEmployed = isEmployed;
     }
 
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
+    public String getEmployedAt() {
+        return employedAt;
     }
 
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmployedAt(String employedAt) {
+        this.employedAt = employedAt;
     }
 
     public Long getEmployeeId() {
@@ -109,6 +105,30 @@ public class FamilyInfoDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -140,12 +160,14 @@ public class FamilyInfoDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", dateOfBirth='" + getDateOfBirth() + "'" +
             ", relation='" + getRelation() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
+            ", addressId=" + getAddressId() +
+            ", isEmployed='" + getIsEmployed() + "'" +
+            ", employedAt='" + getEmployedAt() + "'" +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

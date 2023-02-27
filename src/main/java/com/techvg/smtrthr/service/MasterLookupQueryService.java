@@ -96,23 +96,26 @@ public class MasterLookupQueryService extends QueryService<MasterLookup> {
             if (criteria.getValue() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getValue(), MasterLookup_.value));
             }
+            if (criteria.getValueTwo() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getValueTwo(), MasterLookup_.valueTwo));
+            }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), MasterLookup_.description));
             }
             if (criteria.getType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getType(), MasterLookup_.type));
             }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), MasterLookup_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), MasterLookup_.status));
+            }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), MasterLookup_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), MasterLookup_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), MasterLookup_.status));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), MasterLookup_.companyId));
             }
         }
         return specification;

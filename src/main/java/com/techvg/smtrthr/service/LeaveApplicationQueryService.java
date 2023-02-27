@@ -96,9 +96,6 @@ public class LeaveApplicationQueryService extends QueryService<LeaveApplication>
             if (criteria.getLeaveType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLeaveType(), LeaveApplication_.leaveType));
             }
-            if (criteria.getBalanceLeave() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getBalanceLeave(), LeaveApplication_.balanceLeave));
-            }
             if (criteria.getNoOfDays() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNoOfDays(), LeaveApplication_.noOfDays));
             }
@@ -117,12 +114,6 @@ public class LeaveApplicationQueryService extends QueryService<LeaveApplication>
             if (criteria.getLeaveStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLeaveStatus(), LeaveApplication_.leaveStatus));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), LeaveApplication_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), LeaveApplication_.lastModifiedBy));
-            }
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatus(), LeaveApplication_.status));
             }
@@ -131,6 +122,12 @@ public class LeaveApplicationQueryService extends QueryService<LeaveApplication>
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), LeaveApplication_.companyId));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), LeaveApplication_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), LeaveApplication_.lastModifiedBy));
             }
         }
         return specification;

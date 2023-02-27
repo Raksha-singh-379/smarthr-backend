@@ -23,19 +23,19 @@
             <column name="percentage" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="last_modified" type="${datetimeType}">
+            <column name="salary_setting_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_modified_by" type="varchar(255)">
+            <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="salary_setting_id" type="bigint">
+            <column name="last_modified" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="company_id" type="bigint">
+            <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -65,11 +65,11 @@
             <column name="salary_from" type="date"/>
             <column name="salary_to" type="date"/>
             <column name="percentage" type="numeric"/>
-            <column name="last_modified" type="date"/>
-            <column name="last_modified_by" type="string"/>
-            <column name="status" type="string"/>
             <column name="salary_setting_id" type="numeric"/>
             <column name="company_id" type="numeric"/>
+            <column name="status" type="string"/>
+            <column name="last_modified" type="date"/>
+            <column name="last_modified_by" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

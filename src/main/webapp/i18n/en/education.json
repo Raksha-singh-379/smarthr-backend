@@ -20,16 +20,16 @@
       "id": "ID",
       "institution": "Institution",
       "subject": "Subject",
-      "startDate": "Start Date",
+      "startYear": "Start Year",
       "endDate": "End Date",
       "educationType": "Education Type",
       "grade": "Grade",
       "description": "Description",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "employeeId": "Employee Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

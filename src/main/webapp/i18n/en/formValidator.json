@@ -23,8 +23,9 @@
       "formName": "Form Name",
       "fieldName": "Field Name",
       "companyId": "Company Id",
-      "createdBy": "Created By",
-      "createdOn": "Created On"
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

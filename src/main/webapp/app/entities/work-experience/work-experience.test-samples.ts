@@ -7,26 +7,25 @@ export const sampleWithRequiredData: IWorkExperience = {
 };
 
 export const sampleWithPartialData: IWorkExperience = {
-  id: 76299,
-  jobTitle: 'Legacy Communications Orchestrator',
-  companyName: 'Horizontal grid-enabled proactive',
-  yearOfExp: 70973,
+  id: 10295,
+  jobTitle: 'Legacy Assurance Orchestrator',
+  companyName: 'overriding France',
+  lastModifiedBy: 'proactive',
 };
 
 export const sampleWithFullData: IWorkExperience = {
-  id: 53098,
-  jobTitle: 'Human Tactics Officer',
-  companyName: 'multi-tasking',
-  startDate: dayjs('2023-02-08T06:11'),
-  endDate: dayjs('2023-02-08T16:31'),
-  lastModified: dayjs('2023-02-08T18:25'),
-  lastModifiedBy: 'Afghani calculate matrix',
-  status: 'Direct BEAC payment',
-  addressId: 76651,
-  employeeId: 48687,
-  companyId: 10956,
-  yearOfExp: 73310,
-  jobDesc: 'sensor Account Shirt',
+  id: 70973,
+  jobTitle: 'Global Interactions Director',
+  companyName: 'Computer',
+  startDate: dayjs('2023-02-08T16:31'),
+  endDate: dayjs('2023-02-08T18:25'),
+  addressId: 95881,
+  employeeId: 69234,
+  companyId: 907,
+  jobDesc: 'calculate matrix Chief',
+  status: 'BEAC payment connect',
+  lastModified: dayjs('2023-02-08T11:12'),
+  lastModifiedBy: 'sensor Account Shirt',
 };
 
 export const sampleWithNewData: NewWorkExperience = {

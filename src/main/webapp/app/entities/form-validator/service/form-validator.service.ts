@@ -11,8 +11,8 @@ import { IFormValidator, NewFormValidator } from '../form-validator.model';
 
 export type PartialUpdateFormValidator = Partial<IFormValidator> & Pick<IFormValidator, 'id'>;
 
-type RestOf<T extends IFormValidator | NewFormValidator> = Omit<T, 'createdOn'> & {
-  createdOn?: string | null;
+type RestOf<T extends IFormValidator | NewFormValidator> = Omit<T, 'lastModified'> & {
+  lastModified?: string | null;
 };
 
 export type RestFormValidator = RestOf<IFormValidator>;
@@ -101,14 +101,14 @@ export class FormValidatorService {
   protected convertDateFromClient<T extends IFormValidator | NewFormValidator | PartialUpdateFormValidator>(formValidator: T): RestOf<T> {
     return {
       ...formValidator,
-      createdOn: formValidator.createdOn?.toJSON() ?? null,
+      lastModified: formValidator.lastModified?.toJSON() ?? null,
     };
   }
 
   protected convertDateFromServer(restFormValidator: RestFormValidator): IFormValidator {
     return {
       ...restFormValidator,
-      createdOn: restFormValidator.createdOn ? dayjs(restFormValidator.createdOn) : undefined,
+      lastModified: restFormValidator.lastModified ? dayjs(restFormValidator.lastModified) : undefined,
     };
   }
 

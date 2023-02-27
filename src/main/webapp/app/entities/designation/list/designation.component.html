@@ -46,24 +46,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.designation.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.designation.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.designation.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="departmentId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.designation.departmentId">Department Id</span>
@@ -76,6 +58,24 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.designation.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.designation.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.designation.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -85,11 +85,11 @@
             <a [routerLink]="['/designation', designation.id, 'view']">{{ designation.id }}</a>
           </td>
           <td>{{ designation.name }}</td>
-          <td>{{ designation.lastModified | formatMediumDatetime }}</td>
-          <td>{{ designation.lastModifiedBy }}</td>
-          <td>{{ designation.status }}</td>
           <td>{{ designation.departmentId }}</td>
           <td>{{ designation.companyId }}</td>
+          <td>{{ designation.status }}</td>
+          <td>{{ designation.lastModified | formatMediumDatetime }}</td>
+          <td>{{ designation.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

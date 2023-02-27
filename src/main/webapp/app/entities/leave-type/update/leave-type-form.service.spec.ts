@@ -22,11 +22,13 @@ describe('LeaveType Form Service', () => {
             id: expect.any(Object),
             leaveType: expect.any(Object),
             noOfDays: expect.any(Object),
-            recordStatus: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            hasCarryForward: expect.any(Object),
+            hasEarned: expect.any(Object),
+            hasCustomPolicy: expect.any(Object),
           })
         );
       });
@@ -39,11 +41,13 @@ describe('LeaveType Form Service', () => {
             id: expect.any(Object),
             leaveType: expect.any(Object),
             noOfDays: expect.any(Object),
-            recordStatus: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            hasCarryForward: expect.any(Object),
+            hasEarned: expect.any(Object),
+            hasCustomPolicy: expect.any(Object),
           })
         );
       });

@@ -31,21 +31,19 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
 
     private InstantFilter endDate;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
     private LongFilter addressId;
 
     private LongFilter employeeId;
 
     private LongFilter companyId;
 
-    private DoubleFilter yearOfExp;
-
     private StringFilter jobDesc;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -57,14 +55,13 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
         this.companyName = other.companyName == null ? null : other.companyName.copy();
         this.startDate = other.startDate == null ? null : other.startDate.copy();
         this.endDate = other.endDate == null ? null : other.endDate.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
         this.addressId = other.addressId == null ? null : other.addressId.copy();
         this.employeeId = other.employeeId == null ? null : other.employeeId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
-        this.yearOfExp = other.yearOfExp == null ? null : other.yearOfExp.copy();
         this.jobDesc = other.jobDesc == null ? null : other.jobDesc.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -148,51 +145,6 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
         this.endDate = endDate;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
     public LongFilter getAddressId() {
         return addressId;
     }
@@ -238,21 +190,6 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
-    public DoubleFilter getYearOfExp() {
-        return yearOfExp;
-    }
-
-    public DoubleFilter yearOfExp() {
-        if (yearOfExp == null) {
-            yearOfExp = new DoubleFilter();
-        }
-        return yearOfExp;
-    }
-
-    public void setYearOfExp(DoubleFilter yearOfExp) {
-        this.yearOfExp = yearOfExp;
-    }
-
     public StringFilter getJobDesc() {
         return jobDesc;
     }
@@ -266,6 +203,51 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
 
     public void setJobDesc(StringFilter jobDesc) {
         this.jobDesc = jobDesc;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Boolean getDistinct() {
@@ -291,14 +273,13 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
             Objects.equals(companyName, that.companyName) &&
             Objects.equals(startDate, that.startDate) &&
             Objects.equals(endDate, that.endDate) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(addressId, that.addressId) &&
             Objects.equals(employeeId, that.employeeId) &&
             Objects.equals(companyId, that.companyId) &&
-            Objects.equals(yearOfExp, that.yearOfExp) &&
             Objects.equals(jobDesc, that.jobDesc) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -311,14 +292,13 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
             companyName,
             startDate,
             endDate,
-            lastModified,
-            lastModifiedBy,
-            status,
             addressId,
             employeeId,
             companyId,
-            yearOfExp,
             jobDesc,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -332,14 +312,13 @@ public class WorkExperienceCriteria implements Serializable, Criteria {
             (companyName != null ? "companyName=" + companyName + ", " : "") +
             (startDate != null ? "startDate=" + startDate + ", " : "") +
             (endDate != null ? "endDate=" + endDate + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
             (addressId != null ? "addressId=" + addressId + ", " : "") +
             (employeeId != null ? "employeeId=" + employeeId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
-            (yearOfExp != null ? "yearOfExp=" + yearOfExp + ", " : "") +
             (jobDesc != null ? "jobDesc=" + jobDesc + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

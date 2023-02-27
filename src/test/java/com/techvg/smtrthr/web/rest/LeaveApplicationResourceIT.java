@@ -37,10 +37,6 @@ class LeaveApplicationResourceIT {
     private static final String DEFAULT_LEAVE_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_LEAVE_TYPE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_BALANCE_LEAVE = 1L;
-    private static final Long UPDATED_BALANCE_LEAVE = 2L;
-    private static final Long SMALLER_BALANCE_LEAVE = 1L - 1L;
-
     private static final Long DEFAULT_NO_OF_DAYS = 1L;
     private static final Long UPDATED_NO_OF_DAYS = 2L;
     private static final Long SMALLER_NO_OF_DAYS = 1L - 1L;
@@ -61,12 +57,6 @@ class LeaveApplicationResourceIT {
     private static final String DEFAULT_LEAVE_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_LEAVE_STATUS = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
     private static final String DEFAULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
@@ -77,6 +67,12 @@ class LeaveApplicationResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/leave-applications";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -107,18 +103,17 @@ class LeaveApplicationResourceIT {
     public static LeaveApplication createEntity(EntityManager em) {
         LeaveApplication leaveApplication = new LeaveApplication()
             .leaveType(DEFAULT_LEAVE_TYPE)
-            .balanceLeave(DEFAULT_BALANCE_LEAVE)
             .noOfDays(DEFAULT_NO_OF_DAYS)
             .reason(DEFAULT_REASON)
             .year(DEFAULT_YEAR)
             .formDate(DEFAULT_FORM_DATE)
             .toDate(DEFAULT_TO_DATE)
             .leaveStatus(DEFAULT_LEAVE_STATUS)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
             .status(DEFAULT_STATUS)
             .employeId(DEFAULT_EMPLOYE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return leaveApplication;
     }
 
@@ -131,18 +126,17 @@ class LeaveApplicationResourceIT {
     public static LeaveApplication createUpdatedEntity(EntityManager em) {
         LeaveApplication leaveApplication = new LeaveApplication()
             .leaveType(UPDATED_LEAVE_TYPE)
-            .balanceLeave(UPDATED_BALANCE_LEAVE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .reason(UPDATED_REASON)
             .year(UPDATED_YEAR)
             .formDate(UPDATED_FORM_DATE)
             .toDate(UPDATED_TO_DATE)
             .leaveStatus(UPDATED_LEAVE_STATUS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
             .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return leaveApplication;
     }
 
@@ -168,18 +162,17 @@ class LeaveApplicationResourceIT {
         assertThat(leaveApplicationList).hasSize(databaseSizeBeforeCreate + 1);
         LeaveApplication testLeaveApplication = leaveApplicationList.get(leaveApplicationList.size() - 1);
         assertThat(testLeaveApplication.getLeaveType()).isEqualTo(DEFAULT_LEAVE_TYPE);
-        assertThat(testLeaveApplication.getBalanceLeave()).isEqualTo(DEFAULT_BALANCE_LEAVE);
         assertThat(testLeaveApplication.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
         assertThat(testLeaveApplication.getReason()).isEqualTo(DEFAULT_REASON);
         assertThat(testLeaveApplication.getYear()).isEqualTo(DEFAULT_YEAR);
         assertThat(testLeaveApplication.getFormDate()).isEqualTo(DEFAULT_FORM_DATE);
         assertThat(testLeaveApplication.getToDate()).isEqualTo(DEFAULT_TO_DATE);
         assertThat(testLeaveApplication.getLeaveStatus()).isEqualTo(DEFAULT_LEAVE_STATUS);
-        assertThat(testLeaveApplication.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
         assertThat(testLeaveApplication.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testLeaveApplication.getEmployeId()).isEqualTo(DEFAULT_EMPLOYE_ID);
         assertThat(testLeaveApplication.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeaveApplication.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -216,18 +209,17 @@ class LeaveApplicationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(leaveApplication.getId().intValue())))
             .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
-            .andExpect(jsonPath("$.[*].balanceLeave").value(hasItem(DEFAULT_BALANCE_LEAVE.intValue())))
             .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS.intValue())))
             .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].formDate").value(hasItem(DEFAULT_FORM_DATE.toString())))
             .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
             .andExpect(jsonPath("$.[*].leaveStatus").value(hasItem(DEFAULT_LEAVE_STATUS)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -243,18 +235,17 @@ class LeaveApplicationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(leaveApplication.getId().intValue()))
             .andExpect(jsonPath("$.leaveType").value(DEFAULT_LEAVE_TYPE))
-            .andExpect(jsonPath("$.balanceLeave").value(DEFAULT_BALANCE_LEAVE.intValue()))
             .andExpect(jsonPath("$.noOfDays").value(DEFAULT_NO_OF_DAYS.intValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
             .andExpect(jsonPath("$.formDate").value(DEFAULT_FORM_DATE.toString()))
             .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()))
             .andExpect(jsonPath("$.leaveStatus").value(DEFAULT_LEAVE_STATUS))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.employeId").value(DEFAULT_EMPLOYE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -338,97 +329,6 @@ class LeaveApplicationResourceIT {
 
         // Get all the leaveApplicationList where leaveType does not contain UPDATED_LEAVE_TYPE
         defaultLeaveApplicationShouldBeFound("leaveType.doesNotContain=" + UPDATED_LEAVE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave equals to DEFAULT_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.equals=" + DEFAULT_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave equals to UPDATED_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.equals=" + UPDATED_BALANCE_LEAVE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsInShouldWork() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave in DEFAULT_BALANCE_LEAVE or UPDATED_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.in=" + DEFAULT_BALANCE_LEAVE + "," + UPDATED_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave equals to UPDATED_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.in=" + UPDATED_BALANCE_LEAVE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave is not null
-        defaultLeaveApplicationShouldBeFound("balanceLeave.specified=true");
-
-        // Get all the leaveApplicationList where balanceLeave is null
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave is greater than or equal to DEFAULT_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.greaterThanOrEqual=" + DEFAULT_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave is greater than or equal to UPDATED_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.greaterThanOrEqual=" + UPDATED_BALANCE_LEAVE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave is less than or equal to DEFAULT_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.lessThanOrEqual=" + DEFAULT_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave is less than or equal to SMALLER_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.lessThanOrEqual=" + SMALLER_BALANCE_LEAVE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsLessThanSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave is less than DEFAULT_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.lessThan=" + DEFAULT_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave is less than UPDATED_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.lessThan=" + UPDATED_BALANCE_LEAVE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByBalanceLeaveIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where balanceLeave is greater than DEFAULT_BALANCE_LEAVE
-        defaultLeaveApplicationShouldNotBeFound("balanceLeave.greaterThan=" + DEFAULT_BALANCE_LEAVE);
-
-        // Get all the leaveApplicationList where balanceLeave is greater than SMALLER_BALANCE_LEAVE
-        defaultLeaveApplicationShouldBeFound("balanceLeave.greaterThan=" + SMALLER_BALANCE_LEAVE);
     }
 
     @Test
@@ -823,110 +723,6 @@ class LeaveApplicationResourceIT {
 
     @Test
     @Transactional
-    void getAllLeaveApplicationsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultLeaveApplicationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the leaveApplicationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultLeaveApplicationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultLeaveApplicationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the leaveApplicationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultLeaveApplicationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModified is not null
-        defaultLeaveApplicationShouldBeFound("lastModified.specified=true");
-
-        // Get all the leaveApplicationList where lastModified is null
-        defaultLeaveApplicationShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the leaveApplicationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the leaveApplicationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModifiedBy is not null
-        defaultLeaveApplicationShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the leaveApplicationList where lastModifiedBy is null
-        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the leaveApplicationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveApplicationsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        leaveApplicationRepository.saveAndFlush(leaveApplication);
-
-        // Get all the leaveApplicationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the leaveApplicationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultLeaveApplicationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
     void getAllLeaveApplicationsByStatusIsEqualToSomething() throws Exception {
         // Initialize the database
         leaveApplicationRepository.saveAndFlush(leaveApplication);
@@ -1172,6 +968,110 @@ class LeaveApplicationResourceIT {
         defaultLeaveApplicationShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultLeaveApplicationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the leaveApplicationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultLeaveApplicationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultLeaveApplicationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the leaveApplicationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultLeaveApplicationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModified is not null
+        defaultLeaveApplicationShouldBeFound("lastModified.specified=true");
+
+        // Get all the leaveApplicationList where lastModified is null
+        defaultLeaveApplicationShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the leaveApplicationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the leaveApplicationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModifiedBy is not null
+        defaultLeaveApplicationShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the leaveApplicationList where lastModifiedBy is null
+        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the leaveApplicationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveApplicationsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        leaveApplicationRepository.saveAndFlush(leaveApplication);
+
+        // Get all the leaveApplicationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the leaveApplicationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultLeaveApplicationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1182,18 +1082,17 @@ class LeaveApplicationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(leaveApplication.getId().intValue())))
             .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
-            .andExpect(jsonPath("$.[*].balanceLeave").value(hasItem(DEFAULT_BALANCE_LEAVE.intValue())))
             .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS.intValue())))
             .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].formDate").value(hasItem(DEFAULT_FORM_DATE.toString())))
             .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
             .andExpect(jsonPath("$.[*].leaveStatus").value(hasItem(DEFAULT_LEAVE_STATUS)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeId").value(hasItem(DEFAULT_EMPLOYE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restLeaveApplicationMockMvc
@@ -1243,18 +1142,17 @@ class LeaveApplicationResourceIT {
         em.detach(updatedLeaveApplication);
         updatedLeaveApplication
             .leaveType(UPDATED_LEAVE_TYPE)
-            .balanceLeave(UPDATED_BALANCE_LEAVE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .reason(UPDATED_REASON)
             .year(UPDATED_YEAR)
             .formDate(UPDATED_FORM_DATE)
             .toDate(UPDATED_TO_DATE)
             .leaveStatus(UPDATED_LEAVE_STATUS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
             .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         LeaveApplicationDTO leaveApplicationDTO = leaveApplicationMapper.toDto(updatedLeaveApplication);
 
         restLeaveApplicationMockMvc
@@ -1270,18 +1168,17 @@ class LeaveApplicationResourceIT {
         assertThat(leaveApplicationList).hasSize(databaseSizeBeforeUpdate);
         LeaveApplication testLeaveApplication = leaveApplicationList.get(leaveApplicationList.size() - 1);
         assertThat(testLeaveApplication.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
-        assertThat(testLeaveApplication.getBalanceLeave()).isEqualTo(UPDATED_BALANCE_LEAVE);
         assertThat(testLeaveApplication.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testLeaveApplication.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testLeaveApplication.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testLeaveApplication.getFormDate()).isEqualTo(UPDATED_FORM_DATE);
         assertThat(testLeaveApplication.getToDate()).isEqualTo(UPDATED_TO_DATE);
         assertThat(testLeaveApplication.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
-        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testLeaveApplication.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeaveApplication.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testLeaveApplication.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1365,13 +1262,12 @@ class LeaveApplicationResourceIT {
 
         partialUpdatedLeaveApplication
             .leaveType(UPDATED_LEAVE_TYPE)
-            .noOfDays(UPDATED_NO_OF_DAYS)
-            .year(UPDATED_YEAR)
-            .toDate(UPDATED_TO_DATE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .status(UPDATED_STATUS)
+            .reason(UPDATED_REASON)
+            .formDate(UPDATED_FORM_DATE)
+            .leaveStatus(UPDATED_LEAVE_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restLeaveApplicationMockMvc
             .perform(
@@ -1386,18 +1282,17 @@ class LeaveApplicationResourceIT {
         assertThat(leaveApplicationList).hasSize(databaseSizeBeforeUpdate);
         LeaveApplication testLeaveApplication = leaveApplicationList.get(leaveApplicationList.size() - 1);
         assertThat(testLeaveApplication.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
-        assertThat(testLeaveApplication.getBalanceLeave()).isEqualTo(DEFAULT_BALANCE_LEAVE);
-        assertThat(testLeaveApplication.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
-        assertThat(testLeaveApplication.getReason()).isEqualTo(DEFAULT_REASON);
-        assertThat(testLeaveApplication.getYear()).isEqualTo(UPDATED_YEAR);
-        assertThat(testLeaveApplication.getFormDate()).isEqualTo(DEFAULT_FORM_DATE);
-        assertThat(testLeaveApplication.getToDate()).isEqualTo(UPDATED_TO_DATE);
-        assertThat(testLeaveApplication.getLeaveStatus()).isEqualTo(DEFAULT_LEAVE_STATUS);
-        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testLeaveApplication.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testLeaveApplication.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
+        assertThat(testLeaveApplication.getReason()).isEqualTo(UPDATED_REASON);
+        assertThat(testLeaveApplication.getYear()).isEqualTo(DEFAULT_YEAR);
+        assertThat(testLeaveApplication.getFormDate()).isEqualTo(UPDATED_FORM_DATE);
+        assertThat(testLeaveApplication.getToDate()).isEqualTo(DEFAULT_TO_DATE);
+        assertThat(testLeaveApplication.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
+        assertThat(testLeaveApplication.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testLeaveApplication.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
-        assertThat(testLeaveApplication.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveApplication.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1414,18 +1309,17 @@ class LeaveApplicationResourceIT {
 
         partialUpdatedLeaveApplication
             .leaveType(UPDATED_LEAVE_TYPE)
-            .balanceLeave(UPDATED_BALANCE_LEAVE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .reason(UPDATED_REASON)
             .year(UPDATED_YEAR)
             .formDate(UPDATED_FORM_DATE)
             .toDate(UPDATED_TO_DATE)
             .leaveStatus(UPDATED_LEAVE_STATUS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
             .status(UPDATED_STATUS)
             .employeId(UPDATED_EMPLOYE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restLeaveApplicationMockMvc
             .perform(
@@ -1440,18 +1334,17 @@ class LeaveApplicationResourceIT {
         assertThat(leaveApplicationList).hasSize(databaseSizeBeforeUpdate);
         LeaveApplication testLeaveApplication = leaveApplicationList.get(leaveApplicationList.size() - 1);
         assertThat(testLeaveApplication.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
-        assertThat(testLeaveApplication.getBalanceLeave()).isEqualTo(UPDATED_BALANCE_LEAVE);
         assertThat(testLeaveApplication.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testLeaveApplication.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testLeaveApplication.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testLeaveApplication.getFormDate()).isEqualTo(UPDATED_FORM_DATE);
         assertThat(testLeaveApplication.getToDate()).isEqualTo(UPDATED_TO_DATE);
         assertThat(testLeaveApplication.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
-        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testLeaveApplication.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeaveApplication.getEmployeId()).isEqualTo(UPDATED_EMPLOYE_ID);
         assertThat(testLeaveApplication.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveApplication.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testLeaveApplication.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

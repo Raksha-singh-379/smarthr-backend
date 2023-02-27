@@ -40,8 +40,12 @@ class LeaveTypeResourceIT {
     private static final String DEFAULT_NO_OF_DAYS = "AAAAAAAAAA";
     private static final String UPDATED_NO_OF_DAYS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_RECORD_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_RECORD_STATUS = "BBBBBBBBBB";
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -49,12 +53,14 @@ class LeaveTypeResourceIT {
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_HAS_CARRY_FORWARD = false;
+    private static final Boolean UPDATED_HAS_CARRY_FORWARD = true;
 
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+    private static final Boolean DEFAULT_HAS_EARNED = false;
+    private static final Boolean UPDATED_HAS_EARNED = true;
+
+    private static final Boolean DEFAULT_HAS_CUSTOM_POLICY = false;
+    private static final Boolean UPDATED_HAS_CUSTOM_POLICY = true;
 
     private static final String ENTITY_API_URL = "/api/leave-types";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -86,11 +92,13 @@ class LeaveTypeResourceIT {
         LeaveType leaveType = new LeaveType()
             .leaveType(DEFAULT_LEAVE_TYPE)
             .noOfDays(DEFAULT_NO_OF_DAYS)
-            .recordStatus(DEFAULT_RECORD_STATUS)
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
             .lastModified(DEFAULT_LAST_MODIFIED)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .hasCarryForward(DEFAULT_HAS_CARRY_FORWARD)
+            .hasEarned(DEFAULT_HAS_EARNED)
+            .hasCustomPolicy(DEFAULT_HAS_CUSTOM_POLICY);
         return leaveType;
     }
 
@@ -104,11 +112,13 @@ class LeaveTypeResourceIT {
         LeaveType leaveType = new LeaveType()
             .leaveType(UPDATED_LEAVE_TYPE)
             .noOfDays(UPDATED_NO_OF_DAYS)
-            .recordStatus(UPDATED_RECORD_STATUS)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .hasCarryForward(UPDATED_HAS_CARRY_FORWARD)
+            .hasEarned(UPDATED_HAS_EARNED)
+            .hasCustomPolicy(UPDATED_HAS_CUSTOM_POLICY);
         return leaveType;
     }
 
@@ -133,11 +143,13 @@ class LeaveTypeResourceIT {
         LeaveType testLeaveType = leaveTypeList.get(leaveTypeList.size() - 1);
         assertThat(testLeaveType.getLeaveType()).isEqualTo(DEFAULT_LEAVE_TYPE);
         assertThat(testLeaveType.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
-        assertThat(testLeaveType.getRecordStatus()).isEqualTo(DEFAULT_RECORD_STATUS);
+        assertThat(testLeaveType.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeaveType.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testLeaveType.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testLeaveType.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testLeaveType.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testLeaveType.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeaveType.getHasCarryForward()).isEqualTo(DEFAULT_HAS_CARRY_FORWARD);
+        assertThat(testLeaveType.getHasEarned()).isEqualTo(DEFAULT_HAS_EARNED);
+        assertThat(testLeaveType.getHasCustomPolicy()).isEqualTo(DEFAULT_HAS_CUSTOM_POLICY);
     }
 
     @Test
@@ -173,11 +185,13 @@ class LeaveTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(leaveType.getId().intValue())))
             .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
             .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS)))
-            .andExpect(jsonPath("$.[*].recordStatus").value(hasItem(DEFAULT_RECORD_STATUS)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].hasCarryForward").value(hasItem(DEFAULT_HAS_CARRY_FORWARD.booleanValue())))
+            .andExpect(jsonPath("$.[*].hasEarned").value(hasItem(DEFAULT_HAS_EARNED.booleanValue())))
+            .andExpect(jsonPath("$.[*].hasCustomPolicy").value(hasItem(DEFAULT_HAS_CUSTOM_POLICY.booleanValue())));
     }
 
     @Test
@@ -194,11 +208,13 @@ class LeaveTypeResourceIT {
             .andExpect(jsonPath("$.id").value(leaveType.getId().intValue()))
             .andExpect(jsonPath("$.leaveType").value(DEFAULT_LEAVE_TYPE))
             .andExpect(jsonPath("$.noOfDays").value(DEFAULT_NO_OF_DAYS))
-            .andExpect(jsonPath("$.recordStatus").value(DEFAULT_RECORD_STATUS))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.hasCarryForward").value(DEFAULT_HAS_CARRY_FORWARD.booleanValue()))
+            .andExpect(jsonPath("$.hasEarned").value(DEFAULT_HAS_EARNED.booleanValue()))
+            .andExpect(jsonPath("$.hasCustomPolicy").value(DEFAULT_HAS_CUSTOM_POLICY.booleanValue()));
     }
 
     @Test
@@ -351,67 +367,158 @@ class LeaveTypeResourceIT {
 
     @Test
     @Transactional
-    void getAllLeaveTypesByRecordStatusIsEqualToSomething() throws Exception {
+    void getAllLeaveTypesByCompanyIdIsEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where recordStatus equals to DEFAULT_RECORD_STATUS
-        defaultLeaveTypeShouldBeFound("recordStatus.equals=" + DEFAULT_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId equals to DEFAULT_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
 
-        // Get all the leaveTypeList where recordStatus equals to UPDATED_RECORD_STATUS
-        defaultLeaveTypeShouldNotBeFound("recordStatus.equals=" + UPDATED_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId equals to UPDATED_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByRecordStatusIsInShouldWork() throws Exception {
+    void getAllLeaveTypesByCompanyIdIsInShouldWork() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where recordStatus in DEFAULT_RECORD_STATUS or UPDATED_RECORD_STATUS
-        defaultLeaveTypeShouldBeFound("recordStatus.in=" + DEFAULT_RECORD_STATUS + "," + UPDATED_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
 
-        // Get all the leaveTypeList where recordStatus equals to UPDATED_RECORD_STATUS
-        defaultLeaveTypeShouldNotBeFound("recordStatus.in=" + UPDATED_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId equals to UPDATED_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByRecordStatusIsNullOrNotNull() throws Exception {
+    void getAllLeaveTypesByCompanyIdIsNullOrNotNull() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where recordStatus is not null
-        defaultLeaveTypeShouldBeFound("recordStatus.specified=true");
+        // Get all the leaveTypeList where companyId is not null
+        defaultLeaveTypeShouldBeFound("companyId.specified=true");
 
-        // Get all the leaveTypeList where recordStatus is null
-        defaultLeaveTypeShouldNotBeFound("recordStatus.specified=false");
+        // Get all the leaveTypeList where companyId is null
+        defaultLeaveTypeShouldNotBeFound("companyId.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByRecordStatusContainsSomething() throws Exception {
+    void getAllLeaveTypesByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where recordStatus contains DEFAULT_RECORD_STATUS
-        defaultLeaveTypeShouldBeFound("recordStatus.contains=" + DEFAULT_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
 
-        // Get all the leaveTypeList where recordStatus contains UPDATED_RECORD_STATUS
-        defaultLeaveTypeShouldNotBeFound("recordStatus.contains=" + UPDATED_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByRecordStatusNotContainsSomething() throws Exception {
+    void getAllLeaveTypesByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where recordStatus does not contain DEFAULT_RECORD_STATUS
-        defaultLeaveTypeShouldNotBeFound("recordStatus.doesNotContain=" + DEFAULT_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
 
-        // Get all the leaveTypeList where recordStatus does not contain UPDATED_RECORD_STATUS
-        defaultLeaveTypeShouldBeFound("recordStatus.doesNotContain=" + UPDATED_RECORD_STATUS);
+        // Get all the leaveTypeList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where companyId is less than DEFAULT_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leaveTypeList where companyId is less than UPDATED_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultLeaveTypeShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leaveTypeList where companyId is greater than SMALLER_COMPANY_ID
+        defaultLeaveTypeShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where status equals to DEFAULT_STATUS
+        defaultLeaveTypeShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the leaveTypeList where status equals to UPDATED_STATUS
+        defaultLeaveTypeShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultLeaveTypeShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the leaveTypeList where status equals to UPDATED_STATUS
+        defaultLeaveTypeShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where status is not null
+        defaultLeaveTypeShouldBeFound("status.specified=true");
+
+        // Get all the leaveTypeList where status is null
+        defaultLeaveTypeShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where status contains DEFAULT_STATUS
+        defaultLeaveTypeShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the leaveTypeList where status contains UPDATED_STATUS
+        defaultLeaveTypeShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeaveTypesByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        leaveTypeRepository.saveAndFlush(leaveType);
+
+        // Get all the leaveTypeList where status does not contain DEFAULT_STATUS
+        defaultLeaveTypeShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the leaveTypeList where status does not contain UPDATED_STATUS
+        defaultLeaveTypeShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -520,158 +627,119 @@ class LeaveTypeResourceIT {
 
     @Test
     @Transactional
-    void getAllLeaveTypesByStatusIsEqualToSomething() throws Exception {
+    void getAllLeaveTypesByHasCarryForwardIsEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where status equals to DEFAULT_STATUS
-        defaultLeaveTypeShouldBeFound("status.equals=" + DEFAULT_STATUS);
+        // Get all the leaveTypeList where hasCarryForward equals to DEFAULT_HAS_CARRY_FORWARD
+        defaultLeaveTypeShouldBeFound("hasCarryForward.equals=" + DEFAULT_HAS_CARRY_FORWARD);
 
-        // Get all the leaveTypeList where status equals to UPDATED_STATUS
-        defaultLeaveTypeShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+        // Get all the leaveTypeList where hasCarryForward equals to UPDATED_HAS_CARRY_FORWARD
+        defaultLeaveTypeShouldNotBeFound("hasCarryForward.equals=" + UPDATED_HAS_CARRY_FORWARD);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByStatusIsInShouldWork() throws Exception {
+    void getAllLeaveTypesByHasCarryForwardIsInShouldWork() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultLeaveTypeShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+        // Get all the leaveTypeList where hasCarryForward in DEFAULT_HAS_CARRY_FORWARD or UPDATED_HAS_CARRY_FORWARD
+        defaultLeaveTypeShouldBeFound("hasCarryForward.in=" + DEFAULT_HAS_CARRY_FORWARD + "," + UPDATED_HAS_CARRY_FORWARD);
 
-        // Get all the leaveTypeList where status equals to UPDATED_STATUS
-        defaultLeaveTypeShouldNotBeFound("status.in=" + UPDATED_STATUS);
+        // Get all the leaveTypeList where hasCarryForward equals to UPDATED_HAS_CARRY_FORWARD
+        defaultLeaveTypeShouldNotBeFound("hasCarryForward.in=" + UPDATED_HAS_CARRY_FORWARD);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByStatusIsNullOrNotNull() throws Exception {
+    void getAllLeaveTypesByHasCarryForwardIsNullOrNotNull() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where status is not null
-        defaultLeaveTypeShouldBeFound("status.specified=true");
+        // Get all the leaveTypeList where hasCarryForward is not null
+        defaultLeaveTypeShouldBeFound("hasCarryForward.specified=true");
 
-        // Get all the leaveTypeList where status is null
-        defaultLeaveTypeShouldNotBeFound("status.specified=false");
+        // Get all the leaveTypeList where hasCarryForward is null
+        defaultLeaveTypeShouldNotBeFound("hasCarryForward.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByStatusContainsSomething() throws Exception {
+    void getAllLeaveTypesByHasEarnedIsEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where status contains DEFAULT_STATUS
-        defaultLeaveTypeShouldBeFound("status.contains=" + DEFAULT_STATUS);
+        // Get all the leaveTypeList where hasEarned equals to DEFAULT_HAS_EARNED
+        defaultLeaveTypeShouldBeFound("hasEarned.equals=" + DEFAULT_HAS_EARNED);
 
-        // Get all the leaveTypeList where status contains UPDATED_STATUS
-        defaultLeaveTypeShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+        // Get all the leaveTypeList where hasEarned equals to UPDATED_HAS_EARNED
+        defaultLeaveTypeShouldNotBeFound("hasEarned.equals=" + UPDATED_HAS_EARNED);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByStatusNotContainsSomething() throws Exception {
+    void getAllLeaveTypesByHasEarnedIsInShouldWork() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where status does not contain DEFAULT_STATUS
-        defaultLeaveTypeShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+        // Get all the leaveTypeList where hasEarned in DEFAULT_HAS_EARNED or UPDATED_HAS_EARNED
+        defaultLeaveTypeShouldBeFound("hasEarned.in=" + DEFAULT_HAS_EARNED + "," + UPDATED_HAS_EARNED);
 
-        // Get all the leaveTypeList where status does not contain UPDATED_STATUS
-        defaultLeaveTypeShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+        // Get all the leaveTypeList where hasEarned equals to UPDATED_HAS_EARNED
+        defaultLeaveTypeShouldNotBeFound("hasEarned.in=" + UPDATED_HAS_EARNED);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByCompanyIdIsEqualToSomething() throws Exception {
+    void getAllLeaveTypesByHasEarnedIsNullOrNotNull() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where companyId equals to DEFAULT_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+        // Get all the leaveTypeList where hasEarned is not null
+        defaultLeaveTypeShouldBeFound("hasEarned.specified=true");
 
-        // Get all the leaveTypeList where companyId equals to UPDATED_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+        // Get all the leaveTypeList where hasEarned is null
+        defaultLeaveTypeShouldNotBeFound("hasEarned.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByCompanyIdIsInShouldWork() throws Exception {
+    void getAllLeaveTypesByHasCustomPolicyIsEqualToSomething() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+        // Get all the leaveTypeList where hasCustomPolicy equals to DEFAULT_HAS_CUSTOM_POLICY
+        defaultLeaveTypeShouldBeFound("hasCustomPolicy.equals=" + DEFAULT_HAS_CUSTOM_POLICY);
 
-        // Get all the leaveTypeList where companyId equals to UPDATED_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+        // Get all the leaveTypeList where hasCustomPolicy equals to UPDATED_HAS_CUSTOM_POLICY
+        defaultLeaveTypeShouldNotBeFound("hasCustomPolicy.equals=" + UPDATED_HAS_CUSTOM_POLICY);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByCompanyIdIsNullOrNotNull() throws Exception {
+    void getAllLeaveTypesByHasCustomPolicyIsInShouldWork() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where companyId is not null
-        defaultLeaveTypeShouldBeFound("companyId.specified=true");
+        // Get all the leaveTypeList where hasCustomPolicy in DEFAULT_HAS_CUSTOM_POLICY or UPDATED_HAS_CUSTOM_POLICY
+        defaultLeaveTypeShouldBeFound("hasCustomPolicy.in=" + DEFAULT_HAS_CUSTOM_POLICY + "," + UPDATED_HAS_CUSTOM_POLICY);
 
-        // Get all the leaveTypeList where companyId is null
-        defaultLeaveTypeShouldNotBeFound("companyId.specified=false");
+        // Get all the leaveTypeList where hasCustomPolicy equals to UPDATED_HAS_CUSTOM_POLICY
+        defaultLeaveTypeShouldNotBeFound("hasCustomPolicy.in=" + UPDATED_HAS_CUSTOM_POLICY);
     }
 
     @Test
     @Transactional
-    void getAllLeaveTypesByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllLeaveTypesByHasCustomPolicyIsNullOrNotNull() throws Exception {
         // Initialize the database
         leaveTypeRepository.saveAndFlush(leaveType);
 
-        // Get all the leaveTypeList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+        // Get all the leaveTypeList where hasCustomPolicy is not null
+        defaultLeaveTypeShouldBeFound("hasCustomPolicy.specified=true");
 
-        // Get all the leaveTypeList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveTypesByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        leaveTypeRepository.saveAndFlush(leaveType);
-
-        // Get all the leaveTypeList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leaveTypeList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveTypesByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        leaveTypeRepository.saveAndFlush(leaveType);
-
-        // Get all the leaveTypeList where companyId is less than DEFAULT_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leaveTypeList where companyId is less than UPDATED_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeaveTypesByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        leaveTypeRepository.saveAndFlush(leaveType);
-
-        // Get all the leaveTypeList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultLeaveTypeShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leaveTypeList where companyId is greater than SMALLER_COMPANY_ID
-        defaultLeaveTypeShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+        // Get all the leaveTypeList where hasCustomPolicy is null
+        defaultLeaveTypeShouldNotBeFound("hasCustomPolicy.specified=false");
     }
 
     /**
@@ -685,11 +753,13 @@ class LeaveTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(leaveType.getId().intValue())))
             .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
             .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS)))
-            .andExpect(jsonPath("$.[*].recordStatus").value(hasItem(DEFAULT_RECORD_STATUS)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].hasCarryForward").value(hasItem(DEFAULT_HAS_CARRY_FORWARD.booleanValue())))
+            .andExpect(jsonPath("$.[*].hasEarned").value(hasItem(DEFAULT_HAS_EARNED.booleanValue())))
+            .andExpect(jsonPath("$.[*].hasCustomPolicy").value(hasItem(DEFAULT_HAS_CUSTOM_POLICY.booleanValue())));
 
         // Check, that the count call also returns 1
         restLeaveTypeMockMvc
@@ -740,11 +810,13 @@ class LeaveTypeResourceIT {
         updatedLeaveType
             .leaveType(UPDATED_LEAVE_TYPE)
             .noOfDays(UPDATED_NO_OF_DAYS)
-            .recordStatus(UPDATED_RECORD_STATUS)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .hasCarryForward(UPDATED_HAS_CARRY_FORWARD)
+            .hasEarned(UPDATED_HAS_EARNED)
+            .hasCustomPolicy(UPDATED_HAS_CUSTOM_POLICY);
         LeaveTypeDTO leaveTypeDTO = leaveTypeMapper.toDto(updatedLeaveType);
 
         restLeaveTypeMockMvc
@@ -761,11 +833,13 @@ class LeaveTypeResourceIT {
         LeaveType testLeaveType = leaveTypeList.get(leaveTypeList.size() - 1);
         assertThat(testLeaveType.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
         assertThat(testLeaveType.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
-        assertThat(testLeaveType.getRecordStatus()).isEqualTo(UPDATED_RECORD_STATUS);
+        assertThat(testLeaveType.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeaveType.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testLeaveType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testLeaveType.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveType.getHasCarryForward()).isEqualTo(UPDATED_HAS_CARRY_FORWARD);
+        assertThat(testLeaveType.getHasEarned()).isEqualTo(UPDATED_HAS_EARNED);
+        assertThat(testLeaveType.getHasCustomPolicy()).isEqualTo(UPDATED_HAS_CUSTOM_POLICY);
     }
 
     @Test
@@ -847,10 +921,12 @@ class LeaveTypeResourceIT {
 
         partialUpdatedLeaveType
             .leaveType(UPDATED_LEAVE_TYPE)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .hasCarryForward(UPDATED_HAS_CARRY_FORWARD)
+            .hasEarned(UPDATED_HAS_EARNED)
+            .hasCustomPolicy(UPDATED_HAS_CUSTOM_POLICY);
 
         restLeaveTypeMockMvc
             .perform(
@@ -866,11 +942,13 @@ class LeaveTypeResourceIT {
         LeaveType testLeaveType = leaveTypeList.get(leaveTypeList.size() - 1);
         assertThat(testLeaveType.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
         assertThat(testLeaveType.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
-        assertThat(testLeaveType.getRecordStatus()).isEqualTo(DEFAULT_RECORD_STATUS);
+        assertThat(testLeaveType.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeaveType.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testLeaveType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testLeaveType.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveType.getHasCarryForward()).isEqualTo(UPDATED_HAS_CARRY_FORWARD);
+        assertThat(testLeaveType.getHasEarned()).isEqualTo(UPDATED_HAS_EARNED);
+        assertThat(testLeaveType.getHasCustomPolicy()).isEqualTo(UPDATED_HAS_CUSTOM_POLICY);
     }
 
     @Test
@@ -888,11 +966,13 @@ class LeaveTypeResourceIT {
         partialUpdatedLeaveType
             .leaveType(UPDATED_LEAVE_TYPE)
             .noOfDays(UPDATED_NO_OF_DAYS)
-            .recordStatus(UPDATED_RECORD_STATUS)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .hasCarryForward(UPDATED_HAS_CARRY_FORWARD)
+            .hasEarned(UPDATED_HAS_EARNED)
+            .hasCustomPolicy(UPDATED_HAS_CUSTOM_POLICY);
 
         restLeaveTypeMockMvc
             .perform(
@@ -908,11 +988,13 @@ class LeaveTypeResourceIT {
         LeaveType testLeaveType = leaveTypeList.get(leaveTypeList.size() - 1);
         assertThat(testLeaveType.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
         assertThat(testLeaveType.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
-        assertThat(testLeaveType.getRecordStatus()).isEqualTo(UPDATED_RECORD_STATUS);
+        assertThat(testLeaveType.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeaveType.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testLeaveType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testLeaveType.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testLeaveType.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeaveType.getHasCarryForward()).isEqualTo(UPDATED_HAS_CARRY_FORWARD);
+        assertThat(testLeaveType.getHasEarned()).isEqualTo(UPDATED_HAS_EARNED);
+        assertThat(testLeaveType.getHasCustomPolicy()).isEqualTo(UPDATED_HAS_CUSTOM_POLICY);
     }
 
     @Test

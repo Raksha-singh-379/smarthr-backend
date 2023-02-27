@@ -39,19 +39,15 @@ public class CompanyCriteria implements Serializable, Criteria {
 
     private StringFilter fax;
 
+    private StringFilter regNumber;
+
     private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
 
-    private StringFilter regNumber;
-
-    private StringFilter gstin;
-
-    private StringFilter pan;
-
-    private StringFilter tan;
+    private StringFilter leaveSettingLevel;
 
     private Boolean distinct;
 
@@ -67,13 +63,11 @@ public class CompanyCriteria implements Serializable, Criteria {
         this.mobileNumber = other.mobileNumber == null ? null : other.mobileNumber.copy();
         this.websiteUrl = other.websiteUrl == null ? null : other.websiteUrl.copy();
         this.fax = other.fax == null ? null : other.fax.copy();
+        this.regNumber = other.regNumber == null ? null : other.regNumber.copy();
         this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.regNumber = other.regNumber == null ? null : other.regNumber.copy();
-        this.gstin = other.gstin == null ? null : other.gstin.copy();
-        this.pan = other.pan == null ? null : other.pan.copy();
-        this.tan = other.tan == null ? null : other.tan.copy();
+        this.leaveSettingLevel = other.leaveSettingLevel == null ? null : other.leaveSettingLevel.copy();
         this.distinct = other.distinct;
     }
 
@@ -217,6 +211,21 @@ public class CompanyCriteria implements Serializable, Criteria {
         this.fax = fax;
     }
 
+    public StringFilter getRegNumber() {
+        return regNumber;
+    }
+
+    public StringFilter regNumber() {
+        if (regNumber == null) {
+            regNumber = new StringFilter();
+        }
+        return regNumber;
+    }
+
+    public void setRegNumber(StringFilter regNumber) {
+        this.regNumber = regNumber;
+    }
+
     public StringFilter getStatus() {
         return status;
     }
@@ -262,64 +271,19 @@ public class CompanyCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getRegNumber() {
-        return regNumber;
+    public StringFilter getLeaveSettingLevel() {
+        return leaveSettingLevel;
     }
 
-    public StringFilter regNumber() {
-        if (regNumber == null) {
-            regNumber = new StringFilter();
+    public StringFilter leaveSettingLevel() {
+        if (leaveSettingLevel == null) {
+            leaveSettingLevel = new StringFilter();
         }
-        return regNumber;
+        return leaveSettingLevel;
     }
 
-    public void setRegNumber(StringFilter regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public StringFilter getGstin() {
-        return gstin;
-    }
-
-    public StringFilter gstin() {
-        if (gstin == null) {
-            gstin = new StringFilter();
-        }
-        return gstin;
-    }
-
-    public void setGstin(StringFilter gstin) {
-        this.gstin = gstin;
-    }
-
-    public StringFilter getPan() {
-        return pan;
-    }
-
-    public StringFilter pan() {
-        if (pan == null) {
-            pan = new StringFilter();
-        }
-        return pan;
-    }
-
-    public void setPan(StringFilter pan) {
-        this.pan = pan;
-    }
-
-    public StringFilter getTan() {
-        return tan;
-    }
-
-    public StringFilter tan() {
-        if (tan == null) {
-            tan = new StringFilter();
-        }
-        return tan;
-    }
-
-    public void setTan(StringFilter tan) {
-        this.tan = tan;
+    public void setLeaveSettingLevel(StringFilter leaveSettingLevel) {
+        this.leaveSettingLevel = leaveSettingLevel;
     }
 
     public Boolean getDistinct() {
@@ -349,13 +313,11 @@ public class CompanyCriteria implements Serializable, Criteria {
             Objects.equals(mobileNumber, that.mobileNumber) &&
             Objects.equals(websiteUrl, that.websiteUrl) &&
             Objects.equals(fax, that.fax) &&
+            Objects.equals(regNumber, that.regNumber) &&
             Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(regNumber, that.regNumber) &&
-            Objects.equals(gstin, that.gstin) &&
-            Objects.equals(pan, that.pan) &&
-            Objects.equals(tan, that.tan) &&
+            Objects.equals(leaveSettingLevel, that.leaveSettingLevel) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -372,13 +334,11 @@ public class CompanyCriteria implements Serializable, Criteria {
             mobileNumber,
             websiteUrl,
             fax,
+            regNumber,
             status,
             lastModified,
             lastModifiedBy,
-            regNumber,
-            gstin,
-            pan,
-            tan,
+            leaveSettingLevel,
             distinct
         );
     }
@@ -396,13 +356,11 @@ public class CompanyCriteria implements Serializable, Criteria {
             (mobileNumber != null ? "mobileNumber=" + mobileNumber + ", " : "") +
             (websiteUrl != null ? "websiteUrl=" + websiteUrl + ", " : "") +
             (fax != null ? "fax=" + fax + ", " : "") +
+            (regNumber != null ? "regNumber=" + regNumber + ", " : "") +
             (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (regNumber != null ? "regNumber=" + regNumber + ", " : "") +
-            (gstin != null ? "gstin=" + gstin + ", " : "") +
-            (pan != null ? "pan=" + pan + ", " : "") +
-            (tan != null ? "tan=" + tan + ", " : "") +
+            (leaveSettingLevel != null ? "leaveSettingLevel=" + leaveSettingLevel + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

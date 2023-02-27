@@ -16,7 +16,7 @@ public class EducationDTO implements Serializable {
 
     private String subject;
 
-    private Instant startDate;
+    private Instant startYear;
 
     private Instant endDate;
 
@@ -26,15 +26,15 @@ public class EducationDTO implements Serializable {
 
     private String description;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
     private Long employeeId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -60,12 +60,12 @@ public class EducationDTO implements Serializable {
         this.subject = subject;
     }
 
-    public Instant getStartDate() {
-        return startDate;
+    public Instant getStartYear() {
+        return startYear;
     }
 
-    public void setStartDate(Instant startDate) {
-        this.startDate = startDate;
+    public void setStartYear(Instant startYear) {
+        this.startYear = startYear;
     }
 
     public Instant getEndDate() {
@@ -100,30 +100,6 @@ public class EducationDTO implements Serializable {
         this.description = description;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getEmployeeId() {
         return employeeId;
     }
@@ -138,6 +114,30 @@ public class EducationDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -168,16 +168,16 @@ public class EducationDTO implements Serializable {
             "id=" + getId() +
             ", institution='" + getInstitution() + "'" +
             ", subject='" + getSubject() + "'" +
-            ", startDate='" + getStartDate() + "'" +
+            ", startYear='" + getStartYear() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", educationType='" + getEducationType() + "'" +
             ", grade='" + getGrade() + "'" +
             ", description='" + getDescription() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

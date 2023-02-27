@@ -7,32 +7,30 @@ export const sampleWithRequiredData: ILeaveApplication = {
 };
 
 export const sampleWithPartialData: ILeaveApplication = {
-  id: 48531,
-  noOfDays: 95755,
-  reason: 'Shoes',
-  toDate: dayjs('2023-02-08T10:51'),
-  leaveStatus: 'Handcrafted Bangladesh',
-  lastModifiedBy: 'executive',
+  id: 52122,
+  reason: 'Implementation Global',
+  year: 94322,
+  leaveStatus: 'Benin Infrastructure Ergonomic',
   status: 'Macao distributed',
-  employeId: 13284,
-  companyId: 25221,
+  companyId: 13284,
+  lastModified: dayjs('2023-02-08T22:45'),
+  lastModifiedBy: 'strategy',
 };
 
 export const sampleWithFullData: ILeaveApplication = {
-  id: 1506,
-  leaveType: 'ADP',
-  balanceLeave: 3353,
-  noOfDays: 26196,
-  reason: 'CSS',
-  year: 1870,
-  formDate: dayjs('2023-02-08T19:20'),
-  toDate: dayjs('2023-02-08T10:17'),
-  leaveStatus: 'access Rustic',
-  lastModified: dayjs('2023-02-08T07:37'),
-  lastModifiedBy: 'innovative embrace GB',
-  status: 'Avon navigating Kentucky',
-  employeId: 30305,
-  companyId: 44734,
+  id: 14469,
+  leaveType: 'demand-driven',
+  noOfDays: 17360,
+  reason: 'Tools Greece Movies',
+  year: 37074,
+  formDate: dayjs('2023-02-08T07:37'),
+  toDate: dayjs('2023-02-08T12:18'),
+  leaveStatus: 'Fresh Rubber',
+  status: 'scale',
+  employeId: 1263,
+  companyId: 57564,
+  lastModified: dayjs('2023-02-08T08:40'),
+  lastModifiedBy: 'knowledge Product',
 };
 
 export const sampleWithNewData: NewLeaveApplication = {

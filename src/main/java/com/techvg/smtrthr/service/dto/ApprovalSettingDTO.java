@@ -12,17 +12,17 @@ public class ApprovalSettingDTO implements Serializable {
 
     private Long id;
 
-    private Boolean isSequenceApproval;
+    private String type;
 
-    private Boolean isSimultaneousApproval;
+    private Integer approvalCategory;
+
+    private Long companyId;
+
+    private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
-
-    private String status;
-
-    private Long companyId;
 
     public Long getId() {
         return id;
@@ -32,20 +32,36 @@ public class ApprovalSettingDTO implements Serializable {
         this.id = id;
     }
 
-    public Boolean getIsSequenceApproval() {
-        return isSequenceApproval;
+    public String getType() {
+        return type;
     }
 
-    public void setIsSequenceApproval(Boolean isSequenceApproval) {
-        this.isSequenceApproval = isSequenceApproval;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Boolean getIsSimultaneousApproval() {
-        return isSimultaneousApproval;
+    public Integer getApprovalCategory() {
+        return approvalCategory;
     }
 
-    public void setIsSimultaneousApproval(Boolean isSimultaneousApproval) {
-        this.isSimultaneousApproval = isSimultaneousApproval;
+    public void setApprovalCategory(Integer approvalCategory) {
+        this.approvalCategory = approvalCategory;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -62,22 +78,6 @@ public class ApprovalSettingDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -106,12 +106,12 @@ public class ApprovalSettingDTO implements Serializable {
     public String toString() {
         return "ApprovalSettingDTO{" +
             "id=" + getId() +
-            ", isSequenceApproval='" + getIsSequenceApproval() + "'" +
-            ", isSimultaneousApproval='" + getIsSimultaneousApproval() + "'" +
+            ", type='" + getType() + "'" +
+            ", approvalCategory=" + getApprovalCategory() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

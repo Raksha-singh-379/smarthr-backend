@@ -54,6 +54,16 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.gstin" for="field_gstin">Gstin</label>
+          <input type="text" class="form-control" name="gstin" id="field_gstin" data-cy="gstin" formControlName="gstin" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.tan" for="field_tan">Tan</label>
+          <input type="text" class="form-control" name="tan" id="field_tan" data-cy="tan" formControlName="tan" />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.banksDetails.branchName" for="field_branchName">Branch Name</label>
           <input
             type="text"
@@ -63,6 +73,33 @@
             data-cy="branchName"
             formControlName="branchName"
           />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.refTable" for="field_refTable">Ref Table</label>
+          <input type="text" class="form-control" name="refTable" id="field_refTable" data-cy="refTable" formControlName="refTable" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.refTableId" for="field_refTableId">Ref Table Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="refTableId"
+            id="field_refTableId"
+            data-cy="refTableId"
+            formControlName="refTableId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
         </div>
 
         <div class="row mb-3">
@@ -92,40 +129,6 @@
             data-cy="lastModifiedBy"
             formControlName="lastModifiedBy"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.refTableType" for="field_refTableType">Ref Table Type</label>
-          <input
-            type="text"
-            class="form-control"
-            name="refTableType"
-            id="field_refTableType"
-            data-cy="refTableType"
-            formControlName="refTableType"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.refTableId" for="field_refTableId">Ref Table Id</label>
-          <input
-            type="number"
-            class="form-control"
-            name="refTableId"
-            id="field_refTableId"
-            data-cy="refTableId"
-            formControlName="refTableId"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.banksDetails.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
         </div>
       </div>
 

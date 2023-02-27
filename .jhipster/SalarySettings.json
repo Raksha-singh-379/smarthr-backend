@@ -22,12 +22,12 @@
       "fieldType": "Double"
     },
     {
-      "fieldName": "salaryFrom",
-      "fieldType": "Instant"
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
-      "fieldName": "salaryTo",
-      "fieldType": "Instant"
+      "fieldName": "status",
+      "fieldType": "String"
     },
     {
       "fieldName": "lastModified",
@@ -36,14 +36,6 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

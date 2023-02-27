@@ -3,7 +3,6 @@ package com.techvg.smtrthr.domain;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,8 +22,7 @@ public class Holiday implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "holiday_name", nullable = false)
+    @Column(name = "holiday_name")
     private String holidayName;
 
     @Column(name = "holiday_date")
@@ -36,17 +34,17 @@ public class Holiday implements Serializable {
     @Column(name = "year")
     private Instant year;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -115,6 +113,32 @@ public class Holiday implements Serializable {
         this.year = year;
     }
 
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public Holiday companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public Holiday status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -139,32 +163,6 @@ public class Holiday implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public Holiday status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public Holiday companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -195,10 +193,10 @@ public class Holiday implements Serializable {
             ", holidayDate='" + getHolidayDate() + "'" +
             ", day='" + getDay() + "'" +
             ", year='" + getYear() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

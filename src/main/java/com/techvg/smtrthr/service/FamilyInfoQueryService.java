@@ -99,23 +99,29 @@ public class FamilyInfoQueryService extends QueryService<FamilyInfo> {
             if (criteria.getRelation() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRelation(), FamilyInfo_.relation));
             }
-            if (criteria.getAddress() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getAddress(), FamilyInfo_.address));
+            if (criteria.getAddressId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getAddressId(), FamilyInfo_.addressId));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), FamilyInfo_.lastModified));
+            if (criteria.getIsEmployed() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsEmployed(), FamilyInfo_.isEmployed));
             }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), FamilyInfo_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), FamilyInfo_.status));
+            if (criteria.getEmployedAt() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEmployedAt(), FamilyInfo_.employedAt));
             }
             if (criteria.getEmployeeId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEmployeeId(), FamilyInfo_.employeeId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), FamilyInfo_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), FamilyInfo_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), FamilyInfo_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), FamilyInfo_.lastModifiedBy));
             }
         }
         return specification;

@@ -24,14 +24,13 @@ describe('WorkExperience Form Service', () => {
             companyName: expect.any(Object),
             startDate: expect.any(Object),
             endDate: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             addressId: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
-            yearOfExp: expect.any(Object),
             jobDesc: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -46,14 +45,13 @@ describe('WorkExperience Form Service', () => {
             companyName: expect.any(Object),
             startDate: expect.any(Object),
             endDate: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
             addressId: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
-            yearOfExp: expect.any(Object),
             jobDesc: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

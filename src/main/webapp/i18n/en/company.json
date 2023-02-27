@@ -26,13 +26,11 @@
       "mobileNumber": "Mobile Number",
       "websiteUrl": "Website Url",
       "fax": "Fax",
+      "regNumber": "Reg Number",
       "status": "Status",
       "lastModified": "Last Modified",
       "lastModifiedBy": "Last Modified By",
-      "regNumber": "Reg Number",
-      "gstin": "Gstin",
-      "pan": "Pan",
-      "tan": "Tan"
+      "leaveSettingLevel": "Leave Setting Level"
     }
   }
 }

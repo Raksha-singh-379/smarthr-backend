@@ -102,17 +102,17 @@ public class HolidayQueryService extends QueryService<Holiday> {
             if (criteria.getYear() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getYear(), Holiday_.year));
             }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Holiday_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), Holiday_.status));
+            }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Holiday_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Holiday_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), Holiday_.status));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Holiday_.companyId));
             }
         }
         return specification;

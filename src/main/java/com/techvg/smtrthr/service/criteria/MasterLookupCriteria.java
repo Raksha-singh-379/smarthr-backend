@@ -27,17 +27,19 @@ public class MasterLookupCriteria implements Serializable, Criteria {
 
     private StringFilter value;
 
+    private StringFilter valueTwo;
+
     private StringFilter description;
 
     private StringFilter type;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
+    private LongFilter companyId;
 
     private StringFilter status;
 
-    private LongFilter companyId;
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -47,12 +49,13 @@ public class MasterLookupCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.value = other.value == null ? null : other.value.copy();
+        this.valueTwo = other.valueTwo == null ? null : other.valueTwo.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.type = other.type == null ? null : other.type.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.distinct = other.distinct;
     }
 
@@ -106,6 +109,21 @@ public class MasterLookupCriteria implements Serializable, Criteria {
         this.value = value;
     }
 
+    public StringFilter getValueTwo() {
+        return valueTwo;
+    }
+
+    public StringFilter valueTwo() {
+        if (valueTwo == null) {
+            valueTwo = new StringFilter();
+        }
+        return valueTwo;
+    }
+
+    public void setValueTwo(StringFilter valueTwo) {
+        this.valueTwo = valueTwo;
+    }
+
     public StringFilter getDescription() {
         return description;
     }
@@ -134,6 +152,36 @@ public class MasterLookupCriteria implements Serializable, Criteria {
 
     public void setType(StringFilter type) {
         this.type = type;
+    }
+
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
     public InstantFilter getLastModified() {
@@ -166,36 +214,6 @@ public class MasterLookupCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public LongFilter getCompanyId() {
-        return companyId;
-    }
-
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
-        }
-        return companyId;
-    }
-
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -217,19 +235,20 @@ public class MasterLookupCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(value, that.value) &&
+            Objects.equals(valueTwo, that.valueTwo) &&
             Objects.equals(description, that.description) &&
             Objects.equals(type, that.type) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, value, description, type, lastModified, lastModifiedBy, status, companyId, distinct);
+        return Objects.hash(id, name, value, valueTwo, description, type, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -239,12 +258,13 @@ public class MasterLookupCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
             (value != null ? "value=" + value + ", " : "") +
+            (valueTwo != null ? "valueTwo=" + valueTwo + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
             (type != null ? "type=" + type + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

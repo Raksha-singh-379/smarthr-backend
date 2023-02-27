@@ -22,23 +22,23 @@ public class ApprovalSetting implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "is_sequence_approval")
-    private Boolean isSequenceApproval;
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "is_simultaneous_approval")
-    private Boolean isSimultaneousApproval;
+    @Column(name = "approval_category")
+    private Integer approvalCategory;
+
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -55,30 +55,56 @@ public class ApprovalSetting implements Serializable {
         this.id = id;
     }
 
-    public Boolean getIsSequenceApproval() {
-        return this.isSequenceApproval;
+    public String getType() {
+        return this.type;
     }
 
-    public ApprovalSetting isSequenceApproval(Boolean isSequenceApproval) {
-        this.setIsSequenceApproval(isSequenceApproval);
+    public ApprovalSetting type(String type) {
+        this.setType(type);
         return this;
     }
 
-    public void setIsSequenceApproval(Boolean isSequenceApproval) {
-        this.isSequenceApproval = isSequenceApproval;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Boolean getIsSimultaneousApproval() {
-        return this.isSimultaneousApproval;
+    public Integer getApprovalCategory() {
+        return this.approvalCategory;
     }
 
-    public ApprovalSetting isSimultaneousApproval(Boolean isSimultaneousApproval) {
-        this.setIsSimultaneousApproval(isSimultaneousApproval);
+    public ApprovalSetting approvalCategory(Integer approvalCategory) {
+        this.setApprovalCategory(approvalCategory);
         return this;
     }
 
-    public void setIsSimultaneousApproval(Boolean isSimultaneousApproval) {
-        this.isSimultaneousApproval = isSimultaneousApproval;
+    public void setApprovalCategory(Integer approvalCategory) {
+        this.approvalCategory = approvalCategory;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public ApprovalSetting companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public ApprovalSetting status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -107,32 +133,6 @@ public class ApprovalSetting implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public ApprovalSetting status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public ApprovalSetting companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -157,12 +157,12 @@ public class ApprovalSetting implements Serializable {
     public String toString() {
         return "ApprovalSetting{" +
             "id=" + getId() +
-            ", isSequenceApproval='" + getIsSequenceApproval() + "'" +
-            ", isSimultaneousApproval='" + getIsSimultaneousApproval() + "'" +
+            ", type='" + getType() + "'" +
+            ", approvalCategory=" + getApprovalCategory() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

@@ -47,20 +47,17 @@ class BanksDetailsResourceIT {
     private static final String DEFAULT_TAX_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_TAX_NUMBER = "BBBBBBBBBB";
 
+    private static final String DEFAULT_GSTIN = "AAAAAAAAAA";
+    private static final String UPDATED_GSTIN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TAN = "AAAAAAAAAA";
+    private static final String UPDATED_TAN = "BBBBBBBBBB";
+
     private static final String DEFAULT_BRANCH_NAME = "AAAAAAAAAA";
     private static final String UPDATED_BRANCH_NAME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_REF_TABLE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_REF_TABLE_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_REF_TABLE = "AAAAAAAAAA";
+    private static final String UPDATED_REF_TABLE = "BBBBBBBBBB";
 
     private static final Long DEFAULT_REF_TABLE_ID = 1L;
     private static final Long UPDATED_REF_TABLE_ID = 2L;
@@ -69,6 +66,15 @@ class BanksDetailsResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/banks-details";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -102,13 +108,15 @@ class BanksDetailsResourceIT {
             .bankName(DEFAULT_BANK_NAME)
             .branchTransCode(DEFAULT_BRANCH_TRANS_CODE)
             .taxNumber(DEFAULT_TAX_NUMBER)
+            .gstin(DEFAULT_GSTIN)
+            .tan(DEFAULT_TAN)
             .branchName(DEFAULT_BRANCH_NAME)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
-            .refTableType(DEFAULT_REF_TABLE_TYPE)
+            .refTable(DEFAULT_REF_TABLE)
             .refTableId(DEFAULT_REF_TABLE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return banksDetails;
     }
 
@@ -124,13 +132,15 @@ class BanksDetailsResourceIT {
             .bankName(UPDATED_BANK_NAME)
             .branchTransCode(UPDATED_BRANCH_TRANS_CODE)
             .taxNumber(UPDATED_TAX_NUMBER)
+            .gstin(UPDATED_GSTIN)
+            .tan(UPDATED_TAN)
             .branchName(UPDATED_BRANCH_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return banksDetails;
     }
 
@@ -159,13 +169,15 @@ class BanksDetailsResourceIT {
         assertThat(testBanksDetails.getBankName()).isEqualTo(DEFAULT_BANK_NAME);
         assertThat(testBanksDetails.getBranchTransCode()).isEqualTo(DEFAULT_BRANCH_TRANS_CODE);
         assertThat(testBanksDetails.getTaxNumber()).isEqualTo(DEFAULT_TAX_NUMBER);
+        assertThat(testBanksDetails.getGstin()).isEqualTo(DEFAULT_GSTIN);
+        assertThat(testBanksDetails.getTan()).isEqualTo(DEFAULT_TAN);
         assertThat(testBanksDetails.getBranchName()).isEqualTo(DEFAULT_BRANCH_NAME);
-        assertThat(testBanksDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testBanksDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testBanksDetails.getRefTableType()).isEqualTo(DEFAULT_REF_TABLE_TYPE);
+        assertThat(testBanksDetails.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
         assertThat(testBanksDetails.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
         assertThat(testBanksDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testBanksDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testBanksDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -205,13 +217,15 @@ class BanksDetailsResourceIT {
             .andExpect(jsonPath("$.[*].bankName").value(hasItem(DEFAULT_BANK_NAME)))
             .andExpect(jsonPath("$.[*].branchTransCode").value(hasItem(DEFAULT_BRANCH_TRANS_CODE)))
             .andExpect(jsonPath("$.[*].taxNumber").value(hasItem(DEFAULT_TAX_NUMBER)))
+            .andExpect(jsonPath("$.[*].gstin").value(hasItem(DEFAULT_GSTIN)))
+            .andExpect(jsonPath("$.[*].tan").value(hasItem(DEFAULT_TAN)))
             .andExpect(jsonPath("$.[*].branchName").value(hasItem(DEFAULT_BRANCH_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
             .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -230,13 +244,15 @@ class BanksDetailsResourceIT {
             .andExpect(jsonPath("$.bankName").value(DEFAULT_BANK_NAME))
             .andExpect(jsonPath("$.branchTransCode").value(DEFAULT_BRANCH_TRANS_CODE))
             .andExpect(jsonPath("$.taxNumber").value(DEFAULT_TAX_NUMBER))
+            .andExpect(jsonPath("$.gstin").value(DEFAULT_GSTIN))
+            .andExpect(jsonPath("$.tan").value(DEFAULT_TAN))
             .andExpect(jsonPath("$.branchName").value(DEFAULT_BRANCH_NAME))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.refTableType").value(DEFAULT_REF_TABLE_TYPE))
+            .andExpect(jsonPath("$.refTable").value(DEFAULT_REF_TABLE))
             .andExpect(jsonPath("$.refTableId").value(DEFAULT_REF_TABLE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -545,6 +561,136 @@ class BanksDetailsResourceIT {
 
     @Test
     @Transactional
+    void getAllBanksDetailsByGstinIsEqualToSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where gstin equals to DEFAULT_GSTIN
+        defaultBanksDetailsShouldBeFound("gstin.equals=" + DEFAULT_GSTIN);
+
+        // Get all the banksDetailsList where gstin equals to UPDATED_GSTIN
+        defaultBanksDetailsShouldNotBeFound("gstin.equals=" + UPDATED_GSTIN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByGstinIsInShouldWork() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where gstin in DEFAULT_GSTIN or UPDATED_GSTIN
+        defaultBanksDetailsShouldBeFound("gstin.in=" + DEFAULT_GSTIN + "," + UPDATED_GSTIN);
+
+        // Get all the banksDetailsList where gstin equals to UPDATED_GSTIN
+        defaultBanksDetailsShouldNotBeFound("gstin.in=" + UPDATED_GSTIN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByGstinIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where gstin is not null
+        defaultBanksDetailsShouldBeFound("gstin.specified=true");
+
+        // Get all the banksDetailsList where gstin is null
+        defaultBanksDetailsShouldNotBeFound("gstin.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByGstinContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where gstin contains DEFAULT_GSTIN
+        defaultBanksDetailsShouldBeFound("gstin.contains=" + DEFAULT_GSTIN);
+
+        // Get all the banksDetailsList where gstin contains UPDATED_GSTIN
+        defaultBanksDetailsShouldNotBeFound("gstin.contains=" + UPDATED_GSTIN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByGstinNotContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where gstin does not contain DEFAULT_GSTIN
+        defaultBanksDetailsShouldNotBeFound("gstin.doesNotContain=" + DEFAULT_GSTIN);
+
+        // Get all the banksDetailsList where gstin does not contain UPDATED_GSTIN
+        defaultBanksDetailsShouldBeFound("gstin.doesNotContain=" + UPDATED_GSTIN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByTanIsEqualToSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where tan equals to DEFAULT_TAN
+        defaultBanksDetailsShouldBeFound("tan.equals=" + DEFAULT_TAN);
+
+        // Get all the banksDetailsList where tan equals to UPDATED_TAN
+        defaultBanksDetailsShouldNotBeFound("tan.equals=" + UPDATED_TAN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByTanIsInShouldWork() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where tan in DEFAULT_TAN or UPDATED_TAN
+        defaultBanksDetailsShouldBeFound("tan.in=" + DEFAULT_TAN + "," + UPDATED_TAN);
+
+        // Get all the banksDetailsList where tan equals to UPDATED_TAN
+        defaultBanksDetailsShouldNotBeFound("tan.in=" + UPDATED_TAN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByTanIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where tan is not null
+        defaultBanksDetailsShouldBeFound("tan.specified=true");
+
+        // Get all the banksDetailsList where tan is null
+        defaultBanksDetailsShouldNotBeFound("tan.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByTanContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where tan contains DEFAULT_TAN
+        defaultBanksDetailsShouldBeFound("tan.contains=" + DEFAULT_TAN);
+
+        // Get all the banksDetailsList where tan contains UPDATED_TAN
+        defaultBanksDetailsShouldNotBeFound("tan.contains=" + UPDATED_TAN);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByTanNotContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where tan does not contain DEFAULT_TAN
+        defaultBanksDetailsShouldNotBeFound("tan.doesNotContain=" + DEFAULT_TAN);
+
+        // Get all the banksDetailsList where tan does not contain UPDATED_TAN
+        defaultBanksDetailsShouldBeFound("tan.doesNotContain=" + UPDATED_TAN);
+    }
+
+    @Test
+    @Transactional
     void getAllBanksDetailsByBranchNameIsEqualToSomething() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
@@ -610,236 +756,67 @@ class BanksDetailsResourceIT {
 
     @Test
     @Transactional
-    void getAllBanksDetailsByLastModifiedIsEqualToSomething() throws Exception {
+    void getAllBanksDetailsByRefTableIsEqualToSomething() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
 
-        // Get all the banksDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultBanksDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+        // Get all the banksDetailsList where refTable equals to DEFAULT_REF_TABLE
+        defaultBanksDetailsShouldBeFound("refTable.equals=" + DEFAULT_REF_TABLE);
 
-        // Get all the banksDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultBanksDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+        // Get all the banksDetailsList where refTable equals to UPDATED_REF_TABLE
+        defaultBanksDetailsShouldNotBeFound("refTable.equals=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllBanksDetailsByLastModifiedIsInShouldWork() throws Exception {
+    void getAllBanksDetailsByRefTableIsInShouldWork() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
 
-        // Get all the banksDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultBanksDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+        // Get all the banksDetailsList where refTable in DEFAULT_REF_TABLE or UPDATED_REF_TABLE
+        defaultBanksDetailsShouldBeFound("refTable.in=" + DEFAULT_REF_TABLE + "," + UPDATED_REF_TABLE);
 
-        // Get all the banksDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultBanksDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+        // Get all the banksDetailsList where refTable equals to UPDATED_REF_TABLE
+        defaultBanksDetailsShouldNotBeFound("refTable.in=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllBanksDetailsByLastModifiedIsNullOrNotNull() throws Exception {
+    void getAllBanksDetailsByRefTableIsNullOrNotNull() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
 
-        // Get all the banksDetailsList where lastModified is not null
-        defaultBanksDetailsShouldBeFound("lastModified.specified=true");
+        // Get all the banksDetailsList where refTable is not null
+        defaultBanksDetailsShouldBeFound("refTable.specified=true");
 
-        // Get all the banksDetailsList where lastModified is null
-        defaultBanksDetailsShouldNotBeFound("lastModified.specified=false");
+        // Get all the banksDetailsList where refTable is null
+        defaultBanksDetailsShouldNotBeFound("refTable.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllBanksDetailsByLastModifiedByIsEqualToSomething() throws Exception {
+    void getAllBanksDetailsByRefTableContainsSomething() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
 
-        // Get all the banksDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the banksDetailsList where refTable contains DEFAULT_REF_TABLE
+        defaultBanksDetailsShouldBeFound("refTable.contains=" + DEFAULT_REF_TABLE);
 
-        // Get all the banksDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the banksDetailsList where refTable contains UPDATED_REF_TABLE
+        defaultBanksDetailsShouldNotBeFound("refTable.contains=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllBanksDetailsByLastModifiedByIsInShouldWork() throws Exception {
+    void getAllBanksDetailsByRefTableNotContainsSomething() throws Exception {
         // Initialize the database
         banksDetailsRepository.saveAndFlush(banksDetails);
 
-        // Get all the banksDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+        // Get all the banksDetailsList where refTable does not contain DEFAULT_REF_TABLE
+        defaultBanksDetailsShouldNotBeFound("refTable.doesNotContain=" + DEFAULT_REF_TABLE);
 
-        // Get all the banksDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where lastModifiedBy is not null
-        defaultBanksDetailsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the banksDetailsList where lastModifiedBy is null
-        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the banksDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the banksDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultBanksDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where status equals to DEFAULT_STATUS
-        defaultBanksDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the banksDetailsList where status equals to UPDATED_STATUS
-        defaultBanksDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultBanksDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the banksDetailsList where status equals to UPDATED_STATUS
-        defaultBanksDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where status is not null
-        defaultBanksDetailsShouldBeFound("status.specified=true");
-
-        // Get all the banksDetailsList where status is null
-        defaultBanksDetailsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where status contains DEFAULT_STATUS
-        defaultBanksDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the banksDetailsList where status contains UPDATED_STATUS
-        defaultBanksDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where status does not contain DEFAULT_STATUS
-        defaultBanksDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the banksDetailsList where status does not contain UPDATED_STATUS
-        defaultBanksDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByRefTableTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where refTableType equals to DEFAULT_REF_TABLE_TYPE
-        defaultBanksDetailsShouldBeFound("refTableType.equals=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the banksDetailsList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultBanksDetailsShouldNotBeFound("refTableType.equals=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByRefTableTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where refTableType in DEFAULT_REF_TABLE_TYPE or UPDATED_REF_TABLE_TYPE
-        defaultBanksDetailsShouldBeFound("refTableType.in=" + DEFAULT_REF_TABLE_TYPE + "," + UPDATED_REF_TABLE_TYPE);
-
-        // Get all the banksDetailsList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultBanksDetailsShouldNotBeFound("refTableType.in=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByRefTableTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where refTableType is not null
-        defaultBanksDetailsShouldBeFound("refTableType.specified=true");
-
-        // Get all the banksDetailsList where refTableType is null
-        defaultBanksDetailsShouldNotBeFound("refTableType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByRefTableTypeContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where refTableType contains DEFAULT_REF_TABLE_TYPE
-        defaultBanksDetailsShouldBeFound("refTableType.contains=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the banksDetailsList where refTableType contains UPDATED_REF_TABLE_TYPE
-        defaultBanksDetailsShouldNotBeFound("refTableType.contains=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllBanksDetailsByRefTableTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        banksDetailsRepository.saveAndFlush(banksDetails);
-
-        // Get all the banksDetailsList where refTableType does not contain DEFAULT_REF_TABLE_TYPE
-        defaultBanksDetailsShouldNotBeFound("refTableType.doesNotContain=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the banksDetailsList where refTableType does not contain UPDATED_REF_TABLE_TYPE
-        defaultBanksDetailsShouldBeFound("refTableType.doesNotContain=" + UPDATED_REF_TABLE_TYPE);
+        // Get all the banksDetailsList where refTable does not contain UPDATED_REF_TABLE
+        defaultBanksDetailsShouldBeFound("refTable.doesNotContain=" + UPDATED_REF_TABLE);
     }
 
     @Test
@@ -1024,6 +1001,175 @@ class BanksDetailsResourceIT {
         defaultBanksDetailsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllBanksDetailsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where status equals to DEFAULT_STATUS
+        defaultBanksDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the banksDetailsList where status equals to UPDATED_STATUS
+        defaultBanksDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultBanksDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the banksDetailsList where status equals to UPDATED_STATUS
+        defaultBanksDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where status is not null
+        defaultBanksDetailsShouldBeFound("status.specified=true");
+
+        // Get all the banksDetailsList where status is null
+        defaultBanksDetailsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where status contains DEFAULT_STATUS
+        defaultBanksDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the banksDetailsList where status contains UPDATED_STATUS
+        defaultBanksDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where status does not contain DEFAULT_STATUS
+        defaultBanksDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the banksDetailsList where status does not contain UPDATED_STATUS
+        defaultBanksDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultBanksDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the banksDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultBanksDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultBanksDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the banksDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultBanksDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModified is not null
+        defaultBanksDetailsShouldBeFound("lastModified.specified=true");
+
+        // Get all the banksDetailsList where lastModified is null
+        defaultBanksDetailsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the banksDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the banksDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModifiedBy is not null
+        defaultBanksDetailsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the banksDetailsList where lastModifiedBy is null
+        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the banksDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllBanksDetailsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        banksDetailsRepository.saveAndFlush(banksDetails);
+
+        // Get all the banksDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the banksDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultBanksDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1037,13 +1183,15 @@ class BanksDetailsResourceIT {
             .andExpect(jsonPath("$.[*].bankName").value(hasItem(DEFAULT_BANK_NAME)))
             .andExpect(jsonPath("$.[*].branchTransCode").value(hasItem(DEFAULT_BRANCH_TRANS_CODE)))
             .andExpect(jsonPath("$.[*].taxNumber").value(hasItem(DEFAULT_TAX_NUMBER)))
+            .andExpect(jsonPath("$.[*].gstin").value(hasItem(DEFAULT_GSTIN)))
+            .andExpect(jsonPath("$.[*].tan").value(hasItem(DEFAULT_TAN)))
             .andExpect(jsonPath("$.[*].branchName").value(hasItem(DEFAULT_BRANCH_NAME)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
             .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restBanksDetailsMockMvc
@@ -1096,13 +1244,15 @@ class BanksDetailsResourceIT {
             .bankName(UPDATED_BANK_NAME)
             .branchTransCode(UPDATED_BRANCH_TRANS_CODE)
             .taxNumber(UPDATED_TAX_NUMBER)
+            .gstin(UPDATED_GSTIN)
+            .tan(UPDATED_TAN)
             .branchName(UPDATED_BRANCH_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         BanksDetailsDTO banksDetailsDTO = banksDetailsMapper.toDto(updatedBanksDetails);
 
         restBanksDetailsMockMvc
@@ -1121,13 +1271,15 @@ class BanksDetailsResourceIT {
         assertThat(testBanksDetails.getBankName()).isEqualTo(UPDATED_BANK_NAME);
         assertThat(testBanksDetails.getBranchTransCode()).isEqualTo(UPDATED_BRANCH_TRANS_CODE);
         assertThat(testBanksDetails.getTaxNumber()).isEqualTo(UPDATED_TAX_NUMBER);
+        assertThat(testBanksDetails.getGstin()).isEqualTo(UPDATED_GSTIN);
+        assertThat(testBanksDetails.getTan()).isEqualTo(UPDATED_TAN);
         assertThat(testBanksDetails.getBranchName()).isEqualTo(UPDATED_BRANCH_NAME);
-        assertThat(testBanksDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testBanksDetails.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testBanksDetails.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testBanksDetails.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testBanksDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testBanksDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1212,11 +1364,12 @@ class BanksDetailsResourceIT {
         partialUpdatedBanksDetails
             .accountNumber(UPDATED_ACCOUNT_NUMBER)
             .bankName(UPDATED_BANK_NAME)
+            .gstin(UPDATED_GSTIN)
             .branchName(UPDATED_BRANCH_NAME)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
             .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restBanksDetailsMockMvc
             .perform(
@@ -1234,13 +1387,15 @@ class BanksDetailsResourceIT {
         assertThat(testBanksDetails.getBankName()).isEqualTo(UPDATED_BANK_NAME);
         assertThat(testBanksDetails.getBranchTransCode()).isEqualTo(DEFAULT_BRANCH_TRANS_CODE);
         assertThat(testBanksDetails.getTaxNumber()).isEqualTo(DEFAULT_TAX_NUMBER);
+        assertThat(testBanksDetails.getGstin()).isEqualTo(UPDATED_GSTIN);
+        assertThat(testBanksDetails.getTan()).isEqualTo(DEFAULT_TAN);
         assertThat(testBanksDetails.getBranchName()).isEqualTo(UPDATED_BRANCH_NAME);
+        assertThat(testBanksDetails.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
+        assertThat(testBanksDetails.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
+        assertThat(testBanksDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testBanksDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testBanksDetails.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
-        assertThat(testBanksDetails.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
-        assertThat(testBanksDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -1260,13 +1415,15 @@ class BanksDetailsResourceIT {
             .bankName(UPDATED_BANK_NAME)
             .branchTransCode(UPDATED_BRANCH_TRANS_CODE)
             .taxNumber(UPDATED_TAX_NUMBER)
+            .gstin(UPDATED_GSTIN)
+            .tan(UPDATED_TAN)
             .branchName(UPDATED_BRANCH_NAME)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
+            .refTable(UPDATED_REF_TABLE)
             .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restBanksDetailsMockMvc
             .perform(
@@ -1284,13 +1441,15 @@ class BanksDetailsResourceIT {
         assertThat(testBanksDetails.getBankName()).isEqualTo(UPDATED_BANK_NAME);
         assertThat(testBanksDetails.getBranchTransCode()).isEqualTo(UPDATED_BRANCH_TRANS_CODE);
         assertThat(testBanksDetails.getTaxNumber()).isEqualTo(UPDATED_TAX_NUMBER);
+        assertThat(testBanksDetails.getGstin()).isEqualTo(UPDATED_GSTIN);
+        assertThat(testBanksDetails.getTan()).isEqualTo(UPDATED_TAN);
         assertThat(testBanksDetails.getBranchName()).isEqualTo(UPDATED_BRANCH_NAME);
-        assertThat(testBanksDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testBanksDetails.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testBanksDetails.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testBanksDetails.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testBanksDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testBanksDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testBanksDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testBanksDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

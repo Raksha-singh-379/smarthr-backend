@@ -106,27 +106,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
+          <th scope="col" jhiSortBy="refTable">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.address.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.address.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.address.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="refTableType">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.address.refTableType">Ref Table Type</span>
+              <span jhiTranslate="smartHrApp.address.refTable">Ref Table</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -139,6 +121,24 @@
           <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.address.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.address.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.address.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.address.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -161,12 +161,12 @@
           <td>{{ address.landMark }}</td>
           <td>{{ address.longitude }}</td>
           <td>{{ address.latitude }}</td>
-          <td>{{ address.lastModified | formatMediumDatetime }}</td>
-          <td>{{ address.lastModifiedBy }}</td>
-          <td>{{ address.status }}</td>
-          <td>{{ address.refTableType }}</td>
+          <td>{{ address.refTable }}</td>
           <td>{{ address.refTableId }}</td>
           <td>{{ address.companyId }}</td>
+          <td>{{ address.status }}</td>
+          <td>{{ address.lastModified | formatMediumDatetime }}</td>
+          <td>{{ address.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

@@ -23,12 +23,6 @@ public class PersonalDetails implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "passport_no")
-    private String passportNo;
-
-    @Column(name = "passport_exp_date")
-    private Instant passportExpDate;
-
     @Column(name = "telephone_no")
     private String telephoneNo;
 
@@ -41,32 +35,26 @@ public class PersonalDetails implements Serializable {
     @Column(name = "religion")
     private String religion;
 
-    @Column(name = "is_spous_employed")
-    private Boolean isSpousEmployed;
-
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "employee_id")
     private Long employeeId;
 
     @Column(name = "company_id")
     private Long companyId;
 
-    @Column(name = "personal_id_no")
-    private String personalIdNo;
-
     @Column(name = "blood_group")
     private String bloodGroup;
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -81,32 +69,6 @@ public class PersonalDetails implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPassportNo() {
-        return this.passportNo;
-    }
-
-    public PersonalDetails passportNo(String passportNo) {
-        this.setPassportNo(passportNo);
-        return this;
-    }
-
-    public void setPassportNo(String passportNo) {
-        this.passportNo = passportNo;
-    }
-
-    public Instant getPassportExpDate() {
-        return this.passportExpDate;
-    }
-
-    public PersonalDetails passportExpDate(Instant passportExpDate) {
-        this.setPassportExpDate(passportExpDate);
-        return this;
-    }
-
-    public void setPassportExpDate(Instant passportExpDate) {
-        this.passportExpDate = passportExpDate;
     }
 
     public String getTelephoneNo() {
@@ -161,58 +123,6 @@ public class PersonalDetails implements Serializable {
         this.religion = religion;
     }
 
-    public Boolean getIsSpousEmployed() {
-        return this.isSpousEmployed;
-    }
-
-    public PersonalDetails isSpousEmployed(Boolean isSpousEmployed) {
-        this.setIsSpousEmployed(isSpousEmployed);
-        return this;
-    }
-
-    public void setIsSpousEmployed(Boolean isSpousEmployed) {
-        this.isSpousEmployed = isSpousEmployed;
-    }
-
-    public Instant getLastModified() {
-        return this.lastModified;
-    }
-
-    public PersonalDetails lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
-        return this;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public PersonalDetails lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public PersonalDetails status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getEmployeeId() {
         return this.employeeId;
     }
@@ -237,19 +147,6 @@ public class PersonalDetails implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
-    }
-
-    public String getPersonalIdNo() {
-        return this.personalIdNo;
-    }
-
-    public PersonalDetails personalIdNo(String personalIdNo) {
-        this.setPersonalIdNo(personalIdNo);
-        return this;
-    }
-
-    public void setPersonalIdNo(String personalIdNo) {
-        this.personalIdNo = personalIdNo;
     }
 
     public String getBloodGroup() {
@@ -278,6 +175,45 @@ public class PersonalDetails implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getStatus() {
+        return this.status;
+    }
+
+    public PersonalDetails status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public PersonalDetails lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public PersonalDetails lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -302,21 +238,17 @@ public class PersonalDetails implements Serializable {
     public String toString() {
         return "PersonalDetails{" +
             "id=" + getId() +
-            ", passportNo='" + getPassportNo() + "'" +
-            ", passportExpDate='" + getPassportExpDate() + "'" +
             ", telephoneNo='" + getTelephoneNo() + "'" +
             ", nationality='" + getNationality() + "'" +
             ", maritalStatus='" + getMaritalStatus() + "'" +
             ", religion='" + getReligion() + "'" +
-            ", isSpousEmployed='" + getIsSpousEmployed() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
-            ", personalIdNo='" + getPersonalIdNo() + "'" +
             ", bloodGroup='" + getBloodGroup() + "'" +
             ", dateOfBirth='" + getDateOfBirth() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

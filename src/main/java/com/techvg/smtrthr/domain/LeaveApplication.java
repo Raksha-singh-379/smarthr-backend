@@ -25,9 +25,6 @@ public class LeaveApplication implements Serializable {
     @Column(name = "leave_type")
     private String leaveType;
 
-    @Column(name = "balance_leave")
-    private Long balanceLeave;
-
     @Column(name = "no_of_days")
     private Long noOfDays;
 
@@ -46,12 +43,6 @@ public class LeaveApplication implements Serializable {
     @Column(name = "leave_status")
     private String leaveStatus;
 
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
     @Column(name = "status")
     private String status;
 
@@ -60,6 +51,12 @@ public class LeaveApplication implements Serializable {
 
     @Column(name = "company_id")
     private Long companyId;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -87,19 +84,6 @@ public class LeaveApplication implements Serializable {
 
     public void setLeaveType(String leaveType) {
         this.leaveType = leaveType;
-    }
-
-    public Long getBalanceLeave() {
-        return this.balanceLeave;
-    }
-
-    public LeaveApplication balanceLeave(Long balanceLeave) {
-        this.setBalanceLeave(balanceLeave);
-        return this;
-    }
-
-    public void setBalanceLeave(Long balanceLeave) {
-        this.balanceLeave = balanceLeave;
     }
 
     public Long getNoOfDays() {
@@ -180,32 +164,6 @@ public class LeaveApplication implements Serializable {
         this.leaveStatus = leaveStatus;
     }
 
-    public Instant getLastModified() {
-        return this.lastModified;
-    }
-
-    public LeaveApplication lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
-        return this;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public LeaveApplication lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
     public String getStatus() {
         return this.status;
     }
@@ -245,6 +203,32 @@ public class LeaveApplication implements Serializable {
         this.companyId = companyId;
     }
 
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public LeaveApplication lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public LeaveApplication lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -270,18 +254,17 @@ public class LeaveApplication implements Serializable {
         return "LeaveApplication{" +
             "id=" + getId() +
             ", leaveType='" + getLeaveType() + "'" +
-            ", balanceLeave=" + getBalanceLeave() +
             ", noOfDays=" + getNoOfDays() +
             ", reason='" + getReason() + "'" +
             ", year=" + getYear() +
             ", formDate='" + getFormDate() + "'" +
             ", toDate='" + getToDate() + "'" +
             ", leaveStatus='" + getLeaveStatus() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", status='" + getStatus() + "'" +
             ", employeId=" + getEmployeId() +
             ", companyId=" + getCompanyId() +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

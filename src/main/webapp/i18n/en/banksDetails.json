@@ -22,13 +22,15 @@
       "bankName": "Bank Name",
       "branchTransCode": "Branch Trans Code",
       "taxNumber": "Tax Number",
+      "gstin": "Gstin",
+      "tan": "Tan",
       "branchName": "Branch Name",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
-      "refTableType": "Ref Table Type",
+      "refTable": "Ref Table",
       "refTableId": "Ref Table Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

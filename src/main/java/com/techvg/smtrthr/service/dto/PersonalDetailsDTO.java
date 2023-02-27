@@ -13,10 +13,6 @@ public class PersonalDetailsDTO implements Serializable {
 
     private Long id;
 
-    private String passportNo;
-
-    private Instant passportExpDate;
-
     private String telephoneNo;
 
     private String nationality;
@@ -25,23 +21,19 @@ public class PersonalDetailsDTO implements Serializable {
 
     private String religion;
 
-    private Boolean isSpousEmployed;
-
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
     private Long employeeId;
 
     private Long companyId;
 
-    private String personalIdNo;
-
     private String bloodGroup;
 
     private LocalDate dateOfBirth;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -49,22 +41,6 @@ public class PersonalDetailsDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPassportNo() {
-        return passportNo;
-    }
-
-    public void setPassportNo(String passportNo) {
-        this.passportNo = passportNo;
-    }
-
-    public Instant getPassportExpDate() {
-        return passportExpDate;
-    }
-
-    public void setPassportExpDate(Instant passportExpDate) {
-        this.passportExpDate = passportExpDate;
     }
 
     public String getTelephoneNo() {
@@ -99,38 +75,6 @@ public class PersonalDetailsDTO implements Serializable {
         this.religion = religion;
     }
 
-    public Boolean getIsSpousEmployed() {
-        return isSpousEmployed;
-    }
-
-    public void setIsSpousEmployed(Boolean isSpousEmployed) {
-        this.isSpousEmployed = isSpousEmployed;
-    }
-
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getEmployeeId() {
         return employeeId;
     }
@@ -147,14 +91,6 @@ public class PersonalDetailsDTO implements Serializable {
         this.companyId = companyId;
     }
 
-    public String getPersonalIdNo() {
-        return personalIdNo;
-    }
-
-    public void setPersonalIdNo(String personalIdNo) {
-        this.personalIdNo = personalIdNo;
-    }
-
     public String getBloodGroup() {
         return bloodGroup;
     }
@@ -169,6 +105,30 @@ public class PersonalDetailsDTO implements Serializable {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -197,21 +157,17 @@ public class PersonalDetailsDTO implements Serializable {
     public String toString() {
         return "PersonalDetailsDTO{" +
             "id=" + getId() +
-            ", passportNo='" + getPassportNo() + "'" +
-            ", passportExpDate='" + getPassportExpDate() + "'" +
             ", telephoneNo='" + getTelephoneNo() + "'" +
             ", nationality='" + getNationality() + "'" +
             ", maritalStatus='" + getMaritalStatus() + "'" +
             ", religion='" + getReligion() + "'" +
-            ", isSpousEmployed='" + getIsSpousEmployed() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
-            ", personalIdNo='" + getPersonalIdNo() + "'" +
             ", bloodGroup='" + getBloodGroup() + "'" +
             ", dateOfBirth='" + getDateOfBirth() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

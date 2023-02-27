@@ -13,12 +13,12 @@ export interface IAddress {
   landMark?: string | null;
   longitude?: number | null;
   latitude?: number | null;
-  lastModified?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  status?: string | null;
-  refTableType?: string | null;
+  refTable?: string | null;
   refTableId?: number | null;
   companyId?: number | null;
+  status?: string | null;
+  lastModified?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
 }
 
 export type NewAddress = Omit<IAddress, 'id'> & { id: null };

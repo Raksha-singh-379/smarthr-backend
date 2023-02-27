@@ -39,13 +39,11 @@ type CompanyFormGroupContent = {
   mobileNumber: FormControl<CompanyFormRawValue['mobileNumber']>;
   websiteUrl: FormControl<CompanyFormRawValue['websiteUrl']>;
   fax: FormControl<CompanyFormRawValue['fax']>;
+  regNumber: FormControl<CompanyFormRawValue['regNumber']>;
   status: FormControl<CompanyFormRawValue['status']>;
   lastModified: FormControl<CompanyFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<CompanyFormRawValue['lastModifiedBy']>;
-  regNumber: FormControl<CompanyFormRawValue['regNumber']>;
-  gstin: FormControl<CompanyFormRawValue['gstin']>;
-  pan: FormControl<CompanyFormRawValue['pan']>;
-  tan: FormControl<CompanyFormRawValue['tan']>;
+  leaveSettingLevel: FormControl<CompanyFormRawValue['leaveSettingLevel']>;
 };
 
 export type CompanyFormGroup = FormGroup<CompanyFormGroupContent>;
@@ -73,13 +71,11 @@ export class CompanyFormService {
       mobileNumber: new FormControl(companyRawValue.mobileNumber),
       websiteUrl: new FormControl(companyRawValue.websiteUrl),
       fax: new FormControl(companyRawValue.fax),
+      regNumber: new FormControl(companyRawValue.regNumber),
       status: new FormControl(companyRawValue.status),
       lastModified: new FormControl(companyRawValue.lastModified),
       lastModifiedBy: new FormControl(companyRawValue.lastModifiedBy),
-      regNumber: new FormControl(companyRawValue.regNumber),
-      gstin: new FormControl(companyRawValue.gstin),
-      pan: new FormControl(companyRawValue.pan),
-      tan: new FormControl(companyRawValue.tan),
+      leaveSettingLevel: new FormControl(companyRawValue.leaveSettingLevel),
     });
   }
 

@@ -22,15 +22,16 @@
       "isCarryForword": "Is Carry Forword",
       "employeeType": "Employee Type",
       "genderLeave": "Gender Leave",
-      "leaveStatus": "Leave Status",
       "totalLeave": "Total Leave",
       "maxLeave": "Max Leave",
       "hasproRataLeave": "Haspro Rata Leave",
       "description": "Description",
+      "companyId": "Company Id",
+      "status": "Status",
       "lastModified": "Last Modified",
       "lastModifiedBy": "Last Modified By",
-      "status": "Status",
-      "companyId": "Company Id"
+      "refTable": "Ref Table",
+      "refTableId": "Ref Table Id"
     }
   }
 }

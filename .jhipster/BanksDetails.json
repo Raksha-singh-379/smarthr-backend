@@ -22,23 +22,19 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "gstin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tan",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "branchName",
       "fieldType": "String"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "refTableType",
+      "fieldName": "refTable",
       "fieldType": "String"
     },
     {
@@ -48,6 +44,18 @@
     {
       "fieldName": "companyId",
       "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

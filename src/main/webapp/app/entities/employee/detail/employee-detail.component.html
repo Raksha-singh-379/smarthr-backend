@@ -18,25 +18,13 @@
         <dd>
           <span>{{ employee.firstName }}</span>
         </dd>
+        <dt><span jhiTranslate="smartHrApp.employee.middleName">Middle Name</span></dt>
+        <dd>
+          <span>{{ employee.middleName }}</span>
+        </dd>
         <dt><span jhiTranslate="smartHrApp.employee.lastName">Last Name</span></dt>
         <dd>
           <span>{{ employee.lastName }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.username">Username</span></dt>
-        <dd>
-          <span>{{ employee.username }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.password">Password</span></dt>
-        <dd>
-          <span>{{ employee.password }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.department">Department</span></dt>
-        <dd>
-          <span>{{ employee.department }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.designation">Designation</span></dt>
-        <dd>
-          <span>{{ employee.designation }}</span>
         </dd>
         <dt><span jhiTranslate="smartHrApp.employee.gender">Gender</span></dt>
         <dd>
@@ -50,6 +38,14 @@
         <dd>
           <span>{{ employee.joindate | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="smartHrApp.employee.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ employee.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employee.status">Status</span></dt>
+        <dd>
+          <span>{{ employee.status }}</span>
+        </dd>
         <dt><span jhiTranslate="smartHrApp.employee.lastModified">Last Modified</span></dt>
         <dd>
           <span>{{ employee.lastModified | formatMediumDatetime }}</span>
@@ -58,21 +54,33 @@
         <dd>
           <span>{{ employee.lastModifiedBy }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.status">Status</span></dt>
+        <dt><span jhiTranslate="smartHrApp.employee.employmentTypeId">Employment Type Id</span></dt>
         <dd>
-          <span>{{ employee.status }}</span>
+          <span>{{ employee.employmentTypeId }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.companyId">Company Id</span></dt>
+        <dt><span jhiTranslate="smartHrApp.employee.designation">Designation</span></dt>
         <dd>
-          <span>{{ employee.companyId }}</span>
+          <div *ngIf="employee.designation">
+            <a [routerLink]="['/designation', employee.designation.id, 'view']">{{ employee.designation.name }}</a>
+          </div>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.branchId">Branch Id</span></dt>
+        <dt><span jhiTranslate="smartHrApp.employee.department">Department</span></dt>
         <dd>
-          <span>{{ employee.branchId }}</span>
+          <div *ngIf="employee.department">
+            <a [routerLink]="['/department', employee.department.id, 'view']">{{ employee.department.name }}</a>
+          </div>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.employee.regionId">Region Id</span></dt>
+        <dt><span jhiTranslate="smartHrApp.employee.branch">Branch</span></dt>
         <dd>
-          <span>{{ employee.regionId }}</span>
+          <div *ngIf="employee.branch">
+            <a [routerLink]="['/branch', employee.branch.id, 'view']">{{ employee.branch.branchName }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employee.region">Region</span></dt>
+        <dd>
+          <div *ngIf="employee.region">
+            <a [routerLink]="['/region', employee.region.id, 'view']">{{ employee.region.regionName }}</a>
+          </div>
         </dd>
       </dl>
 

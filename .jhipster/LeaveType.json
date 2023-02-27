@@ -14,7 +14,11 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "recordStatus",
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
       "fieldType": "String"
     },
     {
@@ -26,12 +30,16 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "status",
-      "fieldType": "String"
+      "fieldName": "hasCarryForward",
+      "fieldType": "Boolean"
     },
     {
-      "fieldName": "companyId",
-      "fieldType": "Long"
+      "fieldName": "hasEarned",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasCustomPolicy",
+      "fieldType": "Boolean"
     }
   ],
   "fluentMethods": true,
