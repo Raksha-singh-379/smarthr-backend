@@ -50,24 +50,18 @@ class SalarySettingsResourceIT {
     private static final Double UPDATED_COMPANY_SHARE = 2D;
     private static final Double SMALLER_COMPANY_SHARE = 1D - 1D;
 
-    private static final Instant DEFAULT_SALARY_FROM = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_SALARY_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
-    private static final Instant DEFAULT_SALARY_TO = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_SALARY_TO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/salary-settings";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -101,12 +95,10 @@ class SalarySettingsResourceIT {
             .hra(DEFAULT_HRA)
             .employeeShare(DEFAULT_EMPLOYEE_SHARE)
             .companyShare(DEFAULT_COMPANY_SHARE)
-            .salaryFrom(DEFAULT_SALARY_FROM)
-            .salaryTo(DEFAULT_SALARY_TO)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return salarySettings;
     }
 
@@ -122,12 +114,10 @@ class SalarySettingsResourceIT {
             .hra(UPDATED_HRA)
             .employeeShare(UPDATED_EMPLOYEE_SHARE)
             .companyShare(UPDATED_COMPANY_SHARE)
-            .salaryFrom(UPDATED_SALARY_FROM)
-            .salaryTo(UPDATED_SALARY_TO)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return salarySettings;
     }
 
@@ -156,12 +146,10 @@ class SalarySettingsResourceIT {
         assertThat(testSalarySettings.getHra()).isEqualTo(DEFAULT_HRA);
         assertThat(testSalarySettings.getEmployeeShare()).isEqualTo(DEFAULT_EMPLOYEE_SHARE);
         assertThat(testSalarySettings.getCompanyShare()).isEqualTo(DEFAULT_COMPANY_SHARE);
-        assertThat(testSalarySettings.getSalaryFrom()).isEqualTo(DEFAULT_SALARY_FROM);
-        assertThat(testSalarySettings.getSalaryTo()).isEqualTo(DEFAULT_SALARY_TO);
+        assertThat(testSalarySettings.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testSalarySettings.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testSalarySettings.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testSalarySettings.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testSalarySettings.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testSalarySettings.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -201,12 +189,10 @@ class SalarySettingsResourceIT {
             .andExpect(jsonPath("$.[*].hra").value(hasItem(DEFAULT_HRA.doubleValue())))
             .andExpect(jsonPath("$.[*].employeeShare").value(hasItem(DEFAULT_EMPLOYEE_SHARE.doubleValue())))
             .andExpect(jsonPath("$.[*].companyShare").value(hasItem(DEFAULT_COMPANY_SHARE.doubleValue())))
-            .andExpect(jsonPath("$.[*].salaryFrom").value(hasItem(DEFAULT_SALARY_FROM.toString())))
-            .andExpect(jsonPath("$.[*].salaryTo").value(hasItem(DEFAULT_SALARY_TO.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -225,12 +211,10 @@ class SalarySettingsResourceIT {
             .andExpect(jsonPath("$.hra").value(DEFAULT_HRA.doubleValue()))
             .andExpect(jsonPath("$.employeeShare").value(DEFAULT_EMPLOYEE_SHARE.doubleValue()))
             .andExpect(jsonPath("$.companyShare").value(DEFAULT_COMPANY_SHARE.doubleValue()))
-            .andExpect(jsonPath("$.salaryFrom").value(DEFAULT_SALARY_FROM.toString()))
-            .andExpect(jsonPath("$.salaryTo").value(DEFAULT_SALARY_TO.toString()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -617,80 +601,158 @@ class SalarySettingsResourceIT {
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryFromIsEqualToSomething() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsEqualToSomething() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryFrom equals to DEFAULT_SALARY_FROM
-        defaultSalarySettingsShouldBeFound("salaryFrom.equals=" + DEFAULT_SALARY_FROM);
+        // Get all the salarySettingsList where companyId equals to DEFAULT_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
 
-        // Get all the salarySettingsList where salaryFrom equals to UPDATED_SALARY_FROM
-        defaultSalarySettingsShouldNotBeFound("salaryFrom.equals=" + UPDATED_SALARY_FROM);
+        // Get all the salarySettingsList where companyId equals to UPDATED_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryFromIsInShouldWork() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsInShouldWork() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryFrom in DEFAULT_SALARY_FROM or UPDATED_SALARY_FROM
-        defaultSalarySettingsShouldBeFound("salaryFrom.in=" + DEFAULT_SALARY_FROM + "," + UPDATED_SALARY_FROM);
+        // Get all the salarySettingsList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
 
-        // Get all the salarySettingsList where salaryFrom equals to UPDATED_SALARY_FROM
-        defaultSalarySettingsShouldNotBeFound("salaryFrom.in=" + UPDATED_SALARY_FROM);
+        // Get all the salarySettingsList where companyId equals to UPDATED_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryFromIsNullOrNotNull() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsNullOrNotNull() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryFrom is not null
-        defaultSalarySettingsShouldBeFound("salaryFrom.specified=true");
+        // Get all the salarySettingsList where companyId is not null
+        defaultSalarySettingsShouldBeFound("companyId.specified=true");
 
-        // Get all the salarySettingsList where salaryFrom is null
-        defaultSalarySettingsShouldNotBeFound("salaryFrom.specified=false");
+        // Get all the salarySettingsList where companyId is null
+        defaultSalarySettingsShouldNotBeFound("companyId.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryToIsEqualToSomething() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryTo equals to DEFAULT_SALARY_TO
-        defaultSalarySettingsShouldBeFound("salaryTo.equals=" + DEFAULT_SALARY_TO);
+        // Get all the salarySettingsList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
 
-        // Get all the salarySettingsList where salaryTo equals to UPDATED_SALARY_TO
-        defaultSalarySettingsShouldNotBeFound("salaryTo.equals=" + UPDATED_SALARY_TO);
+        // Get all the salarySettingsList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryToIsInShouldWork() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryTo in DEFAULT_SALARY_TO or UPDATED_SALARY_TO
-        defaultSalarySettingsShouldBeFound("salaryTo.in=" + DEFAULT_SALARY_TO + "," + UPDATED_SALARY_TO);
+        // Get all the salarySettingsList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
 
-        // Get all the salarySettingsList where salaryTo equals to UPDATED_SALARY_TO
-        defaultSalarySettingsShouldNotBeFound("salaryTo.in=" + UPDATED_SALARY_TO);
+        // Get all the salarySettingsList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
     }
 
     @Test
     @Transactional
-    void getAllSalarySettingsBySalaryToIsNullOrNotNull() throws Exception {
+    void getAllSalarySettingsByCompanyIdIsLessThanSomething() throws Exception {
         // Initialize the database
         salarySettingsRepository.saveAndFlush(salarySettings);
 
-        // Get all the salarySettingsList where salaryTo is not null
-        defaultSalarySettingsShouldBeFound("salaryTo.specified=true");
+        // Get all the salarySettingsList where companyId is less than DEFAULT_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
 
-        // Get all the salarySettingsList where salaryTo is null
-        defaultSalarySettingsShouldNotBeFound("salaryTo.specified=false");
+        // Get all the salarySettingsList where companyId is less than UPDATED_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultSalarySettingsShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the salarySettingsList where companyId is greater than SMALLER_COMPANY_ID
+        defaultSalarySettingsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where status equals to DEFAULT_STATUS
+        defaultSalarySettingsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the salarySettingsList where status equals to UPDATED_STATUS
+        defaultSalarySettingsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultSalarySettingsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the salarySettingsList where status equals to UPDATED_STATUS
+        defaultSalarySettingsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where status is not null
+        defaultSalarySettingsShouldBeFound("status.specified=true");
+
+        // Get all the salarySettingsList where status is null
+        defaultSalarySettingsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where status contains DEFAULT_STATUS
+        defaultSalarySettingsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the salarySettingsList where status contains UPDATED_STATUS
+        defaultSalarySettingsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllSalarySettingsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        salarySettingsRepository.saveAndFlush(salarySettings);
+
+        // Get all the salarySettingsList where status does not contain DEFAULT_STATUS
+        defaultSalarySettingsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the salarySettingsList where status does not contain UPDATED_STATUS
+        defaultSalarySettingsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
     }
 
     @Test
@@ -797,162 +859,6 @@ class SalarySettingsResourceIT {
         defaultSalarySettingsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllSalarySettingsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where status equals to DEFAULT_STATUS
-        defaultSalarySettingsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the salarySettingsList where status equals to UPDATED_STATUS
-        defaultSalarySettingsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultSalarySettingsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the salarySettingsList where status equals to UPDATED_STATUS
-        defaultSalarySettingsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where status is not null
-        defaultSalarySettingsShouldBeFound("status.specified=true");
-
-        // Get all the salarySettingsList where status is null
-        defaultSalarySettingsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where status contains DEFAULT_STATUS
-        defaultSalarySettingsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the salarySettingsList where status contains UPDATED_STATUS
-        defaultSalarySettingsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where status does not contain DEFAULT_STATUS
-        defaultSalarySettingsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the salarySettingsList where status does not contain UPDATED_STATUS
-        defaultSalarySettingsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId equals to DEFAULT_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId equals to UPDATED_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId equals to UPDATED_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId is not null
-        defaultSalarySettingsShouldBeFound("companyId.specified=true");
-
-        // Get all the salarySettingsList where companyId is null
-        defaultSalarySettingsShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId is less than DEFAULT_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId is less than UPDATED_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllSalarySettingsByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        salarySettingsRepository.saveAndFlush(salarySettings);
-
-        // Get all the salarySettingsList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultSalarySettingsShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the salarySettingsList where companyId is greater than SMALLER_COMPANY_ID
-        defaultSalarySettingsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -966,12 +872,10 @@ class SalarySettingsResourceIT {
             .andExpect(jsonPath("$.[*].hra").value(hasItem(DEFAULT_HRA.doubleValue())))
             .andExpect(jsonPath("$.[*].employeeShare").value(hasItem(DEFAULT_EMPLOYEE_SHARE.doubleValue())))
             .andExpect(jsonPath("$.[*].companyShare").value(hasItem(DEFAULT_COMPANY_SHARE.doubleValue())))
-            .andExpect(jsonPath("$.[*].salaryFrom").value(hasItem(DEFAULT_SALARY_FROM.toString())))
-            .andExpect(jsonPath("$.[*].salaryTo").value(hasItem(DEFAULT_SALARY_TO.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restSalarySettingsMockMvc
@@ -1024,12 +928,10 @@ class SalarySettingsResourceIT {
             .hra(UPDATED_HRA)
             .employeeShare(UPDATED_EMPLOYEE_SHARE)
             .companyShare(UPDATED_COMPANY_SHARE)
-            .salaryFrom(UPDATED_SALARY_FROM)
-            .salaryTo(UPDATED_SALARY_TO)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         SalarySettingsDTO salarySettingsDTO = salarySettingsMapper.toDto(updatedSalarySettings);
 
         restSalarySettingsMockMvc
@@ -1048,12 +950,10 @@ class SalarySettingsResourceIT {
         assertThat(testSalarySettings.getHra()).isEqualTo(UPDATED_HRA);
         assertThat(testSalarySettings.getEmployeeShare()).isEqualTo(UPDATED_EMPLOYEE_SHARE);
         assertThat(testSalarySettings.getCompanyShare()).isEqualTo(UPDATED_COMPANY_SHARE);
-        assertThat(testSalarySettings.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
-        assertThat(testSalarySettings.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
+        assertThat(testSalarySettings.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testSalarySettings.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testSalarySettings.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testSalarySettings.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testSalarySettings.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testSalarySettings.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -1138,8 +1038,8 @@ class SalarySettingsResourceIT {
         partialUpdatedSalarySettings
             .da(UPDATED_DA)
             .hra(UPDATED_HRA)
-            .salaryFrom(UPDATED_SALARY_FROM)
-            .salaryTo(UPDATED_SALARY_TO)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED);
 
         restSalarySettingsMockMvc
@@ -1158,12 +1058,10 @@ class SalarySettingsResourceIT {
         assertThat(testSalarySettings.getHra()).isEqualTo(UPDATED_HRA);
         assertThat(testSalarySettings.getEmployeeShare()).isEqualTo(DEFAULT_EMPLOYEE_SHARE);
         assertThat(testSalarySettings.getCompanyShare()).isEqualTo(DEFAULT_COMPANY_SHARE);
-        assertThat(testSalarySettings.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
-        assertThat(testSalarySettings.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
+        assertThat(testSalarySettings.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testSalarySettings.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testSalarySettings.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testSalarySettings.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testSalarySettings.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testSalarySettings.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -1183,12 +1081,10 @@ class SalarySettingsResourceIT {
             .hra(UPDATED_HRA)
             .employeeShare(UPDATED_EMPLOYEE_SHARE)
             .companyShare(UPDATED_COMPANY_SHARE)
-            .salaryFrom(UPDATED_SALARY_FROM)
-            .salaryTo(UPDATED_SALARY_TO)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restSalarySettingsMockMvc
             .perform(
@@ -1206,12 +1102,10 @@ class SalarySettingsResourceIT {
         assertThat(testSalarySettings.getHra()).isEqualTo(UPDATED_HRA);
         assertThat(testSalarySettings.getEmployeeShare()).isEqualTo(UPDATED_EMPLOYEE_SHARE);
         assertThat(testSalarySettings.getCompanyShare()).isEqualTo(UPDATED_COMPANY_SHARE);
-        assertThat(testSalarySettings.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
-        assertThat(testSalarySettings.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
+        assertThat(testSalarySettings.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testSalarySettings.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testSalarySettings.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testSalarySettings.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testSalarySettings.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testSalarySettings.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

@@ -19,8 +19,8 @@ type EducationFormGroupInput = IEducation | PartialWithRequiredKeyOf<NewEducatio
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IEducation | NewEducation> = Omit<T, 'startDate' | 'endDate' | 'lastModified'> & {
-  startDate?: string | null;
+type FormValueOf<T extends IEducation | NewEducation> = Omit<T, 'startYear' | 'endDate' | 'lastModified'> & {
+  startYear?: string | null;
   endDate?: string | null;
   lastModified?: string | null;
 };
@@ -29,22 +29,22 @@ type EducationFormRawValue = FormValueOf<IEducation>;
 
 type NewEducationFormRawValue = FormValueOf<NewEducation>;
 
-type EducationFormDefaults = Pick<NewEducation, 'id' | 'startDate' | 'endDate' | 'lastModified'>;
+type EducationFormDefaults = Pick<NewEducation, 'id' | 'startYear' | 'endDate' | 'lastModified'>;
 
 type EducationFormGroupContent = {
   id: FormControl<EducationFormRawValue['id'] | NewEducation['id']>;
   institution: FormControl<EducationFormRawValue['institution']>;
   subject: FormControl<EducationFormRawValue['subject']>;
-  startDate: FormControl<EducationFormRawValue['startDate']>;
+  startYear: FormControl<EducationFormRawValue['startYear']>;
   endDate: FormControl<EducationFormRawValue['endDate']>;
   educationType: FormControl<EducationFormRawValue['educationType']>;
   grade: FormControl<EducationFormRawValue['grade']>;
   description: FormControl<EducationFormRawValue['description']>;
-  lastModified: FormControl<EducationFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<EducationFormRawValue['lastModifiedBy']>;
-  status: FormControl<EducationFormRawValue['status']>;
   employeeId: FormControl<EducationFormRawValue['employeeId']>;
   companyId: FormControl<EducationFormRawValue['companyId']>;
+  status: FormControl<EducationFormRawValue['status']>;
+  lastModified: FormControl<EducationFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<EducationFormRawValue['lastModifiedBy']>;
 };
 
 export type EducationFormGroup = FormGroup<EducationFormGroupContent>;
@@ -66,16 +66,16 @@ export class EducationFormService {
       ),
       institution: new FormControl(educationRawValue.institution),
       subject: new FormControl(educationRawValue.subject),
-      startDate: new FormControl(educationRawValue.startDate),
+      startYear: new FormControl(educationRawValue.startYear),
       endDate: new FormControl(educationRawValue.endDate),
       educationType: new FormControl(educationRawValue.educationType),
       grade: new FormControl(educationRawValue.grade),
       description: new FormControl(educationRawValue.description),
-      lastModified: new FormControl(educationRawValue.lastModified),
-      lastModifiedBy: new FormControl(educationRawValue.lastModifiedBy),
-      status: new FormControl(educationRawValue.status),
       employeeId: new FormControl(educationRawValue.employeeId),
       companyId: new FormControl(educationRawValue.companyId),
+      status: new FormControl(educationRawValue.status),
+      lastModified: new FormControl(educationRawValue.lastModified),
+      lastModifiedBy: new FormControl(educationRawValue.lastModifiedBy),
     });
   }
 
@@ -98,7 +98,7 @@ export class EducationFormService {
 
     return {
       id: null,
-      startDate: currentTime,
+      startYear: currentTime,
       endDate: currentTime,
       lastModified: currentTime,
     };
@@ -107,7 +107,7 @@ export class EducationFormService {
   private convertEducationRawValueToEducation(rawEducation: EducationFormRawValue | NewEducationFormRawValue): IEducation | NewEducation {
     return {
       ...rawEducation,
-      startDate: dayjs(rawEducation.startDate, DATE_TIME_FORMAT),
+      startYear: dayjs(rawEducation.startYear, DATE_TIME_FORMAT),
       endDate: dayjs(rawEducation.endDate, DATE_TIME_FORMAT),
       lastModified: dayjs(rawEducation.lastModified, DATE_TIME_FORMAT),
     };
@@ -118,7 +118,7 @@ export class EducationFormService {
   ): EducationFormRawValue | PartialWithRequiredKeyOf<NewEducationFormRawValue> {
     return {
       ...education,
-      startDate: education.startDate ? education.startDate.format(DATE_TIME_FORMAT) : undefined,
+      startYear: education.startYear ? education.startYear.format(DATE_TIME_FORMAT) : undefined,
       endDate: education.endDate ? education.endDate.format(DATE_TIME_FORMAT) : undefined,
       lastModified: education.lastModified ? education.lastModified.format(DATE_TIME_FORMAT) : undefined,
     };

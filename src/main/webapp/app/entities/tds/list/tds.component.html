@@ -58,24 +58,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.tds.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.tds.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.tds.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="salarySettingId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.tds.salarySettingId">Salary Setting Id</span>
@@ -85,6 +67,24 @@
           <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.tds.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.tds.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.tds.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.tds.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -99,11 +99,11 @@
           <td>{{ tds.salaryFrom | formatMediumDatetime }}</td>
           <td>{{ tds.salaryTo | formatMediumDatetime }}</td>
           <td>{{ tds.percentage }}</td>
-          <td>{{ tds.lastModified | formatMediumDatetime }}</td>
-          <td>{{ tds.lastModifiedBy }}</td>
-          <td>{{ tds.status }}</td>
           <td>{{ tds.salarySettingId }}</td>
           <td>{{ tds.companyId }}</td>
+          <td>{{ tds.status }}</td>
+          <td>{{ tds.lastModified | formatMediumDatetime }}</td>
+          <td>{{ tds.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/tds', tds.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

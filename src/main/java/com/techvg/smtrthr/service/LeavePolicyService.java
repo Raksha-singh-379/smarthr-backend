@@ -89,6 +89,15 @@ public class LeavePolicyService {
     }
 
     /**
+     * Get all the leavePolicies with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<LeavePolicyDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return leavePolicyRepository.findAllWithEagerRelationships(pageable).map(leavePolicyMapper::toDto);
+    }
+
+    /**
      * Get one leavePolicy by id.
      *
      * @param id the id of the entity.
@@ -97,7 +106,7 @@ public class LeavePolicyService {
     @Transactional(readOnly = true)
     public Optional<LeavePolicyDTO> findOne(Long id) {
         log.debug("Request to get LeavePolicy : {}", id);
-        return leavePolicyRepository.findById(id).map(leavePolicyMapper::toDto);
+        return leavePolicyRepository.findOneWithEagerRelationships(id).map(leavePolicyMapper::toDto);
     }
 
     /**

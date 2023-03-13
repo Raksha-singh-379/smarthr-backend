@@ -40,6 +40,14 @@ class RegionResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_REGION_ID = 1L;
+    private static final Long UPDATED_REGION_ID = 2L;
+    private static final Long SMALLER_REGION_ID = 1L - 1L;
+
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
     private static final String DEFAULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
@@ -48,10 +56,6 @@ class RegionResourceIT {
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/regions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -83,10 +87,11 @@ class RegionResourceIT {
         Region region = new Region()
             .regionName(DEFAULT_REGION_NAME)
             .description(DEFAULT_DESCRIPTION)
+            .regionId(DEFAULT_REGION_ID)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
             .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return region;
     }
 
@@ -100,10 +105,11 @@ class RegionResourceIT {
         Region region = new Region()
             .regionName(UPDATED_REGION_NAME)
             .description(UPDATED_DESCRIPTION)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return region;
     }
 
@@ -128,10 +134,11 @@ class RegionResourceIT {
         Region testRegion = regionList.get(regionList.size() - 1);
         assertThat(testRegion.getRegionName()).isEqualTo(DEFAULT_REGION_NAME);
         assertThat(testRegion.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRegion.getRegionId()).isEqualTo(DEFAULT_REGION_ID);
+        assertThat(testRegion.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
         assertThat(testRegion.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testRegion.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testRegion.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testRegion.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -185,10 +192,11 @@ class RegionResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(region.getId().intValue())))
             .andExpect(jsonPath("$.[*].regionName").value(hasItem(DEFAULT_REGION_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -205,10 +213,11 @@ class RegionResourceIT {
             .andExpect(jsonPath("$.id").value(region.getId().intValue()))
             .andExpect(jsonPath("$.regionName").value(DEFAULT_REGION_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.regionId").value(DEFAULT_REGION_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -357,6 +366,188 @@ class RegionResourceIT {
 
         // Get all the regionList where description does not contain UPDATED_DESCRIPTION
         defaultRegionShouldBeFound("description.doesNotContain=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId equals to DEFAULT_REGION_ID
+        defaultRegionShouldBeFound("regionId.equals=" + DEFAULT_REGION_ID);
+
+        // Get all the regionList where regionId equals to UPDATED_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.equals=" + UPDATED_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId in DEFAULT_REGION_ID or UPDATED_REGION_ID
+        defaultRegionShouldBeFound("regionId.in=" + DEFAULT_REGION_ID + "," + UPDATED_REGION_ID);
+
+        // Get all the regionList where regionId equals to UPDATED_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.in=" + UPDATED_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId is not null
+        defaultRegionShouldBeFound("regionId.specified=true");
+
+        // Get all the regionList where regionId is null
+        defaultRegionShouldNotBeFound("regionId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId is greater than or equal to DEFAULT_REGION_ID
+        defaultRegionShouldBeFound("regionId.greaterThanOrEqual=" + DEFAULT_REGION_ID);
+
+        // Get all the regionList where regionId is greater than or equal to UPDATED_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.greaterThanOrEqual=" + UPDATED_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId is less than or equal to DEFAULT_REGION_ID
+        defaultRegionShouldBeFound("regionId.lessThanOrEqual=" + DEFAULT_REGION_ID);
+
+        // Get all the regionList where regionId is less than or equal to SMALLER_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.lessThanOrEqual=" + SMALLER_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId is less than DEFAULT_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.lessThan=" + DEFAULT_REGION_ID);
+
+        // Get all the regionList where regionId is less than UPDATED_REGION_ID
+        defaultRegionShouldBeFound("regionId.lessThan=" + UPDATED_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByRegionIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where regionId is greater than DEFAULT_REGION_ID
+        defaultRegionShouldNotBeFound("regionId.greaterThan=" + DEFAULT_REGION_ID);
+
+        // Get all the regionList where regionId is greater than SMALLER_REGION_ID
+        defaultRegionShouldBeFound("regionId.greaterThan=" + SMALLER_REGION_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId equals to DEFAULT_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the regionList where companyId equals to UPDATED_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the regionList where companyId equals to UPDATED_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId is not null
+        defaultRegionShouldBeFound("companyId.specified=true");
+
+        // Get all the regionList where companyId is null
+        defaultRegionShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the regionList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the regionList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId is less than DEFAULT_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the regionList where companyId is less than UPDATED_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllRegionsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        regionRepository.saveAndFlush(region);
+
+        // Get all the regionList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultRegionShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the regionList where companyId is greater than SMALLER_COMPANY_ID
+        defaultRegionShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
     @Test
@@ -528,97 +719,6 @@ class RegionResourceIT {
         defaultRegionShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId equals to DEFAULT_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the regionList where companyId equals to UPDATED_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the regionList where companyId equals to UPDATED_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId is not null
-        defaultRegionShouldBeFound("companyId.specified=true");
-
-        // Get all the regionList where companyId is null
-        defaultRegionShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the regionList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the regionList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId is less than DEFAULT_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the regionList where companyId is less than UPDATED_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllRegionsByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        regionRepository.saveAndFlush(region);
-
-        // Get all the regionList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultRegionShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the regionList where companyId is greater than SMALLER_COMPANY_ID
-        defaultRegionShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -630,10 +730,11 @@ class RegionResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(region.getId().intValue())))
             .andExpect(jsonPath("$.[*].regionName").value(hasItem(DEFAULT_REGION_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].regionId").value(hasItem(DEFAULT_REGION_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restRegionMockMvc
@@ -684,10 +785,11 @@ class RegionResourceIT {
         updatedRegion
             .regionName(UPDATED_REGION_NAME)
             .description(UPDATED_DESCRIPTION)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         RegionDTO regionDTO = regionMapper.toDto(updatedRegion);
 
         restRegionMockMvc
@@ -704,10 +806,11 @@ class RegionResourceIT {
         Region testRegion = regionList.get(regionList.size() - 1);
         assertThat(testRegion.getRegionName()).isEqualTo(UPDATED_REGION_NAME);
         assertThat(testRegion.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRegion.getRegionId()).isEqualTo(UPDATED_REGION_ID);
+        assertThat(testRegion.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
         assertThat(testRegion.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testRegion.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testRegion.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testRegion.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -789,9 +892,9 @@ class RegionResourceIT {
 
         partialUpdatedRegion
             .regionName(UPDATED_REGION_NAME)
-            .status(UPDATED_STATUS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS);
 
         restRegionMockMvc
             .perform(
@@ -807,10 +910,11 @@ class RegionResourceIT {
         Region testRegion = regionList.get(regionList.size() - 1);
         assertThat(testRegion.getRegionName()).isEqualTo(UPDATED_REGION_NAME);
         assertThat(testRegion.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRegion.getRegionId()).isEqualTo(UPDATED_REGION_ID);
+        assertThat(testRegion.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
         assertThat(testRegion.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testRegion.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testRegion.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testRegion.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testRegion.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testRegion.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -828,10 +932,11 @@ class RegionResourceIT {
         partialUpdatedRegion
             .regionName(UPDATED_REGION_NAME)
             .description(UPDATED_DESCRIPTION)
+            .regionId(UPDATED_REGION_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restRegionMockMvc
             .perform(
@@ -847,10 +952,11 @@ class RegionResourceIT {
         Region testRegion = regionList.get(regionList.size() - 1);
         assertThat(testRegion.getRegionName()).isEqualTo(UPDATED_REGION_NAME);
         assertThat(testRegion.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRegion.getRegionId()).isEqualTo(UPDATED_REGION_ID);
+        assertThat(testRegion.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
         assertThat(testRegion.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testRegion.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testRegion.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testRegion.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

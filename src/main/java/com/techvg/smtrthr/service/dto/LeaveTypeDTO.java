@@ -14,17 +14,21 @@ public class LeaveTypeDTO implements Serializable {
 
     private String leaveType;
 
-    private String noOfDays;
+    private Long noOfDays;
 
-    private String recordStatus;
+    private Boolean hasCarryForward;
+
+    private Boolean hasEarned;
+
+    private Boolean hasCustomPolicy;
+
+    private Long companyId;
+
+    private String status;
 
     private Instant lastModified;
 
     private String lastModifiedBy;
-
-    private String status;
-
-    private Long companyId;
 
     public Long getId() {
         return id;
@@ -42,20 +46,52 @@ public class LeaveTypeDTO implements Serializable {
         this.leaveType = leaveType;
     }
 
-    public String getNoOfDays() {
+    public Long getNoOfDays() {
         return noOfDays;
     }
 
-    public void setNoOfDays(String noOfDays) {
+    public void setNoOfDays(Long noOfDays) {
         this.noOfDays = noOfDays;
     }
 
-    public String getRecordStatus() {
-        return recordStatus;
+    public Boolean getHasCarryForward() {
+        return hasCarryForward;
     }
 
-    public void setRecordStatus(String recordStatus) {
-        this.recordStatus = recordStatus;
+    public void setHasCarryForward(Boolean hasCarryForward) {
+        this.hasCarryForward = hasCarryForward;
+    }
+
+    public Boolean getHasEarned() {
+        return hasEarned;
+    }
+
+    public void setHasEarned(Boolean hasEarned) {
+        this.hasEarned = hasEarned;
+    }
+
+    public Boolean getHasCustomPolicy() {
+        return hasCustomPolicy;
+    }
+
+    public void setHasCustomPolicy(Boolean hasCustomPolicy) {
+        this.hasCustomPolicy = hasCustomPolicy;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -72,22 +108,6 @@ public class LeaveTypeDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -117,12 +137,14 @@ public class LeaveTypeDTO implements Serializable {
         return "LeaveTypeDTO{" +
             "id=" + getId() +
             ", leaveType='" + getLeaveType() + "'" +
-            ", noOfDays='" + getNoOfDays() + "'" +
-            ", recordStatus='" + getRecordStatus() + "'" +
+            ", noOfDays=" + getNoOfDays() +
+            ", hasCarryForward='" + getHasCarryForward() + "'" +
+            ", hasEarned='" + getHasEarned() + "'" +
+            ", hasCustomPolicy='" + getHasCustomPolicy() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

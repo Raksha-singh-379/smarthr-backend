@@ -105,6 +105,15 @@ public class BranchQueryService extends QueryService<Branch> {
             if (criteria.getWebSite() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getWebSite(), Branch_.webSite));
             }
+            if (criteria.getBranchId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getBranchId(), Branch_.branchId));
+            }
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRegionId(), Branch_.regionId));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Branch_.companyId));
+            }
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatus(), Branch_.status));
             }
@@ -113,12 +122,6 @@ public class BranchQueryService extends QueryService<Branch> {
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Branch_.lastModifiedBy));
-            }
-            if (criteria.getRegionId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRegionId(), Branch_.regionId));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Branch_.companyId));
             }
         }
         return specification;

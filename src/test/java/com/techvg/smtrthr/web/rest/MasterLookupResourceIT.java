@@ -40,24 +40,27 @@ class MasterLookupResourceIT {
     private static final String DEFAULT_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_VALUE_TWO = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE_TWO = "BBBBBBBBBB";
+
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/master-lookups";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -89,12 +92,13 @@ class MasterLookupResourceIT {
         MasterLookup masterLookup = new MasterLookup()
             .name(DEFAULT_NAME)
             .value(DEFAULT_VALUE)
+            .valueTwo(DEFAULT_VALUE_TWO)
             .description(DEFAULT_DESCRIPTION)
             .type(DEFAULT_TYPE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return masterLookup;
     }
 
@@ -108,12 +112,13 @@ class MasterLookupResourceIT {
         MasterLookup masterLookup = new MasterLookup()
             .name(UPDATED_NAME)
             .value(UPDATED_VALUE)
+            .valueTwo(UPDATED_VALUE_TWO)
             .description(UPDATED_DESCRIPTION)
             .type(UPDATED_TYPE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return masterLookup;
     }
 
@@ -140,12 +145,13 @@ class MasterLookupResourceIT {
         MasterLookup testMasterLookup = masterLookupList.get(masterLookupList.size() - 1);
         assertThat(testMasterLookup.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testMasterLookup.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testMasterLookup.getValueTwo()).isEqualTo(DEFAULT_VALUE_TWO);
         assertThat(testMasterLookup.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testMasterLookup.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testMasterLookup.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testMasterLookup.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testMasterLookup.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testMasterLookup.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testMasterLookup.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testMasterLookup.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -183,12 +189,13 @@ class MasterLookupResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(masterLookup.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
+            .andExpect(jsonPath("$.[*].valueTwo").value(hasItem(DEFAULT_VALUE_TWO)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -205,12 +212,13 @@ class MasterLookupResourceIT {
             .andExpect(jsonPath("$.id").value(masterLookup.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
+            .andExpect(jsonPath("$.valueTwo").value(DEFAULT_VALUE_TWO))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -363,6 +371,71 @@ class MasterLookupResourceIT {
 
     @Test
     @Transactional
+    void getAllMasterLookupsByValueTwoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where valueTwo equals to DEFAULT_VALUE_TWO
+        defaultMasterLookupShouldBeFound("valueTwo.equals=" + DEFAULT_VALUE_TWO);
+
+        // Get all the masterLookupList where valueTwo equals to UPDATED_VALUE_TWO
+        defaultMasterLookupShouldNotBeFound("valueTwo.equals=" + UPDATED_VALUE_TWO);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByValueTwoIsInShouldWork() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where valueTwo in DEFAULT_VALUE_TWO or UPDATED_VALUE_TWO
+        defaultMasterLookupShouldBeFound("valueTwo.in=" + DEFAULT_VALUE_TWO + "," + UPDATED_VALUE_TWO);
+
+        // Get all the masterLookupList where valueTwo equals to UPDATED_VALUE_TWO
+        defaultMasterLookupShouldNotBeFound("valueTwo.in=" + UPDATED_VALUE_TWO);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByValueTwoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where valueTwo is not null
+        defaultMasterLookupShouldBeFound("valueTwo.specified=true");
+
+        // Get all the masterLookupList where valueTwo is null
+        defaultMasterLookupShouldNotBeFound("valueTwo.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByValueTwoContainsSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where valueTwo contains DEFAULT_VALUE_TWO
+        defaultMasterLookupShouldBeFound("valueTwo.contains=" + DEFAULT_VALUE_TWO);
+
+        // Get all the masterLookupList where valueTwo contains UPDATED_VALUE_TWO
+        defaultMasterLookupShouldNotBeFound("valueTwo.contains=" + UPDATED_VALUE_TWO);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByValueTwoNotContainsSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where valueTwo does not contain DEFAULT_VALUE_TWO
+        defaultMasterLookupShouldNotBeFound("valueTwo.doesNotContain=" + DEFAULT_VALUE_TWO);
+
+        // Get all the masterLookupList where valueTwo does not contain UPDATED_VALUE_TWO
+        defaultMasterLookupShouldBeFound("valueTwo.doesNotContain=" + UPDATED_VALUE_TWO);
+    }
+
+    @Test
+    @Transactional
     void getAllMasterLookupsByDescriptionIsEqualToSomething() throws Exception {
         // Initialize the database
         masterLookupRepository.saveAndFlush(masterLookup);
@@ -493,6 +566,162 @@ class MasterLookupResourceIT {
 
     @Test
     @Transactional
+    void getAllMasterLookupsByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId equals to DEFAULT_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId equals to UPDATED_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId equals to UPDATED_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId is not null
+        defaultMasterLookupShouldBeFound("companyId.specified=true");
+
+        // Get all the masterLookupList where companyId is null
+        defaultMasterLookupShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId is less than DEFAULT_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId is less than UPDATED_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultMasterLookupShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the masterLookupList where companyId is greater than SMALLER_COMPANY_ID
+        defaultMasterLookupShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where status equals to DEFAULT_STATUS
+        defaultMasterLookupShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the masterLookupList where status equals to UPDATED_STATUS
+        defaultMasterLookupShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultMasterLookupShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the masterLookupList where status equals to UPDATED_STATUS
+        defaultMasterLookupShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where status is not null
+        defaultMasterLookupShouldBeFound("status.specified=true");
+
+        // Get all the masterLookupList where status is null
+        defaultMasterLookupShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where status contains DEFAULT_STATUS
+        defaultMasterLookupShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the masterLookupList where status contains UPDATED_STATUS
+        defaultMasterLookupShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllMasterLookupsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        masterLookupRepository.saveAndFlush(masterLookup);
+
+        // Get all the masterLookupList where status does not contain DEFAULT_STATUS
+        defaultMasterLookupShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the masterLookupList where status does not contain UPDATED_STATUS
+        defaultMasterLookupShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
     void getAllMasterLookupsByLastModifiedIsEqualToSomething() throws Exception {
         // Initialize the database
         masterLookupRepository.saveAndFlush(masterLookup);
@@ -595,162 +824,6 @@ class MasterLookupResourceIT {
         defaultMasterLookupShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllMasterLookupsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where status equals to DEFAULT_STATUS
-        defaultMasterLookupShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the masterLookupList where status equals to UPDATED_STATUS
-        defaultMasterLookupShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultMasterLookupShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the masterLookupList where status equals to UPDATED_STATUS
-        defaultMasterLookupShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where status is not null
-        defaultMasterLookupShouldBeFound("status.specified=true");
-
-        // Get all the masterLookupList where status is null
-        defaultMasterLookupShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where status contains DEFAULT_STATUS
-        defaultMasterLookupShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the masterLookupList where status contains UPDATED_STATUS
-        defaultMasterLookupShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where status does not contain DEFAULT_STATUS
-        defaultMasterLookupShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the masterLookupList where status does not contain UPDATED_STATUS
-        defaultMasterLookupShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId equals to DEFAULT_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId equals to UPDATED_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId equals to UPDATED_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId is not null
-        defaultMasterLookupShouldBeFound("companyId.specified=true");
-
-        // Get all the masterLookupList where companyId is null
-        defaultMasterLookupShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId is less than DEFAULT_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId is less than UPDATED_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllMasterLookupsByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        masterLookupRepository.saveAndFlush(masterLookup);
-
-        // Get all the masterLookupList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultMasterLookupShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the masterLookupList where companyId is greater than SMALLER_COMPANY_ID
-        defaultMasterLookupShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -762,12 +835,13 @@ class MasterLookupResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(masterLookup.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
+            .andExpect(jsonPath("$.[*].valueTwo").value(hasItem(DEFAULT_VALUE_TWO)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restMasterLookupMockMvc
@@ -818,12 +892,13 @@ class MasterLookupResourceIT {
         updatedMasterLookup
             .name(UPDATED_NAME)
             .value(UPDATED_VALUE)
+            .valueTwo(UPDATED_VALUE_TWO)
             .description(UPDATED_DESCRIPTION)
             .type(UPDATED_TYPE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         MasterLookupDTO masterLookupDTO = masterLookupMapper.toDto(updatedMasterLookup);
 
         restMasterLookupMockMvc
@@ -840,12 +915,13 @@ class MasterLookupResourceIT {
         MasterLookup testMasterLookup = masterLookupList.get(masterLookupList.size() - 1);
         assertThat(testMasterLookup.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMasterLookup.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testMasterLookup.getValueTwo()).isEqualTo(UPDATED_VALUE_TWO);
         assertThat(testMasterLookup.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testMasterLookup.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testMasterLookup.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testMasterLookup.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testMasterLookup.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testMasterLookup.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testMasterLookup.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testMasterLookup.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -929,9 +1005,10 @@ class MasterLookupResourceIT {
 
         partialUpdatedMasterLookup
             .value(UPDATED_VALUE)
+            .description(UPDATED_DESCRIPTION)
             .type(UPDATED_TYPE)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restMasterLookupMockMvc
             .perform(
@@ -947,12 +1024,13 @@ class MasterLookupResourceIT {
         MasterLookup testMasterLookup = masterLookupList.get(masterLookupList.size() - 1);
         assertThat(testMasterLookup.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testMasterLookup.getValue()).isEqualTo(UPDATED_VALUE);
-        assertThat(testMasterLookup.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testMasterLookup.getValueTwo()).isEqualTo(DEFAULT_VALUE_TWO);
+        assertThat(testMasterLookup.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testMasterLookup.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testMasterLookup.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testMasterLookup.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testMasterLookup.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
         assertThat(testMasterLookup.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testMasterLookup.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testMasterLookup.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testMasterLookup.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -970,12 +1048,13 @@ class MasterLookupResourceIT {
         partialUpdatedMasterLookup
             .name(UPDATED_NAME)
             .value(UPDATED_VALUE)
+            .valueTwo(UPDATED_VALUE_TWO)
             .description(UPDATED_DESCRIPTION)
             .type(UPDATED_TYPE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restMasterLookupMockMvc
             .perform(
@@ -991,12 +1070,13 @@ class MasterLookupResourceIT {
         MasterLookup testMasterLookup = masterLookupList.get(masterLookupList.size() - 1);
         assertThat(testMasterLookup.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMasterLookup.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testMasterLookup.getValueTwo()).isEqualTo(UPDATED_VALUE_TWO);
         assertThat(testMasterLookup.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testMasterLookup.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testMasterLookup.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testMasterLookup.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testMasterLookup.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testMasterLookup.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testMasterLookup.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testMasterLookup.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

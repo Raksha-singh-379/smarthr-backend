@@ -46,17 +46,8 @@ class ContactsResourceIT {
     private static final String DEFAULT_CONTACT = "AAAAAAAAAA";
     private static final String UPDATED_CONTACT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_REF_TABLE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_REF_TABLE_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_REF_TABLE = "AAAAAAAAAA";
+    private static final String UPDATED_REF_TABLE = "BBBBBBBBBB";
 
     private static final Long DEFAULT_REF_TABLE_ID = 1L;
     private static final Long UPDATED_REF_TABLE_ID = 2L;
@@ -65,6 +56,18 @@ class ContactsResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CONTACT_REFERENCE = "AAAAAAAAAA";
+    private static final String UPDATED_CONTACT_REFERENCE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/contacts";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -98,12 +101,13 @@ class ContactsResourceIT {
             .contactPref(DEFAULT_CONTACT_PREF)
             .contactType(DEFAULT_CONTACT_TYPE)
             .contact(DEFAULT_CONTACT)
+            .refTable(DEFAULT_REF_TABLE)
+            .refTableId(DEFAULT_REF_TABLE_ID)
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
             .lastModified(DEFAULT_LAST_MODIFIED)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
-            .refTableType(DEFAULT_REF_TABLE_TYPE)
-            .refTableId(DEFAULT_REF_TABLE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .contactReference(DEFAULT_CONTACT_REFERENCE);
         return contacts;
     }
 
@@ -119,12 +123,13 @@ class ContactsResourceIT {
             .contactPref(UPDATED_CONTACT_PREF)
             .contactType(UPDATED_CONTACT_TYPE)
             .contact(UPDATED_CONTACT)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
-            .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .contactReference(UPDATED_CONTACT_REFERENCE);
         return contacts;
     }
 
@@ -151,12 +156,13 @@ class ContactsResourceIT {
         assertThat(testContacts.getContactPref()).isEqualTo(DEFAULT_CONTACT_PREF);
         assertThat(testContacts.getContactType()).isEqualTo(DEFAULT_CONTACT_TYPE);
         assertThat(testContacts.getContact()).isEqualTo(DEFAULT_CONTACT);
-        assertThat(testContacts.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testContacts.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testContacts.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testContacts.getRefTableType()).isEqualTo(DEFAULT_REF_TABLE_TYPE);
+        assertThat(testContacts.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
         assertThat(testContacts.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
         assertThat(testContacts.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testContacts.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testContacts.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testContacts.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testContacts.getContactReference()).isEqualTo(DEFAULT_CONTACT_REFERENCE);
     }
 
     @Test
@@ -194,12 +200,13 @@ class ContactsResourceIT {
             .andExpect(jsonPath("$.[*].contactPref").value(hasItem(DEFAULT_CONTACT_PREF)))
             .andExpect(jsonPath("$.[*].contactType").value(hasItem(DEFAULT_CONTACT_TYPE)))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
+            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
-            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].contactReference").value(hasItem(DEFAULT_CONTACT_REFERENCE)));
     }
 
     @Test
@@ -218,12 +225,13 @@ class ContactsResourceIT {
             .andExpect(jsonPath("$.contactPref").value(DEFAULT_CONTACT_PREF))
             .andExpect(jsonPath("$.contactType").value(DEFAULT_CONTACT_TYPE))
             .andExpect(jsonPath("$.contact").value(DEFAULT_CONTACT))
+            .andExpect(jsonPath("$.refTable").value(DEFAULT_REF_TABLE))
+            .andExpect(jsonPath("$.refTableId").value(DEFAULT_REF_TABLE_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.refTableType").value(DEFAULT_REF_TABLE_TYPE))
-            .andExpect(jsonPath("$.refTableId").value(DEFAULT_REF_TABLE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.contactReference").value(DEFAULT_CONTACT_REFERENCE));
     }
 
     @Test
@@ -506,236 +514,67 @@ class ContactsResourceIT {
 
     @Test
     @Transactional
-    void getAllContactsByLastModifiedIsEqualToSomething() throws Exception {
+    void getAllContactsByRefTableIsEqualToSomething() throws Exception {
         // Initialize the database
         contactsRepository.saveAndFlush(contacts);
 
-        // Get all the contactsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultContactsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+        // Get all the contactsList where refTable equals to DEFAULT_REF_TABLE
+        defaultContactsShouldBeFound("refTable.equals=" + DEFAULT_REF_TABLE);
 
-        // Get all the contactsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultContactsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+        // Get all the contactsList where refTable equals to UPDATED_REF_TABLE
+        defaultContactsShouldNotBeFound("refTable.equals=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllContactsByLastModifiedIsInShouldWork() throws Exception {
+    void getAllContactsByRefTableIsInShouldWork() throws Exception {
         // Initialize the database
         contactsRepository.saveAndFlush(contacts);
 
-        // Get all the contactsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultContactsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+        // Get all the contactsList where refTable in DEFAULT_REF_TABLE or UPDATED_REF_TABLE
+        defaultContactsShouldBeFound("refTable.in=" + DEFAULT_REF_TABLE + "," + UPDATED_REF_TABLE);
 
-        // Get all the contactsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultContactsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+        // Get all the contactsList where refTable equals to UPDATED_REF_TABLE
+        defaultContactsShouldNotBeFound("refTable.in=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllContactsByLastModifiedIsNullOrNotNull() throws Exception {
+    void getAllContactsByRefTableIsNullOrNotNull() throws Exception {
         // Initialize the database
         contactsRepository.saveAndFlush(contacts);
 
-        // Get all the contactsList where lastModified is not null
-        defaultContactsShouldBeFound("lastModified.specified=true");
+        // Get all the contactsList where refTable is not null
+        defaultContactsShouldBeFound("refTable.specified=true");
 
-        // Get all the contactsList where lastModified is null
-        defaultContactsShouldNotBeFound("lastModified.specified=false");
+        // Get all the contactsList where refTable is null
+        defaultContactsShouldNotBeFound("refTable.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllContactsByLastModifiedByIsEqualToSomething() throws Exception {
+    void getAllContactsByRefTableContainsSomething() throws Exception {
         // Initialize the database
         contactsRepository.saveAndFlush(contacts);
 
-        // Get all the contactsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultContactsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the contactsList where refTable contains DEFAULT_REF_TABLE
+        defaultContactsShouldBeFound("refTable.contains=" + DEFAULT_REF_TABLE);
 
-        // Get all the contactsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultContactsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the contactsList where refTable contains UPDATED_REF_TABLE
+        defaultContactsShouldNotBeFound("refTable.contains=" + UPDATED_REF_TABLE);
     }
 
     @Test
     @Transactional
-    void getAllContactsByLastModifiedByIsInShouldWork() throws Exception {
+    void getAllContactsByRefTableNotContainsSomething() throws Exception {
         // Initialize the database
         contactsRepository.saveAndFlush(contacts);
 
-        // Get all the contactsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultContactsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+        // Get all the contactsList where refTable does not contain DEFAULT_REF_TABLE
+        defaultContactsShouldNotBeFound("refTable.doesNotContain=" + DEFAULT_REF_TABLE);
 
-        // Get all the contactsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultContactsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where lastModifiedBy is not null
-        defaultContactsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the contactsList where lastModifiedBy is null
-        defaultContactsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultContactsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the contactsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultContactsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultContactsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the contactsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultContactsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where status equals to DEFAULT_STATUS
-        defaultContactsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the contactsList where status equals to UPDATED_STATUS
-        defaultContactsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultContactsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the contactsList where status equals to UPDATED_STATUS
-        defaultContactsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where status is not null
-        defaultContactsShouldBeFound("status.specified=true");
-
-        // Get all the contactsList where status is null
-        defaultContactsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where status contains DEFAULT_STATUS
-        defaultContactsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the contactsList where status contains UPDATED_STATUS
-        defaultContactsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where status does not contain DEFAULT_STATUS
-        defaultContactsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the contactsList where status does not contain UPDATED_STATUS
-        defaultContactsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByRefTableTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where refTableType equals to DEFAULT_REF_TABLE_TYPE
-        defaultContactsShouldBeFound("refTableType.equals=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the contactsList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultContactsShouldNotBeFound("refTableType.equals=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByRefTableTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where refTableType in DEFAULT_REF_TABLE_TYPE or UPDATED_REF_TABLE_TYPE
-        defaultContactsShouldBeFound("refTableType.in=" + DEFAULT_REF_TABLE_TYPE + "," + UPDATED_REF_TABLE_TYPE);
-
-        // Get all the contactsList where refTableType equals to UPDATED_REF_TABLE_TYPE
-        defaultContactsShouldNotBeFound("refTableType.in=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByRefTableTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where refTableType is not null
-        defaultContactsShouldBeFound("refTableType.specified=true");
-
-        // Get all the contactsList where refTableType is null
-        defaultContactsShouldNotBeFound("refTableType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByRefTableTypeContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where refTableType contains DEFAULT_REF_TABLE_TYPE
-        defaultContactsShouldBeFound("refTableType.contains=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the contactsList where refTableType contains UPDATED_REF_TABLE_TYPE
-        defaultContactsShouldNotBeFound("refTableType.contains=" + UPDATED_REF_TABLE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllContactsByRefTableTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        contactsRepository.saveAndFlush(contacts);
-
-        // Get all the contactsList where refTableType does not contain DEFAULT_REF_TABLE_TYPE
-        defaultContactsShouldNotBeFound("refTableType.doesNotContain=" + DEFAULT_REF_TABLE_TYPE);
-
-        // Get all the contactsList where refTableType does not contain UPDATED_REF_TABLE_TYPE
-        defaultContactsShouldBeFound("refTableType.doesNotContain=" + UPDATED_REF_TABLE_TYPE);
+        // Get all the contactsList where refTable does not contain UPDATED_REF_TABLE
+        defaultContactsShouldBeFound("refTable.doesNotContain=" + UPDATED_REF_TABLE);
     }
 
     @Test
@@ -920,6 +759,240 @@ class ContactsResourceIT {
         defaultContactsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllContactsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where status equals to DEFAULT_STATUS
+        defaultContactsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the contactsList where status equals to UPDATED_STATUS
+        defaultContactsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultContactsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the contactsList where status equals to UPDATED_STATUS
+        defaultContactsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where status is not null
+        defaultContactsShouldBeFound("status.specified=true");
+
+        // Get all the contactsList where status is null
+        defaultContactsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where status contains DEFAULT_STATUS
+        defaultContactsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the contactsList where status contains UPDATED_STATUS
+        defaultContactsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where status does not contain DEFAULT_STATUS
+        defaultContactsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the contactsList where status does not contain UPDATED_STATUS
+        defaultContactsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultContactsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the contactsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultContactsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultContactsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the contactsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultContactsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModified is not null
+        defaultContactsShouldBeFound("lastModified.specified=true");
+
+        // Get all the contactsList where lastModified is null
+        defaultContactsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultContactsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the contactsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultContactsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultContactsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the contactsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultContactsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModifiedBy is not null
+        defaultContactsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the contactsList where lastModifiedBy is null
+        defaultContactsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultContactsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the contactsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultContactsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultContactsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the contactsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultContactsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByContactReferenceIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where contactReference equals to DEFAULT_CONTACT_REFERENCE
+        defaultContactsShouldBeFound("contactReference.equals=" + DEFAULT_CONTACT_REFERENCE);
+
+        // Get all the contactsList where contactReference equals to UPDATED_CONTACT_REFERENCE
+        defaultContactsShouldNotBeFound("contactReference.equals=" + UPDATED_CONTACT_REFERENCE);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByContactReferenceIsInShouldWork() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where contactReference in DEFAULT_CONTACT_REFERENCE or UPDATED_CONTACT_REFERENCE
+        defaultContactsShouldBeFound("contactReference.in=" + DEFAULT_CONTACT_REFERENCE + "," + UPDATED_CONTACT_REFERENCE);
+
+        // Get all the contactsList where contactReference equals to UPDATED_CONTACT_REFERENCE
+        defaultContactsShouldNotBeFound("contactReference.in=" + UPDATED_CONTACT_REFERENCE);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByContactReferenceIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where contactReference is not null
+        defaultContactsShouldBeFound("contactReference.specified=true");
+
+        // Get all the contactsList where contactReference is null
+        defaultContactsShouldNotBeFound("contactReference.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByContactReferenceContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where contactReference contains DEFAULT_CONTACT_REFERENCE
+        defaultContactsShouldBeFound("contactReference.contains=" + DEFAULT_CONTACT_REFERENCE);
+
+        // Get all the contactsList where contactReference contains UPDATED_CONTACT_REFERENCE
+        defaultContactsShouldNotBeFound("contactReference.contains=" + UPDATED_CONTACT_REFERENCE);
+    }
+
+    @Test
+    @Transactional
+    void getAllContactsByContactReferenceNotContainsSomething() throws Exception {
+        // Initialize the database
+        contactsRepository.saveAndFlush(contacts);
+
+        // Get all the contactsList where contactReference does not contain DEFAULT_CONTACT_REFERENCE
+        defaultContactsShouldNotBeFound("contactReference.doesNotContain=" + DEFAULT_CONTACT_REFERENCE);
+
+        // Get all the contactsList where contactReference does not contain UPDATED_CONTACT_REFERENCE
+        defaultContactsShouldBeFound("contactReference.doesNotContain=" + UPDATED_CONTACT_REFERENCE);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -933,12 +1006,13 @@ class ContactsResourceIT {
             .andExpect(jsonPath("$.[*].contactPref").value(hasItem(DEFAULT_CONTACT_PREF)))
             .andExpect(jsonPath("$.[*].contactType").value(hasItem(DEFAULT_CONTACT_TYPE)))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
+            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].refTableType").value(hasItem(DEFAULT_REF_TABLE_TYPE)))
-            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].contactReference").value(hasItem(DEFAULT_CONTACT_REFERENCE)));
 
         // Check, that the count call also returns 1
         restContactsMockMvc
@@ -991,12 +1065,13 @@ class ContactsResourceIT {
             .contactPref(UPDATED_CONTACT_PREF)
             .contactType(UPDATED_CONTACT_TYPE)
             .contact(UPDATED_CONTACT)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
-            .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .contactReference(UPDATED_CONTACT_REFERENCE);
         ContactsDTO contactsDTO = contactsMapper.toDto(updatedContacts);
 
         restContactsMockMvc
@@ -1015,12 +1090,13 @@ class ContactsResourceIT {
         assertThat(testContacts.getContactPref()).isEqualTo(UPDATED_CONTACT_PREF);
         assertThat(testContacts.getContactType()).isEqualTo(UPDATED_CONTACT_TYPE);
         assertThat(testContacts.getContact()).isEqualTo(UPDATED_CONTACT);
-        assertThat(testContacts.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testContacts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testContacts.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testContacts.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testContacts.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testContacts.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testContacts.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testContacts.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testContacts.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testContacts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testContacts.getContactReference()).isEqualTo(UPDATED_CONTACT_REFERENCE);
     }
 
     @Test
@@ -1104,7 +1180,7 @@ class ContactsResourceIT {
             .name(UPDATED_NAME)
             .contactType(UPDATED_CONTACT_TYPE)
             .contact(UPDATED_CONTACT)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
+            .refTableId(UPDATED_REF_TABLE_ID);
 
         restContactsMockMvc
             .perform(
@@ -1122,12 +1198,13 @@ class ContactsResourceIT {
         assertThat(testContacts.getContactPref()).isEqualTo(DEFAULT_CONTACT_PREF);
         assertThat(testContacts.getContactType()).isEqualTo(UPDATED_CONTACT_TYPE);
         assertThat(testContacts.getContact()).isEqualTo(UPDATED_CONTACT);
-        assertThat(testContacts.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testContacts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testContacts.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testContacts.getRefTableType()).isEqualTo(DEFAULT_REF_TABLE_TYPE);
-        assertThat(testContacts.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
+        assertThat(testContacts.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
+        assertThat(testContacts.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testContacts.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testContacts.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testContacts.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testContacts.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testContacts.getContactReference()).isEqualTo(DEFAULT_CONTACT_REFERENCE);
     }
 
     @Test
@@ -1147,12 +1224,13 @@ class ContactsResourceIT {
             .contactPref(UPDATED_CONTACT_PREF)
             .contactType(UPDATED_CONTACT_TYPE)
             .contact(UPDATED_CONTACT)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
-            .refTableType(UPDATED_REF_TABLE_TYPE)
-            .refTableId(UPDATED_REF_TABLE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .contactReference(UPDATED_CONTACT_REFERENCE);
 
         restContactsMockMvc
             .perform(
@@ -1170,12 +1248,13 @@ class ContactsResourceIT {
         assertThat(testContacts.getContactPref()).isEqualTo(UPDATED_CONTACT_PREF);
         assertThat(testContacts.getContactType()).isEqualTo(UPDATED_CONTACT_TYPE);
         assertThat(testContacts.getContact()).isEqualTo(UPDATED_CONTACT);
-        assertThat(testContacts.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testContacts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testContacts.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testContacts.getRefTableType()).isEqualTo(UPDATED_REF_TABLE_TYPE);
+        assertThat(testContacts.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
         assertThat(testContacts.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testContacts.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testContacts.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testContacts.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testContacts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testContacts.getContactReference()).isEqualTo(UPDATED_CONTACT_REFERENCE);
     }
 
     @Test

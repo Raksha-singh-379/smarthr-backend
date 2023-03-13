@@ -4,45 +4,37 @@ import { IEmployee, NewEmployee } from './employee.model';
 
 export const sampleWithRequiredData: IEmployee = {
   id: 7813,
-  username: 'transmitting',
-  password: 'scale Mexican Administrator',
-  empUniqueId: 'Granite',
+  empUniqueId: 'transmitting',
 };
 
 export const sampleWithPartialData: IEmployee = {
-  id: 36931,
-  username: 'SSL',
-  password: 'View National Analyst',
-  department: 'Representative user-centric',
-  empUniqueId: 'open-source pixel',
-  joindate: dayjs('2023-02-08T16:19'),
-  lastModifiedBy: 'Tuna',
-  branchId: 38021,
+  id: 8063,
+  firstName: 'Brooke',
+  lastName: 'Labadie',
+  gender: 'empower e-tailers internet',
+  empUniqueId: 'Implementation Pizza',
+  joindate: dayjs('2023-02-08T21:09'),
+  companyId: 71772,
+  lastModified: dayjs('2023-02-08T17:44'),
 };
 
 export const sampleWithFullData: IEmployee = {
-  id: 44544,
-  firstName: 'Gretchen',
-  lastName: 'Cartwright',
-  username: 'uniform Jamaica',
-  password: 'payment exuding',
-  department: 'Health',
-  designation: 'Investor feed Chicken',
-  gender: 'azure',
-  empUniqueId: 'Progressive composite Account',
-  joindate: dayjs('2023-02-08T12:10'),
-  lastModified: dayjs('2023-02-08T06:37'),
-  lastModifiedBy: 'XSS',
-  status: 'Krone web Missouri',
-  companyId: 17603,
-  branchId: 90142,
-  regionId: 96782,
+  id: 93602,
+  firstName: 'Travis',
+  middleName: 'world-class Berkshire Representative',
+  lastName: 'Hermiston',
+  gender: 'Rubber Fundamental Loan',
+  empUniqueId: 'Tuna',
+  joindate: dayjs('2023-02-08T19:40'),
+  companyId: 44544,
+  status: 'Rubber Forward',
+  lastModified: dayjs('2023-02-08T18:21'),
+  lastModifiedBy: 'Island Concrete Music',
+  employmentTypeId: 45515,
 };
 
 export const sampleWithNewData: NewEmployee = {
-  username: 'global XML',
-  password: 'wireless',
-  empUniqueId: 'Synergized bleeding-edge',
+  empUniqueId: 'Factors',
   id: null,
 };
 

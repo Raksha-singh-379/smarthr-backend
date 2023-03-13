@@ -9,17 +9,17 @@ export const sampleWithRequiredData: IDepartment = {
 export const sampleWithPartialData: IDepartment = {
   id: 8019,
   name: 'Cheese encryption Tuna',
-  lastModifiedBy: 'Falls Morocco',
-  status: 'Facilitator',
+  status: 'Falls Morocco',
+  lastModified: dayjs('2023-02-08T23:07'),
 };
 
 export const sampleWithFullData: IDepartment = {
-  id: 74996,
-  name: 'Dollar green',
-  lastModified: dayjs('2023-02-08T07:47'),
-  lastModifiedBy: 'Regional Avon',
-  status: 'program Architect Bacon',
-  companyId: 26441,
+  id: 97334,
+  name: 'portal Dollar green',
+  companyId: 87592,
+  status: 'Regional Avon',
+  lastModified: dayjs('2023-02-08T07:11'),
+  lastModifiedBy: 'Future-proofed Avenue digital',
 };
 
 export const sampleWithNewData: NewDepartment = {

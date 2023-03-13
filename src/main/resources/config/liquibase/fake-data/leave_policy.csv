@@ -1,11 +1,11 @@
-id;leave_type;is_carry_forword;employee_type;gender_leave;leave_status;total_leave;max_leave;haspro_rata_leave;description;last_modified;last_modified_by;status;company_id
-1;schemas;true;XML Pennsylvania Account;up;Switchable;Seamless Orchestrator;cyan;false;Bedfordshire withdrawal Account;2023-02-08T09:19:08;indexing PCI;customized lime Bike;96216
-2;interfaces Internal;false;Virtual 24/365 Dynamic;analyzing programming Practical;Montserrat Quality monitor;compress Consultant web-enabled;override maroon Jersey;true;Steel;2023-02-08T14:08:56;Beauty;Shoes;12520
-3;Dong cross-platform Fish;true;Ergonomic;Jewelery Fish networks;Fresh Lebanese Organic;optical;Suriname Uganda;true;Rubber e-business;2023-02-09T04:10:00;Account capacitor SAS;Estates Automotive;39635
-4;Frozen Tasty Spur;true;Guam Tennessee digital;multi-byte plum;ADP;Agent transmitter Sausages;Dominica;true;Cambridgeshire Views Cheese;2023-02-08T07:55:52;Lead hack;Account;9868
-5;Plastic Shoes Nepal;true;hack index;THX bottom-line standardization;Nevada;hacking;invoice AI;false;Borders;2023-02-08T09:41:05;Rubber Generic;Tactics Keyboard;69371
-6;Interactions;true;web-enabled;feed Internal Via;Chair;Practical Functionality Agent;Steel;false;Cambridgeshire Associate;2023-02-08T18:50:21;deposit;GB;67902
-7;Sleek withdrawal;true;directional;Home Expanded disintermediate;Guiana;Soft;Computers Buckinghamshire;true;Zloty;2023-02-08T23:34:29;invoice;Account Integration program;37566
-8;feed mint Chair;false;Account turn-key e-business;models;seamless Realigned Liaison;Technician;Sleek;true;Product deposit;2023-02-08T09:05:17;cyan project Dalasi;system-worthy;35917
-9;Central;true;1080p;Lane complexity Ghana;workforce;bluetooth Concrete;Jewelery Parkways;false;sensor monitor foreground;2023-02-08T11:16:21;algorithm;Salad Granite;36882
-10;Account;false;drive;Dollar Reduced;Pants Books Quality;compressing;up grey;true;Unbranded Engineer orange;2023-02-08T12:00:36;Division pink;Health Games;2731
+id;is_carry_forword;gender_leave;total_leave;max_leave;haspro_rata_leave;description;ref_table;ref_table_id;company_id;status;last_modified;last_modified_by
+1;false;42004;78640;93388;true;XML Pennsylvania Account;up;13099;24760;Optimization primary payment;2023-02-08T23:44:07;Computer Bedfordshire withdrawal
+2;true;10910;62735;81199;true;Neck seamless customized;program;21184;71846;content JSON Bike;2023-02-08T23:14:52;Pants Unbranded Plastic
+3;true;91827;98493;9979;false;Global XSS Qatar;Legacy Account cross-platform;87841;98649;indigo solutions applications;2023-02-09T03:06:05;Senior
+4;true;61074;23635;2570;true;red panel Dong;end-to-end sensor Pizza;3402;81091;Fish networks Liaison;2023-02-08T21:13:38;Lodge Utah optical
+5;true;52559;84540;59303;true;Caribbean Rubber e-business;pixel;71407;73882;optical Designer Keyboard;2023-02-08T06:46:28;e-enable
+6;true;55417;4615;96568;false;homogeneous scalable;ubiquitous overriding;17248;99429;multi-byte plum;2023-02-09T03:43:13;functionalities Agent transmitter
+7;false;92269;24166;11761;true;Fresh;SDD Brand;76017;55207;Cambridgeshire Handmade Account;2023-02-09T02:26:18;Plastic Shoes Nepal
+8;true;34779;74958;14720;false;markets THX bottom-line;JBOD;57278;55995;Fresh withdrawal Executive;2023-02-08T19:20:42;contextually-based Yemen
+9;true;14208;60129;1721;false;solution function;calculating;95663;91171;Avon Street feed;2023-02-08T06:44:20;withdrawal context-sensitive Industrial
+10;false;41529;54294;96273;false;Agent Business-focused Automotive;supply-chains;6568;96400;Berkshire;2023-02-08T13:30:03;Account

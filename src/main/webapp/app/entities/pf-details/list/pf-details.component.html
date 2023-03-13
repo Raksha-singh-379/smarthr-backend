@@ -70,15 +70,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
+          <th scope="col" jhiSortBy="employeeId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.pfDetails.lastModified">Last Modified</span>
+              <span jhiTranslate="smartHrApp.pfDetails.employeeId">Employee Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
+          <th scope="col" jhiSortBy="reEnumerationId">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.pfDetails.lastModifiedBy">Last Modified By</span>
+              <span jhiTranslate="smartHrApp.pfDetails.reEnumerationId">Re Enumeration Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.pfDetails.companyId">Company Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -88,15 +94,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="employeId">
+          <th scope="col" jhiSortBy="lastModified">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.pfDetails.employeId">Employe Id</span>
+              <span jhiTranslate="smartHrApp.pfDetails.lastModified">Last Modified</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="reEnumerationId">
+          <th scope="col" jhiSortBy="lastModifiedBy">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.pfDetails.reEnumerationId">Re Enumeration Id</span>
+              <span jhiTranslate="smartHrApp.pfDetails.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -113,11 +119,12 @@
           <td>{{ pfDetails.pfRate }}</td>
           <td>{{ pfDetails.additionalPfRate }}</td>
           <td>{{ pfDetails.totalPfRate }}</td>
+          <td>{{ pfDetails.employeeId }}</td>
+          <td>{{ pfDetails.reEnumerationId }}</td>
+          <td>{{ pfDetails.companyId }}</td>
+          <td>{{ pfDetails.status }}</td>
           <td>{{ pfDetails.lastModified | formatMediumDatetime }}</td>
           <td>{{ pfDetails.lastModifiedBy }}</td>
-          <td>{{ pfDetails.status }}</td>
-          <td>{{ pfDetails.employeId }}</td>
-          <td>{{ pfDetails.reEnumerationId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

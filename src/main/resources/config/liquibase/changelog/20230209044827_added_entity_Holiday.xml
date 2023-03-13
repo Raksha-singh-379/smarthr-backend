@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="holiday_name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="holiday_date" type="${datetimeType}">
                 <constraints nullable="true" />
@@ -26,16 +26,16 @@
             <column name="year" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="last_modified" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_modified_by" type="varchar(255)">
+            <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="company_id" type="bigint">
+            <column name="last_modified" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -66,10 +66,10 @@
             <column name="holiday_date" type="date"/>
             <column name="day" type="string"/>
             <column name="year" type="date"/>
+            <column name="company_id" type="numeric"/>
+            <column name="status" type="string"/>
             <column name="last_modified" type="date"/>
             <column name="last_modified_by" type="string"/>
-            <column name="status" type="string"/>
-            <column name="company_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

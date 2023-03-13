@@ -25,17 +25,17 @@ public class Department implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -65,6 +65,32 @@ public class Department implements Serializable {
         this.name = name;
     }
 
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public Department companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public Department status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -89,32 +115,6 @@ public class Department implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public Department status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public Department companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -142,10 +142,10 @@ public class Department implements Serializable {
         return "Department{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

@@ -77,6 +77,19 @@ public class CacheConfiguration {
             createCache(cm, com.techvg.smtrthr.domain.WorkinDaysSetting.class.getName());
             createCache(cm, com.techvg.smtrthr.domain.ApprovalSetting.class.getName());
             createCache(cm, com.techvg.smtrthr.domain.Approver.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Reporting.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.PersonalId.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Remuneration.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.CustomLeavePolicy.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.WorkDaysSetting.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.ApprovalLevel.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.CustomApprovar.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.EmploymentType.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.WorkingHours.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.EmployeeLeaveAccount.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Attendance.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.TimeSheet.class.getName());
+            createCache(cm, com.techvg.smtrthr.domain.Document.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

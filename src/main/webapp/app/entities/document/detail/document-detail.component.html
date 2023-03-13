@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="document">
+      <h2 data-cy="documentDetailsHeading"><span jhiTranslate="smartHrApp.document.detail.title">Document</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ document.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.docType">Doc Type</span></dt>
+        <dd>
+          <span>{{ document.docType }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.docCategory">Doc Category</span></dt>
+        <dd>
+          <span>{{ document.docCategory }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.fileName">File Name</span></dt>
+        <dd>
+          <span>{{ document.fileName }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.contentType">Content Type</span></dt>
+        <dd>
+          <span>{{ document.contentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.fileUuid">File Uuid</span></dt>
+        <dd>
+          <span>{{ document.fileUuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.folderUuid">Folder Uuid</span></dt>
+        <dd>
+          <span>{{ document.folderUuid }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.refTable">Ref Table</span></dt>
+        <dd>
+          <span>{{ document.refTable }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.refTableId">Ref Table Id</span></dt>
+        <dd>
+          <span>{{ document.refTableId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ document.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.status">Status</span></dt>
+        <dd>
+          <span>{{ document.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ document.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.document.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ document.lastModifiedBy }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/document', document.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

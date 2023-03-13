@@ -24,11 +24,17 @@ public class Region implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "region_name", nullable = false, unique = true)
+    @Column(name = "region_name", nullable = false)
     private String regionName;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "region_id")
+    private Long regionId;
+
+    @Column(name = "company_id")
+    private Long companyId;
 
     @Column(name = "status")
     private String status;
@@ -38,9 +44,6 @@ public class Region implements Serializable {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -83,6 +86,32 @@ public class Region implements Serializable {
         this.description = description;
     }
 
+    public Long getRegionId() {
+        return this.regionId;
+    }
+
+    public Region regionId(Long regionId) {
+        this.setRegionId(regionId);
+        return this;
+    }
+
+    public void setRegionId(Long regionId) {
+        this.regionId = regionId;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public Region companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     public String getStatus() {
         return this.status;
     }
@@ -122,19 +151,6 @@ public class Region implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public Region companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -161,10 +177,11 @@ public class Region implements Serializable {
             "id=" + getId() +
             ", regionName='" + getRegionName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", regionId=" + getRegionId() +
+            ", companyId=" + getCompanyId() +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

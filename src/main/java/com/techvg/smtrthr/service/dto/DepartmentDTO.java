@@ -14,13 +14,13 @@ public class DepartmentDTO implements Serializable {
 
     private String name;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
+    private Long companyId;
 
     private String status;
 
-    private Long companyId;
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -38,6 +38,22 @@ public class DepartmentDTO implements Serializable {
         this.name = name;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -52,22 +68,6 @@ public class DepartmentDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -97,10 +97,10 @@ public class DepartmentDTO implements Serializable {
         return "DepartmentDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

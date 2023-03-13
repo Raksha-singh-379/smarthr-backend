@@ -19,60 +19,20 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.employee.middleName" for="field_middleName">Middle Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="middleName"
+            id="field_middleName"
+            data-cy="middleName"
+            formControlName="middleName"
+          />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.employee.lastName" for="field_lastName">Last Name</label>
           <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.username" for="field_username">Username</label>
-          <input type="text" class="form-control" name="username" id="field_username" data-cy="username" formControlName="username" />
-          <div *ngIf="editForm.get('username')!.invalid && (editForm.get('username')!.dirty || editForm.get('username')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('username')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.password" for="field_password">Password</label>
-          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
-          <div *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('password')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.department" for="field_department">Department</label>
-          <input
-            type="text"
-            class="form-control"
-            name="department"
-            id="field_department"
-            data-cy="department"
-            formControlName="department"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.designation" for="field_designation">Designation</label>
-          <input
-            type="text"
-            class="form-control"
-            name="designation"
-            id="field_designation"
-            data-cy="designation"
-            formControlName="designation"
-          />
         </div>
 
         <div class="row mb-3">
@@ -117,6 +77,16 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.employee.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.employee.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.employee.lastModified" for="field_lastModified">Last Modified</label>
           <div class="d-flex">
             <input
@@ -144,23 +114,81 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+          <label class="form-label" jhiTranslate="smartHrApp.employee.employmentTypeId" for="field_employmentTypeId"
+            >Employment Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="employmentTypeId"
+            id="field_employmentTypeId"
+            data-cy="employmentTypeId"
+            formControlName="employmentTypeId"
+          />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+          <label class="form-label" jhiTranslate="smartHrApp.employee.designation" for="field_designation">Designation</label>
+          <select
+            class="form-control"
+            id="field_designation"
+            data-cy="designation"
+            name="designation"
+            formControlName="designation"
+            [compareWith]="compareDesignation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="designationOption" *ngFor="let designationOption of designationsSharedCollection">
+              {{ designationOption.name }}
+            </option>
+          </select>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.branchId" for="field_branchId">Branch Id</label>
-          <input type="number" class="form-control" name="branchId" id="field_branchId" data-cy="branchId" formControlName="branchId" />
+          <label class="form-label" jhiTranslate="smartHrApp.employee.department" for="field_department">Department</label>
+          <select
+            class="form-control"
+            id="field_department"
+            data-cy="department"
+            name="department"
+            formControlName="department"
+            [compareWith]="compareDepartment"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="departmentOption" *ngFor="let departmentOption of departmentsSharedCollection">
+              {{ departmentOption.name }}
+            </option>
+          </select>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.employee.regionId" for="field_regionId">Region Id</label>
-          <input type="number" class="form-control" name="regionId" id="field_regionId" data-cy="regionId" formControlName="regionId" />
+          <label class="form-label" jhiTranslate="smartHrApp.employee.branch" for="field_branch">Branch</label>
+          <select
+            class="form-control"
+            id="field_branch"
+            data-cy="branch"
+            name="branch"
+            formControlName="branch"
+            [compareWith]="compareBranch"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="branchOption" *ngFor="let branchOption of branchesSharedCollection">{{ branchOption.branchName }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.employee.region" for="field_region">Region</label>
+          <select
+            class="form-control"
+            id="field_region"
+            data-cy="region"
+            name="region"
+            formControlName="region"
+            [compareWith]="compareRegion"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="regionOption" *ngFor="let regionOption of regionsSharedCollection">{{ regionOption.regionName }}</option>
+          </select>
         </div>
       </div>
 

@@ -102,23 +102,17 @@ public class SalarySettingsQueryService extends QueryService<SalarySettings> {
             if (criteria.getCompanyShare() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyShare(), SalarySettings_.companyShare));
             }
-            if (criteria.getSalaryFrom() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSalaryFrom(), SalarySettings_.salaryFrom));
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), SalarySettings_.companyId));
             }
-            if (criteria.getSalaryTo() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSalaryTo(), SalarySettings_.salaryTo));
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), SalarySettings_.status));
             }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), SalarySettings_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), SalarySettings_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), SalarySettings_.status));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), SalarySettings_.companyId));
             }
         }
         return specification;

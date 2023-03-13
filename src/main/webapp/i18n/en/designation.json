@@ -19,11 +19,11 @@
       },
       "id": "ID",
       "name": "Name",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "departmentId": "Department Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

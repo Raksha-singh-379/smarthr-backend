@@ -25,17 +25,21 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
 
     private StringFilter leaveType;
 
-    private StringFilter noOfDays;
+    private LongFilter noOfDays;
 
-    private StringFilter recordStatus;
+    private BooleanFilter hasCarryForward;
+
+    private BooleanFilter hasEarned;
+
+    private BooleanFilter hasCustomPolicy;
+
+    private LongFilter companyId;
+
+    private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private LongFilter companyId;
 
     private Boolean distinct;
 
@@ -45,11 +49,13 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.leaveType = other.leaveType == null ? null : other.leaveType.copy();
         this.noOfDays = other.noOfDays == null ? null : other.noOfDays.copy();
-        this.recordStatus = other.recordStatus == null ? null : other.recordStatus.copy();
+        this.hasCarryForward = other.hasCarryForward == null ? null : other.hasCarryForward.copy();
+        this.hasEarned = other.hasEarned == null ? null : other.hasEarned.copy();
+        this.hasCustomPolicy = other.hasCustomPolicy == null ? null : other.hasCustomPolicy.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.distinct = other.distinct;
     }
 
@@ -88,34 +94,94 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.leaveType = leaveType;
     }
 
-    public StringFilter getNoOfDays() {
+    public LongFilter getNoOfDays() {
         return noOfDays;
     }
 
-    public StringFilter noOfDays() {
+    public LongFilter noOfDays() {
         if (noOfDays == null) {
-            noOfDays = new StringFilter();
+            noOfDays = new LongFilter();
         }
         return noOfDays;
     }
 
-    public void setNoOfDays(StringFilter noOfDays) {
+    public void setNoOfDays(LongFilter noOfDays) {
         this.noOfDays = noOfDays;
     }
 
-    public StringFilter getRecordStatus() {
-        return recordStatus;
+    public BooleanFilter getHasCarryForward() {
+        return hasCarryForward;
     }
 
-    public StringFilter recordStatus() {
-        if (recordStatus == null) {
-            recordStatus = new StringFilter();
+    public BooleanFilter hasCarryForward() {
+        if (hasCarryForward == null) {
+            hasCarryForward = new BooleanFilter();
         }
-        return recordStatus;
+        return hasCarryForward;
     }
 
-    public void setRecordStatus(StringFilter recordStatus) {
-        this.recordStatus = recordStatus;
+    public void setHasCarryForward(BooleanFilter hasCarryForward) {
+        this.hasCarryForward = hasCarryForward;
+    }
+
+    public BooleanFilter getHasEarned() {
+        return hasEarned;
+    }
+
+    public BooleanFilter hasEarned() {
+        if (hasEarned == null) {
+            hasEarned = new BooleanFilter();
+        }
+        return hasEarned;
+    }
+
+    public void setHasEarned(BooleanFilter hasEarned) {
+        this.hasEarned = hasEarned;
+    }
+
+    public BooleanFilter getHasCustomPolicy() {
+        return hasCustomPolicy;
+    }
+
+    public BooleanFilter hasCustomPolicy() {
+        if (hasCustomPolicy == null) {
+            hasCustomPolicy = new BooleanFilter();
+        }
+        return hasCustomPolicy;
+    }
+
+    public void setHasCustomPolicy(BooleanFilter hasCustomPolicy) {
+        this.hasCustomPolicy = hasCustomPolicy;
+    }
+
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
     public InstantFilter getLastModified() {
@@ -148,36 +214,6 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public LongFilter getCompanyId() {
-        return companyId;
-    }
-
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
-        }
-        return companyId;
-    }
-
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -199,18 +235,32 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(leaveType, that.leaveType) &&
             Objects.equals(noOfDays, that.noOfDays) &&
-            Objects.equals(recordStatus, that.recordStatus) &&
+            Objects.equals(hasCarryForward, that.hasCarryForward) &&
+            Objects.equals(hasEarned, that.hasEarned) &&
+            Objects.equals(hasCustomPolicy, that.hasCustomPolicy) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, leaveType, noOfDays, recordStatus, lastModified, lastModifiedBy, status, companyId, distinct);
+        return Objects.hash(
+            id,
+            leaveType,
+            noOfDays,
+            hasCarryForward,
+            hasEarned,
+            hasCustomPolicy,
+            companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
+            distinct
+        );
     }
 
     // prettier-ignore
@@ -220,11 +270,13 @@ public class LeaveTypeCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (leaveType != null ? "leaveType=" + leaveType + ", " : "") +
             (noOfDays != null ? "noOfDays=" + noOfDays + ", " : "") +
-            (recordStatus != null ? "recordStatus=" + recordStatus + ", " : "") +
+            (hasCarryForward != null ? "hasCarryForward=" + hasCarryForward + ", " : "") +
+            (hasEarned != null ? "hasEarned=" + hasEarned + ", " : "") +
+            (hasCustomPolicy != null ? "hasCustomPolicy=" + hasCustomPolicy + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

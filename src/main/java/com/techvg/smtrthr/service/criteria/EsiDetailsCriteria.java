@@ -33,15 +33,17 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
 
     private DoubleFilter totalEsiRate;
 
-    private InstantFilter lastModified;
+    private LongFilter employeeId;
 
-    private StringFilter lastModifiedBy;
+    private LongFilter reEnumerationId;
+
+    private LongFilter companyId;
 
     private StringFilter status;
 
-    private LongFilter employeId;
+    private InstantFilter lastModified;
 
-    private LongFilter reEnumerationId;
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -54,11 +56,12 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
         this.esiRate = other.esiRate == null ? null : other.esiRate.copy();
         this.additionalEsiRate = other.additionalEsiRate == null ? null : other.additionalEsiRate.copy();
         this.totalEsiRate = other.totalEsiRate == null ? null : other.totalEsiRate.copy();
+        this.employeeId = other.employeeId == null ? null : other.employeeId.copy();
+        this.reEnumerationId = other.reEnumerationId == null ? null : other.reEnumerationId.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.employeId = other.employeId == null ? null : other.employeId.copy();
-        this.reEnumerationId = other.reEnumerationId == null ? null : other.reEnumerationId.copy();
         this.distinct = other.distinct;
     }
 
@@ -157,6 +160,66 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
         this.totalEsiRate = totalEsiRate;
     }
 
+    public LongFilter getEmployeeId() {
+        return employeeId;
+    }
+
+    public LongFilter employeeId() {
+        if (employeeId == null) {
+            employeeId = new LongFilter();
+        }
+        return employeeId;
+    }
+
+    public void setEmployeeId(LongFilter employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public LongFilter getReEnumerationId() {
+        return reEnumerationId;
+    }
+
+    public LongFilter reEnumerationId() {
+        if (reEnumerationId == null) {
+            reEnumerationId = new LongFilter();
+        }
+        return reEnumerationId;
+    }
+
+    public void setReEnumerationId(LongFilter reEnumerationId) {
+        this.reEnumerationId = reEnumerationId;
+    }
+
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
     public InstantFilter getLastModified() {
         return lastModified;
     }
@@ -187,51 +250,6 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public LongFilter getEmployeId() {
-        return employeId;
-    }
-
-    public LongFilter employeId() {
-        if (employeId == null) {
-            employeId = new LongFilter();
-        }
-        return employeId;
-    }
-
-    public void setEmployeId(LongFilter employeId) {
-        this.employeId = employeId;
-    }
-
-    public LongFilter getReEnumerationId() {
-        return reEnumerationId;
-    }
-
-    public LongFilter reEnumerationId() {
-        if (reEnumerationId == null) {
-            reEnumerationId = new LongFilter();
-        }
-        return reEnumerationId;
-    }
-
-    public void setReEnumerationId(LongFilter reEnumerationId) {
-        this.reEnumerationId = reEnumerationId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -256,11 +274,12 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
             Objects.equals(esiRate, that.esiRate) &&
             Objects.equals(additionalEsiRate, that.additionalEsiRate) &&
             Objects.equals(totalEsiRate, that.totalEsiRate) &&
+            Objects.equals(employeeId, that.employeeId) &&
+            Objects.equals(reEnumerationId, that.reEnumerationId) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(employeId, that.employeId) &&
-            Objects.equals(reEnumerationId, that.reEnumerationId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -274,11 +293,12 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
             esiRate,
             additionalEsiRate,
             totalEsiRate,
+            employeeId,
+            reEnumerationId,
+            companyId,
+            status,
             lastModified,
             lastModifiedBy,
-            status,
-            employeId,
-            reEnumerationId,
             distinct
         );
     }
@@ -293,11 +313,12 @@ public class EsiDetailsCriteria implements Serializable, Criteria {
             (esiRate != null ? "esiRate=" + esiRate + ", " : "") +
             (additionalEsiRate != null ? "additionalEsiRate=" + additionalEsiRate + ", " : "") +
             (totalEsiRate != null ? "totalEsiRate=" + totalEsiRate + ", " : "") +
+            (employeeId != null ? "employeeId=" + employeeId + ", " : "") +
+            (reEnumerationId != null ? "reEnumerationId=" + reEnumerationId + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (employeId != null ? "employeId=" + employeId + ", " : "") +
-            (reEnumerationId != null ? "reEnumerationId=" + reEnumerationId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

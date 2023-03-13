@@ -25,8 +25,9 @@ describe('FormValidator Form Service', () => {
             formName: expect.any(Object),
             fieldName: expect.any(Object),
             companyId: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdOn: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -42,8 +43,9 @@ describe('FormValidator Form Service', () => {
             formName: expect.any(Object),
             fieldName: expect.any(Object),
             companyId: expect.any(Object),
-            createdBy: expect.any(Object),
-            createdOn: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

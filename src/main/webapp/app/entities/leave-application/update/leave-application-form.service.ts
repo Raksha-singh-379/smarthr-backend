@@ -34,18 +34,17 @@ type LeaveApplicationFormDefaults = Pick<NewLeaveApplication, 'id' | 'formDate' 
 type LeaveApplicationFormGroupContent = {
   id: FormControl<LeaveApplicationFormRawValue['id'] | NewLeaveApplication['id']>;
   leaveType: FormControl<LeaveApplicationFormRawValue['leaveType']>;
-  balanceLeave: FormControl<LeaveApplicationFormRawValue['balanceLeave']>;
   noOfDays: FormControl<LeaveApplicationFormRawValue['noOfDays']>;
   reason: FormControl<LeaveApplicationFormRawValue['reason']>;
   year: FormControl<LeaveApplicationFormRawValue['year']>;
   formDate: FormControl<LeaveApplicationFormRawValue['formDate']>;
   toDate: FormControl<LeaveApplicationFormRawValue['toDate']>;
   leaveStatus: FormControl<LeaveApplicationFormRawValue['leaveStatus']>;
-  lastModified: FormControl<LeaveApplicationFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<LeaveApplicationFormRawValue['lastModifiedBy']>;
   status: FormControl<LeaveApplicationFormRawValue['status']>;
   employeId: FormControl<LeaveApplicationFormRawValue['employeId']>;
   companyId: FormControl<LeaveApplicationFormRawValue['companyId']>;
+  lastModified: FormControl<LeaveApplicationFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<LeaveApplicationFormRawValue['lastModifiedBy']>;
 };
 
 export type LeaveApplicationFormGroup = FormGroup<LeaveApplicationFormGroupContent>;
@@ -66,18 +65,17 @@ export class LeaveApplicationFormService {
         }
       ),
       leaveType: new FormControl(leaveApplicationRawValue.leaveType),
-      balanceLeave: new FormControl(leaveApplicationRawValue.balanceLeave),
       noOfDays: new FormControl(leaveApplicationRawValue.noOfDays),
       reason: new FormControl(leaveApplicationRawValue.reason),
       year: new FormControl(leaveApplicationRawValue.year),
       formDate: new FormControl(leaveApplicationRawValue.formDate),
       toDate: new FormControl(leaveApplicationRawValue.toDate),
       leaveStatus: new FormControl(leaveApplicationRawValue.leaveStatus),
-      lastModified: new FormControl(leaveApplicationRawValue.lastModified),
-      lastModifiedBy: new FormControl(leaveApplicationRawValue.lastModifiedBy),
       status: new FormControl(leaveApplicationRawValue.status),
       employeId: new FormControl(leaveApplicationRawValue.employeId),
       companyId: new FormControl(leaveApplicationRawValue.companyId),
+      lastModified: new FormControl(leaveApplicationRawValue.lastModified),
+      lastModifiedBy: new FormControl(leaveApplicationRawValue.lastModifiedBy),
     });
   }
 

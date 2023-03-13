@@ -22,9 +22,11 @@ public class FormValidatorDTO implements Serializable {
 
     private Long companyId;
 
-    private String createdBy;
+    private String status;
 
-    private Instant createdOn;
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -74,20 +76,28 @@ public class FormValidatorDTO implements Serializable {
         this.companyId = companyId;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getLastModified() {
+        return lastModified;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -121,8 +131,9 @@ public class FormValidatorDTO implements Serializable {
             ", formName='" + getFormName() + "'" +
             ", fieldName='" + getFieldName() + "'" +
             ", companyId=" + getCompanyId() +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

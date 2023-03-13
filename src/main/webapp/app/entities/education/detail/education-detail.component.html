@@ -22,9 +22,9 @@
         <dd>
           <span>{{ education.subject }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.education.startDate">Start Date</span></dt>
+        <dt><span jhiTranslate="smartHrApp.education.startYear">Start Year</span></dt>
         <dd>
-          <span>{{ education.startDate | formatMediumDatetime }}</span>
+          <span>{{ education.startYear | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="smartHrApp.education.endDate">End Date</span></dt>
         <dd>
@@ -42,18 +42,6 @@
         <dd>
           <span>{{ education.description }}</span>
         </dd>
-        <dt><span jhiTranslate="smartHrApp.education.lastModified">Last Modified</span></dt>
-        <dd>
-          <span>{{ education.lastModified | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.education.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-          <span>{{ education.lastModifiedBy }}</span>
-        </dd>
-        <dt><span jhiTranslate="smartHrApp.education.status">Status</span></dt>
-        <dd>
-          <span>{{ education.status }}</span>
-        </dd>
         <dt><span jhiTranslate="smartHrApp.education.employeeId">Employee Id</span></dt>
         <dd>
           <span>{{ education.employeeId }}</span>
@@ -61,6 +49,18 @@
         <dt><span jhiTranslate="smartHrApp.education.companyId">Company Id</span></dt>
         <dd>
           <span>{{ education.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.status">Status</span></dt>
+        <dd>
+          <span>{{ education.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ education.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.education.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ education.lastModifiedBy }}</span>
         </dd>
       </dl>
 

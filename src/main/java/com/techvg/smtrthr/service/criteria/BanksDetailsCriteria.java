@@ -31,19 +31,23 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
 
     private StringFilter taxNumber;
 
+    private StringFilter gstin;
+
+    private StringFilter tan;
+
     private StringFilter branchName;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private StringFilter refTableType;
+    private StringFilter refTable;
 
     private LongFilter refTableId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -55,13 +59,15 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
         this.bankName = other.bankName == null ? null : other.bankName.copy();
         this.branchTransCode = other.branchTransCode == null ? null : other.branchTransCode.copy();
         this.taxNumber = other.taxNumber == null ? null : other.taxNumber.copy();
+        this.gstin = other.gstin == null ? null : other.gstin.copy();
+        this.tan = other.tan == null ? null : other.tan.copy();
         this.branchName = other.branchName == null ? null : other.branchName.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.refTableType = other.refTableType == null ? null : other.refTableType.copy();
+        this.refTable = other.refTable == null ? null : other.refTable.copy();
         this.refTableId = other.refTableId == null ? null : other.refTableId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -145,6 +151,36 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
         this.taxNumber = taxNumber;
     }
 
+    public StringFilter getGstin() {
+        return gstin;
+    }
+
+    public StringFilter gstin() {
+        if (gstin == null) {
+            gstin = new StringFilter();
+        }
+        return gstin;
+    }
+
+    public void setGstin(StringFilter gstin) {
+        this.gstin = gstin;
+    }
+
+    public StringFilter getTan() {
+        return tan;
+    }
+
+    public StringFilter tan() {
+        if (tan == null) {
+            tan = new StringFilter();
+        }
+        return tan;
+    }
+
+    public void setTan(StringFilter tan) {
+        this.tan = tan;
+    }
+
     public StringFilter getBranchName() {
         return branchName;
     }
@@ -160,64 +196,19 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
         this.branchName = branchName;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
+    public StringFilter getRefTable() {
+        return refTable;
     }
 
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
+    public StringFilter refTable() {
+        if (refTable == null) {
+            refTable = new StringFilter();
         }
-        return lastModified;
+        return refTable;
     }
 
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public StringFilter getRefTableType() {
-        return refTableType;
-    }
-
-    public StringFilter refTableType() {
-        if (refTableType == null) {
-            refTableType = new StringFilter();
-        }
-        return refTableType;
-    }
-
-    public void setRefTableType(StringFilter refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(StringFilter refTable) {
+        this.refTable = refTable;
     }
 
     public LongFilter getRefTableId() {
@@ -250,6 +241,51 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -273,13 +309,15 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
             Objects.equals(bankName, that.bankName) &&
             Objects.equals(branchTransCode, that.branchTransCode) &&
             Objects.equals(taxNumber, that.taxNumber) &&
+            Objects.equals(gstin, that.gstin) &&
+            Objects.equals(tan, that.tan) &&
             Objects.equals(branchName, that.branchName) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(refTableType, that.refTableType) &&
+            Objects.equals(refTable, that.refTable) &&
             Objects.equals(refTableId, that.refTableId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -292,13 +330,15 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
             bankName,
             branchTransCode,
             taxNumber,
+            gstin,
+            tan,
             branchName,
-            lastModified,
-            lastModifiedBy,
-            status,
-            refTableType,
+            refTable,
             refTableId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -312,13 +352,15 @@ public class BanksDetailsCriteria implements Serializable, Criteria {
             (bankName != null ? "bankName=" + bankName + ", " : "") +
             (branchTransCode != null ? "branchTransCode=" + branchTransCode + ", " : "") +
             (taxNumber != null ? "taxNumber=" + taxNumber + ", " : "") +
+            (gstin != null ? "gstin=" + gstin + ", " : "") +
+            (tan != null ? "tan=" + tan + ", " : "") +
             (branchName != null ? "branchName=" + branchName + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (refTableType != null ? "refTableType=" + refTableType + ", " : "") +
+            (refTable != null ? "refTable=" + refTable + ", " : "") +
             (refTableId != null ? "refTableId=" + refTableId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

@@ -8,7 +8,7 @@ import { FormValidatorService, RestFormValidator } from './form-validator.servic
 
 const requireRestSample: RestFormValidator = {
   ...sampleWithRequiredData,
-  createdOn: sampleWithRequiredData.createdOn?.toJSON(),
+  lastModified: sampleWithRequiredData.lastModified?.toJSON(),
 };
 
 describe('FormValidator Service', () => {

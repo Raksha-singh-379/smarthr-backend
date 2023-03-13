@@ -20,12 +20,12 @@ describe('ApprovalSetting Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            isSequenceApproval: expect.any(Object),
-            isSimultaneousApproval: expect.any(Object),
+            type: expect.any(Object),
+            approvalCategory: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -36,12 +36,12 @@ describe('ApprovalSetting Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            isSequenceApproval: expect.any(Object),
-            isSimultaneousApproval: expect.any(Object),
+            type: expect.any(Object),
+            approvalCategory: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

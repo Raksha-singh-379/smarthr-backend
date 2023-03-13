@@ -28,8 +28,8 @@ public class Education implements Serializable {
     @Column(name = "subject")
     private String subject;
 
-    @Column(name = "start_date")
-    private Instant startDate;
+    @Column(name = "start_year")
+    private Instant startYear;
 
     @Column(name = "end_date")
     private Instant endDate;
@@ -43,20 +43,20 @@ public class Education implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "employee_id")
     private Long employeeId;
 
     @Column(name = "company_id")
     private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -99,17 +99,17 @@ public class Education implements Serializable {
         this.subject = subject;
     }
 
-    public Instant getStartDate() {
-        return this.startDate;
+    public Instant getStartYear() {
+        return this.startYear;
     }
 
-    public Education startDate(Instant startDate) {
-        this.setStartDate(startDate);
+    public Education startYear(Instant startYear) {
+        this.setStartYear(startYear);
         return this;
     }
 
-    public void setStartDate(Instant startDate) {
-        this.startDate = startDate;
+    public void setStartYear(Instant startYear) {
+        this.startYear = startYear;
     }
 
     public Instant getEndDate() {
@@ -164,45 +164,6 @@ public class Education implements Serializable {
         this.description = description;
     }
 
-    public Instant getLastModified() {
-        return this.lastModified;
-    }
-
-    public Education lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
-        return this;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public Education lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public Education status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getEmployeeId() {
         return this.employeeId;
     }
@@ -227,6 +188,45 @@ public class Education implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public Education status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public Education lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public Education lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -255,16 +255,16 @@ public class Education implements Serializable {
             "id=" + getId() +
             ", institution='" + getInstitution() + "'" +
             ", subject='" + getSubject() + "'" +
-            ", startDate='" + getStartDate() + "'" +
+            ", startYear='" + getStartYear() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", educationType='" + getEducationType() + "'" +
             ", grade='" + getGrade() + "'" +
             ", description='" + getDescription() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

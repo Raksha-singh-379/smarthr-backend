@@ -11,10 +11,26 @@
     },
     {
       "fieldName": "noOfDays",
-      "fieldType": "String"
+      "fieldType": "Long"
     },
     {
-      "fieldName": "recordStatus",
+      "fieldName": "hasCarryForward",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasEarned",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasCustomPolicy",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
       "fieldType": "String"
     },
     {
@@ -24,14 +40,6 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

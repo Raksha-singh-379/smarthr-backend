@@ -21,11 +21,11 @@
       "salaryFrom": "Salary From",
       "salaryTo": "Salary To",
       "percentage": "Percentage",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "salarySettingId": "Salary Setting Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

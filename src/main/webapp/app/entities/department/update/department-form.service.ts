@@ -32,10 +32,10 @@ type DepartmentFormDefaults = Pick<NewDepartment, 'id' | 'lastModified'>;
 type DepartmentFormGroupContent = {
   id: FormControl<DepartmentFormRawValue['id'] | NewDepartment['id']>;
   name: FormControl<DepartmentFormRawValue['name']>;
+  companyId: FormControl<DepartmentFormRawValue['companyId']>;
+  status: FormControl<DepartmentFormRawValue['status']>;
   lastModified: FormControl<DepartmentFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<DepartmentFormRawValue['lastModifiedBy']>;
-  status: FormControl<DepartmentFormRawValue['status']>;
-  companyId: FormControl<DepartmentFormRawValue['companyId']>;
 };
 
 export type DepartmentFormGroup = FormGroup<DepartmentFormGroupContent>;
@@ -56,10 +56,10 @@ export class DepartmentFormService {
         }
       ),
       name: new FormControl(departmentRawValue.name),
+      companyId: new FormControl(departmentRawValue.companyId),
+      status: new FormControl(departmentRawValue.status),
       lastModified: new FormControl(departmentRawValue.lastModified),
       lastModifiedBy: new FormControl(departmentRawValue.lastModifiedBy),
-      status: new FormControl(departmentRawValue.status),
-      companyId: new FormControl(departmentRawValue.companyId),
     });
   }
 

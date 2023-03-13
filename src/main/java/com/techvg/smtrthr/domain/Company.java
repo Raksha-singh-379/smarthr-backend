@@ -46,6 +46,9 @@ public class Company implements Serializable {
     @Column(name = "fax")
     private String fax;
 
+    @Column(name = "reg_number")
+    private String regNumber;
+
     @Column(name = "status")
     private String status;
 
@@ -55,17 +58,8 @@ public class Company implements Serializable {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @Column(name = "reg_number")
-    private String regNumber;
-
-    @Column(name = "gstin")
-    private String gstin;
-
-    @Column(name = "pan")
-    private String pan;
-
-    @Column(name = "tan")
-    private String tan;
+    @Column(name = "leave_setting_level")
+    private String leaveSettingLevel;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -186,6 +180,19 @@ public class Company implements Serializable {
         this.fax = fax;
     }
 
+    public String getRegNumber() {
+        return this.regNumber;
+    }
+
+    public Company regNumber(String regNumber) {
+        this.setRegNumber(regNumber);
+        return this;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
+
     public String getStatus() {
         return this.status;
     }
@@ -225,56 +232,17 @@ public class Company implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getRegNumber() {
-        return this.regNumber;
+    public String getLeaveSettingLevel() {
+        return this.leaveSettingLevel;
     }
 
-    public Company regNumber(String regNumber) {
-        this.setRegNumber(regNumber);
+    public Company leaveSettingLevel(String leaveSettingLevel) {
+        this.setLeaveSettingLevel(leaveSettingLevel);
         return this;
     }
 
-    public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public String getGstin() {
-        return this.gstin;
-    }
-
-    public Company gstin(String gstin) {
-        this.setGstin(gstin);
-        return this;
-    }
-
-    public void setGstin(String gstin) {
-        this.gstin = gstin;
-    }
-
-    public String getPan() {
-        return this.pan;
-    }
-
-    public Company pan(String pan) {
-        this.setPan(pan);
-        return this;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
-
-    public String getTan() {
-        return this.tan;
-    }
-
-    public Company tan(String tan) {
-        this.setTan(tan);
-        return this;
-    }
-
-    public void setTan(String tan) {
-        this.tan = tan;
+    public void setLeaveSettingLevel(String leaveSettingLevel) {
+        this.leaveSettingLevel = leaveSettingLevel;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -309,13 +277,11 @@ public class Company implements Serializable {
             ", mobileNumber='" + getMobileNumber() + "'" +
             ", websiteUrl='" + getWebsiteUrl() + "'" +
             ", fax='" + getFax() + "'" +
+            ", regNumber='" + getRegNumber() + "'" +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", regNumber='" + getRegNumber() + "'" +
-            ", gstin='" + getGstin() + "'" +
-            ", pan='" + getPan() + "'" +
-            ", tan='" + getTan() + "'" +
+            ", leaveSettingLevel='" + getLeaveSettingLevel() + "'" +
             "}";
     }
 }

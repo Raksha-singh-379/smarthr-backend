@@ -105,11 +105,14 @@ public class FormValidatorQueryService extends QueryService<FormValidator> {
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), FormValidator_.companyId));
             }
-            if (criteria.getCreatedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), FormValidator_.createdBy));
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), FormValidator_.status));
             }
-            if (criteria.getCreatedOn() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCreatedOn(), FormValidator_.createdOn));
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), FormValidator_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), FormValidator_.lastModifiedBy));
             }
         }
         return specification;

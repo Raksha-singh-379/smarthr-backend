@@ -8,11 +8,19 @@
     {
       "fieldName": "regionName",
       "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "regionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
       "fieldName": "status",
@@ -25,10 +33,6 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

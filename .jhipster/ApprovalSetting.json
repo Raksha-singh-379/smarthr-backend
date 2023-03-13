@@ -6,12 +6,20 @@
   "entityTableName": "approval_setting",
   "fields": [
     {
-      "fieldName": "isSequenceApproval",
-      "fieldType": "Boolean"
+      "fieldName": "type",
+      "fieldType": "String"
     },
     {
-      "fieldName": "isSimultaneousApproval",
-      "fieldType": "Boolean"
+      "fieldName": "approvalCategory",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
     },
     {
       "fieldName": "lastModified",
@@ -20,14 +28,6 @@
     {
       "fieldName": "lastModifiedBy",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "companyId",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

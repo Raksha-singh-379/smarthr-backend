@@ -22,10 +22,11 @@ describe('Region Form Service', () => {
             id: expect.any(Object),
             regionName: expect.any(Object),
             description: expect.any(Object),
+            regionId: expect.any(Object),
+            companyId: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -38,10 +39,11 @@ describe('Region Form Service', () => {
             id: expect.any(Object),
             regionName: expect.any(Object),
             description: expect.any(Object),
+            regionId: expect.any(Object),
+            companyId: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

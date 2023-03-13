@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="timeSheet">
+      <h2 data-cy="timeSheetDetailsHeading"><span jhiTranslate="smartHrApp.timeSheet.detail.title">Time Sheet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ timeSheet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.checkIn">Check In</span></dt>
+        <dd>
+          <span>{{ timeSheet.checkIn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.checkOut">Check Out</span></dt>
+        <dd>
+          <span>{{ timeSheet.checkOut | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.date">Date</span></dt>
+        <dd>
+          <span>{{ timeSheet.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.hasCheckedIn">Has Checked In</span></dt>
+        <dd>
+          <span>{{ timeSheet.hasCheckedIn }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ timeSheet.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.status">Status</span></dt>
+        <dd>
+          <span>{{ timeSheet.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ timeSheet.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ timeSheet.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.timeSheet.attendance">Attendance</span></dt>
+        <dd>
+          <div *ngIf="timeSheet.attendance">
+            <a [routerLink]="['/attendance', timeSheet.attendance.id, 'view']">{{ timeSheet.attendance.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/time-sheet', timeSheet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

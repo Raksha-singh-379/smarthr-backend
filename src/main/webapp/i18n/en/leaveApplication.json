@@ -19,18 +19,17 @@
       },
       "id": "ID",
       "leaveType": "Leave Type",
-      "balanceLeave": "Balance Leave",
       "noOfDays": "No Of Days",
       "reason": "Reason",
       "year": "Year",
       "formDate": "Form Date",
       "toDate": "To Date",
       "leaveStatus": "Leave Status",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
       "status": "Status",
       "employeId": "Employe Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

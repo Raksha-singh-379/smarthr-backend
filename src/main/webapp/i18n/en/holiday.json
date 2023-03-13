@@ -22,10 +22,10 @@
       "holidayDate": "Holiday Date",
       "day": "Day",
       "year": "Year",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "companyId": "Company Id",
       "status": "Status",
-      "companyId": "Company Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

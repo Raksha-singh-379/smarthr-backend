@@ -18,21 +18,17 @@
         "title": "Personal Details"
       },
       "id": "ID",
-      "passportNo": "Passport No",
-      "passportExpDate": "Passport Exp Date",
       "telephoneNo": "Telephone No",
       "nationality": "Nationality",
       "maritalStatus": "Marital Status",
       "religion": "Religion",
-      "isSpousEmployed": "Is Spous Employed",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
       "employeeId": "Employee Id",
       "companyId": "Company Id",
-      "personalIdNo": "Personal Id No",
       "bloodGroup": "Blood Group",
-      "dateOfBirth": "Date Of Birth"
+      "dateOfBirth": "Date Of Birth",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

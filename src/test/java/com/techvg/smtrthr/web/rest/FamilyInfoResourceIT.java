@@ -46,17 +46,15 @@ class FamilyInfoResourceIT {
     private static final String DEFAULT_RELATION = "AAAAAAAAAA";
     private static final String UPDATED_RELATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
-    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+    private static final Long DEFAULT_ADDRESS_ID = 1L;
+    private static final Long UPDATED_ADDRESS_ID = 2L;
+    private static final Long SMALLER_ADDRESS_ID = 1L - 1L;
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Boolean DEFAULT_IS_EMPLOYED = false;
+    private static final Boolean UPDATED_IS_EMPLOYED = true;
 
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+    private static final String DEFAULT_EMPLOYED_AT = "AAAAAAAAAA";
+    private static final String UPDATED_EMPLOYED_AT = "BBBBBBBBBB";
 
     private static final Long DEFAULT_EMPLOYEE_ID = 1L;
     private static final Long UPDATED_EMPLOYEE_ID = 2L;
@@ -65,6 +63,15 @@ class FamilyInfoResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/family-infos";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -97,12 +104,14 @@ class FamilyInfoResourceIT {
             .name(DEFAULT_NAME)
             .dateOfBirth(DEFAULT_DATE_OF_BIRTH)
             .relation(DEFAULT_RELATION)
-            .address(DEFAULT_ADDRESS)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
+            .addressId(DEFAULT_ADDRESS_ID)
+            .isEmployed(DEFAULT_IS_EMPLOYED)
+            .employedAt(DEFAULT_EMPLOYED_AT)
             .employeeId(DEFAULT_EMPLOYEE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return familyInfo;
     }
 
@@ -117,12 +126,14 @@ class FamilyInfoResourceIT {
             .name(UPDATED_NAME)
             .dateOfBirth(UPDATED_DATE_OF_BIRTH)
             .relation(UPDATED_RELATION)
-            .address(UPDATED_ADDRESS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
+            .addressId(UPDATED_ADDRESS_ID)
+            .isEmployed(UPDATED_IS_EMPLOYED)
+            .employedAt(UPDATED_EMPLOYED_AT)
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return familyInfo;
     }
 
@@ -148,12 +159,14 @@ class FamilyInfoResourceIT {
         assertThat(testFamilyInfo.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testFamilyInfo.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
         assertThat(testFamilyInfo.getRelation()).isEqualTo(DEFAULT_RELATION);
-        assertThat(testFamilyInfo.getAddress()).isEqualTo(DEFAULT_ADDRESS);
-        assertThat(testFamilyInfo.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testFamilyInfo.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testFamilyInfo.getAddressId()).isEqualTo(DEFAULT_ADDRESS_ID);
+        assertThat(testFamilyInfo.getIsEmployed()).isEqualTo(DEFAULT_IS_EMPLOYED);
+        assertThat(testFamilyInfo.getEmployedAt()).isEqualTo(DEFAULT_EMPLOYED_AT);
         assertThat(testFamilyInfo.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testFamilyInfo.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testFamilyInfo.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testFamilyInfo.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -190,12 +203,14 @@ class FamilyInfoResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())))
             .andExpect(jsonPath("$.[*].relation").value(hasItem(DEFAULT_RELATION)))
-            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].addressId").value(hasItem(DEFAULT_ADDRESS_ID.intValue())))
+            .andExpect(jsonPath("$.[*].isEmployed").value(hasItem(DEFAULT_IS_EMPLOYED.booleanValue())))
+            .andExpect(jsonPath("$.[*].employedAt").value(hasItem(DEFAULT_EMPLOYED_AT)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -213,12 +228,14 @@ class FamilyInfoResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.dateOfBirth").value(DEFAULT_DATE_OF_BIRTH.toString()))
             .andExpect(jsonPath("$.relation").value(DEFAULT_RELATION))
-            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.addressId").value(DEFAULT_ADDRESS_ID.intValue()))
+            .andExpect(jsonPath("$.isEmployed").value(DEFAULT_IS_EMPLOYED.booleanValue()))
+            .andExpect(jsonPath("$.employedAt").value(DEFAULT_EMPLOYED_AT))
             .andExpect(jsonPath("$.employeeId").value(DEFAULT_EMPLOYEE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -462,236 +479,197 @@ class FamilyInfoResourceIT {
 
     @Test
     @Transactional
-    void getAllFamilyInfosByAddressIsEqualToSomething() throws Exception {
+    void getAllFamilyInfosByAddressIdIsEqualToSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where address equals to DEFAULT_ADDRESS
-        defaultFamilyInfoShouldBeFound("address.equals=" + DEFAULT_ADDRESS);
+        // Get all the familyInfoList where addressId equals to DEFAULT_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.equals=" + DEFAULT_ADDRESS_ID);
 
-        // Get all the familyInfoList where address equals to UPDATED_ADDRESS
-        defaultFamilyInfoShouldNotBeFound("address.equals=" + UPDATED_ADDRESS);
+        // Get all the familyInfoList where addressId equals to UPDATED_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.equals=" + UPDATED_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByAddressIsInShouldWork() throws Exception {
+    void getAllFamilyInfosByAddressIdIsInShouldWork() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where address in DEFAULT_ADDRESS or UPDATED_ADDRESS
-        defaultFamilyInfoShouldBeFound("address.in=" + DEFAULT_ADDRESS + "," + UPDATED_ADDRESS);
+        // Get all the familyInfoList where addressId in DEFAULT_ADDRESS_ID or UPDATED_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.in=" + DEFAULT_ADDRESS_ID + "," + UPDATED_ADDRESS_ID);
 
-        // Get all the familyInfoList where address equals to UPDATED_ADDRESS
-        defaultFamilyInfoShouldNotBeFound("address.in=" + UPDATED_ADDRESS);
+        // Get all the familyInfoList where addressId equals to UPDATED_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.in=" + UPDATED_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByAddressIsNullOrNotNull() throws Exception {
+    void getAllFamilyInfosByAddressIdIsNullOrNotNull() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where address is not null
-        defaultFamilyInfoShouldBeFound("address.specified=true");
+        // Get all the familyInfoList where addressId is not null
+        defaultFamilyInfoShouldBeFound("addressId.specified=true");
 
-        // Get all the familyInfoList where address is null
-        defaultFamilyInfoShouldNotBeFound("address.specified=false");
+        // Get all the familyInfoList where addressId is null
+        defaultFamilyInfoShouldNotBeFound("addressId.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByAddressContainsSomething() throws Exception {
+    void getAllFamilyInfosByAddressIdIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where address contains DEFAULT_ADDRESS
-        defaultFamilyInfoShouldBeFound("address.contains=" + DEFAULT_ADDRESS);
+        // Get all the familyInfoList where addressId is greater than or equal to DEFAULT_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.greaterThanOrEqual=" + DEFAULT_ADDRESS_ID);
 
-        // Get all the familyInfoList where address contains UPDATED_ADDRESS
-        defaultFamilyInfoShouldNotBeFound("address.contains=" + UPDATED_ADDRESS);
+        // Get all the familyInfoList where addressId is greater than or equal to UPDATED_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.greaterThanOrEqual=" + UPDATED_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByAddressNotContainsSomething() throws Exception {
+    void getAllFamilyInfosByAddressIdIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where address does not contain DEFAULT_ADDRESS
-        defaultFamilyInfoShouldNotBeFound("address.doesNotContain=" + DEFAULT_ADDRESS);
+        // Get all the familyInfoList where addressId is less than or equal to DEFAULT_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.lessThanOrEqual=" + DEFAULT_ADDRESS_ID);
 
-        // Get all the familyInfoList where address does not contain UPDATED_ADDRESS
-        defaultFamilyInfoShouldBeFound("address.doesNotContain=" + UPDATED_ADDRESS);
+        // Get all the familyInfoList where addressId is less than or equal to SMALLER_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.lessThanOrEqual=" + SMALLER_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedIsEqualToSomething() throws Exception {
+    void getAllFamilyInfosByAddressIdIsLessThanSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultFamilyInfoShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+        // Get all the familyInfoList where addressId is less than DEFAULT_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.lessThan=" + DEFAULT_ADDRESS_ID);
 
-        // Get all the familyInfoList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultFamilyInfoShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+        // Get all the familyInfoList where addressId is less than UPDATED_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.lessThan=" + UPDATED_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedIsInShouldWork() throws Exception {
+    void getAllFamilyInfosByAddressIdIsGreaterThanSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultFamilyInfoShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+        // Get all the familyInfoList where addressId is greater than DEFAULT_ADDRESS_ID
+        defaultFamilyInfoShouldNotBeFound("addressId.greaterThan=" + DEFAULT_ADDRESS_ID);
 
-        // Get all the familyInfoList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultFamilyInfoShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+        // Get all the familyInfoList where addressId is greater than SMALLER_ADDRESS_ID
+        defaultFamilyInfoShouldBeFound("addressId.greaterThan=" + SMALLER_ADDRESS_ID);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedIsNullOrNotNull() throws Exception {
+    void getAllFamilyInfosByIsEmployedIsEqualToSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModified is not null
-        defaultFamilyInfoShouldBeFound("lastModified.specified=true");
+        // Get all the familyInfoList where isEmployed equals to DEFAULT_IS_EMPLOYED
+        defaultFamilyInfoShouldBeFound("isEmployed.equals=" + DEFAULT_IS_EMPLOYED);
 
-        // Get all the familyInfoList where lastModified is null
-        defaultFamilyInfoShouldNotBeFound("lastModified.specified=false");
+        // Get all the familyInfoList where isEmployed equals to UPDATED_IS_EMPLOYED
+        defaultFamilyInfoShouldNotBeFound("isEmployed.equals=" + UPDATED_IS_EMPLOYED);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedByIsEqualToSomething() throws Exception {
+    void getAllFamilyInfosByIsEmployedIsInShouldWork() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where isEmployed in DEFAULT_IS_EMPLOYED or UPDATED_IS_EMPLOYED
+        defaultFamilyInfoShouldBeFound("isEmployed.in=" + DEFAULT_IS_EMPLOYED + "," + UPDATED_IS_EMPLOYED);
 
-        // Get all the familyInfoList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where isEmployed equals to UPDATED_IS_EMPLOYED
+        defaultFamilyInfoShouldNotBeFound("isEmployed.in=" + UPDATED_IS_EMPLOYED);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedByIsInShouldWork() throws Exception {
+    void getAllFamilyInfosByIsEmployedIsNullOrNotNull() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where isEmployed is not null
+        defaultFamilyInfoShouldBeFound("isEmployed.specified=true");
 
-        // Get all the familyInfoList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where isEmployed is null
+        defaultFamilyInfoShouldNotBeFound("isEmployed.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedByIsNullOrNotNull() throws Exception {
+    void getAllFamilyInfosByEmployedAtIsEqualToSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModifiedBy is not null
-        defaultFamilyInfoShouldBeFound("lastModifiedBy.specified=true");
+        // Get all the familyInfoList where employedAt equals to DEFAULT_EMPLOYED_AT
+        defaultFamilyInfoShouldBeFound("employedAt.equals=" + DEFAULT_EMPLOYED_AT);
 
-        // Get all the familyInfoList where lastModifiedBy is null
-        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.specified=false");
+        // Get all the familyInfoList where employedAt equals to UPDATED_EMPLOYED_AT
+        defaultFamilyInfoShouldNotBeFound("employedAt.equals=" + UPDATED_EMPLOYED_AT);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedByContainsSomething() throws Exception {
+    void getAllFamilyInfosByEmployedAtIsInShouldWork() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where employedAt in DEFAULT_EMPLOYED_AT or UPDATED_EMPLOYED_AT
+        defaultFamilyInfoShouldBeFound("employedAt.in=" + DEFAULT_EMPLOYED_AT + "," + UPDATED_EMPLOYED_AT);
 
-        // Get all the familyInfoList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where employedAt equals to UPDATED_EMPLOYED_AT
+        defaultFamilyInfoShouldNotBeFound("employedAt.in=" + UPDATED_EMPLOYED_AT);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByLastModifiedByNotContainsSomething() throws Exception {
+    void getAllFamilyInfosByEmployedAtIsNullOrNotNull() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where employedAt is not null
+        defaultFamilyInfoShouldBeFound("employedAt.specified=true");
 
-        // Get all the familyInfoList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultFamilyInfoShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+        // Get all the familyInfoList where employedAt is null
+        defaultFamilyInfoShouldNotBeFound("employedAt.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByStatusIsEqualToSomething() throws Exception {
+    void getAllFamilyInfosByEmployedAtContainsSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where status equals to DEFAULT_STATUS
-        defaultFamilyInfoShouldBeFound("status.equals=" + DEFAULT_STATUS);
+        // Get all the familyInfoList where employedAt contains DEFAULT_EMPLOYED_AT
+        defaultFamilyInfoShouldBeFound("employedAt.contains=" + DEFAULT_EMPLOYED_AT);
 
-        // Get all the familyInfoList where status equals to UPDATED_STATUS
-        defaultFamilyInfoShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+        // Get all the familyInfoList where employedAt contains UPDATED_EMPLOYED_AT
+        defaultFamilyInfoShouldNotBeFound("employedAt.contains=" + UPDATED_EMPLOYED_AT);
     }
 
     @Test
     @Transactional
-    void getAllFamilyInfosByStatusIsInShouldWork() throws Exception {
+    void getAllFamilyInfosByEmployedAtNotContainsSomething() throws Exception {
         // Initialize the database
         familyInfoRepository.saveAndFlush(familyInfo);
 
-        // Get all the familyInfoList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultFamilyInfoShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+        // Get all the familyInfoList where employedAt does not contain DEFAULT_EMPLOYED_AT
+        defaultFamilyInfoShouldNotBeFound("employedAt.doesNotContain=" + DEFAULT_EMPLOYED_AT);
 
-        // Get all the familyInfoList where status equals to UPDATED_STATUS
-        defaultFamilyInfoShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllFamilyInfosByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        familyInfoRepository.saveAndFlush(familyInfo);
-
-        // Get all the familyInfoList where status is not null
-        defaultFamilyInfoShouldBeFound("status.specified=true");
-
-        // Get all the familyInfoList where status is null
-        defaultFamilyInfoShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllFamilyInfosByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        familyInfoRepository.saveAndFlush(familyInfo);
-
-        // Get all the familyInfoList where status contains DEFAULT_STATUS
-        defaultFamilyInfoShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the familyInfoList where status contains UPDATED_STATUS
-        defaultFamilyInfoShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllFamilyInfosByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        familyInfoRepository.saveAndFlush(familyInfo);
-
-        // Get all the familyInfoList where status does not contain DEFAULT_STATUS
-        defaultFamilyInfoShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the familyInfoList where status does not contain UPDATED_STATUS
-        defaultFamilyInfoShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+        // Get all the familyInfoList where employedAt does not contain UPDATED_EMPLOYED_AT
+        defaultFamilyInfoShouldBeFound("employedAt.doesNotContain=" + UPDATED_EMPLOYED_AT);
     }
 
     @Test
@@ -876,6 +854,175 @@ class FamilyInfoResourceIT {
         defaultFamilyInfoShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllFamilyInfosByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where status equals to DEFAULT_STATUS
+        defaultFamilyInfoShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the familyInfoList where status equals to UPDATED_STATUS
+        defaultFamilyInfoShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultFamilyInfoShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the familyInfoList where status equals to UPDATED_STATUS
+        defaultFamilyInfoShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where status is not null
+        defaultFamilyInfoShouldBeFound("status.specified=true");
+
+        // Get all the familyInfoList where status is null
+        defaultFamilyInfoShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where status contains DEFAULT_STATUS
+        defaultFamilyInfoShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the familyInfoList where status contains UPDATED_STATUS
+        defaultFamilyInfoShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where status does not contain DEFAULT_STATUS
+        defaultFamilyInfoShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the familyInfoList where status does not contain UPDATED_STATUS
+        defaultFamilyInfoShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultFamilyInfoShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the familyInfoList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultFamilyInfoShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultFamilyInfoShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the familyInfoList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultFamilyInfoShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModified is not null
+        defaultFamilyInfoShouldBeFound("lastModified.specified=true");
+
+        // Get all the familyInfoList where lastModified is null
+        defaultFamilyInfoShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the familyInfoList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the familyInfoList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModifiedBy is not null
+        defaultFamilyInfoShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the familyInfoList where lastModifiedBy is null
+        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the familyInfoList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllFamilyInfosByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        // Get all the familyInfoList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the familyInfoList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultFamilyInfoShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -888,12 +1035,14 @@ class FamilyInfoResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())))
             .andExpect(jsonPath("$.[*].relation").value(hasItem(DEFAULT_RELATION)))
-            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].addressId").value(hasItem(DEFAULT_ADDRESS_ID.intValue())))
+            .andExpect(jsonPath("$.[*].isEmployed").value(hasItem(DEFAULT_IS_EMPLOYED.booleanValue())))
+            .andExpect(jsonPath("$.[*].employedAt").value(hasItem(DEFAULT_EMPLOYED_AT)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restFamilyInfoMockMvc
@@ -945,12 +1094,14 @@ class FamilyInfoResourceIT {
             .name(UPDATED_NAME)
             .dateOfBirth(UPDATED_DATE_OF_BIRTH)
             .relation(UPDATED_RELATION)
-            .address(UPDATED_ADDRESS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
+            .addressId(UPDATED_ADDRESS_ID)
+            .isEmployed(UPDATED_IS_EMPLOYED)
+            .employedAt(UPDATED_EMPLOYED_AT)
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         FamilyInfoDTO familyInfoDTO = familyInfoMapper.toDto(updatedFamilyInfo);
 
         restFamilyInfoMockMvc
@@ -968,12 +1119,14 @@ class FamilyInfoResourceIT {
         assertThat(testFamilyInfo.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testFamilyInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
         assertThat(testFamilyInfo.getRelation()).isEqualTo(UPDATED_RELATION);
-        assertThat(testFamilyInfo.getAddress()).isEqualTo(UPDATED_ADDRESS);
-        assertThat(testFamilyInfo.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testFamilyInfo.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFamilyInfo.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
+        assertThat(testFamilyInfo.getIsEmployed()).isEqualTo(UPDATED_IS_EMPLOYED);
+        assertThat(testFamilyInfo.getEmployedAt()).isEqualTo(UPDATED_EMPLOYED_AT);
         assertThat(testFamilyInfo.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testFamilyInfo.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testFamilyInfo.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFamilyInfo.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1057,53 +1210,7 @@ class FamilyInfoResourceIT {
             .name(UPDATED_NAME)
             .dateOfBirth(UPDATED_DATE_OF_BIRTH)
             .relation(UPDATED_RELATION)
-            .address(UPDATED_ADDRESS)
-            .status(UPDATED_STATUS)
-            .employeeId(UPDATED_EMPLOYEE_ID);
-
-        restFamilyInfoMockMvc
-            .perform(
-                patch(ENTITY_API_URL_ID, partialUpdatedFamilyInfo.getId())
-                    .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedFamilyInfo))
-            )
-            .andExpect(status().isOk());
-
-        // Validate the FamilyInfo in the database
-        List<FamilyInfo> familyInfoList = familyInfoRepository.findAll();
-        assertThat(familyInfoList).hasSize(databaseSizeBeforeUpdate);
-        FamilyInfo testFamilyInfo = familyInfoList.get(familyInfoList.size() - 1);
-        assertThat(testFamilyInfo.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testFamilyInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
-        assertThat(testFamilyInfo.getRelation()).isEqualTo(UPDATED_RELATION);
-        assertThat(testFamilyInfo.getAddress()).isEqualTo(UPDATED_ADDRESS);
-        assertThat(testFamilyInfo.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testFamilyInfo.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testFamilyInfo.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
-        assertThat(testFamilyInfo.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void fullUpdateFamilyInfoWithPatch() throws Exception {
-        // Initialize the database
-        familyInfoRepository.saveAndFlush(familyInfo);
-
-        int databaseSizeBeforeUpdate = familyInfoRepository.findAll().size();
-
-        // Update the familyInfo using partial update
-        FamilyInfo partialUpdatedFamilyInfo = new FamilyInfo();
-        partialUpdatedFamilyInfo.setId(familyInfo.getId());
-
-        partialUpdatedFamilyInfo
-            .name(UPDATED_NAME)
-            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
-            .relation(UPDATED_RELATION)
-            .address(UPDATED_ADDRESS)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
+            .addressId(UPDATED_ADDRESS_ID)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID);
 
@@ -1122,12 +1229,64 @@ class FamilyInfoResourceIT {
         assertThat(testFamilyInfo.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testFamilyInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
         assertThat(testFamilyInfo.getRelation()).isEqualTo(UPDATED_RELATION);
-        assertThat(testFamilyInfo.getAddress()).isEqualTo(UPDATED_ADDRESS);
-        assertThat(testFamilyInfo.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testFamilyInfo.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFamilyInfo.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
+        assertThat(testFamilyInfo.getIsEmployed()).isEqualTo(DEFAULT_IS_EMPLOYED);
+        assertThat(testFamilyInfo.getEmployedAt()).isEqualTo(DEFAULT_EMPLOYED_AT);
         assertThat(testFamilyInfo.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testFamilyInfo.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testFamilyInfo.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testFamilyInfo.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void fullUpdateFamilyInfoWithPatch() throws Exception {
+        // Initialize the database
+        familyInfoRepository.saveAndFlush(familyInfo);
+
+        int databaseSizeBeforeUpdate = familyInfoRepository.findAll().size();
+
+        // Update the familyInfo using partial update
+        FamilyInfo partialUpdatedFamilyInfo = new FamilyInfo();
+        partialUpdatedFamilyInfo.setId(familyInfo.getId());
+
+        partialUpdatedFamilyInfo
+            .name(UPDATED_NAME)
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .relation(UPDATED_RELATION)
+            .addressId(UPDATED_ADDRESS_ID)
+            .isEmployed(UPDATED_IS_EMPLOYED)
+            .employedAt(UPDATED_EMPLOYED_AT)
+            .employeeId(UPDATED_EMPLOYEE_ID)
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
+
+        restFamilyInfoMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partialUpdatedFamilyInfo.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedFamilyInfo))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the FamilyInfo in the database
+        List<FamilyInfo> familyInfoList = familyInfoRepository.findAll();
+        assertThat(familyInfoList).hasSize(databaseSizeBeforeUpdate);
+        FamilyInfo testFamilyInfo = familyInfoList.get(familyInfoList.size() - 1);
+        assertThat(testFamilyInfo.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testFamilyInfo.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testFamilyInfo.getRelation()).isEqualTo(UPDATED_RELATION);
+        assertThat(testFamilyInfo.getAddressId()).isEqualTo(UPDATED_ADDRESS_ID);
+        assertThat(testFamilyInfo.getIsEmployed()).isEqualTo(UPDATED_IS_EMPLOYED);
+        assertThat(testFamilyInfo.getEmployedAt()).isEqualTo(UPDATED_EMPLOYED_AT);
+        assertThat(testFamilyInfo.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
+        assertThat(testFamilyInfo.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testFamilyInfo.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testFamilyInfo.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testFamilyInfo.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

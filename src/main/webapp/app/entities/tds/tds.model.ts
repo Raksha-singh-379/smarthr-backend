@@ -5,11 +5,11 @@ export interface ITds {
   salaryFrom?: dayjs.Dayjs | null;
   salaryTo?: dayjs.Dayjs | null;
   percentage?: number | null;
-  lastModified?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  status?: string | null;
   salarySettingId?: number | null;
   companyId?: number | null;
+  status?: string | null;
+  lastModified?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
 }
 
 export type NewTds = Omit<ITds, 'id'> & { id: null };

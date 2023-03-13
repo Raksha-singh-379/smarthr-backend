@@ -33,9 +33,11 @@ public class FormValidatorCriteria implements Serializable, Criteria {
 
     private LongFilter companyId;
 
-    private StringFilter createdBy;
+    private StringFilter status;
 
-    private InstantFilter createdOn;
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -48,8 +50,9 @@ public class FormValidatorCriteria implements Serializable, Criteria {
         this.formName = other.formName == null ? null : other.formName.copy();
         this.fieldName = other.fieldName == null ? null : other.fieldName.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
-        this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
-        this.createdOn = other.createdOn == null ? null : other.createdOn.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -148,34 +151,49 @@ public class FormValidatorCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
-    public StringFilter getCreatedBy() {
-        return createdBy;
+    public StringFilter getStatus() {
+        return status;
     }
 
-    public StringFilter createdBy() {
-        if (createdBy == null) {
-            createdBy = new StringFilter();
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
         }
-        return createdBy;
+        return status;
     }
 
-    public void setCreatedBy(StringFilter createdBy) {
-        this.createdBy = createdBy;
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
-    public InstantFilter getCreatedOn() {
-        return createdOn;
+    public InstantFilter getLastModified() {
+        return lastModified;
     }
 
-    public InstantFilter createdOn() {
-        if (createdOn == null) {
-            createdOn = new InstantFilter();
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
         }
-        return createdOn;
+        return lastModified;
     }
 
-    public void setCreatedOn(InstantFilter createdOn) {
-        this.createdOn = createdOn;
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Boolean getDistinct() {
@@ -202,15 +220,16 @@ public class FormValidatorCriteria implements Serializable, Criteria {
             Objects.equals(formName, that.formName) &&
             Objects.equals(fieldName, that.fieldName) &&
             Objects.equals(companyId, that.companyId) &&
-            Objects.equals(createdBy, that.createdBy) &&
-            Objects.equals(createdOn, that.createdOn) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, value, formName, fieldName, companyId, createdBy, createdOn, distinct);
+        return Objects.hash(id, type, value, formName, fieldName, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -223,8 +242,9 @@ public class FormValidatorCriteria implements Serializable, Criteria {
             (formName != null ? "formName=" + formName + ", " : "") +
             (fieldName != null ? "fieldName=" + fieldName + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
-            (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
-            (createdOn != null ? "createdOn=" + createdOn + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

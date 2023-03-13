@@ -26,22 +26,28 @@ public class LeaveType implements Serializable {
     private String leaveType;
 
     @Column(name = "no_of_days")
-    private String noOfDays;
+    private Long noOfDays;
 
-    @Column(name = "record_status")
-    private String recordStatus;
+    @Column(name = "has_carry_forward")
+    private Boolean hasCarryForward;
+
+    @Column(name = "has_earned")
+    private Boolean hasEarned;
+
+    @Column(name = "has_custom_policy")
+    private Boolean hasCustomPolicy;
+
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -71,30 +77,82 @@ public class LeaveType implements Serializable {
         this.leaveType = leaveType;
     }
 
-    public String getNoOfDays() {
+    public Long getNoOfDays() {
         return this.noOfDays;
     }
 
-    public LeaveType noOfDays(String noOfDays) {
+    public LeaveType noOfDays(Long noOfDays) {
         this.setNoOfDays(noOfDays);
         return this;
     }
 
-    public void setNoOfDays(String noOfDays) {
+    public void setNoOfDays(Long noOfDays) {
         this.noOfDays = noOfDays;
     }
 
-    public String getRecordStatus() {
-        return this.recordStatus;
+    public Boolean getHasCarryForward() {
+        return this.hasCarryForward;
     }
 
-    public LeaveType recordStatus(String recordStatus) {
-        this.setRecordStatus(recordStatus);
+    public LeaveType hasCarryForward(Boolean hasCarryForward) {
+        this.setHasCarryForward(hasCarryForward);
         return this;
     }
 
-    public void setRecordStatus(String recordStatus) {
-        this.recordStatus = recordStatus;
+    public void setHasCarryForward(Boolean hasCarryForward) {
+        this.hasCarryForward = hasCarryForward;
+    }
+
+    public Boolean getHasEarned() {
+        return this.hasEarned;
+    }
+
+    public LeaveType hasEarned(Boolean hasEarned) {
+        this.setHasEarned(hasEarned);
+        return this;
+    }
+
+    public void setHasEarned(Boolean hasEarned) {
+        this.hasEarned = hasEarned;
+    }
+
+    public Boolean getHasCustomPolicy() {
+        return this.hasCustomPolicy;
+    }
+
+    public LeaveType hasCustomPolicy(Boolean hasCustomPolicy) {
+        this.setHasCustomPolicy(hasCustomPolicy);
+        return this;
+    }
+
+    public void setHasCustomPolicy(Boolean hasCustomPolicy) {
+        this.hasCustomPolicy = hasCustomPolicy;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public LeaveType companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public LeaveType status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -123,32 +181,6 @@ public class LeaveType implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public LeaveType status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public LeaveType companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -174,12 +206,14 @@ public class LeaveType implements Serializable {
         return "LeaveType{" +
             "id=" + getId() +
             ", leaveType='" + getLeaveType() + "'" +
-            ", noOfDays='" + getNoOfDays() + "'" +
-            ", recordStatus='" + getRecordStatus() + "'" +
+            ", noOfDays=" + getNoOfDays() +
+            ", hasCarryForward='" + getHasCarryForward() + "'" +
+            ", hasEarned='" + getHasEarned() + "'" +
+            ", hasCustomPolicy='" + getHasCustomPolicy() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

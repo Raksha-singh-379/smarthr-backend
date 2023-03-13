@@ -22,15 +22,17 @@ public class PfDetailsDTO implements Serializable {
 
     private Double totalPfRate;
 
-    private Instant lastModified;
+    private Long employeeId;
 
-    private String lastModifiedBy;
+    private Long reEnumerationId;
+
+    private Long companyId;
 
     private String status;
 
-    private Long employeId;
+    private Instant lastModified;
 
-    private Long reEnumerationId;
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -80,6 +82,38 @@ public class PfDetailsDTO implements Serializable {
         this.totalPfRate = totalPfRate;
     }
 
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Long getReEnumerationId() {
+        return reEnumerationId;
+    }
+
+    public void setReEnumerationId(Long reEnumerationId) {
+        this.reEnumerationId = reEnumerationId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -94,30 +128,6 @@ public class PfDetailsDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getEmployeId() {
-        return employeId;
-    }
-
-    public void setEmployeId(Long employeId) {
-        this.employeId = employeId;
-    }
-
-    public Long getReEnumerationId() {
-        return reEnumerationId;
-    }
-
-    public void setReEnumerationId(Long reEnumerationId) {
-        this.reEnumerationId = reEnumerationId;
     }
 
     @Override
@@ -151,11 +161,12 @@ public class PfDetailsDTO implements Serializable {
             ", pfRate=" + getPfRate() +
             ", additionalPfRate='" + getAdditionalPfRate() + "'" +
             ", totalPfRate=" + getTotalPfRate() +
+            ", employeeId=" + getEmployeeId() +
+            ", reEnumerationId=" + getReEnumerationId() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", employeId=" + getEmployeId() +
-            ", reEnumerationId=" + getReEnumerationId() +
             "}";
     }
 }

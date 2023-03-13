@@ -25,15 +25,9 @@ public class EmployeeCriteria implements Serializable, Criteria {
 
     private StringFilter firstName;
 
+    private StringFilter middleName;
+
     private StringFilter lastName;
-
-    private StringFilter username;
-
-    private StringFilter password;
-
-    private StringFilter department;
-
-    private StringFilter designation;
 
     private StringFilter gender;
 
@@ -41,13 +35,19 @@ public class EmployeeCriteria implements Serializable, Criteria {
 
     private InstantFilter joindate;
 
+    private LongFilter companyId;
+
+    private StringFilter status;
+
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
 
-    private StringFilter status;
+    private LongFilter employmentTypeId;
 
-    private LongFilter companyId;
+    private LongFilter designationId;
+
+    private LongFilter departmentId;
 
     private LongFilter branchId;
 
@@ -60,18 +60,18 @@ public class EmployeeCriteria implements Serializable, Criteria {
     public EmployeeCriteria(EmployeeCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.firstName = other.firstName == null ? null : other.firstName.copy();
+        this.middleName = other.middleName == null ? null : other.middleName.copy();
         this.lastName = other.lastName == null ? null : other.lastName.copy();
-        this.username = other.username == null ? null : other.username.copy();
-        this.password = other.password == null ? null : other.password.copy();
-        this.department = other.department == null ? null : other.department.copy();
-        this.designation = other.designation == null ? null : other.designation.copy();
         this.gender = other.gender == null ? null : other.gender.copy();
         this.empUniqueId = other.empUniqueId == null ? null : other.empUniqueId.copy();
         this.joindate = other.joindate == null ? null : other.joindate.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.employmentTypeId = other.employmentTypeId == null ? null : other.employmentTypeId.copy();
+        this.designationId = other.designationId == null ? null : other.designationId.copy();
+        this.departmentId = other.departmentId == null ? null : other.departmentId.copy();
         this.branchId = other.branchId == null ? null : other.branchId.copy();
         this.regionId = other.regionId == null ? null : other.regionId.copy();
         this.distinct = other.distinct;
@@ -112,6 +112,21 @@ public class EmployeeCriteria implements Serializable, Criteria {
         this.firstName = firstName;
     }
 
+    public StringFilter getMiddleName() {
+        return middleName;
+    }
+
+    public StringFilter middleName() {
+        if (middleName == null) {
+            middleName = new StringFilter();
+        }
+        return middleName;
+    }
+
+    public void setMiddleName(StringFilter middleName) {
+        this.middleName = middleName;
+    }
+
     public StringFilter getLastName() {
         return lastName;
     }
@@ -125,66 +140,6 @@ public class EmployeeCriteria implements Serializable, Criteria {
 
     public void setLastName(StringFilter lastName) {
         this.lastName = lastName;
-    }
-
-    public StringFilter getUsername() {
-        return username;
-    }
-
-    public StringFilter username() {
-        if (username == null) {
-            username = new StringFilter();
-        }
-        return username;
-    }
-
-    public void setUsername(StringFilter username) {
-        this.username = username;
-    }
-
-    public StringFilter getPassword() {
-        return password;
-    }
-
-    public StringFilter password() {
-        if (password == null) {
-            password = new StringFilter();
-        }
-        return password;
-    }
-
-    public void setPassword(StringFilter password) {
-        this.password = password;
-    }
-
-    public StringFilter getDepartment() {
-        return department;
-    }
-
-    public StringFilter department() {
-        if (department == null) {
-            department = new StringFilter();
-        }
-        return department;
-    }
-
-    public void setDepartment(StringFilter department) {
-        this.department = department;
-    }
-
-    public StringFilter getDesignation() {
-        return designation;
-    }
-
-    public StringFilter designation() {
-        if (designation == null) {
-            designation = new StringFilter();
-        }
-        return designation;
-    }
-
-    public void setDesignation(StringFilter designation) {
-        this.designation = designation;
     }
 
     public StringFilter getGender() {
@@ -232,6 +187,36 @@ public class EmployeeCriteria implements Serializable, Criteria {
         this.joindate = joindate;
     }
 
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
     public InstantFilter getLastModified() {
         return lastModified;
     }
@@ -262,34 +247,49 @@ public class EmployeeCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
+    public LongFilter getEmploymentTypeId() {
+        return employmentTypeId;
     }
 
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
+    public LongFilter employmentTypeId() {
+        if (employmentTypeId == null) {
+            employmentTypeId = new LongFilter();
         }
-        return status;
+        return employmentTypeId;
     }
 
-    public void setStatus(StringFilter status) {
-        this.status = status;
+    public void setEmploymentTypeId(LongFilter employmentTypeId) {
+        this.employmentTypeId = employmentTypeId;
     }
 
-    public LongFilter getCompanyId() {
-        return companyId;
+    public LongFilter getDesignationId() {
+        return designationId;
     }
 
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
+    public LongFilter designationId() {
+        if (designationId == null) {
+            designationId = new LongFilter();
         }
-        return companyId;
+        return designationId;
     }
 
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
+    public void setDesignationId(LongFilter designationId) {
+        this.designationId = designationId;
+    }
+
+    public LongFilter getDepartmentId() {
+        return departmentId;
+    }
+
+    public LongFilter departmentId() {
+        if (departmentId == null) {
+            departmentId = new LongFilter();
+        }
+        return departmentId;
+    }
+
+    public void setDepartmentId(LongFilter departmentId) {
+        this.departmentId = departmentId;
     }
 
     public LongFilter getBranchId() {
@@ -342,18 +342,18 @@ public class EmployeeCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
+            Objects.equals(middleName, that.middleName) &&
             Objects.equals(lastName, that.lastName) &&
-            Objects.equals(username, that.username) &&
-            Objects.equals(password, that.password) &&
-            Objects.equals(department, that.department) &&
-            Objects.equals(designation, that.designation) &&
             Objects.equals(gender, that.gender) &&
             Objects.equals(empUniqueId, that.empUniqueId) &&
             Objects.equals(joindate, that.joindate) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(employmentTypeId, that.employmentTypeId) &&
+            Objects.equals(designationId, that.designationId) &&
+            Objects.equals(departmentId, that.departmentId) &&
             Objects.equals(branchId, that.branchId) &&
             Objects.equals(regionId, that.regionId) &&
             Objects.equals(distinct, that.distinct)
@@ -365,18 +365,18 @@ public class EmployeeCriteria implements Serializable, Criteria {
         return Objects.hash(
             id,
             firstName,
+            middleName,
             lastName,
-            username,
-            password,
-            department,
-            designation,
             gender,
             empUniqueId,
             joindate,
+            companyId,
+            status,
             lastModified,
             lastModifiedBy,
-            status,
-            companyId,
+            employmentTypeId,
+            designationId,
+            departmentId,
             branchId,
             regionId,
             distinct
@@ -389,18 +389,18 @@ public class EmployeeCriteria implements Serializable, Criteria {
         return "EmployeeCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (firstName != null ? "firstName=" + firstName + ", " : "") +
+            (middleName != null ? "middleName=" + middleName + ", " : "") +
             (lastName != null ? "lastName=" + lastName + ", " : "") +
-            (username != null ? "username=" + username + ", " : "") +
-            (password != null ? "password=" + password + ", " : "") +
-            (department != null ? "department=" + department + ", " : "") +
-            (designation != null ? "designation=" + designation + ", " : "") +
             (gender != null ? "gender=" + gender + ", " : "") +
             (empUniqueId != null ? "empUniqueId=" + empUniqueId + ", " : "") +
             (joindate != null ? "joindate=" + joindate + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (employmentTypeId != null ? "employmentTypeId=" + employmentTypeId + ", " : "") +
+            (designationId != null ? "designationId=" + designationId + ", " : "") +
+            (departmentId != null ? "departmentId=" + departmentId + ", " : "") +
             (branchId != null ? "branchId=" + branchId + ", " : "") +
             (regionId != null ? "regionId=" + regionId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +

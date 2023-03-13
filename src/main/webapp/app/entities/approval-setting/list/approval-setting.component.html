@@ -40,15 +40,27 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="isSequenceApproval">
+          <th scope="col" jhiSortBy="type">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.approvalSetting.isSequenceApproval">Is Sequence Approval</span>
+              <span jhiTranslate="smartHrApp.approvalSetting.type">Type</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="isSimultaneousApproval">
+          <th scope="col" jhiSortBy="approvalCategory">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.approvalSetting.isSimultaneousApproval">Is Simultaneous Approval</span>
+              <span jhiTranslate="smartHrApp.approvalSetting.approvalCategory">Approval Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyId">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.approvalSetting.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.approvalSetting.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -64,18 +76,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.approvalSetting.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="companyId">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.approvalSetting.companyId">Company Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -84,12 +84,12 @@
           <td>
             <a [routerLink]="['/approval-setting', approvalSetting.id, 'view']">{{ approvalSetting.id }}</a>
           </td>
-          <td>{{ approvalSetting.isSequenceApproval }}</td>
-          <td>{{ approvalSetting.isSimultaneousApproval }}</td>
+          <td>{{ approvalSetting.type }}</td>
+          <td>{{ approvalSetting.approvalCategory }}</td>
+          <td>{{ approvalSetting.companyId }}</td>
+          <td>{{ approvalSetting.status }}</td>
           <td>{{ approvalSetting.lastModified | formatMediumDatetime }}</td>
           <td>{{ approvalSetting.lastModifiedBy }}</td>
-          <td>{{ approvalSetting.status }}</td>
-          <td>{{ approvalSetting.companyId }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

@@ -94,22 +94,28 @@ public class LeaveTypeQueryService extends QueryService<LeaveType> {
                 specification = specification.and(buildStringSpecification(criteria.getLeaveType(), LeaveType_.leaveType));
             }
             if (criteria.getNoOfDays() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNoOfDays(), LeaveType_.noOfDays));
+                specification = specification.and(buildRangeSpecification(criteria.getNoOfDays(), LeaveType_.noOfDays));
             }
-            if (criteria.getRecordStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRecordStatus(), LeaveType_.recordStatus));
+            if (criteria.getHasCarryForward() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasCarryForward(), LeaveType_.hasCarryForward));
+            }
+            if (criteria.getHasEarned() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasEarned(), LeaveType_.hasEarned));
+            }
+            if (criteria.getHasCustomPolicy() != null) {
+                specification = specification.and(buildSpecification(criteria.getHasCustomPolicy(), LeaveType_.hasCustomPolicy));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), LeaveType_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), LeaveType_.status));
             }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), LeaveType_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), LeaveType_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), LeaveType_.status));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), LeaveType_.companyId));
             }
         }
         return specification;

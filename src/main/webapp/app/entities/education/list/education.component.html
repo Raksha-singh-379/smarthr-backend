@@ -52,9 +52,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="startDate">
+          <th scope="col" jhiSortBy="startYear">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.education.startDate">Start Date</span>
+              <span jhiTranslate="smartHrApp.education.startYear">Start Year</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -82,24 +82,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.education.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.education.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.education.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="employeeId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.education.employeeId">Employee Id</span>
@@ -109,6 +91,24 @@
           <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.education.companyId">Company Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.education.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.education.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.education.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -122,16 +122,16 @@
           </td>
           <td>{{ education.institution }}</td>
           <td>{{ education.subject }}</td>
-          <td>{{ education.startDate | formatMediumDatetime }}</td>
+          <td>{{ education.startYear | formatMediumDatetime }}</td>
           <td>{{ education.endDate | formatMediumDatetime }}</td>
           <td>{{ education.educationType }}</td>
           <td>{{ education.grade }}</td>
           <td>{{ education.description }}</td>
-          <td>{{ education.lastModified | formatMediumDatetime }}</td>
-          <td>{{ education.lastModifiedBy }}</td>
-          <td>{{ education.status }}</td>
           <td>{{ education.employeeId }}</td>
           <td>{{ education.companyId }}</td>
+          <td>{{ education.status }}</td>
+          <td>{{ education.lastModified | formatMediumDatetime }}</td>
+          <td>{{ education.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

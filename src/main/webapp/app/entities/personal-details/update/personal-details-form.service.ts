@@ -19,8 +19,7 @@ type PersonalDetailsFormGroupInput = IPersonalDetails | PartialWithRequiredKeyOf
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IPersonalDetails | NewPersonalDetails> = Omit<T, 'passportExpDate' | 'lastModified'> & {
-  passportExpDate?: string | null;
+type FormValueOf<T extends IPersonalDetails | NewPersonalDetails> = Omit<T, 'lastModified'> & {
   lastModified?: string | null;
 };
 
@@ -28,25 +27,21 @@ type PersonalDetailsFormRawValue = FormValueOf<IPersonalDetails>;
 
 type NewPersonalDetailsFormRawValue = FormValueOf<NewPersonalDetails>;
 
-type PersonalDetailsFormDefaults = Pick<NewPersonalDetails, 'id' | 'passportExpDate' | 'isSpousEmployed' | 'lastModified'>;
+type PersonalDetailsFormDefaults = Pick<NewPersonalDetails, 'id' | 'lastModified'>;
 
 type PersonalDetailsFormGroupContent = {
   id: FormControl<PersonalDetailsFormRawValue['id'] | NewPersonalDetails['id']>;
-  passportNo: FormControl<PersonalDetailsFormRawValue['passportNo']>;
-  passportExpDate: FormControl<PersonalDetailsFormRawValue['passportExpDate']>;
   telephoneNo: FormControl<PersonalDetailsFormRawValue['telephoneNo']>;
   nationality: FormControl<PersonalDetailsFormRawValue['nationality']>;
   maritalStatus: FormControl<PersonalDetailsFormRawValue['maritalStatus']>;
   religion: FormControl<PersonalDetailsFormRawValue['religion']>;
-  isSpousEmployed: FormControl<PersonalDetailsFormRawValue['isSpousEmployed']>;
-  lastModified: FormControl<PersonalDetailsFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<PersonalDetailsFormRawValue['lastModifiedBy']>;
-  status: FormControl<PersonalDetailsFormRawValue['status']>;
   employeeId: FormControl<PersonalDetailsFormRawValue['employeeId']>;
   companyId: FormControl<PersonalDetailsFormRawValue['companyId']>;
-  personalIdNo: FormControl<PersonalDetailsFormRawValue['personalIdNo']>;
   bloodGroup: FormControl<PersonalDetailsFormRawValue['bloodGroup']>;
   dateOfBirth: FormControl<PersonalDetailsFormRawValue['dateOfBirth']>;
+  status: FormControl<PersonalDetailsFormRawValue['status']>;
+  lastModified: FormControl<PersonalDetailsFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<PersonalDetailsFormRawValue['lastModifiedBy']>;
 };
 
 export type PersonalDetailsFormGroup = FormGroup<PersonalDetailsFormGroupContent>;
@@ -66,21 +61,17 @@ export class PersonalDetailsFormService {
           validators: [Validators.required],
         }
       ),
-      passportNo: new FormControl(personalDetailsRawValue.passportNo),
-      passportExpDate: new FormControl(personalDetailsRawValue.passportExpDate),
       telephoneNo: new FormControl(personalDetailsRawValue.telephoneNo),
       nationality: new FormControl(personalDetailsRawValue.nationality),
       maritalStatus: new FormControl(personalDetailsRawValue.maritalStatus),
       religion: new FormControl(personalDetailsRawValue.religion),
-      isSpousEmployed: new FormControl(personalDetailsRawValue.isSpousEmployed),
-      lastModified: new FormControl(personalDetailsRawValue.lastModified),
-      lastModifiedBy: new FormControl(personalDetailsRawValue.lastModifiedBy),
-      status: new FormControl(personalDetailsRawValue.status),
       employeeId: new FormControl(personalDetailsRawValue.employeeId),
       companyId: new FormControl(personalDetailsRawValue.companyId),
-      personalIdNo: new FormControl(personalDetailsRawValue.personalIdNo),
       bloodGroup: new FormControl(personalDetailsRawValue.bloodGroup),
       dateOfBirth: new FormControl(personalDetailsRawValue.dateOfBirth),
+      status: new FormControl(personalDetailsRawValue.status),
+      lastModified: new FormControl(personalDetailsRawValue.lastModified),
+      lastModifiedBy: new FormControl(personalDetailsRawValue.lastModifiedBy),
     });
   }
 
@@ -105,8 +96,6 @@ export class PersonalDetailsFormService {
 
     return {
       id: null,
-      passportExpDate: currentTime,
-      isSpousEmployed: false,
       lastModified: currentTime,
     };
   }
@@ -116,7 +105,6 @@ export class PersonalDetailsFormService {
   ): IPersonalDetails | NewPersonalDetails {
     return {
       ...rawPersonalDetails,
-      passportExpDate: dayjs(rawPersonalDetails.passportExpDate, DATE_TIME_FORMAT),
       lastModified: dayjs(rawPersonalDetails.lastModified, DATE_TIME_FORMAT),
     };
   }
@@ -126,7 +114,6 @@ export class PersonalDetailsFormService {
   ): PersonalDetailsFormRawValue | PartialWithRequiredKeyOf<NewPersonalDetailsFormRawValue> {
     return {
       ...personalDetails,
-      passportExpDate: personalDetails.passportExpDate ? personalDetails.passportExpDate.format(DATE_TIME_FORMAT) : undefined,
       lastModified: personalDetails.lastModified ? personalDetails.lastModified.format(DATE_TIME_FORMAT) : undefined,
     };
   }

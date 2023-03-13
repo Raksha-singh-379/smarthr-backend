@@ -27,13 +27,15 @@ public class RegionCriteria implements Serializable, Criteria {
 
     private StringFilter description;
 
+    private LongFilter regionId;
+
+    private LongFilter companyId;
+
     private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
-
-    private LongFilter companyId;
 
     private Boolean distinct;
 
@@ -43,10 +45,11 @@ public class RegionCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.regionName = other.regionName == null ? null : other.regionName.copy();
         this.description = other.description == null ? null : other.description.copy();
+        this.regionId = other.regionId == null ? null : other.regionId.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.distinct = other.distinct;
     }
 
@@ -100,6 +103,36 @@ public class RegionCriteria implements Serializable, Criteria {
         this.description = description;
     }
 
+    public LongFilter getRegionId() {
+        return regionId;
+    }
+
+    public LongFilter regionId() {
+        if (regionId == null) {
+            regionId = new LongFilter();
+        }
+        return regionId;
+    }
+
+    public void setRegionId(LongFilter regionId) {
+        this.regionId = regionId;
+    }
+
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
     public StringFilter getStatus() {
         return status;
     }
@@ -145,21 +178,6 @@ public class RegionCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public LongFilter getCompanyId() {
-        return companyId;
-    }
-
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
-        }
-        return companyId;
-    }
-
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -181,17 +199,18 @@ public class RegionCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(regionName, that.regionName) &&
             Objects.equals(description, that.description) &&
+            Objects.equals(regionId, that.regionId) &&
+            Objects.equals(companyId, that.companyId) &&
             Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(companyId, that.companyId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, regionName, description, status, lastModified, lastModifiedBy, companyId, distinct);
+        return Objects.hash(id, regionName, description, regionId, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -201,10 +220,11 @@ public class RegionCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (regionName != null ? "regionName=" + regionName + ", " : "") +
             (description != null ? "description=" + description + ", " : "") +
+            (regionId != null ? "regionId=" + regionId + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

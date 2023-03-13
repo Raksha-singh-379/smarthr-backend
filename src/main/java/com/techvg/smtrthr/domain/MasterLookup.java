@@ -28,23 +28,26 @@ public class MasterLookup implements Serializable {
     @Column(name = "value")
     private String value;
 
+    @Column(name = "value_two")
+    private String valueTwo;
+
     @Column(name = "description")
     private String description;
 
     @Column(name = "type")
     private String type;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -87,6 +90,19 @@ public class MasterLookup implements Serializable {
         this.value = value;
     }
 
+    public String getValueTwo() {
+        return this.valueTwo;
+    }
+
+    public MasterLookup valueTwo(String valueTwo) {
+        this.setValueTwo(valueTwo);
+        return this;
+    }
+
+    public void setValueTwo(String valueTwo) {
+        this.valueTwo = valueTwo;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -111,6 +127,32 @@ public class MasterLookup implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public MasterLookup companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public MasterLookup status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Instant getLastModified() {
@@ -139,32 +181,6 @@ public class MasterLookup implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public MasterLookup status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public MasterLookup companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -191,12 +207,13 @@ public class MasterLookup implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", value='" + getValue() + "'" +
+            ", valueTwo='" + getValueTwo() + "'" +
             ", description='" + getDescription() + "'" +
             ", type='" + getType() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

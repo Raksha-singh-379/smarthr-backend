@@ -33,20 +33,20 @@ type EmployeeFormDefaults = Pick<NewEmployee, 'id' | 'joindate' | 'lastModified'
 type EmployeeFormGroupContent = {
   id: FormControl<EmployeeFormRawValue['id'] | NewEmployee['id']>;
   firstName: FormControl<EmployeeFormRawValue['firstName']>;
+  middleName: FormControl<EmployeeFormRawValue['middleName']>;
   lastName: FormControl<EmployeeFormRawValue['lastName']>;
-  username: FormControl<EmployeeFormRawValue['username']>;
-  password: FormControl<EmployeeFormRawValue['password']>;
-  department: FormControl<EmployeeFormRawValue['department']>;
-  designation: FormControl<EmployeeFormRawValue['designation']>;
   gender: FormControl<EmployeeFormRawValue['gender']>;
   empUniqueId: FormControl<EmployeeFormRawValue['empUniqueId']>;
   joindate: FormControl<EmployeeFormRawValue['joindate']>;
+  companyId: FormControl<EmployeeFormRawValue['companyId']>;
+  status: FormControl<EmployeeFormRawValue['status']>;
   lastModified: FormControl<EmployeeFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<EmployeeFormRawValue['lastModifiedBy']>;
-  status: FormControl<EmployeeFormRawValue['status']>;
-  companyId: FormControl<EmployeeFormRawValue['companyId']>;
-  branchId: FormControl<EmployeeFormRawValue['branchId']>;
-  regionId: FormControl<EmployeeFormRawValue['regionId']>;
+  employmentTypeId: FormControl<EmployeeFormRawValue['employmentTypeId']>;
+  designation: FormControl<EmployeeFormRawValue['designation']>;
+  department: FormControl<EmployeeFormRawValue['department']>;
+  branch: FormControl<EmployeeFormRawValue['branch']>;
+  region: FormControl<EmployeeFormRawValue['region']>;
 };
 
 export type EmployeeFormGroup = FormGroup<EmployeeFormGroupContent>;
@@ -67,26 +67,22 @@ export class EmployeeFormService {
         }
       ),
       firstName: new FormControl(employeeRawValue.firstName),
+      middleName: new FormControl(employeeRawValue.middleName),
       lastName: new FormControl(employeeRawValue.lastName),
-      username: new FormControl(employeeRawValue.username, {
-        validators: [Validators.required],
-      }),
-      password: new FormControl(employeeRawValue.password, {
-        validators: [Validators.required],
-      }),
-      department: new FormControl(employeeRawValue.department),
-      designation: new FormControl(employeeRawValue.designation),
       gender: new FormControl(employeeRawValue.gender),
       empUniqueId: new FormControl(employeeRawValue.empUniqueId, {
         validators: [Validators.required],
       }),
       joindate: new FormControl(employeeRawValue.joindate),
+      companyId: new FormControl(employeeRawValue.companyId),
+      status: new FormControl(employeeRawValue.status),
       lastModified: new FormControl(employeeRawValue.lastModified),
       lastModifiedBy: new FormControl(employeeRawValue.lastModifiedBy),
-      status: new FormControl(employeeRawValue.status),
-      companyId: new FormControl(employeeRawValue.companyId),
-      branchId: new FormControl(employeeRawValue.branchId),
-      regionId: new FormControl(employeeRawValue.regionId),
+      employmentTypeId: new FormControl(employeeRawValue.employmentTypeId),
+      designation: new FormControl(employeeRawValue.designation),
+      department: new FormControl(employeeRawValue.department),
+      branch: new FormControl(employeeRawValue.branch),
+      region: new FormControl(employeeRawValue.region),
     });
   }
 

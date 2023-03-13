@@ -14,8 +14,6 @@ public class LeaveApplicationDTO implements Serializable {
 
     private String leaveType;
 
-    private Long balanceLeave;
-
     private Long noOfDays;
 
     private String reason;
@@ -28,15 +26,15 @@ public class LeaveApplicationDTO implements Serializable {
 
     private String leaveStatus;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
     private String status;
 
     private Long employeId;
 
     private Long companyId;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -52,14 +50,6 @@ public class LeaveApplicationDTO implements Serializable {
 
     public void setLeaveType(String leaveType) {
         this.leaveType = leaveType;
-    }
-
-    public Long getBalanceLeave() {
-        return balanceLeave;
-    }
-
-    public void setBalanceLeave(Long balanceLeave) {
-        this.balanceLeave = balanceLeave;
     }
 
     public Long getNoOfDays() {
@@ -110,22 +100,6 @@ public class LeaveApplicationDTO implements Serializable {
         this.leaveStatus = leaveStatus;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -148,6 +122,22 @@ public class LeaveApplicationDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -177,18 +167,17 @@ public class LeaveApplicationDTO implements Serializable {
         return "LeaveApplicationDTO{" +
             "id=" + getId() +
             ", leaveType='" + getLeaveType() + "'" +
-            ", balanceLeave=" + getBalanceLeave() +
             ", noOfDays=" + getNoOfDays() +
             ", reason='" + getReason() + "'" +
             ", year=" + getYear() +
             ", formDate='" + getFormDate() + "'" +
             ", toDate='" + getToDate() + "'" +
             ", leaveStatus='" + getLeaveStatus() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", status='" + getStatus() + "'" +
             ", employeId=" + getEmployeId() +
             ", companyId=" + getCompanyId() +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

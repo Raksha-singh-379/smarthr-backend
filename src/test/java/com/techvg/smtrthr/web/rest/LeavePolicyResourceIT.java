@@ -2,25 +2,36 @@ package com.techvg.smtrthr.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.techvg.smtrthr.IntegrationTest;
+import com.techvg.smtrthr.domain.EmploymentType;
 import com.techvg.smtrthr.domain.LeavePolicy;
+import com.techvg.smtrthr.domain.LeaveType;
 import com.techvg.smtrthr.repository.LeavePolicyRepository;
+import com.techvg.smtrthr.service.LeavePolicyService;
 import com.techvg.smtrthr.service.criteria.LeavePolicyCriteria;
 import com.techvg.smtrthr.service.dto.LeavePolicyDTO;
 import com.techvg.smtrthr.service.mapper.LeavePolicyMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,30 +41,25 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link LeavePolicyResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class LeavePolicyResourceIT {
 
-    private static final String DEFAULT_LEAVE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_LEAVE_TYPE = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_IS_CARRY_FORWORD = false;
     private static final Boolean UPDATED_IS_CARRY_FORWORD = true;
 
-    private static final String DEFAULT_EMPLOYEE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_EMPLOYEE_TYPE = "BBBBBBBBBB";
+    private static final Long DEFAULT_GENDER_LEAVE = 1L;
+    private static final Long UPDATED_GENDER_LEAVE = 2L;
+    private static final Long SMALLER_GENDER_LEAVE = 1L - 1L;
 
-    private static final String DEFAULT_GENDER_LEAVE = "AAAAAAAAAA";
-    private static final String UPDATED_GENDER_LEAVE = "BBBBBBBBBB";
+    private static final Long DEFAULT_TOTAL_LEAVE = 1L;
+    private static final Long UPDATED_TOTAL_LEAVE = 2L;
+    private static final Long SMALLER_TOTAL_LEAVE = 1L - 1L;
 
-    private static final String DEFAULT_LEAVE_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_LEAVE_STATUS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TOTAL_LEAVE = "AAAAAAAAAA";
-    private static final String UPDATED_TOTAL_LEAVE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MAX_LEAVE = "AAAAAAAAAA";
-    private static final String UPDATED_MAX_LEAVE = "BBBBBBBBBB";
+    private static final Long DEFAULT_MAX_LEAVE = 1L;
+    private static final Long UPDATED_MAX_LEAVE = 2L;
+    private static final Long SMALLER_MAX_LEAVE = 1L - 1L;
 
     private static final Boolean DEFAULT_HASPRO_RATA_LEAVE = false;
     private static final Boolean UPDATED_HASPRO_RATA_LEAVE = true;
@@ -61,18 +67,25 @@ class LeavePolicyResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_REF_TABLE = "AAAAAAAAAA";
+    private static final String UPDATED_REF_TABLE = "BBBBBBBBBB";
+
+    private static final Long DEFAULT_REF_TABLE_ID = 1L;
+    private static final Long UPDATED_REF_TABLE_ID = 2L;
+    private static final Long SMALLER_REF_TABLE_ID = 1L - 1L;
+
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/leave-policies";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -83,8 +96,14 @@ class LeavePolicyResourceIT {
     @Autowired
     private LeavePolicyRepository leavePolicyRepository;
 
+    @Mock
+    private LeavePolicyRepository leavePolicyRepositoryMock;
+
     @Autowired
     private LeavePolicyMapper leavePolicyMapper;
+
+    @Mock
+    private LeavePolicyService leavePolicyServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -102,19 +121,18 @@ class LeavePolicyResourceIT {
      */
     public static LeavePolicy createEntity(EntityManager em) {
         LeavePolicy leavePolicy = new LeavePolicy()
-            .leaveType(DEFAULT_LEAVE_TYPE)
             .isCarryForword(DEFAULT_IS_CARRY_FORWORD)
-            .employeeType(DEFAULT_EMPLOYEE_TYPE)
             .genderLeave(DEFAULT_GENDER_LEAVE)
-            .leaveStatus(DEFAULT_LEAVE_STATUS)
             .totalLeave(DEFAULT_TOTAL_LEAVE)
             .maxLeave(DEFAULT_MAX_LEAVE)
             .hasproRataLeave(DEFAULT_HASPRO_RATA_LEAVE)
             .description(DEFAULT_DESCRIPTION)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .refTable(DEFAULT_REF_TABLE)
+            .refTableId(DEFAULT_REF_TABLE_ID)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return leavePolicy;
     }
 
@@ -126,19 +144,18 @@ class LeavePolicyResourceIT {
      */
     public static LeavePolicy createUpdatedEntity(EntityManager em) {
         LeavePolicy leavePolicy = new LeavePolicy()
-            .leaveType(UPDATED_LEAVE_TYPE)
             .isCarryForword(UPDATED_IS_CARRY_FORWORD)
-            .employeeType(UPDATED_EMPLOYEE_TYPE)
             .genderLeave(UPDATED_GENDER_LEAVE)
-            .leaveStatus(UPDATED_LEAVE_STATUS)
             .totalLeave(UPDATED_TOTAL_LEAVE)
             .maxLeave(UPDATED_MAX_LEAVE)
             .hasproRataLeave(UPDATED_HASPRO_RATA_LEAVE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return leavePolicy;
     }
 
@@ -163,19 +180,18 @@ class LeavePolicyResourceIT {
         List<LeavePolicy> leavePolicyList = leavePolicyRepository.findAll();
         assertThat(leavePolicyList).hasSize(databaseSizeBeforeCreate + 1);
         LeavePolicy testLeavePolicy = leavePolicyList.get(leavePolicyList.size() - 1);
-        assertThat(testLeavePolicy.getLeaveType()).isEqualTo(DEFAULT_LEAVE_TYPE);
         assertThat(testLeavePolicy.getIsCarryForword()).isEqualTo(DEFAULT_IS_CARRY_FORWORD);
-        assertThat(testLeavePolicy.getEmployeeType()).isEqualTo(DEFAULT_EMPLOYEE_TYPE);
         assertThat(testLeavePolicy.getGenderLeave()).isEqualTo(DEFAULT_GENDER_LEAVE);
-        assertThat(testLeavePolicy.getLeaveStatus()).isEqualTo(DEFAULT_LEAVE_STATUS);
         assertThat(testLeavePolicy.getTotalLeave()).isEqualTo(DEFAULT_TOTAL_LEAVE);
         assertThat(testLeavePolicy.getMaxLeave()).isEqualTo(DEFAULT_MAX_LEAVE);
         assertThat(testLeavePolicy.getHasproRataLeave()).isEqualTo(DEFAULT_HASPRO_RATA_LEAVE);
         assertThat(testLeavePolicy.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testLeavePolicy.getRefTable()).isEqualTo(DEFAULT_REF_TABLE);
+        assertThat(testLeavePolicy.getRefTableId()).isEqualTo(DEFAULT_REF_TABLE_ID);
+        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeavePolicy.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testLeavePolicy.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testLeavePolicy.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testLeavePolicy.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -211,19 +227,35 @@ class LeavePolicyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(leavePolicy.getId().intValue())))
-            .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
             .andExpect(jsonPath("$.[*].isCarryForword").value(hasItem(DEFAULT_IS_CARRY_FORWORD.booleanValue())))
-            .andExpect(jsonPath("$.[*].employeeType").value(hasItem(DEFAULT_EMPLOYEE_TYPE)))
-            .andExpect(jsonPath("$.[*].genderLeave").value(hasItem(DEFAULT_GENDER_LEAVE)))
-            .andExpect(jsonPath("$.[*].leaveStatus").value(hasItem(DEFAULT_LEAVE_STATUS)))
-            .andExpect(jsonPath("$.[*].totalLeave").value(hasItem(DEFAULT_TOTAL_LEAVE)))
-            .andExpect(jsonPath("$.[*].maxLeave").value(hasItem(DEFAULT_MAX_LEAVE)))
+            .andExpect(jsonPath("$.[*].genderLeave").value(hasItem(DEFAULT_GENDER_LEAVE.intValue())))
+            .andExpect(jsonPath("$.[*].totalLeave").value(hasItem(DEFAULT_TOTAL_LEAVE.intValue())))
+            .andExpect(jsonPath("$.[*].maxLeave").value(hasItem(DEFAULT_MAX_LEAVE.intValue())))
             .andExpect(jsonPath("$.[*].hasproRataLeave").value(hasItem(DEFAULT_HASPRO_RATA_LEAVE.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
+            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllLeavePoliciesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(leavePolicyServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restLeavePolicyMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(leavePolicyServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllLeavePoliciesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(leavePolicyServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restLeavePolicyMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(leavePolicyRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -238,19 +270,18 @@ class LeavePolicyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(leavePolicy.getId().intValue()))
-            .andExpect(jsonPath("$.leaveType").value(DEFAULT_LEAVE_TYPE))
             .andExpect(jsonPath("$.isCarryForword").value(DEFAULT_IS_CARRY_FORWORD.booleanValue()))
-            .andExpect(jsonPath("$.employeeType").value(DEFAULT_EMPLOYEE_TYPE))
-            .andExpect(jsonPath("$.genderLeave").value(DEFAULT_GENDER_LEAVE))
-            .andExpect(jsonPath("$.leaveStatus").value(DEFAULT_LEAVE_STATUS))
-            .andExpect(jsonPath("$.totalLeave").value(DEFAULT_TOTAL_LEAVE))
-            .andExpect(jsonPath("$.maxLeave").value(DEFAULT_MAX_LEAVE))
+            .andExpect(jsonPath("$.genderLeave").value(DEFAULT_GENDER_LEAVE.intValue()))
+            .andExpect(jsonPath("$.totalLeave").value(DEFAULT_TOTAL_LEAVE.intValue()))
+            .andExpect(jsonPath("$.maxLeave").value(DEFAULT_MAX_LEAVE.intValue()))
             .andExpect(jsonPath("$.hasproRataLeave").value(DEFAULT_HASPRO_RATA_LEAVE.booleanValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.refTable").value(DEFAULT_REF_TABLE))
+            .andExpect(jsonPath("$.refTableId").value(DEFAULT_REF_TABLE_ID.intValue()))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -269,71 +300,6 @@ class LeavePolicyResourceIT {
 
         defaultLeavePolicyShouldBeFound("id.lessThanOrEqual=" + id);
         defaultLeavePolicyShouldNotBeFound("id.lessThan=" + id);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveType equals to DEFAULT_LEAVE_TYPE
-        defaultLeavePolicyShouldBeFound("leaveType.equals=" + DEFAULT_LEAVE_TYPE);
-
-        // Get all the leavePolicyList where leaveType equals to UPDATED_LEAVE_TYPE
-        defaultLeavePolicyShouldNotBeFound("leaveType.equals=" + UPDATED_LEAVE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveType in DEFAULT_LEAVE_TYPE or UPDATED_LEAVE_TYPE
-        defaultLeavePolicyShouldBeFound("leaveType.in=" + DEFAULT_LEAVE_TYPE + "," + UPDATED_LEAVE_TYPE);
-
-        // Get all the leavePolicyList where leaveType equals to UPDATED_LEAVE_TYPE
-        defaultLeavePolicyShouldNotBeFound("leaveType.in=" + UPDATED_LEAVE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveType is not null
-        defaultLeavePolicyShouldBeFound("leaveType.specified=true");
-
-        // Get all the leavePolicyList where leaveType is null
-        defaultLeavePolicyShouldNotBeFound("leaveType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveTypeContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveType contains DEFAULT_LEAVE_TYPE
-        defaultLeavePolicyShouldBeFound("leaveType.contains=" + DEFAULT_LEAVE_TYPE);
-
-        // Get all the leavePolicyList where leaveType contains UPDATED_LEAVE_TYPE
-        defaultLeavePolicyShouldNotBeFound("leaveType.contains=" + UPDATED_LEAVE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveType does not contain DEFAULT_LEAVE_TYPE
-        defaultLeavePolicyShouldNotBeFound("leaveType.doesNotContain=" + DEFAULT_LEAVE_TYPE);
-
-        // Get all the leavePolicyList where leaveType does not contain UPDATED_LEAVE_TYPE
-        defaultLeavePolicyShouldBeFound("leaveType.doesNotContain=" + UPDATED_LEAVE_TYPE);
     }
 
     @Test
@@ -377,71 +343,6 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByEmployeeTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where employeeType equals to DEFAULT_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldBeFound("employeeType.equals=" + DEFAULT_EMPLOYEE_TYPE);
-
-        // Get all the leavePolicyList where employeeType equals to UPDATED_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldNotBeFound("employeeType.equals=" + UPDATED_EMPLOYEE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByEmployeeTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where employeeType in DEFAULT_EMPLOYEE_TYPE or UPDATED_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldBeFound("employeeType.in=" + DEFAULT_EMPLOYEE_TYPE + "," + UPDATED_EMPLOYEE_TYPE);
-
-        // Get all the leavePolicyList where employeeType equals to UPDATED_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldNotBeFound("employeeType.in=" + UPDATED_EMPLOYEE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByEmployeeTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where employeeType is not null
-        defaultLeavePolicyShouldBeFound("employeeType.specified=true");
-
-        // Get all the leavePolicyList where employeeType is null
-        defaultLeavePolicyShouldNotBeFound("employeeType.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByEmployeeTypeContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where employeeType contains DEFAULT_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldBeFound("employeeType.contains=" + DEFAULT_EMPLOYEE_TYPE);
-
-        // Get all the leavePolicyList where employeeType contains UPDATED_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldNotBeFound("employeeType.contains=" + UPDATED_EMPLOYEE_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByEmployeeTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where employeeType does not contain DEFAULT_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldNotBeFound("employeeType.doesNotContain=" + DEFAULT_EMPLOYEE_TYPE);
-
-        // Get all the leavePolicyList where employeeType does not contain UPDATED_EMPLOYEE_TYPE
-        defaultLeavePolicyShouldBeFound("employeeType.doesNotContain=" + UPDATED_EMPLOYEE_TYPE);
-    }
-
-    @Test
-    @Transactional
     void getAllLeavePoliciesByGenderLeaveIsEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
@@ -481,93 +382,54 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByGenderLeaveContainsSomething() throws Exception {
+    void getAllLeavePoliciesByGenderLeaveIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where genderLeave contains DEFAULT_GENDER_LEAVE
-        defaultLeavePolicyShouldBeFound("genderLeave.contains=" + DEFAULT_GENDER_LEAVE);
+        // Get all the leavePolicyList where genderLeave is greater than or equal to DEFAULT_GENDER_LEAVE
+        defaultLeavePolicyShouldBeFound("genderLeave.greaterThanOrEqual=" + DEFAULT_GENDER_LEAVE);
 
-        // Get all the leavePolicyList where genderLeave contains UPDATED_GENDER_LEAVE
-        defaultLeavePolicyShouldNotBeFound("genderLeave.contains=" + UPDATED_GENDER_LEAVE);
+        // Get all the leavePolicyList where genderLeave is greater than or equal to UPDATED_GENDER_LEAVE
+        defaultLeavePolicyShouldNotBeFound("genderLeave.greaterThanOrEqual=" + UPDATED_GENDER_LEAVE);
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByGenderLeaveNotContainsSomething() throws Exception {
+    void getAllLeavePoliciesByGenderLeaveIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where genderLeave does not contain DEFAULT_GENDER_LEAVE
-        defaultLeavePolicyShouldNotBeFound("genderLeave.doesNotContain=" + DEFAULT_GENDER_LEAVE);
+        // Get all the leavePolicyList where genderLeave is less than or equal to DEFAULT_GENDER_LEAVE
+        defaultLeavePolicyShouldBeFound("genderLeave.lessThanOrEqual=" + DEFAULT_GENDER_LEAVE);
 
-        // Get all the leavePolicyList where genderLeave does not contain UPDATED_GENDER_LEAVE
-        defaultLeavePolicyShouldBeFound("genderLeave.doesNotContain=" + UPDATED_GENDER_LEAVE);
+        // Get all the leavePolicyList where genderLeave is less than or equal to SMALLER_GENDER_LEAVE
+        defaultLeavePolicyShouldNotBeFound("genderLeave.lessThanOrEqual=" + SMALLER_GENDER_LEAVE);
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByLeaveStatusIsEqualToSomething() throws Exception {
+    void getAllLeavePoliciesByGenderLeaveIsLessThanSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where leaveStatus equals to DEFAULT_LEAVE_STATUS
-        defaultLeavePolicyShouldBeFound("leaveStatus.equals=" + DEFAULT_LEAVE_STATUS);
+        // Get all the leavePolicyList where genderLeave is less than DEFAULT_GENDER_LEAVE
+        defaultLeavePolicyShouldNotBeFound("genderLeave.lessThan=" + DEFAULT_GENDER_LEAVE);
 
-        // Get all the leavePolicyList where leaveStatus equals to UPDATED_LEAVE_STATUS
-        defaultLeavePolicyShouldNotBeFound("leaveStatus.equals=" + UPDATED_LEAVE_STATUS);
+        // Get all the leavePolicyList where genderLeave is less than UPDATED_GENDER_LEAVE
+        defaultLeavePolicyShouldBeFound("genderLeave.lessThan=" + UPDATED_GENDER_LEAVE);
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByLeaveStatusIsInShouldWork() throws Exception {
+    void getAllLeavePoliciesByGenderLeaveIsGreaterThanSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where leaveStatus in DEFAULT_LEAVE_STATUS or UPDATED_LEAVE_STATUS
-        defaultLeavePolicyShouldBeFound("leaveStatus.in=" + DEFAULT_LEAVE_STATUS + "," + UPDATED_LEAVE_STATUS);
+        // Get all the leavePolicyList where genderLeave is greater than DEFAULT_GENDER_LEAVE
+        defaultLeavePolicyShouldNotBeFound("genderLeave.greaterThan=" + DEFAULT_GENDER_LEAVE);
 
-        // Get all the leavePolicyList where leaveStatus equals to UPDATED_LEAVE_STATUS
-        defaultLeavePolicyShouldNotBeFound("leaveStatus.in=" + UPDATED_LEAVE_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveStatus is not null
-        defaultLeavePolicyShouldBeFound("leaveStatus.specified=true");
-
-        // Get all the leavePolicyList where leaveStatus is null
-        defaultLeavePolicyShouldNotBeFound("leaveStatus.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveStatusContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveStatus contains DEFAULT_LEAVE_STATUS
-        defaultLeavePolicyShouldBeFound("leaveStatus.contains=" + DEFAULT_LEAVE_STATUS);
-
-        // Get all the leavePolicyList where leaveStatus contains UPDATED_LEAVE_STATUS
-        defaultLeavePolicyShouldNotBeFound("leaveStatus.contains=" + UPDATED_LEAVE_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByLeaveStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where leaveStatus does not contain DEFAULT_LEAVE_STATUS
-        defaultLeavePolicyShouldNotBeFound("leaveStatus.doesNotContain=" + DEFAULT_LEAVE_STATUS);
-
-        // Get all the leavePolicyList where leaveStatus does not contain UPDATED_LEAVE_STATUS
-        defaultLeavePolicyShouldBeFound("leaveStatus.doesNotContain=" + UPDATED_LEAVE_STATUS);
+        // Get all the leavePolicyList where genderLeave is greater than SMALLER_GENDER_LEAVE
+        defaultLeavePolicyShouldBeFound("genderLeave.greaterThan=" + SMALLER_GENDER_LEAVE);
     }
 
     @Test
@@ -611,28 +473,54 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByTotalLeaveContainsSomething() throws Exception {
+    void getAllLeavePoliciesByTotalLeaveIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where totalLeave contains DEFAULT_TOTAL_LEAVE
-        defaultLeavePolicyShouldBeFound("totalLeave.contains=" + DEFAULT_TOTAL_LEAVE);
+        // Get all the leavePolicyList where totalLeave is greater than or equal to DEFAULT_TOTAL_LEAVE
+        defaultLeavePolicyShouldBeFound("totalLeave.greaterThanOrEqual=" + DEFAULT_TOTAL_LEAVE);
 
-        // Get all the leavePolicyList where totalLeave contains UPDATED_TOTAL_LEAVE
-        defaultLeavePolicyShouldNotBeFound("totalLeave.contains=" + UPDATED_TOTAL_LEAVE);
+        // Get all the leavePolicyList where totalLeave is greater than or equal to UPDATED_TOTAL_LEAVE
+        defaultLeavePolicyShouldNotBeFound("totalLeave.greaterThanOrEqual=" + UPDATED_TOTAL_LEAVE);
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByTotalLeaveNotContainsSomething() throws Exception {
+    void getAllLeavePoliciesByTotalLeaveIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where totalLeave does not contain DEFAULT_TOTAL_LEAVE
-        defaultLeavePolicyShouldNotBeFound("totalLeave.doesNotContain=" + DEFAULT_TOTAL_LEAVE);
+        // Get all the leavePolicyList where totalLeave is less than or equal to DEFAULT_TOTAL_LEAVE
+        defaultLeavePolicyShouldBeFound("totalLeave.lessThanOrEqual=" + DEFAULT_TOTAL_LEAVE);
 
-        // Get all the leavePolicyList where totalLeave does not contain UPDATED_TOTAL_LEAVE
-        defaultLeavePolicyShouldBeFound("totalLeave.doesNotContain=" + UPDATED_TOTAL_LEAVE);
+        // Get all the leavePolicyList where totalLeave is less than or equal to SMALLER_TOTAL_LEAVE
+        defaultLeavePolicyShouldNotBeFound("totalLeave.lessThanOrEqual=" + SMALLER_TOTAL_LEAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByTotalLeaveIsLessThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where totalLeave is less than DEFAULT_TOTAL_LEAVE
+        defaultLeavePolicyShouldNotBeFound("totalLeave.lessThan=" + DEFAULT_TOTAL_LEAVE);
+
+        // Get all the leavePolicyList where totalLeave is less than UPDATED_TOTAL_LEAVE
+        defaultLeavePolicyShouldBeFound("totalLeave.lessThan=" + UPDATED_TOTAL_LEAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByTotalLeaveIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where totalLeave is greater than DEFAULT_TOTAL_LEAVE
+        defaultLeavePolicyShouldNotBeFound("totalLeave.greaterThan=" + DEFAULT_TOTAL_LEAVE);
+
+        // Get all the leavePolicyList where totalLeave is greater than SMALLER_TOTAL_LEAVE
+        defaultLeavePolicyShouldBeFound("totalLeave.greaterThan=" + SMALLER_TOTAL_LEAVE);
     }
 
     @Test
@@ -676,28 +564,54 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByMaxLeaveContainsSomething() throws Exception {
+    void getAllLeavePoliciesByMaxLeaveIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where maxLeave contains DEFAULT_MAX_LEAVE
-        defaultLeavePolicyShouldBeFound("maxLeave.contains=" + DEFAULT_MAX_LEAVE);
+        // Get all the leavePolicyList where maxLeave is greater than or equal to DEFAULT_MAX_LEAVE
+        defaultLeavePolicyShouldBeFound("maxLeave.greaterThanOrEqual=" + DEFAULT_MAX_LEAVE);
 
-        // Get all the leavePolicyList where maxLeave contains UPDATED_MAX_LEAVE
-        defaultLeavePolicyShouldNotBeFound("maxLeave.contains=" + UPDATED_MAX_LEAVE);
+        // Get all the leavePolicyList where maxLeave is greater than or equal to UPDATED_MAX_LEAVE
+        defaultLeavePolicyShouldNotBeFound("maxLeave.greaterThanOrEqual=" + UPDATED_MAX_LEAVE);
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByMaxLeaveNotContainsSomething() throws Exception {
+    void getAllLeavePoliciesByMaxLeaveIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
 
-        // Get all the leavePolicyList where maxLeave does not contain DEFAULT_MAX_LEAVE
-        defaultLeavePolicyShouldNotBeFound("maxLeave.doesNotContain=" + DEFAULT_MAX_LEAVE);
+        // Get all the leavePolicyList where maxLeave is less than or equal to DEFAULT_MAX_LEAVE
+        defaultLeavePolicyShouldBeFound("maxLeave.lessThanOrEqual=" + DEFAULT_MAX_LEAVE);
 
-        // Get all the leavePolicyList where maxLeave does not contain UPDATED_MAX_LEAVE
-        defaultLeavePolicyShouldBeFound("maxLeave.doesNotContain=" + UPDATED_MAX_LEAVE);
+        // Get all the leavePolicyList where maxLeave is less than or equal to SMALLER_MAX_LEAVE
+        defaultLeavePolicyShouldNotBeFound("maxLeave.lessThanOrEqual=" + SMALLER_MAX_LEAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByMaxLeaveIsLessThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where maxLeave is less than DEFAULT_MAX_LEAVE
+        defaultLeavePolicyShouldNotBeFound("maxLeave.lessThan=" + DEFAULT_MAX_LEAVE);
+
+        // Get all the leavePolicyList where maxLeave is less than UPDATED_MAX_LEAVE
+        defaultLeavePolicyShouldBeFound("maxLeave.lessThan=" + UPDATED_MAX_LEAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByMaxLeaveIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where maxLeave is greater than DEFAULT_MAX_LEAVE
+        defaultLeavePolicyShouldNotBeFound("maxLeave.greaterThan=" + DEFAULT_MAX_LEAVE);
+
+        // Get all the leavePolicyList where maxLeave is greater than SMALLER_MAX_LEAVE
+        defaultLeavePolicyShouldBeFound("maxLeave.greaterThan=" + SMALLER_MAX_LEAVE);
     }
 
     @Test
@@ -806,6 +720,318 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
+    void getAllLeavePoliciesByRefTableIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTable equals to DEFAULT_REF_TABLE
+        defaultLeavePolicyShouldBeFound("refTable.equals=" + DEFAULT_REF_TABLE);
+
+        // Get all the leavePolicyList where refTable equals to UPDATED_REF_TABLE
+        defaultLeavePolicyShouldNotBeFound("refTable.equals=" + UPDATED_REF_TABLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIsInShouldWork() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTable in DEFAULT_REF_TABLE or UPDATED_REF_TABLE
+        defaultLeavePolicyShouldBeFound("refTable.in=" + DEFAULT_REF_TABLE + "," + UPDATED_REF_TABLE);
+
+        // Get all the leavePolicyList where refTable equals to UPDATED_REF_TABLE
+        defaultLeavePolicyShouldNotBeFound("refTable.in=" + UPDATED_REF_TABLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTable is not null
+        defaultLeavePolicyShouldBeFound("refTable.specified=true");
+
+        // Get all the leavePolicyList where refTable is null
+        defaultLeavePolicyShouldNotBeFound("refTable.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableContainsSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTable contains DEFAULT_REF_TABLE
+        defaultLeavePolicyShouldBeFound("refTable.contains=" + DEFAULT_REF_TABLE);
+
+        // Get all the leavePolicyList where refTable contains UPDATED_REF_TABLE
+        defaultLeavePolicyShouldNotBeFound("refTable.contains=" + UPDATED_REF_TABLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableNotContainsSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTable does not contain DEFAULT_REF_TABLE
+        defaultLeavePolicyShouldNotBeFound("refTable.doesNotContain=" + DEFAULT_REF_TABLE);
+
+        // Get all the leavePolicyList where refTable does not contain UPDATED_REF_TABLE
+        defaultLeavePolicyShouldBeFound("refTable.doesNotContain=" + UPDATED_REF_TABLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId equals to DEFAULT_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.equals=" + DEFAULT_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId equals to UPDATED_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.equals=" + UPDATED_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId in DEFAULT_REF_TABLE_ID or UPDATED_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.in=" + DEFAULT_REF_TABLE_ID + "," + UPDATED_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId equals to UPDATED_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.in=" + UPDATED_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId is not null
+        defaultLeavePolicyShouldBeFound("refTableId.specified=true");
+
+        // Get all the leavePolicyList where refTableId is null
+        defaultLeavePolicyShouldNotBeFound("refTableId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId is greater than or equal to DEFAULT_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.greaterThanOrEqual=" + DEFAULT_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId is greater than or equal to UPDATED_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.greaterThanOrEqual=" + UPDATED_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId is less than or equal to DEFAULT_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.lessThanOrEqual=" + DEFAULT_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId is less than or equal to SMALLER_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.lessThanOrEqual=" + SMALLER_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId is less than DEFAULT_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.lessThan=" + DEFAULT_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId is less than UPDATED_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.lessThan=" + UPDATED_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByRefTableIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where refTableId is greater than DEFAULT_REF_TABLE_ID
+        defaultLeavePolicyShouldNotBeFound("refTableId.greaterThan=" + DEFAULT_REF_TABLE_ID);
+
+        // Get all the leavePolicyList where refTableId is greater than SMALLER_REF_TABLE_ID
+        defaultLeavePolicyShouldBeFound("refTableId.greaterThan=" + SMALLER_REF_TABLE_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId equals to DEFAULT_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId equals to UPDATED_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId equals to UPDATED_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId is not null
+        defaultLeavePolicyShouldBeFound("companyId.specified=true");
+
+        // Get all the leavePolicyList where companyId is null
+        defaultLeavePolicyShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId is less than DEFAULT_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId is less than UPDATED_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultLeavePolicyShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the leavePolicyList where companyId is greater than SMALLER_COMPANY_ID
+        defaultLeavePolicyShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where status equals to DEFAULT_STATUS
+        defaultLeavePolicyShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the leavePolicyList where status equals to UPDATED_STATUS
+        defaultLeavePolicyShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultLeavePolicyShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the leavePolicyList where status equals to UPDATED_STATUS
+        defaultLeavePolicyShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where status is not null
+        defaultLeavePolicyShouldBeFound("status.specified=true");
+
+        // Get all the leavePolicyList where status is null
+        defaultLeavePolicyShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where status contains DEFAULT_STATUS
+        defaultLeavePolicyShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the leavePolicyList where status contains UPDATED_STATUS
+        defaultLeavePolicyShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllLeavePoliciesByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        leavePolicyRepository.saveAndFlush(leavePolicy);
+
+        // Get all the leavePolicyList where status does not contain DEFAULT_STATUS
+        defaultLeavePolicyShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the leavePolicyList where status does not contain UPDATED_STATUS
+        defaultLeavePolicyShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
     void getAllLeavePoliciesByLastModifiedIsEqualToSomething() throws Exception {
         // Initialize the database
         leavePolicyRepository.saveAndFlush(leavePolicy);
@@ -910,158 +1136,48 @@ class LeavePolicyResourceIT {
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
+    void getAllLeavePoliciesByLeaveTypeIsEqualToSomething() throws Exception {
+        LeaveType leaveType;
+        if (TestUtil.findAll(em, LeaveType.class).isEmpty()) {
+            leavePolicyRepository.saveAndFlush(leavePolicy);
+            leaveType = LeaveTypeResourceIT.createEntity(em);
+        } else {
+            leaveType = TestUtil.findAll(em, LeaveType.class).get(0);
+        }
+        em.persist(leaveType);
+        em.flush();
+        leavePolicy.setLeaveType(leaveType);
         leavePolicyRepository.saveAndFlush(leavePolicy);
+        Long leaveTypeId = leaveType.getId();
 
-        // Get all the leavePolicyList where status equals to DEFAULT_STATUS
-        defaultLeavePolicyShouldBeFound("status.equals=" + DEFAULT_STATUS);
+        // Get all the leavePolicyList where leaveType equals to leaveTypeId
+        defaultLeavePolicyShouldBeFound("leaveTypeId.equals=" + leaveTypeId);
 
-        // Get all the leavePolicyList where status equals to UPDATED_STATUS
-        defaultLeavePolicyShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+        // Get all the leavePolicyList where leaveType equals to (leaveTypeId + 1)
+        defaultLeavePolicyShouldNotBeFound("leaveTypeId.equals=" + (leaveTypeId + 1));
     }
 
     @Test
     @Transactional
-    void getAllLeavePoliciesByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
+    void getAllLeavePoliciesByEmploymentTypeIsEqualToSomething() throws Exception {
+        EmploymentType employmentType;
+        if (TestUtil.findAll(em, EmploymentType.class).isEmpty()) {
+            leavePolicyRepository.saveAndFlush(leavePolicy);
+            employmentType = EmploymentTypeResourceIT.createEntity(em);
+        } else {
+            employmentType = TestUtil.findAll(em, EmploymentType.class).get(0);
+        }
+        em.persist(employmentType);
+        em.flush();
+        leavePolicy.setEmploymentType(employmentType);
         leavePolicyRepository.saveAndFlush(leavePolicy);
+        Long employmentTypeId = employmentType.getId();
 
-        // Get all the leavePolicyList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultLeavePolicyShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+        // Get all the leavePolicyList where employmentType equals to employmentTypeId
+        defaultLeavePolicyShouldBeFound("employmentTypeId.equals=" + employmentTypeId);
 
-        // Get all the leavePolicyList where status equals to UPDATED_STATUS
-        defaultLeavePolicyShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where status is not null
-        defaultLeavePolicyShouldBeFound("status.specified=true");
-
-        // Get all the leavePolicyList where status is null
-        defaultLeavePolicyShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where status contains DEFAULT_STATUS
-        defaultLeavePolicyShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the leavePolicyList where status contains UPDATED_STATUS
-        defaultLeavePolicyShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where status does not contain DEFAULT_STATUS
-        defaultLeavePolicyShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the leavePolicyList where status does not contain UPDATED_STATUS
-        defaultLeavePolicyShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId equals to DEFAULT_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId equals to UPDATED_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId equals to UPDATED_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId is not null
-        defaultLeavePolicyShouldBeFound("companyId.specified=true");
-
-        // Get all the leavePolicyList where companyId is null
-        defaultLeavePolicyShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId is less than DEFAULT_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId is less than UPDATED_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllLeavePoliciesByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        leavePolicyRepository.saveAndFlush(leavePolicy);
-
-        // Get all the leavePolicyList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultLeavePolicyShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the leavePolicyList where companyId is greater than SMALLER_COMPANY_ID
-        defaultLeavePolicyShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+        // Get all the leavePolicyList where employmentType equals to (employmentTypeId + 1)
+        defaultLeavePolicyShouldNotBeFound("employmentTypeId.equals=" + (employmentTypeId + 1));
     }
 
     /**
@@ -1073,19 +1189,18 @@ class LeavePolicyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(leavePolicy.getId().intValue())))
-            .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
             .andExpect(jsonPath("$.[*].isCarryForword").value(hasItem(DEFAULT_IS_CARRY_FORWORD.booleanValue())))
-            .andExpect(jsonPath("$.[*].employeeType").value(hasItem(DEFAULT_EMPLOYEE_TYPE)))
-            .andExpect(jsonPath("$.[*].genderLeave").value(hasItem(DEFAULT_GENDER_LEAVE)))
-            .andExpect(jsonPath("$.[*].leaveStatus").value(hasItem(DEFAULT_LEAVE_STATUS)))
-            .andExpect(jsonPath("$.[*].totalLeave").value(hasItem(DEFAULT_TOTAL_LEAVE)))
-            .andExpect(jsonPath("$.[*].maxLeave").value(hasItem(DEFAULT_MAX_LEAVE)))
+            .andExpect(jsonPath("$.[*].genderLeave").value(hasItem(DEFAULT_GENDER_LEAVE.intValue())))
+            .andExpect(jsonPath("$.[*].totalLeave").value(hasItem(DEFAULT_TOTAL_LEAVE.intValue())))
+            .andExpect(jsonPath("$.[*].maxLeave").value(hasItem(DEFAULT_MAX_LEAVE.intValue())))
             .andExpect(jsonPath("$.[*].hasproRataLeave").value(hasItem(DEFAULT_HASPRO_RATA_LEAVE.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].refTable").value(hasItem(DEFAULT_REF_TABLE)))
+            .andExpect(jsonPath("$.[*].refTableId").value(hasItem(DEFAULT_REF_TABLE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restLeavePolicyMockMvc
@@ -1134,19 +1249,18 @@ class LeavePolicyResourceIT {
         // Disconnect from session so that the updates on updatedLeavePolicy are not directly saved in db
         em.detach(updatedLeavePolicy);
         updatedLeavePolicy
-            .leaveType(UPDATED_LEAVE_TYPE)
             .isCarryForword(UPDATED_IS_CARRY_FORWORD)
-            .employeeType(UPDATED_EMPLOYEE_TYPE)
             .genderLeave(UPDATED_GENDER_LEAVE)
-            .leaveStatus(UPDATED_LEAVE_STATUS)
             .totalLeave(UPDATED_TOTAL_LEAVE)
             .maxLeave(UPDATED_MAX_LEAVE)
             .hasproRataLeave(UPDATED_HASPRO_RATA_LEAVE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         LeavePolicyDTO leavePolicyDTO = leavePolicyMapper.toDto(updatedLeavePolicy);
 
         restLeavePolicyMockMvc
@@ -1161,19 +1275,18 @@ class LeavePolicyResourceIT {
         List<LeavePolicy> leavePolicyList = leavePolicyRepository.findAll();
         assertThat(leavePolicyList).hasSize(databaseSizeBeforeUpdate);
         LeavePolicy testLeavePolicy = leavePolicyList.get(leavePolicyList.size() - 1);
-        assertThat(testLeavePolicy.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
         assertThat(testLeavePolicy.getIsCarryForword()).isEqualTo(UPDATED_IS_CARRY_FORWORD);
-        assertThat(testLeavePolicy.getEmployeeType()).isEqualTo(UPDATED_EMPLOYEE_TYPE);
         assertThat(testLeavePolicy.getGenderLeave()).isEqualTo(UPDATED_GENDER_LEAVE);
-        assertThat(testLeavePolicy.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
         assertThat(testLeavePolicy.getTotalLeave()).isEqualTo(UPDATED_TOTAL_LEAVE);
         assertThat(testLeavePolicy.getMaxLeave()).isEqualTo(UPDATED_MAX_LEAVE);
         assertThat(testLeavePolicy.getHasproRataLeave()).isEqualTo(UPDATED_HASPRO_RATA_LEAVE);
         assertThat(testLeavePolicy.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLeavePolicy.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
+        assertThat(testLeavePolicy.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
+        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeavePolicy.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeavePolicy.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testLeavePolicy.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testLeavePolicy.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -1254,13 +1367,13 @@ class LeavePolicyResourceIT {
         partialUpdatedLeavePolicy.setId(leavePolicy.getId());
 
         partialUpdatedLeavePolicy
-            .employeeType(UPDATED_EMPLOYEE_TYPE)
-            .genderLeave(UPDATED_GENDER_LEAVE)
-            .leaveStatus(UPDATED_LEAVE_STATUS)
             .totalLeave(UPDATED_TOTAL_LEAVE)
             .maxLeave(UPDATED_MAX_LEAVE)
             .hasproRataLeave(UPDATED_HASPRO_RATA_LEAVE)
-            .status(UPDATED_STATUS);
+            .description(UPDATED_DESCRIPTION)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restLeavePolicyMockMvc
             .perform(
@@ -1274,19 +1387,18 @@ class LeavePolicyResourceIT {
         List<LeavePolicy> leavePolicyList = leavePolicyRepository.findAll();
         assertThat(leavePolicyList).hasSize(databaseSizeBeforeUpdate);
         LeavePolicy testLeavePolicy = leavePolicyList.get(leavePolicyList.size() - 1);
-        assertThat(testLeavePolicy.getLeaveType()).isEqualTo(DEFAULT_LEAVE_TYPE);
         assertThat(testLeavePolicy.getIsCarryForword()).isEqualTo(DEFAULT_IS_CARRY_FORWORD);
-        assertThat(testLeavePolicy.getEmployeeType()).isEqualTo(UPDATED_EMPLOYEE_TYPE);
-        assertThat(testLeavePolicy.getGenderLeave()).isEqualTo(UPDATED_GENDER_LEAVE);
-        assertThat(testLeavePolicy.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
+        assertThat(testLeavePolicy.getGenderLeave()).isEqualTo(DEFAULT_GENDER_LEAVE);
         assertThat(testLeavePolicy.getTotalLeave()).isEqualTo(UPDATED_TOTAL_LEAVE);
         assertThat(testLeavePolicy.getMaxLeave()).isEqualTo(UPDATED_MAX_LEAVE);
         assertThat(testLeavePolicy.getHasproRataLeave()).isEqualTo(UPDATED_HASPRO_RATA_LEAVE);
-        assertThat(testLeavePolicy.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testLeavePolicy.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testLeavePolicy.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testLeavePolicy.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testLeavePolicy.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLeavePolicy.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
+        assertThat(testLeavePolicy.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
         assertThat(testLeavePolicy.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testLeavePolicy.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testLeavePolicy.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testLeavePolicy.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1302,19 +1414,18 @@ class LeavePolicyResourceIT {
         partialUpdatedLeavePolicy.setId(leavePolicy.getId());
 
         partialUpdatedLeavePolicy
-            .leaveType(UPDATED_LEAVE_TYPE)
             .isCarryForword(UPDATED_IS_CARRY_FORWORD)
-            .employeeType(UPDATED_EMPLOYEE_TYPE)
             .genderLeave(UPDATED_GENDER_LEAVE)
-            .leaveStatus(UPDATED_LEAVE_STATUS)
             .totalLeave(UPDATED_TOTAL_LEAVE)
             .maxLeave(UPDATED_MAX_LEAVE)
             .hasproRataLeave(UPDATED_HASPRO_RATA_LEAVE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .refTable(UPDATED_REF_TABLE)
+            .refTableId(UPDATED_REF_TABLE_ID)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restLeavePolicyMockMvc
             .perform(
@@ -1328,19 +1439,18 @@ class LeavePolicyResourceIT {
         List<LeavePolicy> leavePolicyList = leavePolicyRepository.findAll();
         assertThat(leavePolicyList).hasSize(databaseSizeBeforeUpdate);
         LeavePolicy testLeavePolicy = leavePolicyList.get(leavePolicyList.size() - 1);
-        assertThat(testLeavePolicy.getLeaveType()).isEqualTo(UPDATED_LEAVE_TYPE);
         assertThat(testLeavePolicy.getIsCarryForword()).isEqualTo(UPDATED_IS_CARRY_FORWORD);
-        assertThat(testLeavePolicy.getEmployeeType()).isEqualTo(UPDATED_EMPLOYEE_TYPE);
         assertThat(testLeavePolicy.getGenderLeave()).isEqualTo(UPDATED_GENDER_LEAVE);
-        assertThat(testLeavePolicy.getLeaveStatus()).isEqualTo(UPDATED_LEAVE_STATUS);
         assertThat(testLeavePolicy.getTotalLeave()).isEqualTo(UPDATED_TOTAL_LEAVE);
         assertThat(testLeavePolicy.getMaxLeave()).isEqualTo(UPDATED_MAX_LEAVE);
         assertThat(testLeavePolicy.getHasproRataLeave()).isEqualTo(UPDATED_HASPRO_RATA_LEAVE);
         assertThat(testLeavePolicy.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLeavePolicy.getRefTable()).isEqualTo(UPDATED_REF_TABLE);
+        assertThat(testLeavePolicy.getRefTableId()).isEqualTo(UPDATED_REF_TABLE_ID);
+        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testLeavePolicy.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testLeavePolicy.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testLeavePolicy.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testLeavePolicy.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testLeavePolicy.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

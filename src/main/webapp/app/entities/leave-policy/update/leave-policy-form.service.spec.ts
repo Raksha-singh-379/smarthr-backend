@@ -20,19 +20,20 @@ describe('LeavePolicy Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            leaveType: expect.any(Object),
             isCarryForword: expect.any(Object),
-            employeeType: expect.any(Object),
             genderLeave: expect.any(Object),
-            leaveStatus: expect.any(Object),
             totalLeave: expect.any(Object),
             maxLeave: expect.any(Object),
             hasproRataLeave: expect.any(Object),
             description: expect.any(Object),
+            refTable: expect.any(Object),
+            refTableId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            leaveType: expect.any(Object),
+            employmentType: expect.any(Object),
           })
         );
       });
@@ -43,19 +44,20 @@ describe('LeavePolicy Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            leaveType: expect.any(Object),
             isCarryForword: expect.any(Object),
-            employeeType: expect.any(Object),
             genderLeave: expect.any(Object),
-            leaveStatus: expect.any(Object),
             totalLeave: expect.any(Object),
             maxLeave: expect.any(Object),
             hasproRataLeave: expect.any(Object),
             description: expect.any(Object),
+            refTable: expect.any(Object),
+            refTableId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
+            leaveType: expect.any(Object),
+            employmentType: expect.any(Object),
           })
         );
       });

@@ -20,10 +20,11 @@
       "id": "ID",
       "regionName": "Region Name",
       "description": "Description",
+      "regionId": "Region Id",
+      "companyId": "Company Id",
       "status": "Status",
       "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "companyId": "Company Id"
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

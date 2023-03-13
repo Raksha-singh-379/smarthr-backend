@@ -22,26 +22,17 @@ public class LeavePolicy implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "leave_type")
-    private String leaveType;
-
     @Column(name = "is_carry_forword")
     private Boolean isCarryForword;
 
-    @Column(name = "employee_type")
-    private String employeeType;
-
     @Column(name = "gender_leave")
-    private String genderLeave;
-
-    @Column(name = "leave_status")
-    private String leaveStatus;
+    private Long genderLeave;
 
     @Column(name = "total_leave")
-    private String totalLeave;
+    private Long totalLeave;
 
     @Column(name = "max_leave")
-    private String maxLeave;
+    private Long maxLeave;
 
     @Column(name = "haspro_rata_leave")
     private Boolean hasproRataLeave;
@@ -49,17 +40,29 @@ public class LeavePolicy implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "ref_table")
+    private String refTable;
+
+    @Column(name = "ref_table_id")
+    private Long refTableId;
+
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @Column(name = "status")
-    private String status;
+    @ManyToOne
+    private LeaveType leaveType;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @ManyToOne
+    private EmploymentType employmentType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -76,19 +79,6 @@ public class LeavePolicy implements Serializable {
         this.id = id;
     }
 
-    public String getLeaveType() {
-        return this.leaveType;
-    }
-
-    public LeavePolicy leaveType(String leaveType) {
-        this.setLeaveType(leaveType);
-        return this;
-    }
-
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
-    }
-
     public Boolean getIsCarryForword() {
         return this.isCarryForword;
     }
@@ -102,68 +92,42 @@ public class LeavePolicy implements Serializable {
         this.isCarryForword = isCarryForword;
     }
 
-    public String getEmployeeType() {
-        return this.employeeType;
-    }
-
-    public LeavePolicy employeeType(String employeeType) {
-        this.setEmployeeType(employeeType);
-        return this;
-    }
-
-    public void setEmployeeType(String employeeType) {
-        this.employeeType = employeeType;
-    }
-
-    public String getGenderLeave() {
+    public Long getGenderLeave() {
         return this.genderLeave;
     }
 
-    public LeavePolicy genderLeave(String genderLeave) {
+    public LeavePolicy genderLeave(Long genderLeave) {
         this.setGenderLeave(genderLeave);
         return this;
     }
 
-    public void setGenderLeave(String genderLeave) {
+    public void setGenderLeave(Long genderLeave) {
         this.genderLeave = genderLeave;
     }
 
-    public String getLeaveStatus() {
-        return this.leaveStatus;
-    }
-
-    public LeavePolicy leaveStatus(String leaveStatus) {
-        this.setLeaveStatus(leaveStatus);
-        return this;
-    }
-
-    public void setLeaveStatus(String leaveStatus) {
-        this.leaveStatus = leaveStatus;
-    }
-
-    public String getTotalLeave() {
+    public Long getTotalLeave() {
         return this.totalLeave;
     }
 
-    public LeavePolicy totalLeave(String totalLeave) {
+    public LeavePolicy totalLeave(Long totalLeave) {
         this.setTotalLeave(totalLeave);
         return this;
     }
 
-    public void setTotalLeave(String totalLeave) {
+    public void setTotalLeave(Long totalLeave) {
         this.totalLeave = totalLeave;
     }
 
-    public String getMaxLeave() {
+    public Long getMaxLeave() {
         return this.maxLeave;
     }
 
-    public LeavePolicy maxLeave(String maxLeave) {
+    public LeavePolicy maxLeave(Long maxLeave) {
         this.setMaxLeave(maxLeave);
         return this;
     }
 
-    public void setMaxLeave(String maxLeave) {
+    public void setMaxLeave(Long maxLeave) {
         this.maxLeave = maxLeave;
     }
 
@@ -193,6 +157,58 @@ public class LeavePolicy implements Serializable {
         this.description = description;
     }
 
+    public String getRefTable() {
+        return this.refTable;
+    }
+
+    public LeavePolicy refTable(String refTable) {
+        this.setRefTable(refTable);
+        return this;
+    }
+
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
+    }
+
+    public Long getRefTableId() {
+        return this.refTableId;
+    }
+
+    public LeavePolicy refTableId(Long refTableId) {
+        this.setRefTableId(refTableId);
+        return this;
+    }
+
+    public void setRefTableId(Long refTableId) {
+        this.refTableId = refTableId;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public LeavePolicy companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public LeavePolicy status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -219,30 +235,30 @@ public class LeavePolicy implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
+    public LeaveType getLeaveType() {
+        return this.leaveType;
     }
 
-    public LeavePolicy status(String status) {
-        this.setStatus(status);
+    public void setLeaveType(LeaveType leaveType) {
+        this.leaveType = leaveType;
+    }
+
+    public LeavePolicy leaveType(LeaveType leaveType) {
+        this.setLeaveType(leaveType);
         return this;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public EmploymentType getEmploymentType() {
+        return this.employmentType;
     }
 
-    public Long getCompanyId() {
-        return this.companyId;
+    public void setEmploymentType(EmploymentType employmentType) {
+        this.employmentType = employmentType;
     }
 
-    public LeavePolicy companyId(Long companyId) {
-        this.setCompanyId(companyId);
+    public LeavePolicy employmentType(EmploymentType employmentType) {
+        this.setEmploymentType(employmentType);
         return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -269,19 +285,18 @@ public class LeavePolicy implements Serializable {
     public String toString() {
         return "LeavePolicy{" +
             "id=" + getId() +
-            ", leaveType='" + getLeaveType() + "'" +
             ", isCarryForword='" + getIsCarryForword() + "'" +
-            ", employeeType='" + getEmployeeType() + "'" +
-            ", genderLeave='" + getGenderLeave() + "'" +
-            ", leaveStatus='" + getLeaveStatus() + "'" +
-            ", totalLeave='" + getTotalLeave() + "'" +
-            ", maxLeave='" + getMaxLeave() + "'" +
+            ", genderLeave=" + getGenderLeave() +
+            ", totalLeave=" + getTotalLeave() +
+            ", maxLeave=" + getMaxLeave() +
             ", hasproRataLeave='" + getHasproRataLeave() + "'" +
             ", description='" + getDescription() + "'" +
+            ", refTable='" + getRefTable() + "'" +
+            ", refTableId=" + getRefTableId() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

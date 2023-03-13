@@ -23,11 +23,12 @@
       "esiRate": "Esi Rate",
       "additionalEsiRate": "Additional Esi Rate",
       "totalEsiRate": "Total Esi Rate",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "employeeId": "Employee Id",
+      "reEnumerationId": "Re Enumeration Id",
+      "companyId": "Company Id",
       "status": "Status",
-      "employeId": "Employe Id",
-      "reEnumerationId": "Re Enumeration Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

@@ -23,12 +23,14 @@ describe('FamilyInfo Form Service', () => {
             name: expect.any(Object),
             dateOfBirth: expect.any(Object),
             relation: expect.any(Object),
-            address: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
+            addressId: expect.any(Object),
+            isEmployed: expect.any(Object),
+            employedAt: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -42,12 +44,14 @@ describe('FamilyInfo Form Service', () => {
             name: expect.any(Object),
             dateOfBirth: expect.any(Object),
             relation: expect.any(Object),
-            address: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
+            addressId: expect.any(Object),
+            isEmployed: expect.any(Object),
+            employedAt: expect.any(Object),
             employeeId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

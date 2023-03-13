@@ -64,24 +64,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.workExperience.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.workExperience.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.workExperience.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="addressId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.workExperience.addressId">Address Id</span>
@@ -100,15 +82,27 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="yearOfExp">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.workExperience.yearOfExp">Year Of Exp</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="jobDesc">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.workExperience.jobDesc">Job Desc</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.workExperience.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.workExperience.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.workExperience.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -124,14 +118,13 @@
           <td>{{ workExperience.companyName }}</td>
           <td>{{ workExperience.startDate | formatMediumDatetime }}</td>
           <td>{{ workExperience.endDate | formatMediumDatetime }}</td>
-          <td>{{ workExperience.lastModified | formatMediumDatetime }}</td>
-          <td>{{ workExperience.lastModifiedBy }}</td>
-          <td>{{ workExperience.status }}</td>
           <td>{{ workExperience.addressId }}</td>
           <td>{{ workExperience.employeeId }}</td>
           <td>{{ workExperience.companyId }}</td>
-          <td>{{ workExperience.yearOfExp }}</td>
           <td>{{ workExperience.jobDesc }}</td>
+          <td>{{ workExperience.status }}</td>
+          <td>{{ workExperience.lastModified | formatMediumDatetime }}</td>
+          <td>{{ workExperience.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

@@ -9,9 +9,8 @@ import { PersonalDetailsService, RestPersonalDetails } from './personal-details.
 
 const requireRestSample: RestPersonalDetails = {
   ...sampleWithRequiredData,
-  passportExpDate: sampleWithRequiredData.passportExpDate?.toJSON(),
-  lastModified: sampleWithRequiredData.lastModified?.toJSON(),
   dateOfBirth: sampleWithRequiredData.dateOfBirth?.format(DATE_FORMAT),
+  lastModified: sampleWithRequiredData.lastModified?.toJSON(),
 };
 
 describe('PersonalDetails Service', () => {

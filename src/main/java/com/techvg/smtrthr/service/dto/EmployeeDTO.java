@@ -15,17 +15,9 @@ public class EmployeeDTO implements Serializable {
 
     private String firstName;
 
+    private String middleName;
+
     private String lastName;
-
-    @NotNull
-    private String username;
-
-    @NotNull
-    private String password;
-
-    private String department;
-
-    private String designation;
 
     private String gender;
 
@@ -34,17 +26,23 @@ public class EmployeeDTO implements Serializable {
 
     private Instant joindate;
 
+    private Long companyId;
+
+    private String status;
+
     private Instant lastModified;
 
     private String lastModifiedBy;
 
-    private String status;
+    private Long employmentTypeId;
 
-    private Long companyId;
+    private DesignationDTO designation;
 
-    private Long branchId;
+    private DepartmentDTO department;
 
-    private Long regionId;
+    private BranchDTO branch;
+
+    private RegionDTO region;
 
     public Long getId() {
         return id;
@@ -62,44 +60,20 @@ public class EmployeeDTO implements Serializable {
         this.firstName = firstName;
     }
 
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
     }
 
     public String getGender() {
@@ -126,6 +100,22 @@ public class EmployeeDTO implements Serializable {
         this.joindate = joindate;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -142,36 +132,44 @@ public class EmployeeDTO implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return status;
+    public Long getEmploymentTypeId() {
+        return employmentTypeId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmploymentTypeId(Long employmentTypeId) {
+        this.employmentTypeId = employmentTypeId;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public DesignationDTO getDesignation() {
+        return designation;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setDesignation(DesignationDTO designation) {
+        this.designation = designation;
     }
 
-    public Long getBranchId() {
-        return branchId;
+    public DepartmentDTO getDepartment() {
+        return department;
     }
 
-    public void setBranchId(Long branchId) {
-        this.branchId = branchId;
+    public void setDepartment(DepartmentDTO department) {
+        this.department = department;
     }
 
-    public Long getRegionId() {
-        return regionId;
+    public BranchDTO getBranch() {
+        return branch;
     }
 
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
+    public void setBranch(BranchDTO branch) {
+        this.branch = branch;
+    }
+
+    public RegionDTO getRegion() {
+        return region;
+    }
+
+    public void setRegion(RegionDTO region) {
+        this.region = region;
     }
 
     @Override
@@ -201,20 +199,20 @@ public class EmployeeDTO implements Serializable {
         return "EmployeeDTO{" +
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
+            ", middleName='" + getMiddleName() + "'" +
             ", lastName='" + getLastName() + "'" +
-            ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", department='" + getDepartment() + "'" +
-            ", designation='" + getDesignation() + "'" +
             ", gender='" + getGender() + "'" +
             ", empUniqueId='" + getEmpUniqueId() + "'" +
             ", joindate='" + getJoindate() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
-            ", branchId=" + getBranchId() +
-            ", regionId=" + getRegionId() +
+            ", employmentTypeId=" + getEmploymentTypeId() +
+            ", designation=" + getDesignation() +
+            ", department=" + getDepartment() +
+            ", branch=" + getBranch() +
+            ", region=" + getRegion() +
             "}";
     }
 }

@@ -58,6 +58,9 @@ class CompanyResourceIT {
     private static final String DEFAULT_FAX = "AAAAAAAAAA";
     private static final String UPDATED_FAX = "BBBBBBBBBB";
 
+    private static final String DEFAULT_REG_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_REG_NUMBER = "BBBBBBBBBB";
+
     private static final String DEFAULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
@@ -67,17 +70,8 @@ class CompanyResourceIT {
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_REG_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_REG_NUMBER = "BBBBBBBBBB";
-
-    private static final String DEFAULT_GSTIN = "AAAAAAAAAA";
-    private static final String UPDATED_GSTIN = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PAN = "AAAAAAAAAA";
-    private static final String UPDATED_PAN = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TAN = "AAAAAAAAAA";
-    private static final String UPDATED_TAN = "BBBBBBBBBB";
+    private static final String DEFAULT_LEAVE_SETTING_LEVEL = "AAAAAAAAAA";
+    private static final String UPDATED_LEAVE_SETTING_LEVEL = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/companies";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -115,13 +109,11 @@ class CompanyResourceIT {
             .mobileNumber(DEFAULT_MOBILE_NUMBER)
             .websiteUrl(DEFAULT_WEBSITE_URL)
             .fax(DEFAULT_FAX)
+            .regNumber(DEFAULT_REG_NUMBER)
             .status(DEFAULT_STATUS)
             .lastModified(DEFAULT_LAST_MODIFIED)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .regNumber(DEFAULT_REG_NUMBER)
-            .gstin(DEFAULT_GSTIN)
-            .pan(DEFAULT_PAN)
-            .tan(DEFAULT_TAN);
+            .leaveSettingLevel(DEFAULT_LEAVE_SETTING_LEVEL);
         return company;
     }
 
@@ -141,13 +133,11 @@ class CompanyResourceIT {
             .mobileNumber(UPDATED_MOBILE_NUMBER)
             .websiteUrl(UPDATED_WEBSITE_URL)
             .fax(UPDATED_FAX)
+            .regNumber(UPDATED_REG_NUMBER)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regNumber(UPDATED_REG_NUMBER)
-            .gstin(UPDATED_GSTIN)
-            .pan(UPDATED_PAN)
-            .tan(UPDATED_TAN);
+            .leaveSettingLevel(UPDATED_LEAVE_SETTING_LEVEL);
         return company;
     }
 
@@ -178,13 +168,11 @@ class CompanyResourceIT {
         assertThat(testCompany.getMobileNumber()).isEqualTo(DEFAULT_MOBILE_NUMBER);
         assertThat(testCompany.getWebsiteUrl()).isEqualTo(DEFAULT_WEBSITE_URL);
         assertThat(testCompany.getFax()).isEqualTo(DEFAULT_FAX);
+        assertThat(testCompany.getRegNumber()).isEqualTo(DEFAULT_REG_NUMBER);
         assertThat(testCompany.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testCompany.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testCompany.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testCompany.getRegNumber()).isEqualTo(DEFAULT_REG_NUMBER);
-        assertThat(testCompany.getGstin()).isEqualTo(DEFAULT_GSTIN);
-        assertThat(testCompany.getPan()).isEqualTo(DEFAULT_PAN);
-        assertThat(testCompany.getTan()).isEqualTo(DEFAULT_TAN);
+        assertThat(testCompany.getLeaveSettingLevel()).isEqualTo(DEFAULT_LEAVE_SETTING_LEVEL);
     }
 
     @Test
@@ -226,13 +214,11 @@ class CompanyResourceIT {
             .andExpect(jsonPath("$.[*].mobileNumber").value(hasItem(DEFAULT_MOBILE_NUMBER)))
             .andExpect(jsonPath("$.[*].websiteUrl").value(hasItem(DEFAULT_WEBSITE_URL)))
             .andExpect(jsonPath("$.[*].fax").value(hasItem(DEFAULT_FAX)))
+            .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
-            .andExpect(jsonPath("$.[*].gstin").value(hasItem(DEFAULT_GSTIN)))
-            .andExpect(jsonPath("$.[*].pan").value(hasItem(DEFAULT_PAN)))
-            .andExpect(jsonPath("$.[*].tan").value(hasItem(DEFAULT_TAN)));
+            .andExpect(jsonPath("$.[*].leaveSettingLevel").value(hasItem(DEFAULT_LEAVE_SETTING_LEVEL)));
     }
 
     @Test
@@ -255,13 +241,11 @@ class CompanyResourceIT {
             .andExpect(jsonPath("$.mobileNumber").value(DEFAULT_MOBILE_NUMBER))
             .andExpect(jsonPath("$.websiteUrl").value(DEFAULT_WEBSITE_URL))
             .andExpect(jsonPath("$.fax").value(DEFAULT_FAX))
+            .andExpect(jsonPath("$.regNumber").value(DEFAULT_REG_NUMBER))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.regNumber").value(DEFAULT_REG_NUMBER))
-            .andExpect(jsonPath("$.gstin").value(DEFAULT_GSTIN))
-            .andExpect(jsonPath("$.pan").value(DEFAULT_PAN))
-            .andExpect(jsonPath("$.tan").value(DEFAULT_TAN));
+            .andExpect(jsonPath("$.leaveSettingLevel").value(DEFAULT_LEAVE_SETTING_LEVEL));
     }
 
     @Test
@@ -804,6 +788,71 @@ class CompanyResourceIT {
 
     @Test
     @Transactional
+    void getAllCompaniesByRegNumberIsEqualToSomething() throws Exception {
+        // Initialize the database
+        companyRepository.saveAndFlush(company);
+
+        // Get all the companyList where regNumber equals to DEFAULT_REG_NUMBER
+        defaultCompanyShouldBeFound("regNumber.equals=" + DEFAULT_REG_NUMBER);
+
+        // Get all the companyList where regNumber equals to UPDATED_REG_NUMBER
+        defaultCompanyShouldNotBeFound("regNumber.equals=" + UPDATED_REG_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    void getAllCompaniesByRegNumberIsInShouldWork() throws Exception {
+        // Initialize the database
+        companyRepository.saveAndFlush(company);
+
+        // Get all the companyList where regNumber in DEFAULT_REG_NUMBER or UPDATED_REG_NUMBER
+        defaultCompanyShouldBeFound("regNumber.in=" + DEFAULT_REG_NUMBER + "," + UPDATED_REG_NUMBER);
+
+        // Get all the companyList where regNumber equals to UPDATED_REG_NUMBER
+        defaultCompanyShouldNotBeFound("regNumber.in=" + UPDATED_REG_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    void getAllCompaniesByRegNumberIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        companyRepository.saveAndFlush(company);
+
+        // Get all the companyList where regNumber is not null
+        defaultCompanyShouldBeFound("regNumber.specified=true");
+
+        // Get all the companyList where regNumber is null
+        defaultCompanyShouldNotBeFound("regNumber.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllCompaniesByRegNumberContainsSomething() throws Exception {
+        // Initialize the database
+        companyRepository.saveAndFlush(company);
+
+        // Get all the companyList where regNumber contains DEFAULT_REG_NUMBER
+        defaultCompanyShouldBeFound("regNumber.contains=" + DEFAULT_REG_NUMBER);
+
+        // Get all the companyList where regNumber contains UPDATED_REG_NUMBER
+        defaultCompanyShouldNotBeFound("regNumber.contains=" + UPDATED_REG_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    void getAllCompaniesByRegNumberNotContainsSomething() throws Exception {
+        // Initialize the database
+        companyRepository.saveAndFlush(company);
+
+        // Get all the companyList where regNumber does not contain DEFAULT_REG_NUMBER
+        defaultCompanyShouldNotBeFound("regNumber.doesNotContain=" + DEFAULT_REG_NUMBER);
+
+        // Get all the companyList where regNumber does not contain UPDATED_REG_NUMBER
+        defaultCompanyShouldBeFound("regNumber.doesNotContain=" + UPDATED_REG_NUMBER);
+    }
+
+    @Test
+    @Transactional
     void getAllCompaniesByStatusIsEqualToSomething() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
@@ -973,262 +1022,67 @@ class CompanyResourceIT {
 
     @Test
     @Transactional
-    void getAllCompaniesByRegNumberIsEqualToSomething() throws Exception {
+    void getAllCompaniesByLeaveSettingLevelIsEqualToSomething() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
 
-        // Get all the companyList where regNumber equals to DEFAULT_REG_NUMBER
-        defaultCompanyShouldBeFound("regNumber.equals=" + DEFAULT_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel equals to DEFAULT_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldBeFound("leaveSettingLevel.equals=" + DEFAULT_LEAVE_SETTING_LEVEL);
 
-        // Get all the companyList where regNumber equals to UPDATED_REG_NUMBER
-        defaultCompanyShouldNotBeFound("regNumber.equals=" + UPDATED_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel equals to UPDATED_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldNotBeFound("leaveSettingLevel.equals=" + UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test
     @Transactional
-    void getAllCompaniesByRegNumberIsInShouldWork() throws Exception {
+    void getAllCompaniesByLeaveSettingLevelIsInShouldWork() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
 
-        // Get all the companyList where regNumber in DEFAULT_REG_NUMBER or UPDATED_REG_NUMBER
-        defaultCompanyShouldBeFound("regNumber.in=" + DEFAULT_REG_NUMBER + "," + UPDATED_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel in DEFAULT_LEAVE_SETTING_LEVEL or UPDATED_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldBeFound("leaveSettingLevel.in=" + DEFAULT_LEAVE_SETTING_LEVEL + "," + UPDATED_LEAVE_SETTING_LEVEL);
 
-        // Get all the companyList where regNumber equals to UPDATED_REG_NUMBER
-        defaultCompanyShouldNotBeFound("regNumber.in=" + UPDATED_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel equals to UPDATED_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldNotBeFound("leaveSettingLevel.in=" + UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test
     @Transactional
-    void getAllCompaniesByRegNumberIsNullOrNotNull() throws Exception {
+    void getAllCompaniesByLeaveSettingLevelIsNullOrNotNull() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
 
-        // Get all the companyList where regNumber is not null
-        defaultCompanyShouldBeFound("regNumber.specified=true");
+        // Get all the companyList where leaveSettingLevel is not null
+        defaultCompanyShouldBeFound("leaveSettingLevel.specified=true");
 
-        // Get all the companyList where regNumber is null
-        defaultCompanyShouldNotBeFound("regNumber.specified=false");
+        // Get all the companyList where leaveSettingLevel is null
+        defaultCompanyShouldNotBeFound("leaveSettingLevel.specified=false");
     }
 
     @Test
     @Transactional
-    void getAllCompaniesByRegNumberContainsSomething() throws Exception {
+    void getAllCompaniesByLeaveSettingLevelContainsSomething() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
 
-        // Get all the companyList where regNumber contains DEFAULT_REG_NUMBER
-        defaultCompanyShouldBeFound("regNumber.contains=" + DEFAULT_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel contains DEFAULT_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldBeFound("leaveSettingLevel.contains=" + DEFAULT_LEAVE_SETTING_LEVEL);
 
-        // Get all the companyList where regNumber contains UPDATED_REG_NUMBER
-        defaultCompanyShouldNotBeFound("regNumber.contains=" + UPDATED_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel contains UPDATED_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldNotBeFound("leaveSettingLevel.contains=" + UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test
     @Transactional
-    void getAllCompaniesByRegNumberNotContainsSomething() throws Exception {
+    void getAllCompaniesByLeaveSettingLevelNotContainsSomething() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
 
-        // Get all the companyList where regNumber does not contain DEFAULT_REG_NUMBER
-        defaultCompanyShouldNotBeFound("regNumber.doesNotContain=" + DEFAULT_REG_NUMBER);
+        // Get all the companyList where leaveSettingLevel does not contain DEFAULT_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldNotBeFound("leaveSettingLevel.doesNotContain=" + DEFAULT_LEAVE_SETTING_LEVEL);
 
-        // Get all the companyList where regNumber does not contain UPDATED_REG_NUMBER
-        defaultCompanyShouldBeFound("regNumber.doesNotContain=" + UPDATED_REG_NUMBER);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByGstinIsEqualToSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where gstin equals to DEFAULT_GSTIN
-        defaultCompanyShouldBeFound("gstin.equals=" + DEFAULT_GSTIN);
-
-        // Get all the companyList where gstin equals to UPDATED_GSTIN
-        defaultCompanyShouldNotBeFound("gstin.equals=" + UPDATED_GSTIN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByGstinIsInShouldWork() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where gstin in DEFAULT_GSTIN or UPDATED_GSTIN
-        defaultCompanyShouldBeFound("gstin.in=" + DEFAULT_GSTIN + "," + UPDATED_GSTIN);
-
-        // Get all the companyList where gstin equals to UPDATED_GSTIN
-        defaultCompanyShouldNotBeFound("gstin.in=" + UPDATED_GSTIN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByGstinIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where gstin is not null
-        defaultCompanyShouldBeFound("gstin.specified=true");
-
-        // Get all the companyList where gstin is null
-        defaultCompanyShouldNotBeFound("gstin.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByGstinContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where gstin contains DEFAULT_GSTIN
-        defaultCompanyShouldBeFound("gstin.contains=" + DEFAULT_GSTIN);
-
-        // Get all the companyList where gstin contains UPDATED_GSTIN
-        defaultCompanyShouldNotBeFound("gstin.contains=" + UPDATED_GSTIN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByGstinNotContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where gstin does not contain DEFAULT_GSTIN
-        defaultCompanyShouldNotBeFound("gstin.doesNotContain=" + DEFAULT_GSTIN);
-
-        // Get all the companyList where gstin does not contain UPDATED_GSTIN
-        defaultCompanyShouldBeFound("gstin.doesNotContain=" + UPDATED_GSTIN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByPanIsEqualToSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where pan equals to DEFAULT_PAN
-        defaultCompanyShouldBeFound("pan.equals=" + DEFAULT_PAN);
-
-        // Get all the companyList where pan equals to UPDATED_PAN
-        defaultCompanyShouldNotBeFound("pan.equals=" + UPDATED_PAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByPanIsInShouldWork() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where pan in DEFAULT_PAN or UPDATED_PAN
-        defaultCompanyShouldBeFound("pan.in=" + DEFAULT_PAN + "," + UPDATED_PAN);
-
-        // Get all the companyList where pan equals to UPDATED_PAN
-        defaultCompanyShouldNotBeFound("pan.in=" + UPDATED_PAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByPanIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where pan is not null
-        defaultCompanyShouldBeFound("pan.specified=true");
-
-        // Get all the companyList where pan is null
-        defaultCompanyShouldNotBeFound("pan.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByPanContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where pan contains DEFAULT_PAN
-        defaultCompanyShouldBeFound("pan.contains=" + DEFAULT_PAN);
-
-        // Get all the companyList where pan contains UPDATED_PAN
-        defaultCompanyShouldNotBeFound("pan.contains=" + UPDATED_PAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByPanNotContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where pan does not contain DEFAULT_PAN
-        defaultCompanyShouldNotBeFound("pan.doesNotContain=" + DEFAULT_PAN);
-
-        // Get all the companyList where pan does not contain UPDATED_PAN
-        defaultCompanyShouldBeFound("pan.doesNotContain=" + UPDATED_PAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByTanIsEqualToSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where tan equals to DEFAULT_TAN
-        defaultCompanyShouldBeFound("tan.equals=" + DEFAULT_TAN);
-
-        // Get all the companyList where tan equals to UPDATED_TAN
-        defaultCompanyShouldNotBeFound("tan.equals=" + UPDATED_TAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByTanIsInShouldWork() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where tan in DEFAULT_TAN or UPDATED_TAN
-        defaultCompanyShouldBeFound("tan.in=" + DEFAULT_TAN + "," + UPDATED_TAN);
-
-        // Get all the companyList where tan equals to UPDATED_TAN
-        defaultCompanyShouldNotBeFound("tan.in=" + UPDATED_TAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByTanIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where tan is not null
-        defaultCompanyShouldBeFound("tan.specified=true");
-
-        // Get all the companyList where tan is null
-        defaultCompanyShouldNotBeFound("tan.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByTanContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where tan contains DEFAULT_TAN
-        defaultCompanyShouldBeFound("tan.contains=" + DEFAULT_TAN);
-
-        // Get all the companyList where tan contains UPDATED_TAN
-        defaultCompanyShouldNotBeFound("tan.contains=" + UPDATED_TAN);
-    }
-
-    @Test
-    @Transactional
-    void getAllCompaniesByTanNotContainsSomething() throws Exception {
-        // Initialize the database
-        companyRepository.saveAndFlush(company);
-
-        // Get all the companyList where tan does not contain DEFAULT_TAN
-        defaultCompanyShouldNotBeFound("tan.doesNotContain=" + DEFAULT_TAN);
-
-        // Get all the companyList where tan does not contain UPDATED_TAN
-        defaultCompanyShouldBeFound("tan.doesNotContain=" + UPDATED_TAN);
+        // Get all the companyList where leaveSettingLevel does not contain UPDATED_LEAVE_SETTING_LEVEL
+        defaultCompanyShouldBeFound("leaveSettingLevel.doesNotContain=" + UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     /**
@@ -1248,13 +1102,11 @@ class CompanyResourceIT {
             .andExpect(jsonPath("$.[*].mobileNumber").value(hasItem(DEFAULT_MOBILE_NUMBER)))
             .andExpect(jsonPath("$.[*].websiteUrl").value(hasItem(DEFAULT_WEBSITE_URL)))
             .andExpect(jsonPath("$.[*].fax").value(hasItem(DEFAULT_FAX)))
+            .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
-            .andExpect(jsonPath("$.[*].gstin").value(hasItem(DEFAULT_GSTIN)))
-            .andExpect(jsonPath("$.[*].pan").value(hasItem(DEFAULT_PAN)))
-            .andExpect(jsonPath("$.[*].tan").value(hasItem(DEFAULT_TAN)));
+            .andExpect(jsonPath("$.[*].leaveSettingLevel").value(hasItem(DEFAULT_LEAVE_SETTING_LEVEL)));
 
         // Check, that the count call also returns 1
         restCompanyMockMvc
@@ -1311,13 +1163,11 @@ class CompanyResourceIT {
             .mobileNumber(UPDATED_MOBILE_NUMBER)
             .websiteUrl(UPDATED_WEBSITE_URL)
             .fax(UPDATED_FAX)
+            .regNumber(UPDATED_REG_NUMBER)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regNumber(UPDATED_REG_NUMBER)
-            .gstin(UPDATED_GSTIN)
-            .pan(UPDATED_PAN)
-            .tan(UPDATED_TAN);
+            .leaveSettingLevel(UPDATED_LEAVE_SETTING_LEVEL);
         CompanyDTO companyDTO = companyMapper.toDto(updatedCompany);
 
         restCompanyMockMvc
@@ -1340,13 +1190,11 @@ class CompanyResourceIT {
         assertThat(testCompany.getMobileNumber()).isEqualTo(UPDATED_MOBILE_NUMBER);
         assertThat(testCompany.getWebsiteUrl()).isEqualTo(UPDATED_WEBSITE_URL);
         assertThat(testCompany.getFax()).isEqualTo(UPDATED_FAX);
+        assertThat(testCompany.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
         assertThat(testCompany.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testCompany.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testCompany.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testCompany.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
-        assertThat(testCompany.getGstin()).isEqualTo(UPDATED_GSTIN);
-        assertThat(testCompany.getPan()).isEqualTo(UPDATED_PAN);
-        assertThat(testCompany.getTan()).isEqualTo(UPDATED_TAN);
+        assertThat(testCompany.getLeaveSettingLevel()).isEqualTo(UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test
@@ -1431,10 +1279,9 @@ class CompanyResourceIT {
             .postalCode(UPDATED_POSTAL_CODE)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .websiteUrl(UPDATED_WEBSITE_URL)
+            .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .gstin(UPDATED_GSTIN)
-            .tan(UPDATED_TAN);
+            .leaveSettingLevel(UPDATED_LEAVE_SETTING_LEVEL);
 
         restCompanyMockMvc
             .perform(
@@ -1456,13 +1303,11 @@ class CompanyResourceIT {
         assertThat(testCompany.getMobileNumber()).isEqualTo(DEFAULT_MOBILE_NUMBER);
         assertThat(testCompany.getWebsiteUrl()).isEqualTo(UPDATED_WEBSITE_URL);
         assertThat(testCompany.getFax()).isEqualTo(DEFAULT_FAX);
-        assertThat(testCompany.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testCompany.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testCompany.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testCompany.getRegNumber()).isEqualTo(DEFAULT_REG_NUMBER);
-        assertThat(testCompany.getGstin()).isEqualTo(UPDATED_GSTIN);
-        assertThat(testCompany.getPan()).isEqualTo(DEFAULT_PAN);
-        assertThat(testCompany.getTan()).isEqualTo(UPDATED_TAN);
+        assertThat(testCompany.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testCompany.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testCompany.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testCompany.getLeaveSettingLevel()).isEqualTo(UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test
@@ -1486,13 +1331,11 @@ class CompanyResourceIT {
             .mobileNumber(UPDATED_MOBILE_NUMBER)
             .websiteUrl(UPDATED_WEBSITE_URL)
             .fax(UPDATED_FAX)
+            .regNumber(UPDATED_REG_NUMBER)
             .status(UPDATED_STATUS)
             .lastModified(UPDATED_LAST_MODIFIED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .regNumber(UPDATED_REG_NUMBER)
-            .gstin(UPDATED_GSTIN)
-            .pan(UPDATED_PAN)
-            .tan(UPDATED_TAN);
+            .leaveSettingLevel(UPDATED_LEAVE_SETTING_LEVEL);
 
         restCompanyMockMvc
             .perform(
@@ -1514,13 +1357,11 @@ class CompanyResourceIT {
         assertThat(testCompany.getMobileNumber()).isEqualTo(UPDATED_MOBILE_NUMBER);
         assertThat(testCompany.getWebsiteUrl()).isEqualTo(UPDATED_WEBSITE_URL);
         assertThat(testCompany.getFax()).isEqualTo(UPDATED_FAX);
+        assertThat(testCompany.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
         assertThat(testCompany.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testCompany.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testCompany.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testCompany.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
-        assertThat(testCompany.getGstin()).isEqualTo(UPDATED_GSTIN);
-        assertThat(testCompany.getPan()).isEqualTo(UPDATED_PAN);
-        assertThat(testCompany.getTan()).isEqualTo(UPDATED_TAN);
+        assertThat(testCompany.getLeaveSettingLevel()).isEqualTo(UPDATED_LEAVE_SETTING_LEVEL);
     }
 
     @Test

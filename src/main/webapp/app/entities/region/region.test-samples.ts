@@ -8,25 +8,27 @@ export const sampleWithRequiredData: IRegion = {
 };
 
 export const sampleWithPartialData: IRegion = {
-  id: 75657,
-  regionName: 'parse',
-  description: 'Berkshire',
-  lastModifiedBy: 'deposit salmon Product',
-  companyId: 32445,
+  id: 12726,
+  regionName: 'Strategist Berkshire quantifying',
+  description: 'salmon Product',
+  status: 'Soft',
+  lastModified: dayjs('2023-02-09T02:59'),
+  lastModifiedBy: 'Administrator Grocery',
 };
 
 export const sampleWithFullData: IRegion = {
-  id: 12369,
-  regionName: 'Senior Administrator Grocery',
-  description: 'ROI',
-  status: 'Shoes overriding',
-  lastModified: dayjs('2023-02-08T22:07'),
-  lastModifiedBy: 'Iowa Rubber',
+  id: 23487,
+  regionName: 'Horizontal Shoes',
+  description: 'turquoise mesh Executive',
+  regionId: 8297,
   companyId: 21816,
+  status: 'Rubber',
+  lastModified: dayjs('2023-02-08T17:38'),
+  lastModifiedBy: 'deposit Berkshire',
 };
 
 export const sampleWithNewData: NewRegion = {
-  regionName: 'Rubber',
+  regionName: 'array Refined Ergonomic',
   id: null,
 };
 

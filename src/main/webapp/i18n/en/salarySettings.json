@@ -22,12 +22,10 @@
       "hra": "Hra",
       "employeeShare": "Employee Share",
       "companyShare": "Company Share",
-      "salaryFrom": "Salary From",
-      "salaryTo": "Salary To",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "companyId": "Company Id",
       "status": "Status",
-      "companyId": "Company Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }
