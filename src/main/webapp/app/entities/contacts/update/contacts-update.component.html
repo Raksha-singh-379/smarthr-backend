@@ -48,6 +48,33 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.contacts.refTable" for="field_refTable">Ref Table</label>
+          <input type="text" class="form-control" name="refTable" id="field_refTable" data-cy="refTable" formControlName="refTable" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.contacts.refTableId" for="field_refTableId">Ref Table Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="refTableId"
+            id="field_refTableId"
+            data-cy="refTableId"
+            formControlName="refTableId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.contacts.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.contacts.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.contacts.lastModified" for="field_lastModified">Last Modified</label>
           <div class="d-flex">
             <input
@@ -75,37 +102,17 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.contacts.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.contacts.refTableType" for="field_refTableType">Ref Table Type</label>
+          <label class="form-label" jhiTranslate="smartHrApp.contacts.contactReference" for="field_contactReference"
+            >Contact Reference</label
+          >
           <input
             type="text"
             class="form-control"
-            name="refTableType"
-            id="field_refTableType"
-            data-cy="refTableType"
-            formControlName="refTableType"
+            name="contactReference"
+            id="field_contactReference"
+            data-cy="contactReference"
+            formControlName="contactReference"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.contacts.refTableId" for="field_refTableId">Ref Table Id</label>
-          <input
-            type="number"
-            class="form-control"
-            name="refTableId"
-            id="field_refTableId"
-            data-cy="refTableId"
-            formControlName="refTableId"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.contacts.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
         </div>
       </div>
 

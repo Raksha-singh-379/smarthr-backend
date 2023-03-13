@@ -8,18 +8,18 @@ export const sampleWithRequiredData: IApprovalSetting = {
 
 export const sampleWithPartialData: IApprovalSetting = {
   id: 93262,
-  status: 'Checking Japan',
-  companyId: 13869,
+  lastModified: dayjs('2023-02-08T18:36'),
+  lastModifiedBy: 'Small eyeballs',
 };
 
 export const sampleWithFullData: IApprovalSetting = {
   id: 79824,
-  isSequenceApproval: true,
-  isSimultaneousApproval: true,
-  lastModified: dayjs('2023-02-08T17:47'),
-  lastModifiedBy: 'Unbranded Kentucky 60',
-  status: 'payment FTP',
-  companyId: 21656,
+  type: 'Account Unbranded Kentucky',
+  approvalCategory: 54209,
+  companyId: 2902,
+  status: 'payment Human',
+  lastModified: dayjs('2023-02-08T16:25'),
+  lastModifiedBy: 'Dynamic',
 };
 
 export const sampleWithNewData: NewApprovalSetting = {

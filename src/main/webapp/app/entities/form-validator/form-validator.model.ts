@@ -7,8 +7,9 @@ export interface IFormValidator {
   formName?: string | null;
   fieldName?: string | null;
   companyId?: number | null;
-  createdBy?: string | null;
-  createdOn?: dayjs.Dayjs | null;
+  status?: string | null;
+  lastModified?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
 }
 
 export type NewFormValidator = Omit<IFormValidator, 'id'> & { id: null };

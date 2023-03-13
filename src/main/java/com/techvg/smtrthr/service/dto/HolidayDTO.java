@@ -3,7 +3,6 @@ package com.techvg.smtrthr.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.techvg.smtrthr.domain.Holiday} entity.
@@ -13,7 +12,6 @@ public class HolidayDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private String holidayName;
 
     private Instant holidayDate;
@@ -22,13 +20,13 @@ public class HolidayDTO implements Serializable {
 
     private Instant year;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
+    private Long companyId;
 
     private String status;
 
-    private Long companyId;
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -70,6 +68,22 @@ public class HolidayDTO implements Serializable {
         this.year = year;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -84,22 +98,6 @@ public class HolidayDTO implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     @Override
@@ -132,10 +130,10 @@ public class HolidayDTO implements Serializable {
             ", holidayDate='" + getHolidayDate() + "'" +
             ", day='" + getDay() + "'" +
             ", year='" + getYear() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

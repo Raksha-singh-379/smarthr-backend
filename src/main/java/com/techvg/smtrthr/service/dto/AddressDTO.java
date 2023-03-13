@@ -34,17 +34,17 @@ public class AddressDTO implements Serializable {
 
     private Double latitude;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
-    private String refTableType;
+    private String refTable;
 
     private Long refTableId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -142,36 +142,12 @@ public class AddressDTO implements Serializable {
         this.latitude = latitude;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
+    public String getRefTable() {
+        return refTable;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRefTableType() {
-        return refTableType;
-    }
-
-    public void setRefTableType(String refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
     public Long getRefTableId() {
@@ -188,6 +164,30 @@ public class AddressDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -227,12 +227,12 @@ public class AddressDTO implements Serializable {
             ", landMark='" + getLandMark() + "'" +
             ", longitude=" + getLongitude() +
             ", latitude=" + getLatitude() +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", refTableType='" + getRefTableType() + "'" +
+            ", refTable='" + getRefTable() + "'" +
             ", refTableId=" + getRefTableId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

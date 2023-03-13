@@ -23,17 +23,17 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private BooleanFilter isSequenceApproval;
+    private StringFilter type;
 
-    private BooleanFilter isSimultaneousApproval;
+    private IntegerFilter approvalCategory;
+
+    private LongFilter companyId;
+
+    private StringFilter status;
 
     private InstantFilter lastModified;
 
     private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private LongFilter companyId;
 
     private Boolean distinct;
 
@@ -41,12 +41,12 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
 
     public ApprovalSettingCriteria(ApprovalSettingCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.isSequenceApproval = other.isSequenceApproval == null ? null : other.isSequenceApproval.copy();
-        this.isSimultaneousApproval = other.isSimultaneousApproval == null ? null : other.isSimultaneousApproval.copy();
+        this.type = other.type == null ? null : other.type.copy();
+        this.approvalCategory = other.approvalCategory == null ? null : other.approvalCategory.copy();
+        this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
         this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.companyId = other.companyId == null ? null : other.companyId.copy();
         this.distinct = other.distinct;
     }
 
@@ -70,34 +70,64 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public BooleanFilter getIsSequenceApproval() {
-        return isSequenceApproval;
+    public StringFilter getType() {
+        return type;
     }
 
-    public BooleanFilter isSequenceApproval() {
-        if (isSequenceApproval == null) {
-            isSequenceApproval = new BooleanFilter();
+    public StringFilter type() {
+        if (type == null) {
+            type = new StringFilter();
         }
-        return isSequenceApproval;
+        return type;
     }
 
-    public void setIsSequenceApproval(BooleanFilter isSequenceApproval) {
-        this.isSequenceApproval = isSequenceApproval;
+    public void setType(StringFilter type) {
+        this.type = type;
     }
 
-    public BooleanFilter getIsSimultaneousApproval() {
-        return isSimultaneousApproval;
+    public IntegerFilter getApprovalCategory() {
+        return approvalCategory;
     }
 
-    public BooleanFilter isSimultaneousApproval() {
-        if (isSimultaneousApproval == null) {
-            isSimultaneousApproval = new BooleanFilter();
+    public IntegerFilter approvalCategory() {
+        if (approvalCategory == null) {
+            approvalCategory = new IntegerFilter();
         }
-        return isSimultaneousApproval;
+        return approvalCategory;
     }
 
-    public void setIsSimultaneousApproval(BooleanFilter isSimultaneousApproval) {
-        this.isSimultaneousApproval = isSimultaneousApproval;
+    public void setApprovalCategory(IntegerFilter approvalCategory) {
+        this.approvalCategory = approvalCategory;
+    }
+
+    public LongFilter getCompanyId() {
+        return companyId;
+    }
+
+    public LongFilter companyId() {
+        if (companyId == null) {
+            companyId = new LongFilter();
+        }
+        return companyId;
+    }
+
+    public void setCompanyId(LongFilter companyId) {
+        this.companyId = companyId;
+    }
+
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
     }
 
     public InstantFilter getLastModified() {
@@ -130,36 +160,6 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public LongFilter getCompanyId() {
-        return companyId;
-    }
-
-    public LongFilter companyId() {
-        if (companyId == null) {
-            companyId = new LongFilter();
-        }
-        return companyId;
-    }
-
-    public void setCompanyId(LongFilter companyId) {
-        this.companyId = companyId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -179,19 +179,19 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
         final ApprovalSettingCriteria that = (ApprovalSettingCriteria) o;
         return (
             Objects.equals(id, that.id) &&
-            Objects.equals(isSequenceApproval, that.isSequenceApproval) &&
-            Objects.equals(isSimultaneousApproval, that.isSimultaneousApproval) &&
+            Objects.equals(type, that.type) &&
+            Objects.equals(approvalCategory, that.approvalCategory) &&
+            Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
             Objects.equals(lastModified, that.lastModified) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(companyId, that.companyId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isSequenceApproval, isSimultaneousApproval, lastModified, lastModifiedBy, status, companyId, distinct);
+        return Objects.hash(id, type, approvalCategory, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -199,12 +199,12 @@ public class ApprovalSettingCriteria implements Serializable, Criteria {
     public String toString() {
         return "ApprovalSettingCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
-            (isSequenceApproval != null ? "isSequenceApproval=" + isSequenceApproval + ", " : "") +
-            (isSimultaneousApproval != null ? "isSimultaneousApproval=" + isSimultaneousApproval + ", " : "") +
+            (type != null ? "type=" + type + ", " : "") +
+            (approvalCategory != null ? "approvalCategory=" + approvalCategory + ", " : "") +
+            (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
             (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (companyId != null ? "companyId=" + companyId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

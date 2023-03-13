@@ -10,20 +10,20 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
       "fieldName": "status",
       "fieldType": "String"
     },
     {
-      "fieldName": "companyId",
-      "fieldType": "Long"
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

@@ -99,20 +99,20 @@ public class TdsQueryService extends QueryService<Tds> {
             if (criteria.getPercentage() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPercentage(), Tds_.percentage));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Tds_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Tds_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), Tds_.status));
-            }
             if (criteria.getSalarySettingId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSalarySettingId(), Tds_.salarySettingId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Tds_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), Tds_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Tds_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Tds_.lastModifiedBy));
             }
         }
         return specification;

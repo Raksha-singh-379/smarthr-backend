@@ -34,26 +34,32 @@ public class BanksDetails implements Serializable {
     @Column(name = "tax_number")
     private String taxNumber;
 
+    @Column(name = "gstin")
+    private String gstin;
+
+    @Column(name = "tan")
+    private String tan;
+
     @Column(name = "branch_name")
     private String branchName;
 
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "ref_table_type")
-    private String refTableType;
+    @Column(name = "ref_table")
+    private String refTable;
 
     @Column(name = "ref_table_id")
     private Long refTableId;
 
     @Column(name = "company_id")
     private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -122,6 +128,32 @@ public class BanksDetails implements Serializable {
         this.taxNumber = taxNumber;
     }
 
+    public String getGstin() {
+        return this.gstin;
+    }
+
+    public BanksDetails gstin(String gstin) {
+        this.setGstin(gstin);
+        return this;
+    }
+
+    public void setGstin(String gstin) {
+        this.gstin = gstin;
+    }
+
+    public String getTan() {
+        return this.tan;
+    }
+
+    public BanksDetails tan(String tan) {
+        this.setTan(tan);
+        return this;
+    }
+
+    public void setTan(String tan) {
+        this.tan = tan;
+    }
+
     public String getBranchName() {
         return this.branchName;
     }
@@ -135,56 +167,17 @@ public class BanksDetails implements Serializable {
         this.branchName = branchName;
     }
 
-    public Instant getLastModified() {
-        return this.lastModified;
+    public String getRefTable() {
+        return this.refTable;
     }
 
-    public BanksDetails lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
+    public BanksDetails refTable(String refTable) {
+        this.setRefTable(refTable);
         return this;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public BanksDetails lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public BanksDetails status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRefTableType() {
-        return this.refTableType;
-    }
-
-    public BanksDetails refTableType(String refTableType) {
-        this.setRefTableType(refTableType);
-        return this;
-    }
-
-    public void setRefTableType(String refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
     public Long getRefTableId() {
@@ -211,6 +204,45 @@ public class BanksDetails implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public BanksDetails status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public BanksDetails lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public BanksDetails lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -241,13 +273,15 @@ public class BanksDetails implements Serializable {
             ", bankName='" + getBankName() + "'" +
             ", branchTransCode='" + getBranchTransCode() + "'" +
             ", taxNumber='" + getTaxNumber() + "'" +
+            ", gstin='" + getGstin() + "'" +
+            ", tan='" + getTan() + "'" +
             ", branchName='" + getBranchName() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", refTableType='" + getRefTableType() + "'" +
+            ", refTable='" + getRefTable() + "'" +
             ", refTableId=" + getRefTableId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

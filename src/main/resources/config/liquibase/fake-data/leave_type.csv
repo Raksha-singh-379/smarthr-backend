@@ -1,11 +1,11 @@
-id;leave_type;no_of_days;record_status;last_modified;last_modified_by;status;company_id
-1;salmon Concrete;Omani Market;blue Pennsylvania programming;2023-02-08T09:32:30;Direct;networks applications synergy;93544
-2;brand payment Plastic;Uganda;Refined Analyst Functionality;2023-02-08T14:25:24;Multi-lateral input ADP;grid-enabled Bacon systems;13103
-3;Rubber Salad Analyst;Fresh Public-key Chief;methodical Hampshire;2023-02-08T20:51:01;Operative Borders Future;Concrete cross-platform Money;55108
-4;Exclusive;Home Concrete tertiary;Handmade Assimilated;2023-02-08T11:38:20;Product benchmark;Credit customized ivory;89141
-5;Colorado;Reverse-engineered;Coordinator Antillian COM;2023-02-08T22:11:55;Money panel Towels;Borders Monitored Checking;76691
-6;Investment;Loan Supervisor;Strategist;2023-02-08T23:02:57;Principal Idaho Small;Oklahoma Compatible;75033
-7;reintermediate Loan;feed Rubber;Future-proofed;2023-02-08T17:08:52;Sports Ball;salmon;1984
-8;client-server bandwidth target;bus blue;Borders Shoes;2023-02-08T20:53:50;instruction;Oregon Analyst;94880
-9;input Cotton Gorgeous;Ergonomic Licensed Triple-buffered;Electronics Division;2023-02-08T06:52:15;Sausages auxiliary;Dynamic;57589
-10;Strategist Avon Bedfordshire;Director Account Chair;alarm International;2023-02-08T18:03:09;ADP compressing;Car optical;78670
+id;leave_type;no_of_days;has_carry_forward;has_earned;has_custom_policy;company_id;status;last_modified;last_modified_by
+1;salmon Concrete;37821;true;true;true;62697;ubiquitous Sleek;2023-02-08T08:30:11;Soft Direct index
+2;applications synergy Usability;45752;false;true;true;3489;Plastic;2023-02-08T13:23:23;Uganda
+3;Refined Analyst Functionality;59930;true;false;false;70692;bypass action-items grid-enabled;2023-02-09T00:28:08;Berkshire hacking Rubber
+4;Dynamic;51674;false;true;false;89031;Public-key;2023-02-08T07:24:15;maroon Market Utah
+5;Operative Borders Future;69797;false;false;true;80798;Tuna Rubber;2023-02-08T22:36:43;Tasty
+6;Multi-tiered;89818;true;false;false;70829;Avon Shoes modular;2023-02-08T13:49:01;Orchestrator Future-proofed Concrete
+7;Senior;10027;false;false;false;75018;Lesotho moratorium;2023-02-08T17:13:47;Denmark Norwegian object-oriented
+8;Towels generate end-to-end;57516;true;false;false;76691;Investment;2023-02-08T14:09:01;Jersey Home
+9;Orchestrator Chief Planner;19709;false;false;true;36746;application Refined;2023-02-08T18:31:46;withdrawal connect
+10;Australian Mozambique withdrawal;34633;true;false;false;1870;clear-thinking program Alaska;2023-02-08T07:48:50;salmon

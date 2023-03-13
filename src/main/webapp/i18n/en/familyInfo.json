@@ -21,12 +21,14 @@
       "name": "Name",
       "dateOfBirth": "Date Of Birth",
       "relation": "Relation",
-      "address": "Address",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
+      "addressId": "Address Id",
+      "isEmployed": "Is Employed",
+      "employedAt": "Employed At",
       "employeeId": "Employee Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

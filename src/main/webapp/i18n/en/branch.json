@@ -23,11 +23,12 @@
       "branchcode": "Branchcode",
       "branchType": "Branch Type",
       "webSite": "Web Site",
+      "branchId": "Branch Id",
+      "regionId": "Region Id",
+      "companyId": "Company Id",
       "status": "Status",
       "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "regionId": "Region Id",
-      "companyId": "Company Id"
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

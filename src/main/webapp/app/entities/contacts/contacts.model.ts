@@ -6,12 +6,13 @@ export interface IContacts {
   contactPref?: string | null;
   contactType?: string | null;
   contact?: string | null;
-  lastModified?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  status?: string | null;
-  refTableType?: string | null;
+  refTable?: string | null;
   refTableId?: number | null;
   companyId?: number | null;
+  status?: string | null;
+  lastModified?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  contactReference?: string | null;
 }
 
 export type NewContacts = Omit<IContacts, 'id'> & { id: null };

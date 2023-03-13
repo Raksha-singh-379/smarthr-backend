@@ -7,29 +7,28 @@ export const sampleWithRequiredData: ILeavePolicy = {
 };
 
 export const sampleWithPartialData: ILeavePolicy = {
-  id: 10789,
-  totalLeave: 'Plaza Corporate',
-  maxLeave: 'Alabama',
-  hasproRataLeave: true,
-  lastModified: dayjs('2023-02-08T15:12'),
-  lastModifiedBy: 'turquoise',
+  id: 1109,
+  description: 'Berkshire',
+  refTable: 'Corporate',
+  refTableId: 10701,
+  status: 'Sports Florida',
+  lastModified: dayjs('2023-02-08T17:38'),
 };
 
 export const sampleWithFullData: ILeavePolicy = {
-  id: 32211,
-  leaveType: 'FTP Cambridgeshire optical',
-  isCarryForword: true,
-  employeeType: 'Ireland',
-  genderLeave: 'Account Montenegro',
-  leaveStatus: 'sensor Rubber',
-  totalLeave: 'Electronics Rustic',
-  maxLeave: 'Handmade',
+  id: 25294,
+  isCarryForword: false,
+  genderLeave: 90670,
+  totalLeave: 87902,
+  maxLeave: 34074,
   hasproRataLeave: false,
-  description: 'Plastic',
-  lastModified: dayjs('2023-02-08T07:34'),
-  lastModifiedBy: 'Tools Agent panel',
-  status: 'Berkshire',
-  companyId: 56778,
+  description: 'Central up',
+  refTable: 'Ireland',
+  refTableId: 56964,
+  companyId: 60669,
+  status: 'Malta',
+  lastModified: dayjs('2023-02-08T12:38'),
+  lastModifiedBy: 'sensor Rubber',
 };
 
 export const sampleWithNewData: NewLeavePolicy = {

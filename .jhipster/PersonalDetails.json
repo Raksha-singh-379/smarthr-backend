@@ -6,14 +6,6 @@
   "entityTableName": "personal_details",
   "fields": [
     {
-      "fieldName": "passportNo",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "passportExpDate",
-      "fieldType": "Instant"
-    },
-    {
       "fieldName": "telephoneNo",
       "fieldType": "String"
     },
@@ -30,22 +22,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "isSpousEmployed",
-      "fieldType": "Boolean"
-    },
-    {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "employeeId",
       "fieldType": "Long"
     },
@@ -54,16 +30,24 @@
       "fieldType": "Long"
     },
     {
-      "fieldName": "personalIdNo",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "bloodGroup",
       "fieldType": "String"
     },
     {
       "fieldName": "dateOfBirth",
       "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

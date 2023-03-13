@@ -40,18 +40,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="passportNo">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.passportNo">Passport No</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="passportExpDate">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.passportExpDate">Passport Exp Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="telephoneNo">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.personalDetails.telephoneNo">Telephone No</span>
@@ -76,30 +64,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="isSpousEmployed">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.isSpousEmployed">Is Spous Employed</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="employeeId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.personalDetails.employeeId">Employee Id</span>
@@ -109,12 +73,6 @@
           <th scope="col" jhiSortBy="companyId">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.personalDetails.companyId">Company Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="personalIdNo">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.personalDetails.personalIdNo">Personal Id No</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -130,6 +88,24 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.personalDetails.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.personalDetails.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.personalDetails.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -138,21 +114,17 @@
           <td>
             <a [routerLink]="['/personal-details', personalDetails.id, 'view']">{{ personalDetails.id }}</a>
           </td>
-          <td>{{ personalDetails.passportNo }}</td>
-          <td>{{ personalDetails.passportExpDate | formatMediumDatetime }}</td>
           <td>{{ personalDetails.telephoneNo }}</td>
           <td>{{ personalDetails.nationality }}</td>
           <td>{{ personalDetails.maritalStatus }}</td>
           <td>{{ personalDetails.religion }}</td>
-          <td>{{ personalDetails.isSpousEmployed }}</td>
-          <td>{{ personalDetails.lastModified | formatMediumDatetime }}</td>
-          <td>{{ personalDetails.lastModifiedBy }}</td>
-          <td>{{ personalDetails.status }}</td>
           <td>{{ personalDetails.employeeId }}</td>
           <td>{{ personalDetails.companyId }}</td>
-          <td>{{ personalDetails.personalIdNo }}</td>
           <td>{{ personalDetails.bloodGroup }}</td>
           <td>{{ personalDetails.dateOfBirth | formatMediumDate }}</td>
+          <td>{{ personalDetails.status }}</td>
+          <td>{{ personalDetails.lastModified | formatMediumDatetime }}</td>
+          <td>{{ personalDetails.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

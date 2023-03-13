@@ -36,11 +36,12 @@ type EsiDetailsFormGroupContent = {
   esiRate: FormControl<EsiDetailsFormRawValue['esiRate']>;
   additionalEsiRate: FormControl<EsiDetailsFormRawValue['additionalEsiRate']>;
   totalEsiRate: FormControl<EsiDetailsFormRawValue['totalEsiRate']>;
+  employeeId: FormControl<EsiDetailsFormRawValue['employeeId']>;
+  reEnumerationId: FormControl<EsiDetailsFormRawValue['reEnumerationId']>;
+  companyId: FormControl<EsiDetailsFormRawValue['companyId']>;
+  status: FormControl<EsiDetailsFormRawValue['status']>;
   lastModified: FormControl<EsiDetailsFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<EsiDetailsFormRawValue['lastModifiedBy']>;
-  status: FormControl<EsiDetailsFormRawValue['status']>;
-  employeId: FormControl<EsiDetailsFormRawValue['employeId']>;
-  reEnumerationId: FormControl<EsiDetailsFormRawValue['reEnumerationId']>;
 };
 
 export type EsiDetailsFormGroup = FormGroup<EsiDetailsFormGroupContent>;
@@ -65,11 +66,12 @@ export class EsiDetailsFormService {
       esiRate: new FormControl(esiDetailsRawValue.esiRate),
       additionalEsiRate: new FormControl(esiDetailsRawValue.additionalEsiRate),
       totalEsiRate: new FormControl(esiDetailsRawValue.totalEsiRate),
+      employeeId: new FormControl(esiDetailsRawValue.employeeId),
+      reEnumerationId: new FormControl(esiDetailsRawValue.reEnumerationId),
+      companyId: new FormControl(esiDetailsRawValue.companyId),
+      status: new FormControl(esiDetailsRawValue.status),
       lastModified: new FormControl(esiDetailsRawValue.lastModified),
       lastModifiedBy: new FormControl(esiDetailsRawValue.lastModifiedBy),
-      status: new FormControl(esiDetailsRawValue.status),
-      employeId: new FormControl(esiDetailsRawValue.employeId),
-      reEnumerationId: new FormControl(esiDetailsRawValue.reEnumerationId),
     });
   }
 

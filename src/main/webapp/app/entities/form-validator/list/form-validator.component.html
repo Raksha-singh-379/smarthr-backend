@@ -70,15 +70,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="createdBy">
+          <th scope="col" jhiSortBy="status">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.formValidator.createdBy">Created By</span>
+              <span jhiTranslate="smartHrApp.formValidator.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="createdOn">
+          <th scope="col" jhiSortBy="lastModified">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.formValidator.createdOn">Created On</span>
+              <span jhiTranslate="smartHrApp.formValidator.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.formValidator.lastModifiedBy">Last Modified By</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -95,8 +101,9 @@
           <td>{{ formValidator.formName }}</td>
           <td>{{ formValidator.fieldName }}</td>
           <td>{{ formValidator.companyId }}</td>
-          <td>{{ formValidator.createdBy }}</td>
-          <td>{{ formValidator.createdOn | formatMediumDatetime }}</td>
+          <td>{{ formValidator.status }}</td>
+          <td>{{ formValidator.lastModified | formatMediumDatetime }}</td>
+          <td>{{ formValidator.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

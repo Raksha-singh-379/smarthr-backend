@@ -102,26 +102,32 @@ public class BanksDetailsQueryService extends QueryService<BanksDetails> {
             if (criteria.getTaxNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTaxNumber(), BanksDetails_.taxNumber));
             }
+            if (criteria.getGstin() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getGstin(), BanksDetails_.gstin));
+            }
+            if (criteria.getTan() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTan(), BanksDetails_.tan));
+            }
             if (criteria.getBranchName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getBranchName(), BanksDetails_.branchName));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), BanksDetails_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), BanksDetails_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), BanksDetails_.status));
-            }
-            if (criteria.getRefTableType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRefTableType(), BanksDetails_.refTableType));
+            if (criteria.getRefTable() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRefTable(), BanksDetails_.refTable));
             }
             if (criteria.getRefTableId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRefTableId(), BanksDetails_.refTableId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), BanksDetails_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), BanksDetails_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), BanksDetails_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), BanksDetails_.lastModifiedBy));
             }
         }
         return specification;

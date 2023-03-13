@@ -22,12 +22,13 @@
       "contactPref": "Contact Pref",
       "contactType": "Contact Type",
       "contact": "Contact",
+      "refTable": "Ref Table",
+      "refTableId": "Ref Table Id",
+      "companyId": "Company Id",
+      "status": "Status",
       "lastModified": "Last Modified",
       "lastModifiedBy": "Last Modified By",
-      "status": "Status",
-      "refTableType": "Ref Table Type",
-      "refTableId": "Ref Table Id",
-      "companyId": "Company Id"
+      "contactReference": "Contact Reference"
     }
   }
 }

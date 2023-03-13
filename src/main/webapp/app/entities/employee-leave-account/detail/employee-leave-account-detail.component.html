@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="employeeLeaveAccount">
+      <h2 data-cy="employeeLeaveAccountDetailsHeading">
+        <span jhiTranslate="smartHrApp.employeeLeaveAccount.detail.title">Employee Leave Account</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.carriedLeaves">Carried Leaves</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.carriedLeaves }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.creditedLeaves">Credited Leaves</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.creditedLeaves }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.date">Date</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.balance">Balance</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.balance }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.companyId">Company Id</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.companyId }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.status">Status</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.lastModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ employeeLeaveAccount.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.leaveType">Leave Type</span></dt>
+        <dd>
+          <div *ngIf="employeeLeaveAccount.leaveType">
+            <a [routerLink]="['/leave-type', employeeLeaveAccount.leaveType.id, 'view']">{{ employeeLeaveAccount.leaveType.leaveType }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="smartHrApp.employeeLeaveAccount.employee">Employee</span></dt>
+        <dd>
+          <div *ngIf="employeeLeaveAccount.employee">
+            <a [routerLink]="['/employee', employeeLeaveAccount.employee.id, 'view']">{{ employeeLeaveAccount.employee.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employee-leave-account', employeeLeaveAccount.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

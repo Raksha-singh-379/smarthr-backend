@@ -1,0 +1,35 @@
+{
+  "smartHrApp": {
+    "document": {
+      "home": {
+        "title": "Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document",
+        "createOrEditLabel": "Create or edit a Document",
+        "notFound": "No Documents found"
+      },
+      "created": "A new Document is created with identifier {{ param }}",
+      "updated": "A Document is updated with identifier {{ param }}",
+      "deleted": "A Document is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document {{ id }}?"
+      },
+      "detail": {
+        "title": "Document"
+      },
+      "id": "ID",
+      "docType": "Doc Type",
+      "docCategory": "Doc Category",
+      "fileName": "File Name",
+      "contentType": "Content Type",
+      "fileUuid": "File Uuid",
+      "folderUuid": "Folder Uuid",
+      "refTable": "Ref Table",
+      "refTableId": "Ref Table Id",
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
+    }
+  }
+}

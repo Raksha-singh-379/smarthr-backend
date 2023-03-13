@@ -26,12 +26,16 @@
       "fieldType": "Long"
     },
     {
-      "fieldName": "createdBy",
+      "fieldName": "status",
       "fieldType": "String"
     },
     {
-      "fieldName": "createdOn",
+      "fieldName": "lastModified",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

@@ -12,31 +12,33 @@ public class LeavePolicyDTO implements Serializable {
 
     private Long id;
 
-    private String leaveType;
-
     private Boolean isCarryForword;
 
-    private String employeeType;
+    private Long genderLeave;
 
-    private String genderLeave;
+    private Long totalLeave;
 
-    private String leaveStatus;
-
-    private String totalLeave;
-
-    private String maxLeave;
+    private Long maxLeave;
 
     private Boolean hasproRataLeave;
 
     private String description;
 
+    private String refTable;
+
+    private Long refTableId;
+
+    private Long companyId;
+
+    private String status;
+
     private Instant lastModified;
 
     private String lastModifiedBy;
 
-    private String status;
+    private LeaveTypeDTO leaveType;
 
-    private Long companyId;
+    private EmploymentTypeDTO employmentType;
 
     public Long getId() {
         return id;
@@ -44,14 +46,6 @@ public class LeavePolicyDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLeaveType() {
-        return leaveType;
-    }
-
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
     }
 
     public Boolean getIsCarryForword() {
@@ -62,43 +56,27 @@ public class LeavePolicyDTO implements Serializable {
         this.isCarryForword = isCarryForword;
     }
 
-    public String getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(String employeeType) {
-        this.employeeType = employeeType;
-    }
-
-    public String getGenderLeave() {
+    public Long getGenderLeave() {
         return genderLeave;
     }
 
-    public void setGenderLeave(String genderLeave) {
+    public void setGenderLeave(Long genderLeave) {
         this.genderLeave = genderLeave;
     }
 
-    public String getLeaveStatus() {
-        return leaveStatus;
-    }
-
-    public void setLeaveStatus(String leaveStatus) {
-        this.leaveStatus = leaveStatus;
-    }
-
-    public String getTotalLeave() {
+    public Long getTotalLeave() {
         return totalLeave;
     }
 
-    public void setTotalLeave(String totalLeave) {
+    public void setTotalLeave(Long totalLeave) {
         this.totalLeave = totalLeave;
     }
 
-    public String getMaxLeave() {
+    public Long getMaxLeave() {
         return maxLeave;
     }
 
-    public void setMaxLeave(String maxLeave) {
+    public void setMaxLeave(Long maxLeave) {
         this.maxLeave = maxLeave;
     }
 
@@ -118,6 +96,38 @@ public class LeavePolicyDTO implements Serializable {
         this.description = description;
     }
 
+    public String getRefTable() {
+        return refTable;
+    }
+
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
+    }
+
+    public Long getRefTableId() {
+        return refTableId;
+    }
+
+    public void setRefTableId(Long refTableId) {
+        this.refTableId = refTableId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return lastModified;
     }
@@ -134,20 +144,20 @@ public class LeavePolicyDTO implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return status;
+    public LeaveTypeDTO getLeaveType() {
+        return leaveType;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setLeaveType(LeaveTypeDTO leaveType) {
+        this.leaveType = leaveType;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public EmploymentTypeDTO getEmploymentType() {
+        return employmentType;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setEmploymentType(EmploymentTypeDTO employmentType) {
+        this.employmentType = employmentType;
     }
 
     @Override
@@ -176,19 +186,20 @@ public class LeavePolicyDTO implements Serializable {
     public String toString() {
         return "LeavePolicyDTO{" +
             "id=" + getId() +
-            ", leaveType='" + getLeaveType() + "'" +
             ", isCarryForword='" + getIsCarryForword() + "'" +
-            ", employeeType='" + getEmployeeType() + "'" +
-            ", genderLeave='" + getGenderLeave() + "'" +
-            ", leaveStatus='" + getLeaveStatus() + "'" +
-            ", totalLeave='" + getTotalLeave() + "'" +
-            ", maxLeave='" + getMaxLeave() + "'" +
+            ", genderLeave=" + getGenderLeave() +
+            ", totalLeave=" + getTotalLeave() +
+            ", maxLeave=" + getMaxLeave() +
             ", hasproRataLeave='" + getHasproRataLeave() + "'" +
             ", description='" + getDescription() + "'" +
+            ", refTable='" + getRefTable() + "'" +
+            ", refTableId=" + getRefTableId() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
+            ", leaveType=" + getLeaveType() +
+            ", employmentType=" + getEmploymentType() +
             "}";
     }
 }

@@ -90,25 +90,24 @@ public class ApprovalSettingQueryService extends QueryService<ApprovalSetting> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), ApprovalSetting_.id));
             }
-            if (criteria.getIsSequenceApproval() != null) {
-                specification =
-                    specification.and(buildSpecification(criteria.getIsSequenceApproval(), ApprovalSetting_.isSequenceApproval));
+            if (criteria.getType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getType(), ApprovalSetting_.type));
             }
-            if (criteria.getIsSimultaneousApproval() != null) {
+            if (criteria.getApprovalCategory() != null) {
                 specification =
-                    specification.and(buildSpecification(criteria.getIsSimultaneousApproval(), ApprovalSetting_.isSimultaneousApproval));
+                    specification.and(buildRangeSpecification(criteria.getApprovalCategory(), ApprovalSetting_.approvalCategory));
+            }
+            if (criteria.getCompanyId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), ApprovalSetting_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), ApprovalSetting_.status));
             }
             if (criteria.getLastModified() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModified(), ApprovalSetting_.lastModified));
             }
             if (criteria.getLastModifiedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), ApprovalSetting_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), ApprovalSetting_.status));
-            }
-            if (criteria.getCompanyId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), ApprovalSetting_.companyId));
             }
         }
         return specification;

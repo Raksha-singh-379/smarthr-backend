@@ -37,20 +37,23 @@ public class PfDetails implements Serializable {
     @Column(name = "total_pf_rate")
     private Double totalPfRate;
 
+    @Column(name = "employee_id")
+    private Long employeeId;
+
+    @Column(name = "re_enumeration_id")
+    private Long reEnumerationId;
+
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "employe_id")
-    private Long employeId;
-
-    @Column(name = "re_enumeration_id")
-    private Long reEnumerationId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -132,6 +135,58 @@ public class PfDetails implements Serializable {
         this.totalPfRate = totalPfRate;
     }
 
+    public Long getEmployeeId() {
+        return this.employeeId;
+    }
+
+    public PfDetails employeeId(Long employeeId) {
+        this.setEmployeeId(employeeId);
+        return this;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Long getReEnumerationId() {
+        return this.reEnumerationId;
+    }
+
+    public PfDetails reEnumerationId(Long reEnumerationId) {
+        this.setReEnumerationId(reEnumerationId);
+        return this;
+    }
+
+    public void setReEnumerationId(Long reEnumerationId) {
+        this.reEnumerationId = reEnumerationId;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public PfDetails companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public PfDetails status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -156,45 +211,6 @@ public class PfDetails implements Serializable {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public PfDetails status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getEmployeId() {
-        return this.employeId;
-    }
-
-    public PfDetails employeId(Long employeId) {
-        this.setEmployeId(employeId);
-        return this;
-    }
-
-    public void setEmployeId(Long employeId) {
-        this.employeId = employeId;
-    }
-
-    public Long getReEnumerationId() {
-        return this.reEnumerationId;
-    }
-
-    public PfDetails reEnumerationId(Long reEnumerationId) {
-        this.setReEnumerationId(reEnumerationId);
-        return this;
-    }
-
-    public void setReEnumerationId(Long reEnumerationId) {
-        this.reEnumerationId = reEnumerationId;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -226,11 +242,12 @@ public class PfDetails implements Serializable {
             ", pfRate=" + getPfRate() +
             ", additionalPfRate='" + getAdditionalPfRate() + "'" +
             ", totalPfRate=" + getTotalPfRate() +
+            ", employeeId=" + getEmployeeId() +
+            ", reEnumerationId=" + getReEnumerationId() +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", employeId=" + getEmployeId() +
-            ", reEnumerationId=" + getReEnumerationId() +
             "}";
     }
 }

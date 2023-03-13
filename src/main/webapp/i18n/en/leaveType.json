@@ -20,11 +20,13 @@
       "id": "ID",
       "leaveType": "Leave Type",
       "noOfDays": "No Of Days",
-      "recordStatus": "Record Status",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
+      "hasCarryForward": "Has Carry Forward",
+      "hasEarned": "Has Earned",
+      "hasCustomPolicy": "Has Custom Policy",
+      "companyId": "Company Id",
       "status": "Status",
-      "companyId": "Company Id"
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

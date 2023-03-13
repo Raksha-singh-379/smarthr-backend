@@ -18,15 +18,15 @@ public class TdsDTO implements Serializable {
 
     private Double percentage;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
     private Long salarySettingId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -60,30 +60,6 @@ public class TdsDTO implements Serializable {
         this.percentage = percentage;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getSalarySettingId() {
         return salarySettingId;
     }
@@ -98,6 +74,30 @@ public class TdsDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -129,11 +129,11 @@ public class TdsDTO implements Serializable {
             ", salaryFrom='" + getSalaryFrom() + "'" +
             ", salaryTo='" + getSalaryTo() + "'" +
             ", percentage=" + getPercentage() +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", salarySettingId=" + getSalarySettingId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

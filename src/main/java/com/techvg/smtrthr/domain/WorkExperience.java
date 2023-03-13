@@ -34,15 +34,6 @@ public class WorkExperience implements Serializable {
     @Column(name = "end_date")
     private Instant endDate;
 
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "address_id")
     private Long addressId;
 
@@ -52,11 +43,17 @@ public class WorkExperience implements Serializable {
     @Column(name = "company_id")
     private Long companyId;
 
-    @Column(name = "year_of_exp")
-    private Double yearOfExp;
-
     @Column(name = "job_desc")
     private String jobDesc;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -125,45 +122,6 @@ public class WorkExperience implements Serializable {
         this.endDate = endDate;
     }
 
-    public Instant getLastModified() {
-        return this.lastModified;
-    }
-
-    public WorkExperience lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
-        return this;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public WorkExperience lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public WorkExperience status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getAddressId() {
         return this.addressId;
     }
@@ -203,19 +161,6 @@ public class WorkExperience implements Serializable {
         this.companyId = companyId;
     }
 
-    public Double getYearOfExp() {
-        return this.yearOfExp;
-    }
-
-    public WorkExperience yearOfExp(Double yearOfExp) {
-        this.setYearOfExp(yearOfExp);
-        return this;
-    }
-
-    public void setYearOfExp(Double yearOfExp) {
-        this.yearOfExp = yearOfExp;
-    }
-
     public String getJobDesc() {
         return this.jobDesc;
     }
@@ -227,6 +172,45 @@ public class WorkExperience implements Serializable {
 
     public void setJobDesc(String jobDesc) {
         this.jobDesc = jobDesc;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public WorkExperience status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public WorkExperience lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public WorkExperience lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -257,14 +241,13 @@ public class WorkExperience implements Serializable {
             ", companyName='" + getCompanyName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", addressId=" + getAddressId() +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
-            ", yearOfExp=" + getYearOfExp() +
             ", jobDesc='" + getJobDesc() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

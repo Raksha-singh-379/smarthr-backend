@@ -31,17 +31,19 @@ public class ContactsCriteria implements Serializable, Criteria {
 
     private StringFilter contact;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
-    private StringFilter refTableType;
+    private StringFilter refTable;
 
     private LongFilter refTableId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
+
+    private StringFilter contactReference;
 
     private Boolean distinct;
 
@@ -53,12 +55,13 @@ public class ContactsCriteria implements Serializable, Criteria {
         this.contactPref = other.contactPref == null ? null : other.contactPref.copy();
         this.contactType = other.contactType == null ? null : other.contactType.copy();
         this.contact = other.contact == null ? null : other.contact.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
-        this.refTableType = other.refTableType == null ? null : other.refTableType.copy();
+        this.refTable = other.refTable == null ? null : other.refTable.copy();
         this.refTableId = other.refTableId == null ? null : other.refTableId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
+        this.contactReference = other.contactReference == null ? null : other.contactReference.copy();
         this.distinct = other.distinct;
     }
 
@@ -142,64 +145,19 @@ public class ContactsCriteria implements Serializable, Criteria {
         this.contact = contact;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
+    public StringFilter getRefTable() {
+        return refTable;
     }
 
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
+    public StringFilter refTable() {
+        if (refTable == null) {
+            refTable = new StringFilter();
         }
-        return lastModified;
+        return refTable;
     }
 
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
-    public StringFilter getRefTableType() {
-        return refTableType;
-    }
-
-    public StringFilter refTableType() {
-        if (refTableType == null) {
-            refTableType = new StringFilter();
-        }
-        return refTableType;
-    }
-
-    public void setRefTableType(StringFilter refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(StringFilter refTable) {
+        this.refTable = refTable;
     }
 
     public LongFilter getRefTableId() {
@@ -232,6 +190,66 @@ public class ContactsCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public StringFilter getContactReference() {
+        return contactReference;
+    }
+
+    public StringFilter contactReference() {
+        if (contactReference == null) {
+            contactReference = new StringFilter();
+        }
+        return contactReference;
+    }
+
+    public void setContactReference(StringFilter contactReference) {
+        this.contactReference = contactReference;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -255,12 +273,13 @@ public class ContactsCriteria implements Serializable, Criteria {
             Objects.equals(contactPref, that.contactPref) &&
             Objects.equals(contactType, that.contactType) &&
             Objects.equals(contact, that.contact) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(refTableType, that.refTableType) &&
+            Objects.equals(refTable, that.refTable) &&
             Objects.equals(refTableId, that.refTableId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
+            Objects.equals(contactReference, that.contactReference) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -273,12 +292,13 @@ public class ContactsCriteria implements Serializable, Criteria {
             contactPref,
             contactType,
             contact,
-            lastModified,
-            lastModifiedBy,
-            status,
-            refTableType,
+            refTable,
             refTableId,
             companyId,
+            status,
+            lastModified,
+            lastModifiedBy,
+            contactReference,
             distinct
         );
     }
@@ -292,12 +312,13 @@ public class ContactsCriteria implements Serializable, Criteria {
             (contactPref != null ? "contactPref=" + contactPref + ", " : "") +
             (contactType != null ? "contactType=" + contactType + ", " : "") +
             (contact != null ? "contact=" + contact + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
-            (refTableType != null ? "refTableType=" + refTableType + ", " : "") +
+            (refTable != null ? "refTable=" + refTable + ", " : "") +
             (refTableId != null ? "refTableId=" + refTableId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
+            (contactReference != null ? "contactReference=" + contactReference + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

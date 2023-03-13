@@ -25,15 +25,15 @@ public class DesignationCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
     private LongFilter departmentId;
 
     private LongFilter companyId;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -42,11 +42,11 @@ public class DesignationCriteria implements Serializable, Criteria {
     public DesignationCriteria(DesignationCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
         this.departmentId = other.departmentId == null ? null : other.departmentId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -85,51 +85,6 @@ public class DesignationCriteria implements Serializable, Criteria {
         this.name = name;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
     public LongFilter getDepartmentId() {
         return departmentId;
     }
@@ -160,6 +115,51 @@ public class DesignationCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -180,18 +180,18 @@ public class DesignationCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(departmentId, that.departmentId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastModified, lastModifiedBy, status, departmentId, companyId, distinct);
+        return Objects.hash(id, name, departmentId, companyId, status, lastModified, lastModifiedBy, distinct);
     }
 
     // prettier-ignore
@@ -200,11 +200,11 @@ public class DesignationCriteria implements Serializable, Criteria {
         return "DesignationCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
             (departmentId != null ? "departmentId=" + departmentId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

@@ -36,12 +36,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class PersonalDetailsResourceIT {
 
-    private static final String DEFAULT_PASSPORT_NO = "AAAAAAAAAA";
-    private static final String UPDATED_PASSPORT_NO = "BBBBBBBBBB";
-
-    private static final Instant DEFAULT_PASSPORT_EXP_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_PASSPORT_EXP_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
     private static final String DEFAULT_TELEPHONE_NO = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE_NO = "BBBBBBBBBB";
 
@@ -54,18 +48,6 @@ class PersonalDetailsResourceIT {
     private static final String DEFAULT_RELIGION = "AAAAAAAAAA";
     private static final String UPDATED_RELIGION = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_IS_SPOUS_EMPLOYED = false;
-    private static final Boolean UPDATED_IS_SPOUS_EMPLOYED = true;
-
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_EMPLOYEE_ID = 1L;
     private static final Long UPDATED_EMPLOYEE_ID = 2L;
     private static final Long SMALLER_EMPLOYEE_ID = 1L - 1L;
@@ -74,15 +56,21 @@ class PersonalDetailsResourceIT {
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
-    private static final String DEFAULT_PERSONAL_ID_NO = "AAAAAAAAAA";
-    private static final String UPDATED_PERSONAL_ID_NO = "BBBBBBBBBB";
-
     private static final String DEFAULT_BLOOD_GROUP = "AAAAAAAAAA";
     private static final String UPDATED_BLOOD_GROUP = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_OF_BIRTH = LocalDate.now(ZoneId.systemDefault());
     private static final LocalDate SMALLER_DATE_OF_BIRTH = LocalDate.ofEpochDay(-1L);
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/personal-details";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -112,21 +100,17 @@ class PersonalDetailsResourceIT {
      */
     public static PersonalDetails createEntity(EntityManager em) {
         PersonalDetails personalDetails = new PersonalDetails()
-            .passportNo(DEFAULT_PASSPORT_NO)
-            .passportExpDate(DEFAULT_PASSPORT_EXP_DATE)
             .telephoneNo(DEFAULT_TELEPHONE_NO)
             .nationality(DEFAULT_NATIONALITY)
             .maritalStatus(DEFAULT_MARITAL_STATUS)
             .religion(DEFAULT_RELIGION)
-            .isSpousEmployed(DEFAULT_IS_SPOUS_EMPLOYED)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .employeeId(DEFAULT_EMPLOYEE_ID)
             .companyId(DEFAULT_COMPANY_ID)
-            .personalIdNo(DEFAULT_PERSONAL_ID_NO)
             .bloodGroup(DEFAULT_BLOOD_GROUP)
-            .dateOfBirth(DEFAULT_DATE_OF_BIRTH);
+            .dateOfBirth(DEFAULT_DATE_OF_BIRTH)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return personalDetails;
     }
 
@@ -138,21 +122,17 @@ class PersonalDetailsResourceIT {
      */
     public static PersonalDetails createUpdatedEntity(EntityManager em) {
         PersonalDetails personalDetails = new PersonalDetails()
-            .passportNo(UPDATED_PASSPORT_NO)
-            .passportExpDate(UPDATED_PASSPORT_EXP_DATE)
             .telephoneNo(UPDATED_TELEPHONE_NO)
             .nationality(UPDATED_NATIONALITY)
             .maritalStatus(UPDATED_MARITAL_STATUS)
             .religion(UPDATED_RELIGION)
-            .isSpousEmployed(UPDATED_IS_SPOUS_EMPLOYED)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .personalIdNo(UPDATED_PERSONAL_ID_NO)
             .bloodGroup(UPDATED_BLOOD_GROUP)
-            .dateOfBirth(UPDATED_DATE_OF_BIRTH);
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return personalDetails;
     }
 
@@ -177,21 +157,17 @@ class PersonalDetailsResourceIT {
         List<PersonalDetails> personalDetailsList = personalDetailsRepository.findAll();
         assertThat(personalDetailsList).hasSize(databaseSizeBeforeCreate + 1);
         PersonalDetails testPersonalDetails = personalDetailsList.get(personalDetailsList.size() - 1);
-        assertThat(testPersonalDetails.getPassportNo()).isEqualTo(DEFAULT_PASSPORT_NO);
-        assertThat(testPersonalDetails.getPassportExpDate()).isEqualTo(DEFAULT_PASSPORT_EXP_DATE);
         assertThat(testPersonalDetails.getTelephoneNo()).isEqualTo(DEFAULT_TELEPHONE_NO);
         assertThat(testPersonalDetails.getNationality()).isEqualTo(DEFAULT_NATIONALITY);
         assertThat(testPersonalDetails.getMaritalStatus()).isEqualTo(DEFAULT_MARITAL_STATUS);
         assertThat(testPersonalDetails.getReligion()).isEqualTo(DEFAULT_RELIGION);
-        assertThat(testPersonalDetails.getIsSpousEmployed()).isEqualTo(DEFAULT_IS_SPOUS_EMPLOYED);
-        assertThat(testPersonalDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testPersonalDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testPersonalDetails.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testPersonalDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-        assertThat(testPersonalDetails.getPersonalIdNo()).isEqualTo(DEFAULT_PERSONAL_ID_NO);
         assertThat(testPersonalDetails.getBloodGroup()).isEqualTo(DEFAULT_BLOOD_GROUP);
         assertThat(testPersonalDetails.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testPersonalDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testPersonalDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -227,21 +203,17 @@ class PersonalDetailsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(personalDetails.getId().intValue())))
-            .andExpect(jsonPath("$.[*].passportNo").value(hasItem(DEFAULT_PASSPORT_NO)))
-            .andExpect(jsonPath("$.[*].passportExpDate").value(hasItem(DEFAULT_PASSPORT_EXP_DATE.toString())))
             .andExpect(jsonPath("$.[*].telephoneNo").value(hasItem(DEFAULT_TELEPHONE_NO)))
             .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY)))
             .andExpect(jsonPath("$.[*].maritalStatus").value(hasItem(DEFAULT_MARITAL_STATUS)))
             .andExpect(jsonPath("$.[*].religion").value(hasItem(DEFAULT_RELIGION)))
-            .andExpect(jsonPath("$.[*].isSpousEmployed").value(hasItem(DEFAULT_IS_SPOUS_EMPLOYED.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].personalIdNo").value(hasItem(DEFAULT_PERSONAL_ID_NO)))
             .andExpect(jsonPath("$.[*].bloodGroup").value(hasItem(DEFAULT_BLOOD_GROUP)))
-            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())));
+            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -256,21 +228,17 @@ class PersonalDetailsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(personalDetails.getId().intValue()))
-            .andExpect(jsonPath("$.passportNo").value(DEFAULT_PASSPORT_NO))
-            .andExpect(jsonPath("$.passportExpDate").value(DEFAULT_PASSPORT_EXP_DATE.toString()))
             .andExpect(jsonPath("$.telephoneNo").value(DEFAULT_TELEPHONE_NO))
             .andExpect(jsonPath("$.nationality").value(DEFAULT_NATIONALITY))
             .andExpect(jsonPath("$.maritalStatus").value(DEFAULT_MARITAL_STATUS))
             .andExpect(jsonPath("$.religion").value(DEFAULT_RELIGION))
-            .andExpect(jsonPath("$.isSpousEmployed").value(DEFAULT_IS_SPOUS_EMPLOYED.booleanValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.employeeId").value(DEFAULT_EMPLOYEE_ID.intValue()))
             .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
-            .andExpect(jsonPath("$.personalIdNo").value(DEFAULT_PERSONAL_ID_NO))
             .andExpect(jsonPath("$.bloodGroup").value(DEFAULT_BLOOD_GROUP))
-            .andExpect(jsonPath("$.dateOfBirth").value(DEFAULT_DATE_OF_BIRTH.toString()));
+            .andExpect(jsonPath("$.dateOfBirth").value(DEFAULT_DATE_OF_BIRTH.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -289,110 +257,6 @@ class PersonalDetailsResourceIT {
 
         defaultPersonalDetailsShouldBeFound("id.lessThanOrEqual=" + id);
         defaultPersonalDetailsShouldNotBeFound("id.lessThan=" + id);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportNoIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportNo equals to DEFAULT_PASSPORT_NO
-        defaultPersonalDetailsShouldBeFound("passportNo.equals=" + DEFAULT_PASSPORT_NO);
-
-        // Get all the personalDetailsList where passportNo equals to UPDATED_PASSPORT_NO
-        defaultPersonalDetailsShouldNotBeFound("passportNo.equals=" + UPDATED_PASSPORT_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportNoIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportNo in DEFAULT_PASSPORT_NO or UPDATED_PASSPORT_NO
-        defaultPersonalDetailsShouldBeFound("passportNo.in=" + DEFAULT_PASSPORT_NO + "," + UPDATED_PASSPORT_NO);
-
-        // Get all the personalDetailsList where passportNo equals to UPDATED_PASSPORT_NO
-        defaultPersonalDetailsShouldNotBeFound("passportNo.in=" + UPDATED_PASSPORT_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportNoIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportNo is not null
-        defaultPersonalDetailsShouldBeFound("passportNo.specified=true");
-
-        // Get all the personalDetailsList where passportNo is null
-        defaultPersonalDetailsShouldNotBeFound("passportNo.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportNoContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportNo contains DEFAULT_PASSPORT_NO
-        defaultPersonalDetailsShouldBeFound("passportNo.contains=" + DEFAULT_PASSPORT_NO);
-
-        // Get all the personalDetailsList where passportNo contains UPDATED_PASSPORT_NO
-        defaultPersonalDetailsShouldNotBeFound("passportNo.contains=" + UPDATED_PASSPORT_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportNoNotContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportNo does not contain DEFAULT_PASSPORT_NO
-        defaultPersonalDetailsShouldNotBeFound("passportNo.doesNotContain=" + DEFAULT_PASSPORT_NO);
-
-        // Get all the personalDetailsList where passportNo does not contain UPDATED_PASSPORT_NO
-        defaultPersonalDetailsShouldBeFound("passportNo.doesNotContain=" + UPDATED_PASSPORT_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportExpDateIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportExpDate equals to DEFAULT_PASSPORT_EXP_DATE
-        defaultPersonalDetailsShouldBeFound("passportExpDate.equals=" + DEFAULT_PASSPORT_EXP_DATE);
-
-        // Get all the personalDetailsList where passportExpDate equals to UPDATED_PASSPORT_EXP_DATE
-        defaultPersonalDetailsShouldNotBeFound("passportExpDate.equals=" + UPDATED_PASSPORT_EXP_DATE);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportExpDateIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportExpDate in DEFAULT_PASSPORT_EXP_DATE or UPDATED_PASSPORT_EXP_DATE
-        defaultPersonalDetailsShouldBeFound("passportExpDate.in=" + DEFAULT_PASSPORT_EXP_DATE + "," + UPDATED_PASSPORT_EXP_DATE);
-
-        // Get all the personalDetailsList where passportExpDate equals to UPDATED_PASSPORT_EXP_DATE
-        defaultPersonalDetailsShouldNotBeFound("passportExpDate.in=" + UPDATED_PASSPORT_EXP_DATE);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPassportExpDateIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where passportExpDate is not null
-        defaultPersonalDetailsShouldBeFound("passportExpDate.specified=true");
-
-        // Get all the personalDetailsList where passportExpDate is null
-        defaultPersonalDetailsShouldNotBeFound("passportExpDate.specified=false");
     }
 
     @Test
@@ -657,214 +521,6 @@ class PersonalDetailsResourceIT {
 
     @Test
     @Transactional
-    void getAllPersonalDetailsByIsSpousEmployedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where isSpousEmployed equals to DEFAULT_IS_SPOUS_EMPLOYED
-        defaultPersonalDetailsShouldBeFound("isSpousEmployed.equals=" + DEFAULT_IS_SPOUS_EMPLOYED);
-
-        // Get all the personalDetailsList where isSpousEmployed equals to UPDATED_IS_SPOUS_EMPLOYED
-        defaultPersonalDetailsShouldNotBeFound("isSpousEmployed.equals=" + UPDATED_IS_SPOUS_EMPLOYED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByIsSpousEmployedIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where isSpousEmployed in DEFAULT_IS_SPOUS_EMPLOYED or UPDATED_IS_SPOUS_EMPLOYED
-        defaultPersonalDetailsShouldBeFound("isSpousEmployed.in=" + DEFAULT_IS_SPOUS_EMPLOYED + "," + UPDATED_IS_SPOUS_EMPLOYED);
-
-        // Get all the personalDetailsList where isSpousEmployed equals to UPDATED_IS_SPOUS_EMPLOYED
-        defaultPersonalDetailsShouldNotBeFound("isSpousEmployed.in=" + UPDATED_IS_SPOUS_EMPLOYED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByIsSpousEmployedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where isSpousEmployed is not null
-        defaultPersonalDetailsShouldBeFound("isSpousEmployed.specified=true");
-
-        // Get all the personalDetailsList where isSpousEmployed is null
-        defaultPersonalDetailsShouldNotBeFound("isSpousEmployed.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultPersonalDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the personalDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultPersonalDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultPersonalDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the personalDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultPersonalDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModified is not null
-        defaultPersonalDetailsShouldBeFound("lastModified.specified=true");
-
-        // Get all the personalDetailsList where lastModified is null
-        defaultPersonalDetailsShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the personalDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the personalDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModifiedBy is not null
-        defaultPersonalDetailsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the personalDetailsList where lastModifiedBy is null
-        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the personalDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the personalDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultPersonalDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where status equals to DEFAULT_STATUS
-        defaultPersonalDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the personalDetailsList where status equals to UPDATED_STATUS
-        defaultPersonalDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultPersonalDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the personalDetailsList where status equals to UPDATED_STATUS
-        defaultPersonalDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where status is not null
-        defaultPersonalDetailsShouldBeFound("status.specified=true");
-
-        // Get all the personalDetailsList where status is null
-        defaultPersonalDetailsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where status contains DEFAULT_STATUS
-        defaultPersonalDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the personalDetailsList where status contains UPDATED_STATUS
-        defaultPersonalDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where status does not contain DEFAULT_STATUS
-        defaultPersonalDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the personalDetailsList where status does not contain UPDATED_STATUS
-        defaultPersonalDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
     void getAllPersonalDetailsByEmployeeIdIsEqualToSomething() throws Exception {
         // Initialize the database
         personalDetailsRepository.saveAndFlush(personalDetails);
@@ -1047,71 +703,6 @@ class PersonalDetailsResourceIT {
 
     @Test
     @Transactional
-    void getAllPersonalDetailsByPersonalIdNoIsEqualToSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where personalIdNo equals to DEFAULT_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldBeFound("personalIdNo.equals=" + DEFAULT_PERSONAL_ID_NO);
-
-        // Get all the personalDetailsList where personalIdNo equals to UPDATED_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldNotBeFound("personalIdNo.equals=" + UPDATED_PERSONAL_ID_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPersonalIdNoIsInShouldWork() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where personalIdNo in DEFAULT_PERSONAL_ID_NO or UPDATED_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldBeFound("personalIdNo.in=" + DEFAULT_PERSONAL_ID_NO + "," + UPDATED_PERSONAL_ID_NO);
-
-        // Get all the personalDetailsList where personalIdNo equals to UPDATED_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldNotBeFound("personalIdNo.in=" + UPDATED_PERSONAL_ID_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPersonalIdNoIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where personalIdNo is not null
-        defaultPersonalDetailsShouldBeFound("personalIdNo.specified=true");
-
-        // Get all the personalDetailsList where personalIdNo is null
-        defaultPersonalDetailsShouldNotBeFound("personalIdNo.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPersonalIdNoContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where personalIdNo contains DEFAULT_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldBeFound("personalIdNo.contains=" + DEFAULT_PERSONAL_ID_NO);
-
-        // Get all the personalDetailsList where personalIdNo contains UPDATED_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldNotBeFound("personalIdNo.contains=" + UPDATED_PERSONAL_ID_NO);
-    }
-
-    @Test
-    @Transactional
-    void getAllPersonalDetailsByPersonalIdNoNotContainsSomething() throws Exception {
-        // Initialize the database
-        personalDetailsRepository.saveAndFlush(personalDetails);
-
-        // Get all the personalDetailsList where personalIdNo does not contain DEFAULT_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldNotBeFound("personalIdNo.doesNotContain=" + DEFAULT_PERSONAL_ID_NO);
-
-        // Get all the personalDetailsList where personalIdNo does not contain UPDATED_PERSONAL_ID_NO
-        defaultPersonalDetailsShouldBeFound("personalIdNo.doesNotContain=" + UPDATED_PERSONAL_ID_NO);
-    }
-
-    @Test
-    @Transactional
     void getAllPersonalDetailsByBloodGroupIsEqualToSomething() throws Exception {
         // Initialize the database
         personalDetailsRepository.saveAndFlush(personalDetails);
@@ -1266,6 +857,175 @@ class PersonalDetailsResourceIT {
         defaultPersonalDetailsShouldBeFound("dateOfBirth.greaterThan=" + SMALLER_DATE_OF_BIRTH);
     }
 
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where status equals to DEFAULT_STATUS
+        defaultPersonalDetailsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the personalDetailsList where status equals to UPDATED_STATUS
+        defaultPersonalDetailsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultPersonalDetailsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the personalDetailsList where status equals to UPDATED_STATUS
+        defaultPersonalDetailsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where status is not null
+        defaultPersonalDetailsShouldBeFound("status.specified=true");
+
+        // Get all the personalDetailsList where status is null
+        defaultPersonalDetailsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where status contains DEFAULT_STATUS
+        defaultPersonalDetailsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the personalDetailsList where status contains UPDATED_STATUS
+        defaultPersonalDetailsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where status does not contain DEFAULT_STATUS
+        defaultPersonalDetailsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the personalDetailsList where status does not contain UPDATED_STATUS
+        defaultPersonalDetailsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultPersonalDetailsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the personalDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultPersonalDetailsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultPersonalDetailsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the personalDetailsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultPersonalDetailsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModified is not null
+        defaultPersonalDetailsShouldBeFound("lastModified.specified=true");
+
+        // Get all the personalDetailsList where lastModified is null
+        defaultPersonalDetailsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the personalDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the personalDetailsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModifiedBy is not null
+        defaultPersonalDetailsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the personalDetailsList where lastModifiedBy is null
+        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the personalDetailsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllPersonalDetailsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        personalDetailsRepository.saveAndFlush(personalDetails);
+
+        // Get all the personalDetailsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the personalDetailsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultPersonalDetailsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1275,21 +1035,17 @@ class PersonalDetailsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(personalDetails.getId().intValue())))
-            .andExpect(jsonPath("$.[*].passportNo").value(hasItem(DEFAULT_PASSPORT_NO)))
-            .andExpect(jsonPath("$.[*].passportExpDate").value(hasItem(DEFAULT_PASSPORT_EXP_DATE.toString())))
             .andExpect(jsonPath("$.[*].telephoneNo").value(hasItem(DEFAULT_TELEPHONE_NO)))
             .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY)))
             .andExpect(jsonPath("$.[*].maritalStatus").value(hasItem(DEFAULT_MARITAL_STATUS)))
             .andExpect(jsonPath("$.[*].religion").value(hasItem(DEFAULT_RELIGION)))
-            .andExpect(jsonPath("$.[*].isSpousEmployed").value(hasItem(DEFAULT_IS_SPOUS_EMPLOYED.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
             .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
-            .andExpect(jsonPath("$.[*].personalIdNo").value(hasItem(DEFAULT_PERSONAL_ID_NO)))
             .andExpect(jsonPath("$.[*].bloodGroup").value(hasItem(DEFAULT_BLOOD_GROUP)))
-            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())));
+            .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restPersonalDetailsMockMvc
@@ -1338,21 +1094,17 @@ class PersonalDetailsResourceIT {
         // Disconnect from session so that the updates on updatedPersonalDetails are not directly saved in db
         em.detach(updatedPersonalDetails);
         updatedPersonalDetails
-            .passportNo(UPDATED_PASSPORT_NO)
-            .passportExpDate(UPDATED_PASSPORT_EXP_DATE)
             .telephoneNo(UPDATED_TELEPHONE_NO)
             .nationality(UPDATED_NATIONALITY)
             .maritalStatus(UPDATED_MARITAL_STATUS)
             .religion(UPDATED_RELIGION)
-            .isSpousEmployed(UPDATED_IS_SPOUS_EMPLOYED)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .personalIdNo(UPDATED_PERSONAL_ID_NO)
             .bloodGroup(UPDATED_BLOOD_GROUP)
-            .dateOfBirth(UPDATED_DATE_OF_BIRTH);
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         PersonalDetailsDTO personalDetailsDTO = personalDetailsMapper.toDto(updatedPersonalDetails);
 
         restPersonalDetailsMockMvc
@@ -1367,21 +1119,17 @@ class PersonalDetailsResourceIT {
         List<PersonalDetails> personalDetailsList = personalDetailsRepository.findAll();
         assertThat(personalDetailsList).hasSize(databaseSizeBeforeUpdate);
         PersonalDetails testPersonalDetails = personalDetailsList.get(personalDetailsList.size() - 1);
-        assertThat(testPersonalDetails.getPassportNo()).isEqualTo(UPDATED_PASSPORT_NO);
-        assertThat(testPersonalDetails.getPassportExpDate()).isEqualTo(UPDATED_PASSPORT_EXP_DATE);
         assertThat(testPersonalDetails.getTelephoneNo()).isEqualTo(UPDATED_TELEPHONE_NO);
         assertThat(testPersonalDetails.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testPersonalDetails.getMaritalStatus()).isEqualTo(UPDATED_MARITAL_STATUS);
         assertThat(testPersonalDetails.getReligion()).isEqualTo(UPDATED_RELIGION);
-        assertThat(testPersonalDetails.getIsSpousEmployed()).isEqualTo(UPDATED_IS_SPOUS_EMPLOYED);
-        assertThat(testPersonalDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPersonalDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPersonalDetails.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testPersonalDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testPersonalDetails.getPersonalIdNo()).isEqualTo(UPDATED_PERSONAL_ID_NO);
         assertThat(testPersonalDetails.getBloodGroup()).isEqualTo(UPDATED_BLOOD_GROUP);
         assertThat(testPersonalDetails.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testPersonalDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPersonalDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1464,11 +1212,10 @@ class PersonalDetailsResourceIT {
         partialUpdatedPersonalDetails.setId(personalDetails.getId());
 
         partialUpdatedPersonalDetails
-            .passportNo(UPDATED_PASSPORT_NO)
-            .passportExpDate(UPDATED_PASSPORT_EXP_DATE)
-            .isSpousEmployed(UPDATED_IS_SPOUS_EMPLOYED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .personalIdNo(UPDATED_PERSONAL_ID_NO);
+            .telephoneNo(UPDATED_TELEPHONE_NO)
+            .nationality(UPDATED_NATIONALITY)
+            .bloodGroup(UPDATED_BLOOD_GROUP)
+            .status(UPDATED_STATUS);
 
         restPersonalDetailsMockMvc
             .perform(
@@ -1482,21 +1229,17 @@ class PersonalDetailsResourceIT {
         List<PersonalDetails> personalDetailsList = personalDetailsRepository.findAll();
         assertThat(personalDetailsList).hasSize(databaseSizeBeforeUpdate);
         PersonalDetails testPersonalDetails = personalDetailsList.get(personalDetailsList.size() - 1);
-        assertThat(testPersonalDetails.getPassportNo()).isEqualTo(UPDATED_PASSPORT_NO);
-        assertThat(testPersonalDetails.getPassportExpDate()).isEqualTo(UPDATED_PASSPORT_EXP_DATE);
-        assertThat(testPersonalDetails.getTelephoneNo()).isEqualTo(DEFAULT_TELEPHONE_NO);
-        assertThat(testPersonalDetails.getNationality()).isEqualTo(DEFAULT_NATIONALITY);
+        assertThat(testPersonalDetails.getTelephoneNo()).isEqualTo(UPDATED_TELEPHONE_NO);
+        assertThat(testPersonalDetails.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testPersonalDetails.getMaritalStatus()).isEqualTo(DEFAULT_MARITAL_STATUS);
         assertThat(testPersonalDetails.getReligion()).isEqualTo(DEFAULT_RELIGION);
-        assertThat(testPersonalDetails.getIsSpousEmployed()).isEqualTo(UPDATED_IS_SPOUS_EMPLOYED);
-        assertThat(testPersonalDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPersonalDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testPersonalDetails.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testPersonalDetails.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
-        assertThat(testPersonalDetails.getPersonalIdNo()).isEqualTo(UPDATED_PERSONAL_ID_NO);
-        assertThat(testPersonalDetails.getBloodGroup()).isEqualTo(DEFAULT_BLOOD_GROUP);
+        assertThat(testPersonalDetails.getBloodGroup()).isEqualTo(UPDATED_BLOOD_GROUP);
         assertThat(testPersonalDetails.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testPersonalDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPersonalDetails.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1512,21 +1255,17 @@ class PersonalDetailsResourceIT {
         partialUpdatedPersonalDetails.setId(personalDetails.getId());
 
         partialUpdatedPersonalDetails
-            .passportNo(UPDATED_PASSPORT_NO)
-            .passportExpDate(UPDATED_PASSPORT_EXP_DATE)
             .telephoneNo(UPDATED_TELEPHONE_NO)
             .nationality(UPDATED_NATIONALITY)
             .maritalStatus(UPDATED_MARITAL_STATUS)
             .religion(UPDATED_RELIGION)
-            .isSpousEmployed(UPDATED_IS_SPOUS_EMPLOYED)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
             .companyId(UPDATED_COMPANY_ID)
-            .personalIdNo(UPDATED_PERSONAL_ID_NO)
             .bloodGroup(UPDATED_BLOOD_GROUP)
-            .dateOfBirth(UPDATED_DATE_OF_BIRTH);
+            .dateOfBirth(UPDATED_DATE_OF_BIRTH)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restPersonalDetailsMockMvc
             .perform(
@@ -1540,21 +1279,17 @@ class PersonalDetailsResourceIT {
         List<PersonalDetails> personalDetailsList = personalDetailsRepository.findAll();
         assertThat(personalDetailsList).hasSize(databaseSizeBeforeUpdate);
         PersonalDetails testPersonalDetails = personalDetailsList.get(personalDetailsList.size() - 1);
-        assertThat(testPersonalDetails.getPassportNo()).isEqualTo(UPDATED_PASSPORT_NO);
-        assertThat(testPersonalDetails.getPassportExpDate()).isEqualTo(UPDATED_PASSPORT_EXP_DATE);
         assertThat(testPersonalDetails.getTelephoneNo()).isEqualTo(UPDATED_TELEPHONE_NO);
         assertThat(testPersonalDetails.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testPersonalDetails.getMaritalStatus()).isEqualTo(UPDATED_MARITAL_STATUS);
         assertThat(testPersonalDetails.getReligion()).isEqualTo(UPDATED_RELIGION);
-        assertThat(testPersonalDetails.getIsSpousEmployed()).isEqualTo(UPDATED_IS_SPOUS_EMPLOYED);
-        assertThat(testPersonalDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testPersonalDetails.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPersonalDetails.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testPersonalDetails.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
-        assertThat(testPersonalDetails.getPersonalIdNo()).isEqualTo(UPDATED_PERSONAL_ID_NO);
         assertThat(testPersonalDetails.getBloodGroup()).isEqualTo(UPDATED_BLOOD_GROUP);
         assertThat(testPersonalDetails.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testPersonalDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPersonalDetails.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testPersonalDetails.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

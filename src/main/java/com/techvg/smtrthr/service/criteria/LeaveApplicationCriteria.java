@@ -25,8 +25,6 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
 
     private StringFilter leaveType;
 
-    private LongFilter balanceLeave;
-
     private LongFilter noOfDays;
 
     private StringFilter reason;
@@ -39,15 +37,15 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
 
     private StringFilter leaveStatus;
 
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
     private StringFilter status;
 
     private LongFilter employeId;
 
     private LongFilter companyId;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -56,18 +54,17 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
     public LeaveApplicationCriteria(LeaveApplicationCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.leaveType = other.leaveType == null ? null : other.leaveType.copy();
-        this.balanceLeave = other.balanceLeave == null ? null : other.balanceLeave.copy();
         this.noOfDays = other.noOfDays == null ? null : other.noOfDays.copy();
         this.reason = other.reason == null ? null : other.reason.copy();
         this.year = other.year == null ? null : other.year.copy();
         this.formDate = other.formDate == null ? null : other.formDate.copy();
         this.toDate = other.toDate == null ? null : other.toDate.copy();
         this.leaveStatus = other.leaveStatus == null ? null : other.leaveStatus.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.status = other.status == null ? null : other.status.copy();
         this.employeId = other.employeId == null ? null : other.employeId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -104,21 +101,6 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
 
     public void setLeaveType(StringFilter leaveType) {
         this.leaveType = leaveType;
-    }
-
-    public LongFilter getBalanceLeave() {
-        return balanceLeave;
-    }
-
-    public LongFilter balanceLeave() {
-        if (balanceLeave == null) {
-            balanceLeave = new LongFilter();
-        }
-        return balanceLeave;
-    }
-
-    public void setBalanceLeave(LongFilter balanceLeave) {
-        this.balanceLeave = balanceLeave;
     }
 
     public LongFilter getNoOfDays() {
@@ -211,36 +193,6 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
         this.leaveStatus = leaveStatus;
     }
 
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
     public StringFilter getStatus() {
         return status;
     }
@@ -286,6 +238,36 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
         this.companyId = companyId;
     }
 
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -306,18 +288,17 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(leaveType, that.leaveType) &&
-            Objects.equals(balanceLeave, that.balanceLeave) &&
             Objects.equals(noOfDays, that.noOfDays) &&
             Objects.equals(reason, that.reason) &&
             Objects.equals(year, that.year) &&
             Objects.equals(formDate, that.formDate) &&
             Objects.equals(toDate, that.toDate) &&
             Objects.equals(leaveStatus, that.leaveStatus) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(status, that.status) &&
             Objects.equals(employeId, that.employeId) &&
             Objects.equals(companyId, that.companyId) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -327,18 +308,17 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
         return Objects.hash(
             id,
             leaveType,
-            balanceLeave,
             noOfDays,
             reason,
             year,
             formDate,
             toDate,
             leaveStatus,
-            lastModified,
-            lastModifiedBy,
             status,
             employeId,
             companyId,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -349,18 +329,17 @@ public class LeaveApplicationCriteria implements Serializable, Criteria {
         return "LeaveApplicationCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (leaveType != null ? "leaveType=" + leaveType + ", " : "") +
-            (balanceLeave != null ? "balanceLeave=" + balanceLeave + ", " : "") +
             (noOfDays != null ? "noOfDays=" + noOfDays + ", " : "") +
             (reason != null ? "reason=" + reason + ", " : "") +
             (year != null ? "year=" + year + ", " : "") +
             (formDate != null ? "formDate=" + formDate + ", " : "") +
             (toDate != null ? "toDate=" + toDate + ", " : "") +
             (leaveStatus != null ? "leaveStatus=" + leaveStatus + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (status != null ? "status=" + status + ", " : "") +
             (employeId != null ? "employeId=" + employeId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

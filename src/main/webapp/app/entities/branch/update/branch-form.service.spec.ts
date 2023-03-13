@@ -25,11 +25,12 @@ describe('Branch Form Service', () => {
             branchcode: expect.any(Object),
             branchType: expect.any(Object),
             webSite: expect.any(Object),
+            branchId: expect.any(Object),
+            regionId: expect.any(Object),
+            companyId: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            regionId: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -45,11 +46,12 @@ describe('Branch Form Service', () => {
             branchcode: expect.any(Object),
             branchType: expect.any(Object),
             webSite: expect.any(Object),
+            branchId: expect.any(Object),
+            regionId: expect.any(Object),
+            companyId: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            regionId: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

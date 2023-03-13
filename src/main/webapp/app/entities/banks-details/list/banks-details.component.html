@@ -64,33 +64,27 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="gstin">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.banksDetails.gstin">Gstin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tan">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.banksDetails.tan">Tan</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="branchName">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.banksDetails.branchName">Branch Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
+          <th scope="col" jhiSortBy="refTable">
             <div class="d-flex">
-              <span jhiTranslate="smartHrApp.banksDetails.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.banksDetails.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.banksDetails.status">Status</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="refTableType">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.banksDetails.refTableType">Ref Table Type</span>
+              <span jhiTranslate="smartHrApp.banksDetails.refTable">Ref Table</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -106,6 +100,24 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.banksDetails.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.banksDetails.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.banksDetails.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -118,13 +130,15 @@
           <td>{{ banksDetails.bankName }}</td>
           <td>{{ banksDetails.branchTransCode }}</td>
           <td>{{ banksDetails.taxNumber }}</td>
+          <td>{{ banksDetails.gstin }}</td>
+          <td>{{ banksDetails.tan }}</td>
           <td>{{ banksDetails.branchName }}</td>
-          <td>{{ banksDetails.lastModified | formatMediumDatetime }}</td>
-          <td>{{ banksDetails.lastModifiedBy }}</td>
-          <td>{{ banksDetails.status }}</td>
-          <td>{{ banksDetails.refTableType }}</td>
+          <td>{{ banksDetails.refTable }}</td>
           <td>{{ banksDetails.refTableId }}</td>
           <td>{{ banksDetails.companyId }}</td>
+          <td>{{ banksDetails.status }}</td>
+          <td>{{ banksDetails.lastModified | formatMediumDatetime }}</td>
+          <td>{{ banksDetails.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

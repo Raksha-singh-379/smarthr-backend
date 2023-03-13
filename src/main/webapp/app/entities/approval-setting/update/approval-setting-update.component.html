@@ -18,31 +18,32 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.isSequenceApproval" for="field_isSequenceApproval"
-            >Is Sequence Approval</label
+          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.type" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.approvalCategory" for="field_approvalCategory"
+            >Approval Category</label
           >
           <input
-            type="checkbox"
-            class="form-check"
-            name="isSequenceApproval"
-            id="field_isSequenceApproval"
-            data-cy="isSequenceApproval"
-            formControlName="isSequenceApproval"
+            type="number"
+            class="form-control"
+            name="approvalCategory"
+            id="field_approvalCategory"
+            data-cy="approvalCategory"
+            formControlName="approvalCategory"
           />
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.isSimultaneousApproval" for="field_isSimultaneousApproval"
-            >Is Simultaneous Approval</label
-          >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="isSimultaneousApproval"
-            id="field_isSimultaneousApproval"
-            data-cy="isSimultaneousApproval"
-            formControlName="isSimultaneousApproval"
-          />
+          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
         </div>
 
         <div class="row mb-3">
@@ -72,16 +73,6 @@
             data-cy="lastModifiedBy"
             formControlName="lastModifiedBy"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.approvalSetting.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
         </div>
       </div>
 

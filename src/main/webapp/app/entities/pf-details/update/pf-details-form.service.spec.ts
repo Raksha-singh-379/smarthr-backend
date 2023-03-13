@@ -25,11 +25,12 @@ describe('PfDetails Form Service', () => {
             pfRate: expect.any(Object),
             additionalPfRate: expect.any(Object),
             totalPfRate: expect.any(Object),
+            employeeId: expect.any(Object),
+            reEnumerationId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            employeId: expect.any(Object),
-            reEnumerationId: expect.any(Object),
           })
         );
       });
@@ -45,11 +46,12 @@ describe('PfDetails Form Service', () => {
             pfRate: expect.any(Object),
             additionalPfRate: expect.any(Object),
             totalPfRate: expect.any(Object),
+            employeeId: expect.any(Object),
+            reEnumerationId: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            employeId: expect.any(Object),
-            reEnumerationId: expect.any(Object),
           })
         );
       });

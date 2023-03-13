@@ -26,22 +26,11 @@ public class Employee implements Serializable {
     @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "middle_name")
+    private String middleName;
+
     @Column(name = "last_name")
     private String lastName;
-
-    @NotNull
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @NotNull
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "department")
-    private String department;
-
-    @Column(name = "designation")
-    private String designation;
 
     @Column(name = "gender")
     private String gender;
@@ -53,23 +42,32 @@ public class Employee implements Serializable {
     @Column(name = "joindate")
     private Instant joindate;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "last_modified")
     private Instant lastModified;
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "employment_type_id")
+    private Long employmentTypeId;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @ManyToOne
+    private Designation designation;
 
-    @Column(name = "branch_id")
-    private Long branchId;
+    @ManyToOne
+    private Department department;
 
-    @Column(name = "region_id")
-    private Long regionId;
+    @ManyToOne
+    private Branch branch;
+
+    @ManyToOne
+    private Region region;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -99,6 +97,19 @@ public class Employee implements Serializable {
         this.firstName = firstName;
     }
 
+    public String getMiddleName() {
+        return this.middleName;
+    }
+
+    public Employee middleName(String middleName) {
+        this.setMiddleName(middleName);
+        return this;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
     public String getLastName() {
         return this.lastName;
     }
@@ -110,58 +121,6 @@ public class Employee implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public Employee username(String username) {
-        this.setUsername(username);
-        return this;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public Employee password(String password) {
-        this.setPassword(password);
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDepartment() {
-        return this.department;
-    }
-
-    public Employee department(String department) {
-        this.setDepartment(department);
-        return this;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getDesignation() {
-        return this.designation;
-    }
-
-    public Employee designation(String designation) {
-        this.setDesignation(designation);
-        return this;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
     }
 
     public String getGender() {
@@ -203,6 +162,32 @@ public class Employee implements Serializable {
         this.joindate = joindate;
     }
 
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public Employee companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public Employee status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Instant getLastModified() {
         return this.lastModified;
     }
@@ -229,56 +214,69 @@ public class Employee implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public String getStatus() {
-        return this.status;
+    public Long getEmploymentTypeId() {
+        return this.employmentTypeId;
     }
 
-    public Employee status(String status) {
-        this.setStatus(status);
+    public Employee employmentTypeId(Long employmentTypeId) {
+        this.setEmploymentTypeId(employmentTypeId);
         return this;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEmploymentTypeId(Long employmentTypeId) {
+        this.employmentTypeId = employmentTypeId;
     }
 
-    public Long getCompanyId() {
-        return this.companyId;
+    public Designation getDesignation() {
+        return this.designation;
     }
 
-    public Employee companyId(Long companyId) {
-        this.setCompanyId(companyId);
+    public void setDesignation(Designation designation) {
+        this.designation = designation;
+    }
+
+    public Employee designation(Designation designation) {
+        this.setDesignation(designation);
         return this;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public Department getDepartment() {
+        return this.department;
     }
 
-    public Long getBranchId() {
-        return this.branchId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public Employee branchId(Long branchId) {
-        this.setBranchId(branchId);
+    public Employee department(Department department) {
+        this.setDepartment(department);
         return this;
     }
 
-    public void setBranchId(Long branchId) {
-        this.branchId = branchId;
+    public Branch getBranch() {
+        return this.branch;
     }
 
-    public Long getRegionId() {
-        return this.regionId;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
-    public Employee regionId(Long regionId) {
-        this.setRegionId(regionId);
+    public Employee branch(Branch branch) {
+        this.setBranch(branch);
         return this;
     }
 
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
+    public Region getRegion() {
+        return this.region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public Employee region(Region region) {
+        this.setRegion(region);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -306,20 +304,16 @@ public class Employee implements Serializable {
         return "Employee{" +
             "id=" + getId() +
             ", firstName='" + getFirstName() + "'" +
+            ", middleName='" + getMiddleName() + "'" +
             ", lastName='" + getLastName() + "'" +
-            ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", department='" + getDepartment() + "'" +
-            ", designation='" + getDesignation() + "'" +
             ", gender='" + getGender() + "'" +
             ", empUniqueId='" + getEmpUniqueId() + "'" +
             ", joindate='" + getJoindate() + "'" +
+            ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", companyId=" + getCompanyId() +
-            ", branchId=" + getBranchId() +
-            ", regionId=" + getRegionId() +
+            ", employmentTypeId=" + getEmploymentTypeId() +
             "}";
     }
 }

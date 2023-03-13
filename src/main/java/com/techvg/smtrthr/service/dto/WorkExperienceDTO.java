@@ -20,21 +20,19 @@ public class WorkExperienceDTO implements Serializable {
 
     private Instant endDate;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
     private Long addressId;
 
     private Long employeeId;
 
     private Long companyId;
 
-    private Double yearOfExp;
-
     private String jobDesc;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -76,30 +74,6 @@ public class WorkExperienceDTO implements Serializable {
         this.endDate = endDate;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Long getAddressId() {
         return addressId;
     }
@@ -124,20 +98,36 @@ public class WorkExperienceDTO implements Serializable {
         this.companyId = companyId;
     }
 
-    public Double getYearOfExp() {
-        return yearOfExp;
-    }
-
-    public void setYearOfExp(Double yearOfExp) {
-        this.yearOfExp = yearOfExp;
-    }
-
     public String getJobDesc() {
         return jobDesc;
     }
 
     public void setJobDesc(String jobDesc) {
         this.jobDesc = jobDesc;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -170,14 +160,13 @@ public class WorkExperienceDTO implements Serializable {
             ", companyName='" + getCompanyName() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
             ", addressId=" + getAddressId() +
             ", employeeId=" + getEmployeeId() +
             ", companyId=" + getCompanyId() +
-            ", yearOfExp=" + getYearOfExp() +
             ", jobDesc='" + getJobDesc() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

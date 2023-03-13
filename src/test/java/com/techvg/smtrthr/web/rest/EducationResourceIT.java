@@ -40,8 +40,8 @@ class EducationResourceIT {
     private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
     private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_START_YEAR = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_START_YEAR = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -55,15 +55,6 @@ class EducationResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_EMPLOYEE_ID = 1L;
     private static final Long UPDATED_EMPLOYEE_ID = 2L;
     private static final Long SMALLER_EMPLOYEE_ID = 1L - 1L;
@@ -71,6 +62,15 @@ class EducationResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/educations";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -102,16 +102,16 @@ class EducationResourceIT {
         Education education = new Education()
             .institution(DEFAULT_INSTITUTION)
             .subject(DEFAULT_SUBJECT)
-            .startDate(DEFAULT_START_DATE)
+            .startYear(DEFAULT_START_YEAR)
             .endDate(DEFAULT_END_DATE)
             .educationType(DEFAULT_EDUCATION_TYPE)
             .grade(DEFAULT_GRADE)
             .description(DEFAULT_DESCRIPTION)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .employeeId(DEFAULT_EMPLOYEE_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return education;
     }
 
@@ -125,16 +125,16 @@ class EducationResourceIT {
         Education education = new Education()
             .institution(UPDATED_INSTITUTION)
             .subject(UPDATED_SUBJECT)
-            .startDate(UPDATED_START_DATE)
+            .startYear(UPDATED_START_YEAR)
             .endDate(UPDATED_END_DATE)
             .educationType(UPDATED_EDUCATION_TYPE)
             .grade(UPDATED_GRADE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return education;
     }
 
@@ -159,16 +159,16 @@ class EducationResourceIT {
         Education testEducation = educationList.get(educationList.size() - 1);
         assertThat(testEducation.getInstitution()).isEqualTo(DEFAULT_INSTITUTION);
         assertThat(testEducation.getSubject()).isEqualTo(DEFAULT_SUBJECT);
-        assertThat(testEducation.getStartDate()).isEqualTo(DEFAULT_START_DATE);
+        assertThat(testEducation.getStartYear()).isEqualTo(DEFAULT_START_YEAR);
         assertThat(testEducation.getEndDate()).isEqualTo(DEFAULT_END_DATE);
         assertThat(testEducation.getEducationType()).isEqualTo(DEFAULT_EDUCATION_TYPE);
         assertThat(testEducation.getGrade()).isEqualTo(DEFAULT_GRADE);
         assertThat(testEducation.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testEducation.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testEducation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testEducation.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testEducation.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testEducation.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testEducation.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testEducation.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testEducation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -204,16 +204,16 @@ class EducationResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(education.getId().intValue())))
             .andExpect(jsonPath("$.[*].institution").value(hasItem(DEFAULT_INSTITUTION)))
             .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].startYear").value(hasItem(DEFAULT_START_YEAR.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].educationType").value(hasItem(DEFAULT_EDUCATION_TYPE)))
             .andExpect(jsonPath("$.[*].grade").value(hasItem(DEFAULT_GRADE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -230,16 +230,16 @@ class EducationResourceIT {
             .andExpect(jsonPath("$.id").value(education.getId().intValue()))
             .andExpect(jsonPath("$.institution").value(DEFAULT_INSTITUTION))
             .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT))
-            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
+            .andExpect(jsonPath("$.startYear").value(DEFAULT_START_YEAR.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
             .andExpect(jsonPath("$.educationType").value(DEFAULT_EDUCATION_TYPE))
             .andExpect(jsonPath("$.grade").value(DEFAULT_GRADE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.employeeId").value(DEFAULT_EMPLOYEE_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -392,41 +392,41 @@ class EducationResourceIT {
 
     @Test
     @Transactional
-    void getAllEducationsByStartDateIsEqualToSomething() throws Exception {
+    void getAllEducationsByStartYearIsEqualToSomething() throws Exception {
         // Initialize the database
         educationRepository.saveAndFlush(education);
 
-        // Get all the educationList where startDate equals to DEFAULT_START_DATE
-        defaultEducationShouldBeFound("startDate.equals=" + DEFAULT_START_DATE);
+        // Get all the educationList where startYear equals to DEFAULT_START_YEAR
+        defaultEducationShouldBeFound("startYear.equals=" + DEFAULT_START_YEAR);
 
-        // Get all the educationList where startDate equals to UPDATED_START_DATE
-        defaultEducationShouldNotBeFound("startDate.equals=" + UPDATED_START_DATE);
+        // Get all the educationList where startYear equals to UPDATED_START_YEAR
+        defaultEducationShouldNotBeFound("startYear.equals=" + UPDATED_START_YEAR);
     }
 
     @Test
     @Transactional
-    void getAllEducationsByStartDateIsInShouldWork() throws Exception {
+    void getAllEducationsByStartYearIsInShouldWork() throws Exception {
         // Initialize the database
         educationRepository.saveAndFlush(education);
 
-        // Get all the educationList where startDate in DEFAULT_START_DATE or UPDATED_START_DATE
-        defaultEducationShouldBeFound("startDate.in=" + DEFAULT_START_DATE + "," + UPDATED_START_DATE);
+        // Get all the educationList where startYear in DEFAULT_START_YEAR or UPDATED_START_YEAR
+        defaultEducationShouldBeFound("startYear.in=" + DEFAULT_START_YEAR + "," + UPDATED_START_YEAR);
 
-        // Get all the educationList where startDate equals to UPDATED_START_DATE
-        defaultEducationShouldNotBeFound("startDate.in=" + UPDATED_START_DATE);
+        // Get all the educationList where startYear equals to UPDATED_START_YEAR
+        defaultEducationShouldNotBeFound("startYear.in=" + UPDATED_START_YEAR);
     }
 
     @Test
     @Transactional
-    void getAllEducationsByStartDateIsNullOrNotNull() throws Exception {
+    void getAllEducationsByStartYearIsNullOrNotNull() throws Exception {
         // Initialize the database
         educationRepository.saveAndFlush(education);
 
-        // Get all the educationList where startDate is not null
-        defaultEducationShouldBeFound("startDate.specified=true");
+        // Get all the educationList where startYear is not null
+        defaultEducationShouldBeFound("startYear.specified=true");
 
-        // Get all the educationList where startDate is null
-        defaultEducationShouldNotBeFound("startDate.specified=false");
+        // Get all the educationList where startYear is null
+        defaultEducationShouldNotBeFound("startYear.specified=false");
     }
 
     @Test
@@ -665,175 +665,6 @@ class EducationResourceIT {
 
     @Test
     @Transactional
-    void getAllEducationsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultEducationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the educationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultEducationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultEducationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the educationList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultEducationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModified is not null
-        defaultEducationShouldBeFound("lastModified.specified=true");
-
-        // Get all the educationList where lastModified is null
-        defaultEducationShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultEducationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the educationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultEducationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultEducationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the educationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultEducationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModifiedBy is not null
-        defaultEducationShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the educationList where lastModifiedBy is null
-        defaultEducationShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultEducationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the educationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultEducationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultEducationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the educationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultEducationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where status equals to DEFAULT_STATUS
-        defaultEducationShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the educationList where status equals to UPDATED_STATUS
-        defaultEducationShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultEducationShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the educationList where status equals to UPDATED_STATUS
-        defaultEducationShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where status is not null
-        defaultEducationShouldBeFound("status.specified=true");
-
-        // Get all the educationList where status is null
-        defaultEducationShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where status contains DEFAULT_STATUS
-        defaultEducationShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the educationList where status contains UPDATED_STATUS
-        defaultEducationShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllEducationsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        educationRepository.saveAndFlush(education);
-
-        // Get all the educationList where status does not contain DEFAULT_STATUS
-        defaultEducationShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the educationList where status does not contain UPDATED_STATUS
-        defaultEducationShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
     void getAllEducationsByEmployeeIdIsEqualToSomething() throws Exception {
         // Initialize the database
         educationRepository.saveAndFlush(education);
@@ -1014,6 +845,175 @@ class EducationResourceIT {
         defaultEducationShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllEducationsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where status equals to DEFAULT_STATUS
+        defaultEducationShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the educationList where status equals to UPDATED_STATUS
+        defaultEducationShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultEducationShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the educationList where status equals to UPDATED_STATUS
+        defaultEducationShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where status is not null
+        defaultEducationShouldBeFound("status.specified=true");
+
+        // Get all the educationList where status is null
+        defaultEducationShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where status contains DEFAULT_STATUS
+        defaultEducationShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the educationList where status contains UPDATED_STATUS
+        defaultEducationShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where status does not contain DEFAULT_STATUS
+        defaultEducationShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the educationList where status does not contain UPDATED_STATUS
+        defaultEducationShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultEducationShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the educationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultEducationShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultEducationShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the educationList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultEducationShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModified is not null
+        defaultEducationShouldBeFound("lastModified.specified=true");
+
+        // Get all the educationList where lastModified is null
+        defaultEducationShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultEducationShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the educationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultEducationShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultEducationShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the educationList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultEducationShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModifiedBy is not null
+        defaultEducationShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the educationList where lastModifiedBy is null
+        defaultEducationShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultEducationShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the educationList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultEducationShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllEducationsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        educationRepository.saveAndFlush(education);
+
+        // Get all the educationList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultEducationShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the educationList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultEducationShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1025,16 +1025,16 @@ class EducationResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(education.getId().intValue())))
             .andExpect(jsonPath("$.[*].institution").value(hasItem(DEFAULT_INSTITUTION)))
             .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].startYear").value(hasItem(DEFAULT_START_YEAR.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].educationType").value(hasItem(DEFAULT_EDUCATION_TYPE)))
             .andExpect(jsonPath("$.[*].grade").value(hasItem(DEFAULT_GRADE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restEducationMockMvc
@@ -1085,16 +1085,16 @@ class EducationResourceIT {
         updatedEducation
             .institution(UPDATED_INSTITUTION)
             .subject(UPDATED_SUBJECT)
-            .startDate(UPDATED_START_DATE)
+            .startYear(UPDATED_START_YEAR)
             .endDate(UPDATED_END_DATE)
             .educationType(UPDATED_EDUCATION_TYPE)
             .grade(UPDATED_GRADE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         EducationDTO educationDTO = educationMapper.toDto(updatedEducation);
 
         restEducationMockMvc
@@ -1111,16 +1111,16 @@ class EducationResourceIT {
         Education testEducation = educationList.get(educationList.size() - 1);
         assertThat(testEducation.getInstitution()).isEqualTo(UPDATED_INSTITUTION);
         assertThat(testEducation.getSubject()).isEqualTo(UPDATED_SUBJECT);
-        assertThat(testEducation.getStartDate()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testEducation.getStartYear()).isEqualTo(UPDATED_START_YEAR);
         assertThat(testEducation.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testEducation.getEducationType()).isEqualTo(UPDATED_EDUCATION_TYPE);
         assertThat(testEducation.getGrade()).isEqualTo(UPDATED_GRADE);
         assertThat(testEducation.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testEducation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEducation.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testEducation.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testEducation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1204,9 +1204,9 @@ class EducationResourceIT {
             .endDate(UPDATED_END_DATE)
             .educationType(UPDATED_EDUCATION_TYPE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
+            .employeeId(UPDATED_EMPLOYEE_ID)
             .status(UPDATED_STATUS)
-            .employeeId(UPDATED_EMPLOYEE_ID);
+            .lastModified(UPDATED_LAST_MODIFIED);
 
         restEducationMockMvc
             .perform(
@@ -1222,16 +1222,16 @@ class EducationResourceIT {
         Education testEducation = educationList.get(educationList.size() - 1);
         assertThat(testEducation.getInstitution()).isEqualTo(DEFAULT_INSTITUTION);
         assertThat(testEducation.getSubject()).isEqualTo(DEFAULT_SUBJECT);
-        assertThat(testEducation.getStartDate()).isEqualTo(DEFAULT_START_DATE);
+        assertThat(testEducation.getStartYear()).isEqualTo(DEFAULT_START_YEAR);
         assertThat(testEducation.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testEducation.getEducationType()).isEqualTo(UPDATED_EDUCATION_TYPE);
         assertThat(testEducation.getGrade()).isEqualTo(DEFAULT_GRADE);
         assertThat(testEducation.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testEducation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEducation.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testEducation.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testEducation.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -1249,16 +1249,16 @@ class EducationResourceIT {
         partialUpdatedEducation
             .institution(UPDATED_INSTITUTION)
             .subject(UPDATED_SUBJECT)
-            .startDate(UPDATED_START_DATE)
+            .startYear(UPDATED_START_YEAR)
             .endDate(UPDATED_END_DATE)
             .educationType(UPDATED_EDUCATION_TYPE)
             .grade(UPDATED_GRADE)
             .description(UPDATED_DESCRIPTION)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restEducationMockMvc
             .perform(
@@ -1274,16 +1274,16 @@ class EducationResourceIT {
         Education testEducation = educationList.get(educationList.size() - 1);
         assertThat(testEducation.getInstitution()).isEqualTo(UPDATED_INSTITUTION);
         assertThat(testEducation.getSubject()).isEqualTo(UPDATED_SUBJECT);
-        assertThat(testEducation.getStartDate()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testEducation.getStartYear()).isEqualTo(UPDATED_START_YEAR);
         assertThat(testEducation.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testEducation.getEducationType()).isEqualTo(UPDATED_EDUCATION_TYPE);
         assertThat(testEducation.getGrade()).isEqualTo(UPDATED_GRADE);
         assertThat(testEducation.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testEducation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEducation.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testEducation.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testEducation.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testEducation.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testEducation.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

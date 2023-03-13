@@ -14,25 +14,16 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="leave_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="is_carry_forword" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="employee_type" type="varchar(255)">
+            <column name="gender_leave" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="gender_leave" type="varchar(255)">
+            <column name="total_leave" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="leave_status" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="total_leave" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="max_leave" type="varchar(255)">
+            <column name="max_leave" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="haspro_rata_leave" type="boolean">
@@ -41,16 +32,28 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="ref_table" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ref_table_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="last_modified" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="status" type="varchar(255)">
+            <column name="leave_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="company_id" type="bigint">
+            <column name="employment_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -75,19 +78,18 @@
                   tableName="leave_policy"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="leave_type" type="string"/>
             <column name="is_carry_forword" type="boolean"/>
-            <column name="employee_type" type="string"/>
-            <column name="gender_leave" type="string"/>
-            <column name="leave_status" type="string"/>
-            <column name="total_leave" type="string"/>
-            <column name="max_leave" type="string"/>
+            <column name="gender_leave" type="numeric"/>
+            <column name="total_leave" type="numeric"/>
+            <column name="max_leave" type="numeric"/>
             <column name="haspro_rata_leave" type="boolean"/>
             <column name="description" type="string"/>
+            <column name="ref_table" type="string"/>
+            <column name="ref_table_id" type="numeric"/>
+            <column name="company_id" type="numeric"/>
+            <column name="status" type="string"/>
             <column name="last_modified" type="date"/>
             <column name="last_modified_by" type="string"/>
-            <column name="status" type="string"/>
-            <column name="company_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

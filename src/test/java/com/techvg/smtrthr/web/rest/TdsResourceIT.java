@@ -44,15 +44,6 @@ class TdsResourceIT {
     private static final Double UPDATED_PERCENTAGE = 2D;
     private static final Double SMALLER_PERCENTAGE = 1D - 1D;
 
-    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
     private static final Long DEFAULT_SALARY_SETTING_ID = 1L;
     private static final Long UPDATED_SALARY_SETTING_ID = 2L;
     private static final Long SMALLER_SALARY_SETTING_ID = 1L - 1L;
@@ -60,6 +51,15 @@ class TdsResourceIT {
     private static final Long DEFAULT_COMPANY_ID = 1L;
     private static final Long UPDATED_COMPANY_ID = 2L;
     private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/tds";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -92,11 +92,11 @@ class TdsResourceIT {
             .salaryFrom(DEFAULT_SALARY_FROM)
             .salaryTo(DEFAULT_SALARY_TO)
             .percentage(DEFAULT_PERCENTAGE)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .status(DEFAULT_STATUS)
             .salarySettingId(DEFAULT_SALARY_SETTING_ID)
-            .companyId(DEFAULT_COMPANY_ID);
+            .companyId(DEFAULT_COMPANY_ID)
+            .status(DEFAULT_STATUS)
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return tds;
     }
 
@@ -111,11 +111,11 @@ class TdsResourceIT {
             .salaryFrom(UPDATED_SALARY_FROM)
             .salaryTo(UPDATED_SALARY_TO)
             .percentage(UPDATED_PERCENTAGE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .salarySettingId(UPDATED_SALARY_SETTING_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return tds;
     }
 
@@ -141,11 +141,11 @@ class TdsResourceIT {
         assertThat(testTds.getSalaryFrom()).isEqualTo(DEFAULT_SALARY_FROM);
         assertThat(testTds.getSalaryTo()).isEqualTo(DEFAULT_SALARY_TO);
         assertThat(testTds.getPercentage()).isEqualTo(DEFAULT_PERCENTAGE);
-        assertThat(testTds.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testTds.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testTds.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testTds.getSalarySettingId()).isEqualTo(DEFAULT_SALARY_SETTING_ID);
         assertThat(testTds.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testTds.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testTds.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testTds.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -182,11 +182,11 @@ class TdsResourceIT {
             .andExpect(jsonPath("$.[*].salaryFrom").value(hasItem(DEFAULT_SALARY_FROM.toString())))
             .andExpect(jsonPath("$.[*].salaryTo").value(hasItem(DEFAULT_SALARY_TO.toString())))
             .andExpect(jsonPath("$.[*].percentage").value(hasItem(DEFAULT_PERCENTAGE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].salarySettingId").value(hasItem(DEFAULT_SALARY_SETTING_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -204,11 +204,11 @@ class TdsResourceIT {
             .andExpect(jsonPath("$.salaryFrom").value(DEFAULT_SALARY_FROM.toString()))
             .andExpect(jsonPath("$.salaryTo").value(DEFAULT_SALARY_TO.toString()))
             .andExpect(jsonPath("$.percentage").value(DEFAULT_PERCENTAGE.doubleValue()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.salarySettingId").value(DEFAULT_SALARY_SETTING_ID.intValue()))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -400,175 +400,6 @@ class TdsResourceIT {
 
     @Test
     @Transactional
-    void getAllTdsByLastModifiedIsEqualToSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModified equals to DEFAULT_LAST_MODIFIED
-        defaultTdsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
-
-        // Get all the tdsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultTdsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedIsInShouldWork() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
-        defaultTdsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
-
-        // Get all the tdsList where lastModified equals to UPDATED_LAST_MODIFIED
-        defaultTdsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModified is not null
-        defaultTdsShouldBeFound("lastModified.specified=true");
-
-        // Get all the tdsList where lastModified is null
-        defaultTdsShouldNotBeFound("lastModified.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedByIsEqualToSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
-        defaultTdsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the tdsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultTdsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedByIsInShouldWork() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
-        defaultTdsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
-
-        // Get all the tdsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
-        defaultTdsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedByIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModifiedBy is not null
-        defaultTdsShouldBeFound("lastModifiedBy.specified=true");
-
-        // Get all the tdsList where lastModifiedBy is null
-        defaultTdsShouldNotBeFound("lastModifiedBy.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedByContainsSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
-        defaultTdsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the tdsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
-        defaultTdsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByLastModifiedByNotContainsSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
-        defaultTdsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
-
-        // Get all the tdsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
-        defaultTdsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where status equals to DEFAULT_STATUS
-        defaultTdsShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the tdsList where status equals to UPDATED_STATUS
-        defaultTdsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultTdsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the tdsList where status equals to UPDATED_STATUS
-        defaultTdsShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where status is not null
-        defaultTdsShouldBeFound("status.specified=true");
-
-        // Get all the tdsList where status is null
-        defaultTdsShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where status contains DEFAULT_STATUS
-        defaultTdsShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the tdsList where status contains UPDATED_STATUS
-        defaultTdsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllTdsByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        tdsRepository.saveAndFlush(tds);
-
-        // Get all the tdsList where status does not contain DEFAULT_STATUS
-        defaultTdsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the tdsList where status does not contain UPDATED_STATUS
-        defaultTdsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
     void getAllTdsBySalarySettingIdIsEqualToSomething() throws Exception {
         // Initialize the database
         tdsRepository.saveAndFlush(tds);
@@ -749,6 +580,175 @@ class TdsResourceIT {
         defaultTdsShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
     }
 
+    @Test
+    @Transactional
+    void getAllTdsByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where status equals to DEFAULT_STATUS
+        defaultTdsShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the tdsList where status equals to UPDATED_STATUS
+        defaultTdsShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultTdsShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the tdsList where status equals to UPDATED_STATUS
+        defaultTdsShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where status is not null
+        defaultTdsShouldBeFound("status.specified=true");
+
+        // Get all the tdsList where status is null
+        defaultTdsShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where status contains DEFAULT_STATUS
+        defaultTdsShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the tdsList where status contains UPDATED_STATUS
+        defaultTdsShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where status does not contain DEFAULT_STATUS
+        defaultTdsShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the tdsList where status does not contain UPDATED_STATUS
+        defaultTdsShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModified equals to DEFAULT_LAST_MODIFIED
+        defaultTdsShouldBeFound("lastModified.equals=" + DEFAULT_LAST_MODIFIED);
+
+        // Get all the tdsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultTdsShouldNotBeFound("lastModified.equals=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedIsInShouldWork() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModified in DEFAULT_LAST_MODIFIED or UPDATED_LAST_MODIFIED
+        defaultTdsShouldBeFound("lastModified.in=" + DEFAULT_LAST_MODIFIED + "," + UPDATED_LAST_MODIFIED);
+
+        // Get all the tdsList where lastModified equals to UPDATED_LAST_MODIFIED
+        defaultTdsShouldNotBeFound("lastModified.in=" + UPDATED_LAST_MODIFIED);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModified is not null
+        defaultTdsShouldBeFound("lastModified.specified=true");
+
+        // Get all the tdsList where lastModified is null
+        defaultTdsShouldNotBeFound("lastModified.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultTdsShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the tdsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultTdsShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultTdsShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the tdsList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultTdsShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModifiedBy is not null
+        defaultTdsShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the tdsList where lastModifiedBy is null
+        defaultTdsShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedByContainsSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModifiedBy contains DEFAULT_LAST_MODIFIED_BY
+        defaultTdsShouldBeFound("lastModifiedBy.contains=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the tdsList where lastModifiedBy contains UPDATED_LAST_MODIFIED_BY
+        defaultTdsShouldNotBeFound("lastModifiedBy.contains=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    void getAllTdsByLastModifiedByNotContainsSomething() throws Exception {
+        // Initialize the database
+        tdsRepository.saveAndFlush(tds);
+
+        // Get all the tdsList where lastModifiedBy does not contain DEFAULT_LAST_MODIFIED_BY
+        defaultTdsShouldNotBeFound("lastModifiedBy.doesNotContain=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the tdsList where lastModifiedBy does not contain UPDATED_LAST_MODIFIED_BY
+        defaultTdsShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -761,11 +761,11 @@ class TdsResourceIT {
             .andExpect(jsonPath("$.[*].salaryFrom").value(hasItem(DEFAULT_SALARY_FROM.toString())))
             .andExpect(jsonPath("$.[*].salaryTo").value(hasItem(DEFAULT_SALARY_TO.toString())))
             .andExpect(jsonPath("$.[*].percentage").value(hasItem(DEFAULT_PERCENTAGE.doubleValue())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].salarySettingId").value(hasItem(DEFAULT_SALARY_SETTING_ID.intValue())))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restTdsMockMvc
@@ -817,11 +817,11 @@ class TdsResourceIT {
             .salaryFrom(UPDATED_SALARY_FROM)
             .salaryTo(UPDATED_SALARY_TO)
             .percentage(UPDATED_PERCENTAGE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .salarySettingId(UPDATED_SALARY_SETTING_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         TdsDTO tdsDTO = tdsMapper.toDto(updatedTds);
 
         restTdsMockMvc
@@ -839,11 +839,11 @@ class TdsResourceIT {
         assertThat(testTds.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
         assertThat(testTds.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
         assertThat(testTds.getPercentage()).isEqualTo(UPDATED_PERCENTAGE);
-        assertThat(testTds.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTds.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testTds.getSalarySettingId()).isEqualTo(UPDATED_SALARY_SETTING_ID);
         assertThat(testTds.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testTds.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testTds.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -926,8 +926,8 @@ class TdsResourceIT {
         partialUpdatedTds
             .salaryFrom(UPDATED_SALARY_FROM)
             .salaryTo(UPDATED_SALARY_TO)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restTdsMockMvc
             .perform(
@@ -944,11 +944,11 @@ class TdsResourceIT {
         assertThat(testTds.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
         assertThat(testTds.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
         assertThat(testTds.getPercentage()).isEqualTo(DEFAULT_PERCENTAGE);
-        assertThat(testTds.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTds.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testTds.getSalarySettingId()).isEqualTo(DEFAULT_SALARY_SETTING_ID);
         assertThat(testTds.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testTds.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testTds.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
+        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -967,11 +967,11 @@ class TdsResourceIT {
             .salaryFrom(UPDATED_SALARY_FROM)
             .salaryTo(UPDATED_SALARY_TO)
             .percentage(UPDATED_PERCENTAGE)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS)
             .salarySettingId(UPDATED_SALARY_SETTING_ID)
-            .companyId(UPDATED_COMPANY_ID);
+            .companyId(UPDATED_COMPANY_ID)
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restTdsMockMvc
             .perform(
@@ -988,11 +988,11 @@ class TdsResourceIT {
         assertThat(testTds.getSalaryFrom()).isEqualTo(UPDATED_SALARY_FROM);
         assertThat(testTds.getSalaryTo()).isEqualTo(UPDATED_SALARY_TO);
         assertThat(testTds.getPercentage()).isEqualTo(UPDATED_PERCENTAGE);
-        assertThat(testTds.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
-        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTds.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testTds.getSalarySettingId()).isEqualTo(UPDATED_SALARY_SETTING_ID);
         assertThat(testTds.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testTds.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testTds.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testTds.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
     }
 
     @Test

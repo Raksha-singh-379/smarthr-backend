@@ -4,10 +4,11 @@ export interface IRegion {
   id: number;
   regionName?: string | null;
   description?: string | null;
+  regionId?: number | null;
+  companyId?: number | null;
   status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  companyId?: number | null;
 }
 
 export type NewRegion = Omit<IRegion, 'id'> & { id: null };

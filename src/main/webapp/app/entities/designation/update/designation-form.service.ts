@@ -32,11 +32,11 @@ type DesignationFormDefaults = Pick<NewDesignation, 'id' | 'lastModified'>;
 type DesignationFormGroupContent = {
   id: FormControl<DesignationFormRawValue['id'] | NewDesignation['id']>;
   name: FormControl<DesignationFormRawValue['name']>;
-  lastModified: FormControl<DesignationFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<DesignationFormRawValue['lastModifiedBy']>;
-  status: FormControl<DesignationFormRawValue['status']>;
   departmentId: FormControl<DesignationFormRawValue['departmentId']>;
   companyId: FormControl<DesignationFormRawValue['companyId']>;
+  status: FormControl<DesignationFormRawValue['status']>;
+  lastModified: FormControl<DesignationFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<DesignationFormRawValue['lastModifiedBy']>;
 };
 
 export type DesignationFormGroup = FormGroup<DesignationFormGroupContent>;
@@ -57,11 +57,11 @@ export class DesignationFormService {
         }
       ),
       name: new FormControl(designationRawValue.name),
-      lastModified: new FormControl(designationRawValue.lastModified),
-      lastModifiedBy: new FormControl(designationRawValue.lastModifiedBy),
-      status: new FormControl(designationRawValue.status),
       departmentId: new FormControl(designationRawValue.departmentId),
       companyId: new FormControl(designationRawValue.companyId),
+      status: new FormControl(designationRawValue.status),
+      lastModified: new FormControl(designationRawValue.lastModified),
+      lastModifiedBy: new FormControl(designationRawValue.lastModifiedBy),
     });
   }
 

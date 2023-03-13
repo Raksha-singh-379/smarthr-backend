@@ -7,11 +7,12 @@ export interface IPfDetails {
   pfRate?: number | null;
   additionalPfRate?: string | null;
   totalPfRate?: number | null;
+  employeeId?: number | null;
+  reEnumerationId?: number | null;
+  companyId?: number | null;
+  status?: string | null;
   lastModified?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
-  status?: string | null;
-  employeId?: number | null;
-  reEnumerationId?: number | null;
 }
 
 export type NewPfDetails = Omit<IPfDetails, 'id'> & { id: null };

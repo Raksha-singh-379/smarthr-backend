@@ -46,18 +46,18 @@ class HolidayResourceIT {
     private static final Instant DEFAULT_YEAR = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_YEAR = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Long DEFAULT_COMPANY_ID = 1L;
+    private static final Long UPDATED_COMPANY_ID = 2L;
+    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_LAST_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_STATUS = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_COMPANY_ID = 1L;
-    private static final Long UPDATED_COMPANY_ID = 2L;
-    private static final Long SMALLER_COMPANY_ID = 1L - 1L;
 
     private static final String ENTITY_API_URL = "/api/holidays";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -91,10 +91,10 @@ class HolidayResourceIT {
             .holidayDate(DEFAULT_HOLIDAY_DATE)
             .day(DEFAULT_DAY)
             .year(DEFAULT_YEAR)
-            .lastModified(DEFAULT_LAST_MODIFIED)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .companyId(DEFAULT_COMPANY_ID)
             .status(DEFAULT_STATUS)
-            .companyId(DEFAULT_COMPANY_ID);
+            .lastModified(DEFAULT_LAST_MODIFIED)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return holiday;
     }
 
@@ -110,10 +110,10 @@ class HolidayResourceIT {
             .holidayDate(UPDATED_HOLIDAY_DATE)
             .day(UPDATED_DAY)
             .year(UPDATED_YEAR)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return holiday;
     }
 
@@ -140,10 +140,10 @@ class HolidayResourceIT {
         assertThat(testHoliday.getHolidayDate()).isEqualTo(DEFAULT_HOLIDAY_DATE);
         assertThat(testHoliday.getDay()).isEqualTo(DEFAULT_DAY);
         assertThat(testHoliday.getYear()).isEqualTo(DEFAULT_YEAR);
+        assertThat(testHoliday.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testHoliday.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testHoliday.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
         assertThat(testHoliday.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testHoliday.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testHoliday.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
     }
 
     @Test
@@ -167,24 +167,6 @@ class HolidayResourceIT {
 
     @Test
     @Transactional
-    void checkHolidayNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = holidayRepository.findAll().size();
-        // set the field null
-        holiday.setHolidayName(null);
-
-        // Create the Holiday, which fails.
-        HolidayDTO holidayDTO = holidayMapper.toDto(holiday);
-
-        restHolidayMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(holidayDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Holiday> holidayList = holidayRepository.findAll();
-        assertThat(holidayList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllHolidays() throws Exception {
         // Initialize the database
         holidayRepository.saveAndFlush(holiday);
@@ -199,10 +181,10 @@ class HolidayResourceIT {
             .andExpect(jsonPath("$.[*].holidayDate").value(hasItem(DEFAULT_HOLIDAY_DATE.toString())))
             .andExpect(jsonPath("$.[*].day").value(hasItem(DEFAULT_DAY)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 
     @Test
@@ -221,10 +203,10 @@ class HolidayResourceIT {
             .andExpect(jsonPath("$.holidayDate").value(DEFAULT_HOLIDAY_DATE.toString()))
             .andExpect(jsonPath("$.day").value(DEFAULT_DAY))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.toString()))
-            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.companyId").value(DEFAULT_COMPANY_ID.intValue()));
+            .andExpect(jsonPath("$.lastModified").value(DEFAULT_LAST_MODIFIED.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -455,6 +437,162 @@ class HolidayResourceIT {
 
     @Test
     @Transactional
+    void getAllHolidaysByCompanyIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId equals to DEFAULT_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
+
+        // Get all the holidayList where companyId equals to UPDATED_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
+
+        // Get all the holidayList where companyId equals to UPDATED_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId is not null
+        defaultHolidayShouldBeFound("companyId.specified=true");
+
+        // Get all the holidayList where companyId is null
+        defaultHolidayShouldNotBeFound("companyId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId is greater than or equal to DEFAULT_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the holidayList where companyId is greater than or equal to UPDATED_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId is less than or equal to DEFAULT_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
+
+        // Get all the holidayList where companyId is less than or equal to SMALLER_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId is less than DEFAULT_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the holidayList where companyId is less than UPDATED_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByCompanyIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where companyId is greater than DEFAULT_COMPANY_ID
+        defaultHolidayShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
+
+        // Get all the holidayList where companyId is greater than SMALLER_COMPANY_ID
+        defaultHolidayShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where status equals to DEFAULT_STATUS
+        defaultHolidayShouldBeFound("status.equals=" + DEFAULT_STATUS);
+
+        // Get all the holidayList where status equals to UPDATED_STATUS
+        defaultHolidayShouldNotBeFound("status.equals=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where status in DEFAULT_STATUS or UPDATED_STATUS
+        defaultHolidayShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
+
+        // Get all the holidayList where status equals to UPDATED_STATUS
+        defaultHolidayShouldNotBeFound("status.in=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where status is not null
+        defaultHolidayShouldBeFound("status.specified=true");
+
+        // Get all the holidayList where status is null
+        defaultHolidayShouldNotBeFound("status.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByStatusContainsSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where status contains DEFAULT_STATUS
+        defaultHolidayShouldBeFound("status.contains=" + DEFAULT_STATUS);
+
+        // Get all the holidayList where status contains UPDATED_STATUS
+        defaultHolidayShouldNotBeFound("status.contains=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
+    void getAllHolidaysByStatusNotContainsSomething() throws Exception {
+        // Initialize the database
+        holidayRepository.saveAndFlush(holiday);
+
+        // Get all the holidayList where status does not contain DEFAULT_STATUS
+        defaultHolidayShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
+
+        // Get all the holidayList where status does not contain UPDATED_STATUS
+        defaultHolidayShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
+    }
+
+    @Test
+    @Transactional
     void getAllHolidaysByLastModifiedIsEqualToSomething() throws Exception {
         // Initialize the database
         holidayRepository.saveAndFlush(holiday);
@@ -557,162 +695,6 @@ class HolidayResourceIT {
         defaultHolidayShouldBeFound("lastModifiedBy.doesNotContain=" + UPDATED_LAST_MODIFIED_BY);
     }
 
-    @Test
-    @Transactional
-    void getAllHolidaysByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where status equals to DEFAULT_STATUS
-        defaultHolidayShouldBeFound("status.equals=" + DEFAULT_STATUS);
-
-        // Get all the holidayList where status equals to UPDATED_STATUS
-        defaultHolidayShouldNotBeFound("status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where status in DEFAULT_STATUS or UPDATED_STATUS
-        defaultHolidayShouldBeFound("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS);
-
-        // Get all the holidayList where status equals to UPDATED_STATUS
-        defaultHolidayShouldNotBeFound("status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where status is not null
-        defaultHolidayShouldBeFound("status.specified=true");
-
-        // Get all the holidayList where status is null
-        defaultHolidayShouldNotBeFound("status.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByStatusContainsSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where status contains DEFAULT_STATUS
-        defaultHolidayShouldBeFound("status.contains=" + DEFAULT_STATUS);
-
-        // Get all the holidayList where status contains UPDATED_STATUS
-        defaultHolidayShouldNotBeFound("status.contains=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByStatusNotContainsSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where status does not contain DEFAULT_STATUS
-        defaultHolidayShouldNotBeFound("status.doesNotContain=" + DEFAULT_STATUS);
-
-        // Get all the holidayList where status does not contain UPDATED_STATUS
-        defaultHolidayShouldBeFound("status.doesNotContain=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId equals to DEFAULT_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.equals=" + DEFAULT_COMPANY_ID);
-
-        // Get all the holidayList where companyId equals to UPDATED_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.equals=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId in DEFAULT_COMPANY_ID or UPDATED_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.in=" + DEFAULT_COMPANY_ID + "," + UPDATED_COMPANY_ID);
-
-        // Get all the holidayList where companyId equals to UPDATED_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.in=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId is not null
-        defaultHolidayShouldBeFound("companyId.specified=true");
-
-        // Get all the holidayList where companyId is null
-        defaultHolidayShouldNotBeFound("companyId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId is greater than or equal to DEFAULT_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.greaterThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the holidayList where companyId is greater than or equal to UPDATED_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.greaterThanOrEqual=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId is less than or equal to DEFAULT_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.lessThanOrEqual=" + DEFAULT_COMPANY_ID);
-
-        // Get all the holidayList where companyId is less than or equal to SMALLER_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.lessThanOrEqual=" + SMALLER_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId is less than DEFAULT_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.lessThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the holidayList where companyId is less than UPDATED_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.lessThan=" + UPDATED_COMPANY_ID);
-    }
-
-    @Test
-    @Transactional
-    void getAllHolidaysByCompanyIdIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        holidayRepository.saveAndFlush(holiday);
-
-        // Get all the holidayList where companyId is greater than DEFAULT_COMPANY_ID
-        defaultHolidayShouldNotBeFound("companyId.greaterThan=" + DEFAULT_COMPANY_ID);
-
-        // Get all the holidayList where companyId is greater than SMALLER_COMPANY_ID
-        defaultHolidayShouldBeFound("companyId.greaterThan=" + SMALLER_COMPANY_ID);
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -726,10 +708,10 @@ class HolidayResourceIT {
             .andExpect(jsonPath("$.[*].holidayDate").value(hasItem(DEFAULT_HOLIDAY_DATE.toString())))
             .andExpect(jsonPath("$.[*].day").value(hasItem(DEFAULT_DAY)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.toString())))
-            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].companyId").value(hasItem(DEFAULT_COMPANY_ID.intValue())));
+            .andExpect(jsonPath("$.[*].lastModified").value(hasItem(DEFAULT_LAST_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
 
         // Check, that the count call also returns 1
         restHolidayMockMvc
@@ -782,10 +764,10 @@ class HolidayResourceIT {
             .holidayDate(UPDATED_HOLIDAY_DATE)
             .day(UPDATED_DAY)
             .year(UPDATED_YEAR)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         HolidayDTO holidayDTO = holidayMapper.toDto(updatedHoliday);
 
         restHolidayMockMvc
@@ -804,10 +786,10 @@ class HolidayResourceIT {
         assertThat(testHoliday.getHolidayDate()).isEqualTo(UPDATED_HOLIDAY_DATE);
         assertThat(testHoliday.getDay()).isEqualTo(UPDATED_DAY);
         assertThat(testHoliday.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testHoliday.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testHoliday.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testHoliday.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testHoliday.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test
@@ -890,8 +872,8 @@ class HolidayResourceIT {
         partialUpdatedHoliday
             .holidayName(UPDATED_HOLIDAY_NAME)
             .year(UPDATED_YEAR)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .lastModified(UPDATED_LAST_MODIFIED);
 
         restHolidayMockMvc
             .perform(
@@ -909,10 +891,10 @@ class HolidayResourceIT {
         assertThat(testHoliday.getHolidayDate()).isEqualTo(DEFAULT_HOLIDAY_DATE);
         assertThat(testHoliday.getDay()).isEqualTo(DEFAULT_DAY);
         assertThat(testHoliday.getYear()).isEqualTo(UPDATED_YEAR);
-        assertThat(testHoliday.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
-        assertThat(testHoliday.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testHoliday.getCompanyId()).isEqualTo(DEFAULT_COMPANY_ID);
+        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testHoliday.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
+        assertThat(testHoliday.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
     }
 
     @Test
@@ -932,10 +914,10 @@ class HolidayResourceIT {
             .holidayDate(UPDATED_HOLIDAY_DATE)
             .day(UPDATED_DAY)
             .year(UPDATED_YEAR)
-            .lastModified(UPDATED_LAST_MODIFIED)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .companyId(UPDATED_COMPANY_ID)
             .status(UPDATED_STATUS)
-            .companyId(UPDATED_COMPANY_ID);
+            .lastModified(UPDATED_LAST_MODIFIED)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restHolidayMockMvc
             .perform(
@@ -953,10 +935,10 @@ class HolidayResourceIT {
         assertThat(testHoliday.getHolidayDate()).isEqualTo(UPDATED_HOLIDAY_DATE);
         assertThat(testHoliday.getDay()).isEqualTo(UPDATED_DAY);
         assertThat(testHoliday.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testHoliday.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
+        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testHoliday.getLastModified()).isEqualTo(UPDATED_LAST_MODIFIED);
         assertThat(testHoliday.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testHoliday.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testHoliday.getCompanyId()).isEqualTo(UPDATED_COMPANY_ID);
     }
 
     @Test

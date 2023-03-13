@@ -12,10 +12,9 @@ import { IPersonalDetails, NewPersonalDetails } from '../personal-details.model'
 
 export type PartialUpdatePersonalDetails = Partial<IPersonalDetails> & Pick<IPersonalDetails, 'id'>;
 
-type RestOf<T extends IPersonalDetails | NewPersonalDetails> = Omit<T, 'passportExpDate' | 'lastModified' | 'dateOfBirth'> & {
-  passportExpDate?: string | null;
-  lastModified?: string | null;
+type RestOf<T extends IPersonalDetails | NewPersonalDetails> = Omit<T, 'dateOfBirth' | 'lastModified'> & {
   dateOfBirth?: string | null;
+  lastModified?: string | null;
 };
 
 export type RestPersonalDetails = RestOf<IPersonalDetails>;
@@ -108,18 +107,16 @@ export class PersonalDetailsService {
   ): RestOf<T> {
     return {
       ...personalDetails,
-      passportExpDate: personalDetails.passportExpDate?.toJSON() ?? null,
-      lastModified: personalDetails.lastModified?.toJSON() ?? null,
       dateOfBirth: personalDetails.dateOfBirth?.format(DATE_FORMAT) ?? null,
+      lastModified: personalDetails.lastModified?.toJSON() ?? null,
     };
   }
 
   protected convertDateFromServer(restPersonalDetails: RestPersonalDetails): IPersonalDetails {
     return {
       ...restPersonalDetails,
-      passportExpDate: restPersonalDetails.passportExpDate ? dayjs(restPersonalDetails.passportExpDate) : undefined,
-      lastModified: restPersonalDetails.lastModified ? dayjs(restPersonalDetails.lastModified) : undefined,
       dateOfBirth: restPersonalDetails.dateOfBirth ? dayjs(restPersonalDetails.dateOfBirth) : undefined,
+      lastModified: restPersonalDetails.lastModified ? dayjs(restPersonalDetails.lastModified) : undefined,
     };
   }
 

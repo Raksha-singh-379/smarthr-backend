@@ -29,12 +29,12 @@
       "landMark": "Land Mark",
       "longitude": "Longitude",
       "latitude": "Latitude",
-      "lastModified": "Last Modified",
-      "lastModifiedBy": "Last Modified By",
-      "status": "Status",
-      "refTableType": "Ref Table Type",
+      "refTable": "Ref Table",
       "refTableId": "Ref Table Id",
-      "companyId": "Company Id"
+      "companyId": "Company Id",
+      "status": "Status",
+      "lastModified": "Last Modified",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

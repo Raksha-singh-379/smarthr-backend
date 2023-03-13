@@ -23,10 +23,6 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter passportNo;
-
-    private InstantFilter passportExpDate;
-
     private StringFilter telephoneNo;
 
     private StringFilter nationality;
@@ -35,23 +31,19 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
 
     private StringFilter religion;
 
-    private BooleanFilter isSpousEmployed;
-
-    private InstantFilter lastModified;
-
-    private StringFilter lastModifiedBy;
-
-    private StringFilter status;
-
     private LongFilter employeeId;
 
     private LongFilter companyId;
 
-    private StringFilter personalIdNo;
-
     private StringFilter bloodGroup;
 
     private LocalDateFilter dateOfBirth;
+
+    private StringFilter status;
+
+    private InstantFilter lastModified;
+
+    private StringFilter lastModifiedBy;
 
     private Boolean distinct;
 
@@ -59,21 +51,17 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
 
     public PersonalDetailsCriteria(PersonalDetailsCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
-        this.passportNo = other.passportNo == null ? null : other.passportNo.copy();
-        this.passportExpDate = other.passportExpDate == null ? null : other.passportExpDate.copy();
         this.telephoneNo = other.telephoneNo == null ? null : other.telephoneNo.copy();
         this.nationality = other.nationality == null ? null : other.nationality.copy();
         this.maritalStatus = other.maritalStatus == null ? null : other.maritalStatus.copy();
         this.religion = other.religion == null ? null : other.religion.copy();
-        this.isSpousEmployed = other.isSpousEmployed == null ? null : other.isSpousEmployed.copy();
-        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
-        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
-        this.status = other.status == null ? null : other.status.copy();
         this.employeeId = other.employeeId == null ? null : other.employeeId.copy();
         this.companyId = other.companyId == null ? null : other.companyId.copy();
-        this.personalIdNo = other.personalIdNo == null ? null : other.personalIdNo.copy();
         this.bloodGroup = other.bloodGroup == null ? null : other.bloodGroup.copy();
         this.dateOfBirth = other.dateOfBirth == null ? null : other.dateOfBirth.copy();
+        this.status = other.status == null ? null : other.status.copy();
+        this.lastModified = other.lastModified == null ? null : other.lastModified.copy();
+        this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.distinct = other.distinct;
     }
 
@@ -95,36 +83,6 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public StringFilter getPassportNo() {
-        return passportNo;
-    }
-
-    public StringFilter passportNo() {
-        if (passportNo == null) {
-            passportNo = new StringFilter();
-        }
-        return passportNo;
-    }
-
-    public void setPassportNo(StringFilter passportNo) {
-        this.passportNo = passportNo;
-    }
-
-    public InstantFilter getPassportExpDate() {
-        return passportExpDate;
-    }
-
-    public InstantFilter passportExpDate() {
-        if (passportExpDate == null) {
-            passportExpDate = new InstantFilter();
-        }
-        return passportExpDate;
-    }
-
-    public void setPassportExpDate(InstantFilter passportExpDate) {
-        this.passportExpDate = passportExpDate;
     }
 
     public StringFilter getTelephoneNo() {
@@ -187,66 +145,6 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
         this.religion = religion;
     }
 
-    public BooleanFilter getIsSpousEmployed() {
-        return isSpousEmployed;
-    }
-
-    public BooleanFilter isSpousEmployed() {
-        if (isSpousEmployed == null) {
-            isSpousEmployed = new BooleanFilter();
-        }
-        return isSpousEmployed;
-    }
-
-    public void setIsSpousEmployed(BooleanFilter isSpousEmployed) {
-        this.isSpousEmployed = isSpousEmployed;
-    }
-
-    public InstantFilter getLastModified() {
-        return lastModified;
-    }
-
-    public InstantFilter lastModified() {
-        if (lastModified == null) {
-            lastModified = new InstantFilter();
-        }
-        return lastModified;
-    }
-
-    public void setLastModified(InstantFilter lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public StringFilter getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StringFilter lastModifiedBy() {
-        if (lastModifiedBy == null) {
-            lastModifiedBy = new StringFilter();
-        }
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(StringFilter lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public StringFilter getStatus() {
-        return status;
-    }
-
-    public StringFilter status() {
-        if (status == null) {
-            status = new StringFilter();
-        }
-        return status;
-    }
-
-    public void setStatus(StringFilter status) {
-        this.status = status;
-    }
-
     public LongFilter getEmployeeId() {
         return employeeId;
     }
@@ -275,21 +173,6 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
 
     public void setCompanyId(LongFilter companyId) {
         this.companyId = companyId;
-    }
-
-    public StringFilter getPersonalIdNo() {
-        return personalIdNo;
-    }
-
-    public StringFilter personalIdNo() {
-        if (personalIdNo == null) {
-            personalIdNo = new StringFilter();
-        }
-        return personalIdNo;
-    }
-
-    public void setPersonalIdNo(StringFilter personalIdNo) {
-        this.personalIdNo = personalIdNo;
     }
 
     public StringFilter getBloodGroup() {
@@ -322,6 +205,51 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public StringFilter status() {
+        if (status == null) {
+            status = new StringFilter();
+        }
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
+    public InstantFilter getLastModified() {
+        return lastModified;
+    }
+
+    public InstantFilter lastModified() {
+        if (lastModified == null) {
+            lastModified = new InstantFilter();
+        }
+        return lastModified;
+    }
+
+    public void setLastModified(InstantFilter lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public StringFilter lastModifiedBy() {
+        if (lastModifiedBy == null) {
+            lastModifiedBy = new StringFilter();
+        }
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -341,21 +269,17 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
         final PersonalDetailsCriteria that = (PersonalDetailsCriteria) o;
         return (
             Objects.equals(id, that.id) &&
-            Objects.equals(passportNo, that.passportNo) &&
-            Objects.equals(passportExpDate, that.passportExpDate) &&
             Objects.equals(telephoneNo, that.telephoneNo) &&
             Objects.equals(nationality, that.nationality) &&
             Objects.equals(maritalStatus, that.maritalStatus) &&
             Objects.equals(religion, that.religion) &&
-            Objects.equals(isSpousEmployed, that.isSpousEmployed) &&
-            Objects.equals(lastModified, that.lastModified) &&
-            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(employeeId, that.employeeId) &&
             Objects.equals(companyId, that.companyId) &&
-            Objects.equals(personalIdNo, that.personalIdNo) &&
             Objects.equals(bloodGroup, that.bloodGroup) &&
             Objects.equals(dateOfBirth, that.dateOfBirth) &&
+            Objects.equals(status, that.status) &&
+            Objects.equals(lastModified, that.lastModified) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -364,21 +288,17 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
             id,
-            passportNo,
-            passportExpDate,
             telephoneNo,
             nationality,
             maritalStatus,
             religion,
-            isSpousEmployed,
-            lastModified,
-            lastModifiedBy,
-            status,
             employeeId,
             companyId,
-            personalIdNo,
             bloodGroup,
             dateOfBirth,
+            status,
+            lastModified,
+            lastModifiedBy,
             distinct
         );
     }
@@ -388,21 +308,17 @@ public class PersonalDetailsCriteria implements Serializable, Criteria {
     public String toString() {
         return "PersonalDetailsCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
-            (passportNo != null ? "passportNo=" + passportNo + ", " : "") +
-            (passportExpDate != null ? "passportExpDate=" + passportExpDate + ", " : "") +
             (telephoneNo != null ? "telephoneNo=" + telephoneNo + ", " : "") +
             (nationality != null ? "nationality=" + nationality + ", " : "") +
             (maritalStatus != null ? "maritalStatus=" + maritalStatus + ", " : "") +
             (religion != null ? "religion=" + religion + ", " : "") +
-            (isSpousEmployed != null ? "isSpousEmployed=" + isSpousEmployed + ", " : "") +
-            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
-            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-            (status != null ? "status=" + status + ", " : "") +
             (employeeId != null ? "employeeId=" + employeeId + ", " : "") +
             (companyId != null ? "companyId=" + companyId + ", " : "") +
-            (personalIdNo != null ? "personalIdNo=" + personalIdNo + ", " : "") +
             (bloodGroup != null ? "bloodGroup=" + bloodGroup + ", " : "") +
             (dateOfBirth != null ? "dateOfBirth=" + dateOfBirth + ", " : "") +
+            (status != null ? "status=" + status + ", " : "") +
+            (lastModified != null ? "lastModified=" + lastModified + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

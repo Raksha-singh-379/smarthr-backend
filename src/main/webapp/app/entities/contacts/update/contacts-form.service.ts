@@ -35,12 +35,13 @@ type ContactsFormGroupContent = {
   contactPref: FormControl<ContactsFormRawValue['contactPref']>;
   contactType: FormControl<ContactsFormRawValue['contactType']>;
   contact: FormControl<ContactsFormRawValue['contact']>;
-  lastModified: FormControl<ContactsFormRawValue['lastModified']>;
-  lastModifiedBy: FormControl<ContactsFormRawValue['lastModifiedBy']>;
-  status: FormControl<ContactsFormRawValue['status']>;
-  refTableType: FormControl<ContactsFormRawValue['refTableType']>;
+  refTable: FormControl<ContactsFormRawValue['refTable']>;
   refTableId: FormControl<ContactsFormRawValue['refTableId']>;
   companyId: FormControl<ContactsFormRawValue['companyId']>;
+  status: FormControl<ContactsFormRawValue['status']>;
+  lastModified: FormControl<ContactsFormRawValue['lastModified']>;
+  lastModifiedBy: FormControl<ContactsFormRawValue['lastModifiedBy']>;
+  contactReference: FormControl<ContactsFormRawValue['contactReference']>;
 };
 
 export type ContactsFormGroup = FormGroup<ContactsFormGroupContent>;
@@ -64,12 +65,13 @@ export class ContactsFormService {
       contactPref: new FormControl(contactsRawValue.contactPref),
       contactType: new FormControl(contactsRawValue.contactType),
       contact: new FormControl(contactsRawValue.contact),
-      lastModified: new FormControl(contactsRawValue.lastModified),
-      lastModifiedBy: new FormControl(contactsRawValue.lastModifiedBy),
-      status: new FormControl(contactsRawValue.status),
-      refTableType: new FormControl(contactsRawValue.refTableType),
+      refTable: new FormControl(contactsRawValue.refTable),
       refTableId: new FormControl(contactsRawValue.refTableId),
       companyId: new FormControl(contactsRawValue.companyId),
+      status: new FormControl(contactsRawValue.status),
+      lastModified: new FormControl(contactsRawValue.lastModified),
+      lastModifiedBy: new FormControl(contactsRawValue.lastModifiedBy),
+      contactReference: new FormControl(contactsRawValue.contactReference),
     });
   }
 

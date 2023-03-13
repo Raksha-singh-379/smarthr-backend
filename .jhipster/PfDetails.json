@@ -26,24 +26,28 @@
       "fieldType": "Double"
     },
     {
-      "fieldName": "lastModified",
-      "fieldType": "Instant"
+      "fieldName": "employeeId",
+      "fieldType": "Long"
     },
     {
-      "fieldName": "lastModifiedBy",
-      "fieldType": "String"
+      "fieldName": "reEnumerationId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
     },
     {
       "fieldName": "status",
       "fieldType": "String"
     },
     {
-      "fieldName": "employeId",
-      "fieldType": "Long"
+      "fieldName": "lastModified",
+      "fieldType": "Instant"
     },
     {
-      "fieldName": "reEnumerationId",
-      "fieldType": "Long"
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,

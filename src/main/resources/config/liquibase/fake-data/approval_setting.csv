@@ -1,11 +1,11 @@
-id;is_sequence_approval;is_simultaneous_approval;last_modified;last_modified_by;status;company_id
-1;false;false;2023-02-08T08:03:53;Director transmitter interface;Handmade Bedfordshire;9782
-2;false;true;2023-02-08T19:05:41;Fantastic redundant XML;Tools Fresh;36929
-3;false;false;2023-02-08T19:41:33;Shirt International withdrawal;Account International deposit;24680
-4;false;true;2023-02-08T17:54:20;payment Cyprus;optical Ergonomic;37924
-5;false;true;2023-02-09T01:25:02;technologies Paraguay XSS;Granite Account;55193
-6;true;false;2023-02-08T17:33:30;Central;Sleek Drive;7253
-7;false;false;2023-02-08T18:57:06;portal compressing methodology;Chair architecture navigating;51777
-8;true;false;2023-02-08T16:15:31;New bandwidth indexing;Bedfordshire quantify;40463
-9;false;true;2023-02-09T04:32:45;Accountability Computer Concrete;tan;52976
-10;false;true;2023-02-08T13:31:06;Views;Dollar;31372
+id;type;approval_category;company_id;status;last_modified;last_modified_by
+1;systemic Director;72322;81007;interface;2023-02-08T15:39:01;override
+2;asynchronous;97809;40470;Fantastic redundant XML;2023-02-08T20:18:16;benchmark
+3;array niches Shirt;90126;68710;withdrawal multi-byte;2023-02-08T09:31:22;pixel Gloves Cotton
+4;payment foreground;88506;3544;Practical;2023-02-08T23:58:23;Frozen e-markets Franc
+5;pink online Borders;79493;55193;Granite Central Checking;2023-02-08T06:10:12;Multi-lateral Senior fresh-thinking
+6;override;30755;85860;Account;2023-02-09T03:37:28;algorithm architecture
+7;engage Coordinator synthesize;16523;70991;Slovenia;2023-02-08T23:16:33;Bedfordshire quantify
+8;synergistic Chief;62155;5365;Computer Concrete Digitized;2023-02-08T09:29:57;Buckinghamshire Practical
+9;Clothing Specialist;29387;71582;bandwidth metrics Berkshire;2023-02-09T02:30:38;Mississippi
+10;Associate Assurance Inverse;1731;75533;firmware;2023-02-08T07:34:30;transmitting

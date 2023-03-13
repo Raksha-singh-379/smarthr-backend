@@ -22,12 +22,13 @@ describe('MasterLookup Form Service', () => {
             id: expect.any(Object),
             name: expect.any(Object),
             value: expect.any(Object),
+            valueTwo: expect.any(Object),
             description: expect.any(Object),
             type: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -40,12 +41,13 @@ describe('MasterLookup Form Service', () => {
             id: expect.any(Object),
             name: expect.any(Object),
             value: expect.any(Object),
+            valueTwo: expect.any(Object),
             description: expect.any(Object),
             type: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

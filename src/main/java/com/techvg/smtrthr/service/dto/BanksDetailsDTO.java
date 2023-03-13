@@ -20,19 +20,23 @@ public class BanksDetailsDTO implements Serializable {
 
     private String taxNumber;
 
+    private String gstin;
+
+    private String tan;
+
     private String branchName;
 
-    private Instant lastModified;
-
-    private String lastModifiedBy;
-
-    private String status;
-
-    private String refTableType;
+    private String refTable;
 
     private Long refTableId;
 
     private Long companyId;
+
+    private String status;
+
+    private Instant lastModified;
+
+    private String lastModifiedBy;
 
     public Long getId() {
         return id;
@@ -74,6 +78,22 @@ public class BanksDetailsDTO implements Serializable {
         this.taxNumber = taxNumber;
     }
 
+    public String getGstin() {
+        return gstin;
+    }
+
+    public void setGstin(String gstin) {
+        this.gstin = gstin;
+    }
+
+    public String getTan() {
+        return tan;
+    }
+
+    public void setTan(String tan) {
+        this.tan = tan;
+    }
+
     public String getBranchName() {
         return branchName;
     }
@@ -82,36 +102,12 @@ public class BanksDetailsDTO implements Serializable {
         this.branchName = branchName;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
+    public String getRefTable() {
+        return refTable;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRefTableType() {
-        return refTableType;
-    }
-
-    public void setRefTableType(String refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
     public Long getRefTableId() {
@@ -128,6 +124,30 @@ public class BanksDetailsDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -160,13 +180,15 @@ public class BanksDetailsDTO implements Serializable {
             ", bankName='" + getBankName() + "'" +
             ", branchTransCode='" + getBranchTransCode() + "'" +
             ", taxNumber='" + getTaxNumber() + "'" +
+            ", gstin='" + getGstin() + "'" +
+            ", tan='" + getTan() + "'" +
             ", branchName='" + getBranchName() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", refTableType='" + getRefTableType() + "'" +
+            ", refTable='" + getRefTable() + "'" +
             ", refTableId=" + getRefTableId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

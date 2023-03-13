@@ -34,23 +34,26 @@ public class Contacts implements Serializable {
     @Column(name = "contact")
     private String contact;
 
-    @Column(name = "last_modified")
-    private Instant lastModified;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "ref_table_type")
-    private String refTableType;
+    @Column(name = "ref_table")
+    private String refTable;
 
     @Column(name = "ref_table_id")
     private Long refTableId;
 
     @Column(name = "company_id")
     private Long companyId;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "last_modified")
+    private Instant lastModified;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
+    @Column(name = "contact_reference")
+    private String contactReference;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -119,56 +122,17 @@ public class Contacts implements Serializable {
         this.contact = contact;
     }
 
-    public Instant getLastModified() {
-        return this.lastModified;
+    public String getRefTable() {
+        return this.refTable;
     }
 
-    public Contacts lastModified(Instant lastModified) {
-        this.setLastModified(lastModified);
+    public Contacts refTable(String refTable) {
+        this.setRefTable(refTable);
         return this;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return this.lastModifiedBy;
-    }
-
-    public Contacts lastModifiedBy(String lastModifiedBy) {
-        this.setLastModifiedBy(lastModifiedBy);
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public Contacts status(String status) {
-        this.setStatus(status);
-        return this;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRefTableType() {
-        return this.refTableType;
-    }
-
-    public Contacts refTableType(String refTableType) {
-        this.setRefTableType(refTableType);
-        return this;
-    }
-
-    public void setRefTableType(String refTableType) {
-        this.refTableType = refTableType;
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 
     public Long getRefTableId() {
@@ -195,6 +159,58 @@ public class Contacts implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public Contacts status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Instant getLastModified() {
+        return this.lastModified;
+    }
+
+    public Contacts lastModified(Instant lastModified) {
+        this.setLastModified(lastModified);
+        return this;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public Contacts lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public String getContactReference() {
+        return this.contactReference;
+    }
+
+    public Contacts contactReference(String contactReference) {
+        this.setContactReference(contactReference);
+        return this;
+    }
+
+    public void setContactReference(String contactReference) {
+        this.contactReference = contactReference;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -225,12 +241,13 @@ public class Contacts implements Serializable {
             ", contactPref='" + getContactPref() + "'" +
             ", contactType='" + getContactType() + "'" +
             ", contact='" + getContact() + "'" +
-            ", lastModified='" + getLastModified() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", refTableType='" + getRefTableType() + "'" +
+            ", refTable='" + getRefTable() + "'" +
             ", refTableId=" + getRefTableId() +
             ", companyId=" + getCompanyId() +
+            ", status='" + getStatus() + "'" +
+            ", lastModified='" + getLastModified() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", contactReference='" + getContactReference() + "'" +
             "}";
     }
 }

@@ -21,18 +21,17 @@ describe('LeaveApplication Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             leaveType: expect.any(Object),
-            balanceLeave: expect.any(Object),
             noOfDays: expect.any(Object),
             reason: expect.any(Object),
             year: expect.any(Object),
             formDate: expect.any(Object),
             toDate: expect.any(Object),
             leaveStatus: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
             status: expect.any(Object),
             employeId: expect.any(Object),
             companyId: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -44,18 +43,17 @@ describe('LeaveApplication Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             leaveType: expect.any(Object),
-            balanceLeave: expect.any(Object),
             noOfDays: expect.any(Object),
             reason: expect.any(Object),
             year: expect.any(Object),
             formDate: expect.any(Object),
             toDate: expect.any(Object),
             leaveStatus: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
             status: expect.any(Object),
             employeId: expect.any(Object),
             companyId: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });

@@ -33,12 +33,13 @@ type MasterLookupFormGroupContent = {
   id: FormControl<MasterLookupFormRawValue['id'] | NewMasterLookup['id']>;
   name: FormControl<MasterLookupFormRawValue['name']>;
   value: FormControl<MasterLookupFormRawValue['value']>;
+  valueTwo: FormControl<MasterLookupFormRawValue['valueTwo']>;
   description: FormControl<MasterLookupFormRawValue['description']>;
   type: FormControl<MasterLookupFormRawValue['type']>;
+  companyId: FormControl<MasterLookupFormRawValue['companyId']>;
+  status: FormControl<MasterLookupFormRawValue['status']>;
   lastModified: FormControl<MasterLookupFormRawValue['lastModified']>;
   lastModifiedBy: FormControl<MasterLookupFormRawValue['lastModifiedBy']>;
-  status: FormControl<MasterLookupFormRawValue['status']>;
-  companyId: FormControl<MasterLookupFormRawValue['companyId']>;
 };
 
 export type MasterLookupFormGroup = FormGroup<MasterLookupFormGroupContent>;
@@ -60,12 +61,13 @@ export class MasterLookupFormService {
       ),
       name: new FormControl(masterLookupRawValue.name),
       value: new FormControl(masterLookupRawValue.value),
+      valueTwo: new FormControl(masterLookupRawValue.valueTwo),
       description: new FormControl(masterLookupRawValue.description),
       type: new FormControl(masterLookupRawValue.type),
+      companyId: new FormControl(masterLookupRawValue.companyId),
+      status: new FormControl(masterLookupRawValue.status),
       lastModified: new FormControl(masterLookupRawValue.lastModified),
       lastModifiedBy: new FormControl(masterLookupRawValue.lastModifiedBy),
-      status: new FormControl(masterLookupRawValue.status),
-      companyId: new FormControl(masterLookupRawValue.companyId),
     });
   }
 

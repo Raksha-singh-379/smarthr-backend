@@ -7,26 +7,22 @@ export const sampleWithRequiredData: ISalarySettings = {
 };
 
 export const sampleWithPartialData: ISalarySettings = {
-  id: 82287,
-  da: 17493,
-  salaryFrom: dayjs('2023-02-08T07:09'),
-  lastModified: dayjs('2023-02-08T05:45'),
-  status: 'Account TCP',
-  companyId: 29332,
+  id: 67060,
+  da: 72492,
+  companyId: 82287,
+  lastModified: dayjs('2023-02-09T00:36'),
 };
 
 export const sampleWithFullData: ISalarySettings = {
-  id: 88072,
-  da: 99753,
-  hra: 93136,
-  employeeShare: 35194,
-  companyShare: 80054,
-  salaryFrom: dayjs('2023-02-08T09:10'),
-  salaryTo: dayjs('2023-02-08T06:23'),
-  lastModified: dayjs('2023-02-09T02:25'),
-  lastModifiedBy: 'Dominican well-modulated',
-  status: 'synthesizing Automotive',
-  companyId: 67147,
+  id: 90199,
+  da: 96040,
+  hra: 57965,
+  employeeShare: 60468,
+  companyShare: 83635,
+  companyId: 75557,
+  status: 'Books JBOD wireless',
+  lastModified: dayjs('2023-02-08T06:23'),
+  lastModifiedBy: 'efficient',
 };
 
 export const sampleWithNewData: NewSalarySettings = {

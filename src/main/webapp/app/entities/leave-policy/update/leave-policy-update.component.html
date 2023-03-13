@@ -18,11 +18,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.leaveType" for="field_leaveType">Leave Type</label>
-          <input type="text" class="form-control" name="leaveType" id="field_leaveType" data-cy="leaveType" formControlName="leaveType" />
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.isCarryForword" for="field_isCarryForword">Is Carry Forword</label>
           <input
             type="checkbox"
@@ -35,21 +30,9 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.employeeType" for="field_employeeType">Employee Type</label>
-          <input
-            type="text"
-            class="form-control"
-            name="employeeType"
-            id="field_employeeType"
-            data-cy="employeeType"
-            formControlName="employeeType"
-          />
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.genderLeave" for="field_genderLeave">Gender Leave</label>
           <input
-            type="text"
+            type="number"
             class="form-control"
             name="genderLeave"
             id="field_genderLeave"
@@ -59,21 +42,9 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.leaveStatus" for="field_leaveStatus">Leave Status</label>
-          <input
-            type="text"
-            class="form-control"
-            name="leaveStatus"
-            id="field_leaveStatus"
-            data-cy="leaveStatus"
-            formControlName="leaveStatus"
-          />
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.totalLeave" for="field_totalLeave">Total Leave</label>
           <input
-            type="text"
+            type="number"
             class="form-control"
             name="totalLeave"
             id="field_totalLeave"
@@ -84,7 +55,7 @@
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.maxLeave" for="field_maxLeave">Max Leave</label>
-          <input type="text" class="form-control" name="maxLeave" id="field_maxLeave" data-cy="maxLeave" formControlName="maxLeave" />
+          <input type="number" class="form-control" name="maxLeave" id="field_maxLeave" data-cy="maxLeave" formControlName="maxLeave" />
         </div>
 
         <div class="row mb-3">
@@ -111,6 +82,33 @@
             data-cy="description"
             formControlName="description"
           />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.refTable" for="field_refTable">Ref Table</label>
+          <input type="text" class="form-control" name="refTable" id="field_refTable" data-cy="refTable" formControlName="refTable" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.refTableId" for="field_refTableId">Ref Table Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="refTableId"
+            id="field_refTableId"
+            data-cy="refTableId"
+            formControlName="refTableId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.companyId" for="field_companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
         </div>
 
         <div class="row mb-3">
@@ -141,13 +139,37 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.status" for="field_status">Status</label>
-          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.leaveType" for="field_leaveType">Leave Type</label>
+          <select
+            class="form-control"
+            id="field_leaveType"
+            data-cy="leaveType"
+            name="leaveType"
+            formControlName="leaveType"
+            [compareWith]="compareLeaveType"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="leaveTypeOption" *ngFor="let leaveTypeOption of leaveTypesSharedCollection">
+              {{ leaveTypeOption.leaveType }}
+            </option>
+          </select>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.companyId" for="field_companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+          <label class="form-label" jhiTranslate="smartHrApp.leavePolicy.employmentType" for="field_employmentType">Employment Type</label>
+          <select
+            class="form-control"
+            id="field_employmentType"
+            data-cy="employmentType"
+            name="employmentType"
+            formControlName="employmentType"
+            [compareWith]="compareEmploymentType"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employmentTypeOption" *ngFor="let employmentTypeOption of employmentTypesSharedCollection">
+              {{ employmentTypeOption.name }}
+            </option>
+          </select>
         </div>
       </div>
 

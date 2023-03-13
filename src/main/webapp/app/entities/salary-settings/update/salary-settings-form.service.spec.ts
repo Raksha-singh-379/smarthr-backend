@@ -24,12 +24,10 @@ describe('SalarySettings Form Service', () => {
             hra: expect.any(Object),
             employeeShare: expect.any(Object),
             companyShare: expect.any(Object),
-            salaryFrom: expect.any(Object),
-            salaryTo: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });
@@ -44,12 +42,10 @@ describe('SalarySettings Form Service', () => {
             hra: expect.any(Object),
             employeeShare: expect.any(Object),
             companyShare: expect.any(Object),
-            salaryFrom: expect.any(Object),
-            salaryTo: expect.any(Object),
+            companyId: expect.any(Object),
+            status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            companyId: expect.any(Object),
           })
         );
       });

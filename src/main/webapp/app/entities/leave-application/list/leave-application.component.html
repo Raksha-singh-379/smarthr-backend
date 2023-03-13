@@ -46,12 +46,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="balanceLeave">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveApplication.balanceLeave">Balance Leave</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="noOfDays">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.leaveApplication.noOfDays">No Of Days</span>
@@ -88,18 +82,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="lastModified">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveApplication.lastModified">Last Modified</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <div class="d-flex">
-              <span jhiTranslate="smartHrApp.leaveApplication.lastModifiedBy">Last Modified By</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" jhiSortBy="status">
             <div class="d-flex">
               <span jhiTranslate="smartHrApp.leaveApplication.status">Status</span>
@@ -118,6 +100,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leaveApplication.lastModified">Last Modified</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <div class="d-flex">
+              <span jhiTranslate="smartHrApp.leaveApplication.lastModifiedBy">Last Modified By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -127,18 +121,17 @@
             <a [routerLink]="['/leave-application', leaveApplication.id, 'view']">{{ leaveApplication.id }}</a>
           </td>
           <td>{{ leaveApplication.leaveType }}</td>
-          <td>{{ leaveApplication.balanceLeave }}</td>
           <td>{{ leaveApplication.noOfDays }}</td>
           <td>{{ leaveApplication.reason }}</td>
           <td>{{ leaveApplication.year }}</td>
           <td>{{ leaveApplication.formDate | formatMediumDatetime }}</td>
           <td>{{ leaveApplication.toDate | formatMediumDatetime }}</td>
           <td>{{ leaveApplication.leaveStatus }}</td>
-          <td>{{ leaveApplication.lastModified | formatMediumDatetime }}</td>
-          <td>{{ leaveApplication.lastModifiedBy }}</td>
           <td>{{ leaveApplication.status }}</td>
           <td>{{ leaveApplication.employeId }}</td>
           <td>{{ leaveApplication.companyId }}</td>
+          <td>{{ leaveApplication.lastModified | formatMediumDatetime }}</td>
+          <td>{{ leaveApplication.lastModifiedBy }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

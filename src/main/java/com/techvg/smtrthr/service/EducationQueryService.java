@@ -96,8 +96,8 @@ public class EducationQueryService extends QueryService<Education> {
             if (criteria.getSubject() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSubject(), Education_.subject));
             }
-            if (criteria.getStartDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getStartDate(), Education_.startDate));
+            if (criteria.getStartYear() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getStartYear(), Education_.startYear));
             }
             if (criteria.getEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEndDate(), Education_.endDate));
@@ -111,20 +111,20 @@ public class EducationQueryService extends QueryService<Education> {
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), Education_.description));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Education_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Education_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), Education_.status));
-            }
             if (criteria.getEmployeeId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEmployeeId(), Education_.employeeId));
             }
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), Education_.companyId));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), Education_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), Education_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Education_.lastModifiedBy));
             }
         }
         return specification;

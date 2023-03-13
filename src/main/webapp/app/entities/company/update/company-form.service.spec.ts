@@ -28,13 +28,11 @@ describe('Company Form Service', () => {
             mobileNumber: expect.any(Object),
             websiteUrl: expect.any(Object),
             fax: expect.any(Object),
+            regNumber: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            regNumber: expect.any(Object),
-            gstin: expect.any(Object),
-            pan: expect.any(Object),
-            tan: expect.any(Object),
+            leaveSettingLevel: expect.any(Object),
           })
         );
       });
@@ -53,13 +51,11 @@ describe('Company Form Service', () => {
             mobileNumber: expect.any(Object),
             websiteUrl: expect.any(Object),
             fax: expect.any(Object),
+            regNumber: expect.any(Object),
             status: expect.any(Object),
             lastModified: expect.any(Object),
             lastModifiedBy: expect.any(Object),
-            regNumber: expect.any(Object),
-            gstin: expect.any(Object),
-            pan: expect.any(Object),
-            tan: expect.any(Object),
+            leaveSettingLevel: expect.any(Object),
           })
         );
       });

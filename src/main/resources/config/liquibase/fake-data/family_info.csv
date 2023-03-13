@@ -1,11 +1,11 @@
-id;name;date_of_birth;relation;address;last_modified;last_modified_by;status;employee_id;company_id
-1;User;2023-02-08;Loan circuit;Bike Producer;2023-02-08T12:57:58;up collaboration;Implemented Flats;47052;37193
-2;Metal supply-chains;2023-02-08;Industrial Granite Home;zero B2B Home;2023-02-08T08:40:00;Salad Manager protocol;collaborative yellow;86777;40638
-3;Keyboard lavender;2023-02-08;Tactics Shoes Configuration;Island Lithuanian;2023-02-08T15:01:18;Facilitator;Refined grow Account;71880;49616
-4;blue Diverse;2023-02-08;channels;strategic Steel SMTP;2023-02-08T16:06:57;Buckinghamshire;orange Usability Cotton;71800;19154
-5;indigo;2023-02-08;Dollar Vision-oriented Personal;withdrawal;2023-02-08T05:27:25;Avon Steel;New;28974;36019
-6;synthesize;2023-02-08;Mobility maroon Synergized;Planner Unbranded Junctions;2023-02-09T03:28:37;Account transmitter Corporate;Chair Market Tools;12574;49499
-7;Borders parse fuchsia;2023-02-09;intranet Hat grey;Intelligent Sleek Agent;2023-02-08T05:15:26;override;sensor;13565;23431
-8;array;2023-02-08;Guinea;Accountability bricks-and-clicks Delaware;2023-02-09T01:55:32;deposit Square;firewall;43217;35599
-9;synthesize;2023-02-08;Minnesota moratorium;cyan;2023-02-09T00:45:07;logistical teal;Cyprus Hryvnia;84361;89292
-10;auxiliary;2023-02-08;maximize compress;TCP;2023-02-08T22:18:47;Montana;Shoes AI;2879;63132
+id;name;date_of_birth;relation;address_id;is_employed;employed_at;employee_id;company_id;status;last_modified;last_modified_by
+1;User;2023-02-08;Loan circuit;47645;false;Account;24042;65982;up collaboration;2023-02-08T16:33:10;benchmark
+2;turquoise;2023-02-08;circuit;48065;false;Supervisor Avon;49076;50864;Home Specialist;2023-02-08T18:34:17;attitude-oriented tolerance
+3;Salad Manager protocol;2023-02-08;Research Fantastic;40638;false;Tuna;96085;95160;Factors deposit services;2023-02-08T09:05:26;Island Lithuanian
+4;silver Automotive;2023-02-08;grow;60040;false;sensor blue;25338;20496;GB turquoise strategic;2023-02-09T01:16:36;Salad
+5;Bangladesh capacitor;2023-02-09;user-facing;70297;false;synthesize composite;71242;49779;Dollar Vision-oriented Personal;2023-02-08T22:20:52;Organized Missouri
+6;Steel Towels Plastic;2023-02-09;pixel capacitor teal;58875;false;International Auto Customer;22790;45867;Austria Account;2023-02-08T11:50:56;Chief Bacon Sports
+7;implement;2023-02-08;Buckinghamshire;54389;true;Assurance XML copying;69225;17753;composite Silver;2023-02-08T23:55:10;Plastic
+8;Account Metrics;2023-02-08;Guilder;48272;true;face;35200;47655;Programmable Sausages HDD;2023-02-08T11:26:19;Delaware Cotton Granite
+9;Drives Borders proactive;2023-02-08;salmon;44228;false;deposit;20759;88514;Tuna Colorado;2023-02-08T23:55:38;Malta Chicken generate
+10;auxiliary;2023-02-08;maximize compress;14911;true;Indiana;57249;51754;initiatives Loan;2023-02-08T09:00:21;payment

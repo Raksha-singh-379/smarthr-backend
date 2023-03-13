@@ -102,15 +102,6 @@ public class WorkExperienceQueryService extends QueryService<WorkExperience> {
             if (criteria.getEndDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEndDate(), WorkExperience_.endDate));
             }
-            if (criteria.getLastModified() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), WorkExperience_.lastModified));
-            }
-            if (criteria.getLastModifiedBy() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), WorkExperience_.lastModifiedBy));
-            }
-            if (criteria.getStatus() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStatus(), WorkExperience_.status));
-            }
             if (criteria.getAddressId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAddressId(), WorkExperience_.addressId));
             }
@@ -120,11 +111,17 @@ public class WorkExperienceQueryService extends QueryService<WorkExperience> {
             if (criteria.getCompanyId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCompanyId(), WorkExperience_.companyId));
             }
-            if (criteria.getYearOfExp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getYearOfExp(), WorkExperience_.yearOfExp));
-            }
             if (criteria.getJobDesc() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getJobDesc(), WorkExperience_.jobDesc));
+            }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), WorkExperience_.status));
+            }
+            if (criteria.getLastModified() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModified(), WorkExperience_.lastModified));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), WorkExperience_.lastModifiedBy));
             }
         }
         return specification;

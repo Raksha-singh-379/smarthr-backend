@@ -24,13 +24,13 @@ public class Branch implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "branch_name", nullable = false, unique = true)
+    @Column(name = "branch_name", nullable = false)
     private String branchName;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "branchcode", unique = true)
+    @Column(name = "branchcode")
     private String branchcode;
 
     @Column(name = "branch_type")
@@ -38,6 +38,15 @@ public class Branch implements Serializable {
 
     @Column(name = "web_site")
     private String webSite;
+
+    @Column(name = "branch_id")
+    private Long branchId;
+
+    @Column(name = "region_id")
+    private Long regionId;
+
+    @Column(name = "company_id")
+    private Long companyId;
 
     @Column(name = "status")
     private String status;
@@ -47,12 +56,6 @@ public class Branch implements Serializable {
 
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
-
-    @Column(name = "region_id")
-    private Long regionId;
-
-    @Column(name = "company_id")
-    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -134,6 +137,45 @@ public class Branch implements Serializable {
         this.webSite = webSite;
     }
 
+    public Long getBranchId() {
+        return this.branchId;
+    }
+
+    public Branch branchId(Long branchId) {
+        this.setBranchId(branchId);
+        return this;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
+    }
+
+    public Long getRegionId() {
+        return this.regionId;
+    }
+
+    public Branch regionId(Long regionId) {
+        this.setRegionId(regionId);
+        return this;
+    }
+
+    public void setRegionId(Long regionId) {
+        this.regionId = regionId;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public Branch companyId(Long companyId) {
+        this.setCompanyId(companyId);
+        return this;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     public String getStatus() {
         return this.status;
     }
@@ -173,32 +215,6 @@ public class Branch implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Long getRegionId() {
-        return this.regionId;
-    }
-
-    public Branch regionId(Long regionId) {
-        this.setRegionId(regionId);
-        return this;
-    }
-
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
-    }
-
-    public Long getCompanyId() {
-        return this.companyId;
-    }
-
-    public Branch companyId(Long companyId) {
-        this.setCompanyId(companyId);
-        return this;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -228,11 +244,12 @@ public class Branch implements Serializable {
             ", branchcode='" + getBranchcode() + "'" +
             ", branchType='" + getBranchType() + "'" +
             ", webSite='" + getWebSite() + "'" +
+            ", branchId=" + getBranchId() +
+            ", regionId=" + getRegionId() +
+            ", companyId=" + getCompanyId() +
             ", status='" + getStatus() + "'" +
             ", lastModified='" + getLastModified() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", regionId=" + getRegionId() +
-            ", companyId=" + getCompanyId() +
             "}";
     }
 }

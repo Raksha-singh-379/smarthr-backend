@@ -24,13 +24,15 @@ describe('BanksDetails Form Service', () => {
             bankName: expect.any(Object),
             branchTransCode: expect.any(Object),
             taxNumber: expect.any(Object),
+            gstin: expect.any(Object),
+            tan: expect.any(Object),
             branchName: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            refTableType: expect.any(Object),
+            refTable: expect.any(Object),
             refTableId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
@@ -45,13 +47,15 @@ describe('BanksDetails Form Service', () => {
             bankName: expect.any(Object),
             branchTransCode: expect.any(Object),
             taxNumber: expect.any(Object),
+            gstin: expect.any(Object),
+            tan: expect.any(Object),
             branchName: expect.any(Object),
-            lastModified: expect.any(Object),
-            lastModifiedBy: expect.any(Object),
-            status: expect.any(Object),
-            refTableType: expect.any(Object),
+            refTable: expect.any(Object),
             refTableId: expect.any(Object),
             companyId: expect.any(Object),
+            status: expect.any(Object),
+            lastModified: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
           })
         );
       });
